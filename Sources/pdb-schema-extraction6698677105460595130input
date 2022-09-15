@@ -1,0 +1,5 @@
+{"datamodel":"RELATIONAL",
+"tables":[{"tableName":"depts","columnNames":["deptno","name"],"primaryKey":["deptno"],"foreignKeys":[]},
+{"tableName":"emp","columnNames":["employeeno","age","gender","maritalstatus","worklifebalance","education","monthlyincome","relationshipjoy","workingyears","yearsatcompany"],"primaryKey":["employeeno"],"foreignKeys":[]},
+{"tableName":"emps","columnNames":["empid","deptno","name","salary","commission"],"primaryKey":["empid"],"foreignKeys":[{"tableName":"emps","columnNames":["deptno"],"foreignTableName":"depts","foreignTableColumnNames":["deptno"]}]},
+{"tableName":"work","columnNames":["employeeno","educationfield","jobinvolvement","joblevel","jobrole","businesstravel","department","attrition","dailyrate"],"primaryKey":["employeeno"],"foreignKeys":[{"tableName":"work","columnNames":["employeeno"],"foreignTableName":"emp","foreignTableColumnNames":["employeeno"]}]}]}

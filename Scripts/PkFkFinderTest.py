@@ -2,6 +2,7 @@
 import sys
 import polypheny
 import json
+import logging
 from PkFkFinder import PkFkFinder
 
 # Connect to Polypheny

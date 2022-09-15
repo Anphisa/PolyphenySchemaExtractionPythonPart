@@ -1,4 +1,5 @@
 # Compare primary keys and find primary key <-> foreign key relationships
+import logging
 from itertools import chain
 from StringSimilarity import StringSimilarity
 
@@ -18,7 +19,9 @@ class PkFkFinder:
 
     def sample_values(self, cursor, table_name: str, column_name: str, sample_size: int):
         """Take a sample of values in a column."""
-        cursor.execute("SELECT "+ column_name + " FROM " + table_name)
+        query = "SELECT " + column_name + " FROM " + table_name
+        logging.info("Sampling column: " + query)
+        cursor.execute(query)
         result = cursor.fetchmany(sample_size)
         return result
 
@@ -35,6 +38,7 @@ class PkFkFinder:
             flat_sample_entries = list(chain.from_iterable(sample_entries))
             sample_entries_SQL_style = "".join(str(flat_sample_entries))[1:-1]
             query = "SELECT COUNT(" + pk_name + ") FROM " + table_name + " WHERE " + pk_name + " IN (" + sample_entries_SQL_style + ")"
+            logging.info("Checking if a list is subsample of a PK column: " + query)
             cursor.execute(query)
             result = cursor.fetchall()
             if result[0][0] == len(set(flat_sample_entries)):
@@ -51,6 +55,7 @@ class PkFkFinder:
 
         :return: Dictionary of {table 1: {table 2 where pk1 is in: fk2 column}}
         """
+        logging.info("Looking for pk-fk relationships above similarity threshold")
         table_relationships = {}
         # TODO: table_relationships should be a class variable
         # TODO: Write a method to add pk-fks to table_relationships
@@ -98,4 +103,5 @@ class PkFkFinder:
                             table_relationships[table["tableName"]] = [{"columName" : column_name,
                                                                         "foreignTableName": compare_table["tableName"],
                                                                         "foreignColumnNames": compare_pk_name}]
+        logging.info("Finished looking for pk-fk relationships above similarity threshold. Found: " + table_relationships)
         return table_relationships

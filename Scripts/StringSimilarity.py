@@ -1,6 +1,7 @@
 # Given two column names, return a similarity score (or Boolean for identity).
 # This helps decide if two columns should be compared for content too.
 import fuzzy
+import logging
 from itertools import groupby
 import Levenshtein as levenshtein
 

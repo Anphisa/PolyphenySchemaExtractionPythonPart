@@ -6,7 +6,7 @@ async def consumer(message):
     print("consumer: ", message)
     # TODO: Pass message on
 
-async def producer(message):
+async def producer():
     # TODO: Put relevant messages in here, if at all (we may ask our questions via http instead of ws)
     now = datetime.datetime.utcnow().isoformat() + 'Z'
     return (now)
@@ -22,8 +22,8 @@ async def producer_handler(websocket):
     while True:
         message = await producer()
         print("producer: ", message)
-        #await websocket.send(message)
-        #await asyncio.sleep(5.0)
+        await websocket.send(message)
+        await asyncio.sleep(5.0)
 
 async def handler(websocket):
     consumer_task = asyncio.create_task(consumer_handler(websocket))

@@ -8,24 +8,21 @@ import websockets
 import datetime
 import ast
 
+from PkFkFinder import PkFkFinder
+
 async def test(data):
     datamodel = data["datamodel"]
     print("datamodel:", datamodel)
     if datamodel != "RELATIONAL":
         logging.error('Datamodel is not relational. Not implemented!')
         raise ValueError('Datamodel is not relational. Not implemented!')
-        sys.exit('Fatal schema extractor error')
-
-    for i in data["tables"]:
-        print("table name:", i["tableName"] + ".", "number of columns:", len(i["columnNames"]))
-
-        # Execute a Polypheny query
-        URL = "http://127.0.0.1:20598/query"
-        # defining a params dict for the parameters to be sent to the API
-        PARAMS = {'querylanguage': 'SQL', 'query': "SELECT * FROM " + i["tableName"]}
-        # sending get request and saving the response as response object
-        r = requests.get(url=URL, params=PARAMS)
-        print("Result Set: ", r)
+    else:
+        pk_fk_finder = PkFkFinder("http://127.0.0.1", "20598", data["tables"], 20)
+        sampled_pk_fk_relationships = pk_fk_finder.above_similarity_threshold_pk_comparison()
+        #print("Sampled pk_fk relationships", sampled_pk_fk_relationships)
+        validated_pk_fk_relationships = pk_fk_finder.validate_pk_fk_relationships(sampled_pk_fk_relationships)
+        print("Validated pk_fk relationships", validated_pk_fk_relationships)
+        print(validated_pk_fk_relationships)
 
 async def consumer(message):
     print("consumer: ", message)
@@ -65,22 +62,25 @@ async def handler(websocket):
         task.cancel()
 
 async def main():
-        # Connect to Polypheny: websocket connection
+    # Connect to Polypheny: websocket connection
     # Here we get user input (i.e. call to run Python script)
-    async with websockets.connect("ws://localhost:20598/register/c") as websocket:
-        await handler(websocket)
-        await asyncio.Future()  # run forever
+    try:
+        async with websockets.connect("ws://localhost:20598/register/c") as websocket:
+            await handler(websocket)
+            await asyncio.Future()  # run forever
+    except ConnectionRefusedError as e:
+        logging.error("Polypheny websocket server not running or responding")
+        print("Polypheny websocket server not running or responding", e)
 
     # Define a pipeline of steps to be performed (later to be optimized/determined dynamically due to user inputs, etc.)
-    #pipeline = ['pkfkfinder']
+    pipeline = ['pkfkfinder']
 
 if __name__ == "__main__":
-    #logging.basicConfig(filename='PolyphenySchemaIntegrationPython.log',
-    #                    level=logging.INFO,
-    #                    format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
     logging.getLogger("asyncio").setLevel(logging.INFO)
+    logging.Formatter('%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+    # TODO: Set logging file name (https://stackoverflow.com/questions/13839554/how-to-change-filehandle-with-python-logging-on-the-fly-with-different-classes-a)
     logging.info('Started schema integration Python part (main.py)')
 
     asyncio.run(main())
 
-    #logging.info('Closing Polypheny connection. Exiting schema integration Python part.')
+    logging.info('Closing Polypheny connection. Exiting schema integration Python part.')

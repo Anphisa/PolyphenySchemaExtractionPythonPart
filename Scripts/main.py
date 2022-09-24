@@ -10,7 +10,7 @@ import ast
 
 from PkFkFinder import PkFkFinder
 
-async def test(data):
+async def pk_fk_relationship_finder(data):
     datamodel = data["datamodel"]
     print("datamodel:", datamodel)
     if datamodel != "RELATIONAL":
@@ -19,24 +19,21 @@ async def test(data):
     else:
         pk_fk_finder = PkFkFinder("http://127.0.0.1", "20598", data["tables"], 20)
         sampled_pk_fk_relationships = pk_fk_finder.above_similarity_threshold_pk_comparison()
-        #print("Sampled pk_fk relationships", sampled_pk_fk_relationships)
         validated_pk_fk_relationships = pk_fk_finder.validate_pk_fk_relationships(sampled_pk_fk_relationships)
         print("Validated pk_fk relationships", validated_pk_fk_relationships)
-        print(validated_pk_fk_relationships)
 
 async def consumer(message):
     print("consumer: ", message)
     d_message = ast.literal_eval(message)
     if d_message["topic"] == "namespaceInfo":
-        await test(ast.literal_eval(d_message["message"]))
+        await pk_fk_relationship_finder(ast.literal_eval(d_message["message"]))
     #except Exception as e:
      #   print("Evaluation of message failed: ", e)
 
 async def producer():
-    # TODO: Put relevant messages in here, if at all (we may ask our questions via http instead of ws)
-    # Or use as ping?
-    now = datetime.datetime.utcnow().isoformat() + 'Z'
-    return (now)
+    #now = datetime.datetime.utcnow().isoformat() + 'Z'
+    #return (now)
+    pass
 
 async def consumer_handler(websocket):
     while True:
@@ -65,7 +62,7 @@ async def main():
     # Connect to Polypheny: websocket connection
     # Here we get user input (i.e. call to run Python script)
     try:
-        async with websockets.connect("ws://localhost:20598/register/c") as websocket:
+        async with websockets.connect("ws://localhost:20598/register") as websocket:
             await handler(websocket)
             await asyncio.Future()  # run forever
     except ConnectionRefusedError as e:

@@ -31,9 +31,8 @@ async def consumer(message):
      #   print("Evaluation of message failed: ", e)
 
 async def producer():
-    #now = datetime.datetime.utcnow().isoformat() + 'Z'
-    #return (now)
-    pass
+    now = datetime.datetime.utcnow().isoformat() + 'Z'
+    return (now)
 
 async def consumer_handler(websocket):
     while True:

@@ -2,6 +2,7 @@
 import logging
 import requests
 import ast
+import Sample
 from itertools import chain
 from StringSimilarity import StringSimilarity
 
@@ -17,26 +18,6 @@ class PkFkFinder:
         self.tables = tables
         self.sample_size = sample_size
         self.column_name_similarity = StringSimilarity(min_similarity=0.2)
-
-    def sample_values(self, host, port, table_name: str, column_name: str, sample_size: int):
-        """Take a sample of values in a column."""
-        URL = host + ":" + port + "/query"
-        query = "SELECT " + column_name + " FROM " + table_name + " LIMIT " + str(sample_size)
-        DATA = {'querylanguage': 'SQL',
-                  'query': query}
-        result = requests.post(url=URL, data=DATA)
-        logging.info("Sampling column: " + query)
-        return result
-
-    def all_values(self, host, port, table_name: str, column_name: str):
-        """Take a sample of values in a column."""
-        URL = host + ":" + port + "/query"
-        query = "SELECT " + column_name + " FROM " + table_name
-        DATA = {'querylanguage': 'SQL',
-                  'query': query}
-        result = requests.post(url=URL, data=DATA)
-        logging.info("All values from column: " + query)
-        return result
 
     def check_fk(self, host, port, table_name: str, pk_name: str, sample_entries: list):
         """Boolean checking if a list is a sub-sample of a pk column.
@@ -108,7 +89,7 @@ class PkFkFinder:
                         # The column names are not similar enough to be compared
                         # print("Skipping comparison of", table["tableName"], column_name, "with", compare_table["tableName"], compare_pk_name)
                         continue
-                    sample = self.sample_values(self.host, self.port, table["tableName"], column_name, self.sample_size)
+                    sample = Sample.Sample(self.host, self.port, column_name, table["tableName"], self.sample_size).take_sample()
                     sample_list = ast.literal_eval(sample.content.decode('utf-8'))
                     is_table_pk_fk_for_compare = self.check_fk(self.host, self.port, compare_table["tableName"], compare_pk_name, sample_list)
                     if is_table_pk_fk_for_compare:
@@ -153,7 +134,7 @@ class PkFkFinder:
                                                                       "foreignColumnNames": other_column_name,
                                                                       "knownPkFkRelationship": known_pk_fk_relationship}]
                 else:
-                    sample = self.all_values(self.host, self.port, table_name, column_name)
+                    sample = Sample.Sample(self.host, self.port, column_name, table_name, 0).take_sample()
                     sample_list = ast.literal_eval(sample.content.decode('utf-8'))
                     is_table_pk_fk_for_compare = self.check_fk(self.host, self.port, other_table_name, other_column_name, sample_list)
                     if is_table_pk_fk_for_compare:

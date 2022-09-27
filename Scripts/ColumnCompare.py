@@ -1,39 +1,43 @@
 # Given two columns (or fields) from tables (or relations), compare them for similarity
-# Strategy pattern (?)
+import abc
 
-class ColumnCompare:
-    def __init__(self, column1, column2, compare_strategy = "CompareStrategy"):
-        self._compare_strategy_ = compare_strategy
+class ColumnCompare(abc.ABC):
+    def __init__(self, column1 : str, table1 : str, column2 : str, table2 : str):
         self.column1 = column1
         self.column2 = column2
+        self.table1 = table1
+        self.table2 = table2
 
-    @property
-    def compare_strategy(self) -> "CompareStrategy":
-        return self._compare_strategy_
-
-    @compare_strategy.setter
-    def compare_strategy(self, compare_strategy: "CompareStrategy") -> None:
-        self._compare_strategy_ = compare_strategy
-
-class CompareStrategy(abc.ABC):
     @abc.abstractmethod
-    def get_act_price(self, raw_price: float) -> float:
-        raise NotImplementedError
+    def applicable(self) -> bool:
+        # Return true if strategy is applicable to data format, etc (?)
+        pass
 
-class StringStrategy(CompareStrategy):
-    def get_act_price(self, raw_price: float) -> float:
-        return raw_price
+    @abc.abstractmethod
+    def estimate_costs(self, sample):
+        # Estimate cost of executing this strategy given a sample of the two columns
+        pass
+
+    @abc.abstractmethod
+    def compare(self):
+        # Execute comparison (TODO: Split by sample/exhaustive comparison?)
+        pass
+
+
+class StringCompare(ColumnCompare):
+    def applicable(self):
+        return True
+
+    def compare(self) -> float:
+        return 1.0
+
+    def estimate_costs(self, sample):
+        return 1.0
+
 
 def main() -> None:
-    string_strategy = StringStrategy()
-
-    test = ColumnCompare(column1, column2, string_strategy)
-
-    # Something like this... Compare the columns according to strategy comparison
-    # Add the comparison results to some list or something?
-    # ... TO think about
-    # https://en.wikipedia.org/wiki/Strategy_pattern Python code
-    test.compare()
+    test = StringCompare(1, 2, 3, 4)
+    print(test.compare())
 
 if __name__ == "__main__":
     main()

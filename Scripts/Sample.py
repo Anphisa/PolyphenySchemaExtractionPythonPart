@@ -1,6 +1,7 @@
 # Given column name and table name, take a sample
 import requests
 import logging
+import ast
 
 class Sample():
     def __init__(self, host, port, column: str, table: str, sample_size: int, random=False):
@@ -19,12 +20,24 @@ class Sample():
         self.sample_size = sample_size
         self.random = random
 
-    def take_sample(self):
+    def take_set_sample(self):
         query = "SELECT " + self.column_name + " FROM " + self.table_name
         if self.sample_size != 0:
             query += " LIMIT " + str(self.sample_size)
         DATA = {'querylanguage': 'SQL',
                 'query': query}
-        result = requests.post(url=self.URL, data=DATA)
         logging.info("Sampling values from column: " + query)
-        return result
+        result = requests.post(url=self.URL, data=DATA)
+        self.http_sample_result = result
+        return self
+
+    def extract_sample(self):
+        if self.http_sample_result:
+            sample_list = ast.literal_eval(self.http_sample_result.content.decode('utf-8'))
+            return sample_list
+        else:
+            try:
+                self.http_sample_result = self.take_set_sample()
+                self.extract_sample()
+            except:
+                raise RuntimeError("No sample taken before running extract_sample. Resampling failed.")

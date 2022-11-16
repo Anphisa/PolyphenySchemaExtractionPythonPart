@@ -8,13 +8,20 @@ class ColumnCompare(abc.ABC):
         self.table1 = table1
         self.table2 = table2
 
+    @property
+    def identical(self):
+        # Return true if columns are identical
+        if self.column1 == self.column2 and self.table1 == self.table2:
+            return True
+        return False
+
     @abc.abstractmethod
     def applicable(self) -> bool:
         # Return true if strategy is applicable to data format, etc (?)
         pass
 
     @abc.abstractmethod
-    def estimate_costs(self, sample):
+    def estimate_costs(self, sample1, sample2):
         # Estimate cost of executing this strategy given a sample of the two columns
         pass
 
@@ -22,22 +29,3 @@ class ColumnCompare(abc.ABC):
     def compare(self):
         # Execute comparison (TODO: Split by sample/exhaustive comparison?)
         pass
-
-
-class StringCompare(ColumnCompare):
-    def applicable(self):
-        return True
-
-    def compare(self) -> float:
-        return 1.0
-
-    def estimate_costs(self, sample):
-        return 1.0
-
-
-def main() -> None:
-    test = StringCompare(1, 2, 3, 4)
-    print(test.compare())
-
-if __name__ == "__main__":
-    main()

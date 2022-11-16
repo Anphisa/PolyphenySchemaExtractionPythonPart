@@ -89,8 +89,8 @@ class PkFkFinder:
                         # The column names are not similar enough to be compared
                         # print("Skipping comparison of", table["tableName"], column_name, "with", compare_table["tableName"], compare_pk_name)
                         continue
-                    sample = Sample.Sample(self.host, self.port, column_name, table["tableName"], self.sample_size).take_sample()
-                    sample_list = ast.literal_eval(sample.content.decode('utf-8'))
+                    sample = Sample.Sample(self.host, self.port, column_name, table["tableName"], self.sample_size).take_set_sample()
+                    sample_list = sample.extract_sample()
                     is_table_pk_fk_for_compare = self.check_fk(self.host, self.port, compare_table["tableName"], compare_pk_name, sample_list)
                     if is_table_pk_fk_for_compare:
                         if table["tableName"] in table_relationships:
@@ -134,8 +134,8 @@ class PkFkFinder:
                                                                       "foreignColumnNames": other_column_name,
                                                                       "knownPkFkRelationship": known_pk_fk_relationship}]
                 else:
-                    sample = Sample.Sample(self.host, self.port, column_name, table_name, 0).take_sample()
-                    sample_list = ast.literal_eval(sample.content.decode('utf-8'))
+                    sample = Sample.Sample(self.host, self.port, column_name, table_name, 0).take_set_sample()
+                    sample_list = sample.extract_sample()
                     is_table_pk_fk_for_compare = self.check_fk(self.host, self.port, other_table_name, other_column_name, sample_list)
                     if is_table_pk_fk_for_compare:
                         if table_name in validated_table_relationships:

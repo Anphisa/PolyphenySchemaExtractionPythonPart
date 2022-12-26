@@ -1,10 +1,11 @@
 # Compare primary keys and find primary key <-> foreign key relationships
+# TODO: Currently not efficient. Implement efficient method (Fernandez2018)
 import logging
 import requests
 import ast
 import Sample
 from itertools import chain
-from StringSimilarity import StringSimilarity
+from Scripts.probably_to_delete.StringSimilarity import StringSimilarity
 
 class PkFkFinder:
     def __init__(self, host, port, tables: dict, sample_size: int):

@@ -62,7 +62,8 @@ async def consumer(message):
         loop = asyncio.get_event_loop()
         dfs = await loop.run_in_executor(None, build_dataframes, d_message)
         # matching
-        matches = await loop.run_in_executor(None, dataframe_valentine_compare, dfs, Coma())
+        # todo: threshold for jl colnames only
+        matches = await loop.run_in_executor(None, dataframe_valentine_compare, dfs, JaccardLevenMatcherColNamesOnly())
         #print("matches:", await matches)
         # mapping
         matches_above_thresh = await loop.run_in_executor(None, Mapping.naiveMapping, matches, 0.5)

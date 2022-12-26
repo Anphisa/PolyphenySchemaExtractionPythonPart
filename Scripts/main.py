@@ -10,7 +10,7 @@ import ast
 import collections
 import time
 import pandas as pd
-from valentine.algorithms import Coma
+from valentine.algorithms import Coma, JaccardLevenMatcherColNamesOnly
 from valentine import valentine_match
 from Mapping.Mapping import Mapping
 

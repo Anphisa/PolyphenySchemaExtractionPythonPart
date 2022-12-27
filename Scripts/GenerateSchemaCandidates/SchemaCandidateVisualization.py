@@ -1,5 +1,6 @@
 import graphviz
 from graphviz import Digraph
+from Helper.FieldRelationship import FieldRelationship
 
 class SchemaCandidateVisualization():
     def __init__(self,
@@ -49,37 +50,62 @@ class SchemaCandidateVisualization():
         with self.g.subgraph(name='cluster_tables') as t:
             t.attr(label='Proposed schema')
             for j, table in enumerate(self.new_tables):
-                if self.new_tables[table]["type"] != "relational":
+                if self.new_tables[table]["datamodel"].lower() != "relational":
                     raise NotImplementedError("only implemented for relational data!")
                 table_name = table
-                pk = self.new_tables[table]["pk"]
+                pk = ", ".join(self.new_tables[table]["pk"])
                 if first_table_name == "":
                     first_table_name = table_name
-                    rank_hack_nodes.append(table_name + "_" + pk)
-                str_columns = "\n".join(self.new_tables[table]["columns"])
+                    rank_hack_nodes.append(table_name + "_columns:" + table_name + "_" + pk)
+                #print("str_columns", [c[0] for c in self.new_tables[table]["columns"].columns.values])
+                col_names = [c[0] for c in self.new_tables[table]["columns"].columns.values]
+                print("col_names", col_names)
+                #str_columns = "\n".join(col_names)
                 with t.subgraph(name='cluster_' + table_name) as tt:
                     tt.attr(style='filled', color='lightgrey')
                     tt.attr(label=table_name)
-                    tt.node(table_name + "_" + pk, label="primary key: " + pk + "\n", shape="box")
+                    #tt.node(table_name + "_" + pk, label="primary key: " + pk + "\n", shape="box")
                     with tt.subgraph(name='cluster_' + table_name + "_columns") as ttt:
                         ttt.attr(label="")
-                        #inner_label = " | ".join(self.new_tables[table]["columns"])
-                        #label = "{{ " + inner_label + " }}"
-                        #print(label)
-                        #ttt.node(table_name + "_columns", shape="record", label=label)
-                        for i, col in enumerate(self.new_tables[table]["columns"]):
-                            ttt.node(table_name + "_" + col, label=col)
+                        inner_label = ""
+                        pk_name = ""
+                        for c in col_names:
+                            if c in self.new_tables[table]["pk"]:
+                                c_name = c + " (pk)"
+                                pk_name = c
+                            else:
+                                c_name = c
+                            inner_label += "<{}>{} |".format(table_name + "_" + c, c_name)
+                        if j == len(self.new_tables) - 1 and pk_name != "":
+                            rank_hack_nodes.append(table_name + "_columns:" + table_name + "_" + pk_name)
+                        print("table", table_name, "inner label", inner_label)
+                        #inner_label = " | ".join(col_names)
+                        label = "{ " + inner_label[:-1] + " }"
+                        print("table", table_name, "whole label", label)
+                        ttt.node(table_name + "_columns", shape="record", label=label)
+                        #for i, col in enumerate(col_names):
+                            #ttt.node(table_name + "_" + col, label=col)
                             #if i == len(self.new_tables[table]["columns"]) - 1 and j == len(self.new_tables) - 1:
                             #    rank_hack_nodes.append(table_name + "_" + col)
-                        if j == len(self.new_tables) - 1:
-                            rank_hack_nodes.append(table_name + "_" + pk)
                     #tt.edge(table_name + "_" + pk, table_name + "_columns", style="invis")
 
             # relationships between data fields
             for relationship in self.table_relationships:
-                t.edge(relationship["from_table"] + "_" + relationship["from_column"],
-                       relationship["to_table"] + "_" + relationship["to_column"],
-                       label=relationship["relationship"])
+                rel = FieldRelationship(relationship["from_table"],
+                                        relationship["to_table"],
+                                        relationship["from_column"],
+                                        relationship["to_column"],
+                                        relationship["relationship"],
+                                        relationship["relationship_strength"])
+                #t.edge(relationship["from_table"] + "_" + relationship["from_column"],
+                #       relationship["to_table"] + "_" + relationship["to_column"],
+                #       label=relationship["relationship"])
+                t.edge(rel.table1 + "_columns:" + rel.table1 + "_" + rel.field_name1,
+                       rel.table2 + "_columns:" + rel.table2 + "_" + rel.field_name2,
+                       label=rel.relationship_type)
+                #print("edge info: ", (rel.table1 + "_" + rel.field_name1,
+                #       rel.table2 + "_" + rel.field_name2,
+                #       rel.relationship_type))
 
         # todo: force top to bottom order of subgraphs. next line doesn't work
         #self.g.edge("op_" + str(len(self.operations)), 'cluster_' + first_table_name)
@@ -89,7 +115,7 @@ class SchemaCandidateVisualization():
             l.attr(label='Loss under proposed schema')
             # inner_label = " | ".join(self.new_tables[table]["columns"])
             # label = "{{ " + inner_label + " }}"
-            label = "{{ " + self.field_loss + " | " + self.instance_loss + " | " + self.structure_loss + " }}"
+            label = "{ " + self.field_loss + " | " + self.instance_loss + " | " + self.structure_loss + " }"
             # print(label)
             l.node("loss records", shape="record", label=label)
             #l.node("field loss", label=self.field_loss, shape="box")
@@ -98,24 +124,24 @@ class SchemaCandidateVisualization():
 
         #rank_hack_nodes += ["field loss", "instance loss", "structure loss"]
         rank_hack_nodes.append("loss records")
-        print(rank_hack_nodes)
+        #print(rank_hack_nodes)
         k = 0
         while k < len(rank_hack_nodes) - 1:
             self.g.edge(rank_hack_nodes[k], rank_hack_nodes[k+1], style="invis")
             k += 1
-        #return self.g
-        self.g.view()
+        return self.g
+        #self.g.view()
 
 if __name__ == "__main__":
     s = SchemaCandidateVisualization(0,
                                      [{"operation" : "left join: dept:deptid <-> emps:deptid",
                                        "explanation": "JL col names only matcher: 95% match"}],
-                                      {"dept": {"type": "relational",
-                                                  "pk": "deptid",
-                                                  "columns": ["deptname", "deptblub"]},
-                                       "emps": {"type": "relational",
-                                                  "pk": "empid",
-                                                  "columns": ["deptid", "empname"]}},
+                                      {"dept": {"datamodel": "relational",
+                                                "pk": "deptid",
+                                                "columns": ["deptname", "deptblub"]},
+                                       "emps": {"datamodel": "relational",
+                                                "pk": "empid",
+                                                "columns": ["deptid", "empname"]}},
                                      [{"from_table": "dept",
                                        "to_table": "emps",
                                        "from_column": "deptid",
@@ -124,4 +150,5 @@ if __name__ == "__main__":
                                      "Field loss: depts: loss of fields [1, 2, 3]",
                                      "Instance loss: 95% of bla",
                                      "Structure loss: None.")
-    s.draw()
+    g = s.draw()
+    g.view()

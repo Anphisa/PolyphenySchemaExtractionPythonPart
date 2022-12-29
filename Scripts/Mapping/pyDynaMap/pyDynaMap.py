@@ -98,20 +98,27 @@ class pyDynaMap():
                 if map_i_name == map_j_name:
                     continue
                 # If a relation is already part of a mapping, don't combine it in again
-                # todo: does this make sense? I think so...
-                if map_i_name in map_j_name.split("_") or map_j_name in map_i_name.split("_"):
+                if self.mapping_subsumed(map_i_name, map_j_name):
                     continue
                 map_i = copy.deepcopy(batch1[map_i_name])
                 map_j = copy.deepcopy(batch2[map_j_name])
                 operator = self.choose_operator(map_i, map_j)
                 if operator is not None:
                     new_map = self.new_mapping(*operator)
-                    # todo: compute metadata and use for something?
+                    # todo: compute metadata and use it for something?
                     #md = self.compute_metadata(new_map)
                     # metadata needs to be recorded given initial sources (we need to find mapping with highest fitness given same initial sources)
                     if self.is_fittest(new_map, [map_i_name, map_j_name]):
-                        new_maps[map_i_name + "_" + map_j_name] = new_map
+                        map_name = map_i_name + "_" + map_j_name
+                        new_maps[map_name] = new_map
+                        self.mapping_sources[map_name] = [map_i_name, map_j_name]
         return new_maps
+
+    def mapping_subsumed(self, map1_name, map2_name):
+        if (map1_name in self.mapping_sources and map2_name in self.mapping_sources[map1_name]) or \
+            (map2_name in self.mapping_sources and map1_name in self.mapping_sources[map2_name]):
+            return True
+        return False
 
     def compute_metadata(self, new_map):
         # compute fitness data for new mapping

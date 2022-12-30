@@ -102,7 +102,7 @@ class pyDynaMap():
                     continue
                 map_i = copy.deepcopy(batch1[map_i_name])
                 map_j = copy.deepcopy(batch2[map_j_name])
-                operator = self.choose_operator(map_i, map_j)
+                operator = self.choose_operator(map_i, map_j, map_i_name, map_j_name)
                 if operator is not None:
                     new_map = self.new_mapping(*operator)
                     # todo: compute metadata and use it for something?
@@ -125,7 +125,6 @@ class pyDynaMap():
         fitness = self.fitness(new_map)
         # compute profile data for new mapping
         profile_data = self.compute_profile_data(new_map)
-        # todo: store metadata in some class variable
         pass
         # if operator == 'join':
         #     if self.lossy_merge_conditions_satisfied(map1, map2):
@@ -148,7 +147,7 @@ class pyDynaMap():
     def compute_metadata_lossy(self, map1, map2):
         pass
 
-    def choose_operator(self, map1, map2):
+    def choose_operator(self, map1, map2, map1_name, map2_name):
         # Algorithm 3: Choose suitable merge operator.
         # t_rel is the target relation and it's a class variable (paper: global variable)
         map1_ma = self.find_matches_attr(map1)
@@ -156,35 +155,55 @@ class pyDynaMap():
         operator = None
         attributes = None
         if self.diff_matches(map1_ma, map2_ma):
-            operator = self.choose_operator_diff(map1, map2)
+            operator = self.choose_operator_diff(map1, map2, map1_name, map2_name)
         else:
             operator = ("union", map1, map2, None)
         return operator
 
-    def choose_operator_diff(self, map1, map2):
+    def choose_operator_diff(self, map1, map2, map1_name, map2_name):
         # Algorithm 4: Generate operator when two mappings match different target attributes.
         # t_rel, pd (profile data) are class variables
         op = None
-        subsumed_map = self.is_subsumed(map1, map2)
+        subsumed_map = self.is_subsumed(map1, map2, map1_name, map2_name)
         if subsumed_map:
-            # discard(subsumed_map) (?)
             return op
         map1_keys = self.find_keys(map1)
         map2_keys = self.find_keys(map2)
-        ind = self.max_ind(self.pd, map1_keys, map2_keys)
-        if ind:
-            if ind.overlap == 1:
-                #op = op_join(map1, map2, ind.attributes)
-                op = ("join", map1, map2, ind.attributes)
-            else:
-                #op = op_outer_join(map1, map2, ind.attributes)
-                op = ("outer join", map1, map2, ind.attributes)
+        ind_op = self.max_ind(map1, map2, map1_keys, map2_keys)
+        if ind_op:
+            # There is an overlap between candidate keys in map1 and map2
+            return ind_op["op"]
         else:
-            map1_mk = self.find_matched_keys(map1)
-            map2_mk = self.find_matched_keys(map2)
-            if self.same_matches(map1_mk, map2_mk):
-                #op = op_outer_join(map1, map2, [map1_mk, map2_mk])
-                op = ("outer join", map1, map2, [map1_mk, map2_mk])
+            # There is no overlap between candidate keys in map1 and map2, try to find overlap between candidate keys in map1 with attributes in map2
+            # and overlap between candidate keys in map2 with attributes in map1
+            map1_ind_op = self.max_ind(map1, map2, map1_keys, list(map2.keys()))
+            map2_ind_op = self.max_ind(map2, map1, map2_keys, list(map1.keys()))
+            if map1_ind_op and map2_ind_op:
+                if map1_ind_op["inclusion_ratio"] >= map2_ind_op["inclusion_ratio"]:
+                    return map1_ind_op["op"]
+                else:
+                    return map2_ind_op["op"]
+            elif map1_ind_op:
+                return map1_ind_op["op"]
+            elif map2_ind_op:
+                return map2_ind_op["op"]
+            else:
+                # There is no overlap between candidate keys in map1 with attributes in map2 or the other way round.
+                # Next, if a foreign key relationship cannot be inferred, then, on
+                # lines 26–27, FindMatchedKeys retrieves the candidate keys from
+                # both mappings that match target attributes and checks if they
+                # match the same target attributes (line 28). If they do, then the
+                # two mappings are merged using full outer join, where the join
+                # condition is on the attributes that meet the requirements (line
+                # 29). The intuition behind this last step is that even if there is
+                # no overlap between the attribute values of the two mappings,
+                # it could be that there is instance complementarity between the
+                # two mappings, in which case performing a full outer join vertically
+                # aligns the key attributes that match the same target attributes
+                map1_mk = self.find_matched_keys(map1)
+                map2_mk = self.find_matched_keys(map2)
+                if self.same_matches(map1_mk, map2_mk):
+                    op = ("outer join", map1, map2, [map1_mk, map2_mk])
         return op
 
     def new_mapping(self, operator, map1, map2, attributes):
@@ -277,43 +296,112 @@ class pyDynaMap():
         # DiffMatches checks whether the matches are for different target attributes. If they are, they become candidates for joining,
         # to be decided by ChooseOperatorDiff (line 7). If the matches are for the same target attributes, then the two mappings are unioned (line 9).
         # are the matched attributes from map1 with t_rel (set1) the same as matched attributes from map2 with t_rel (set2)?
-        return len(set1.intersection(set2)) == 0
+        return len(set1.symmetric_difference(set2)) == 0
 
-    def is_subsumed(self, map1, map2):
-        if len(map1) != len(map2):
+    def is_subsumed(self, map1, map2, map1_name, map2_name):
+        # In lines 4–7, IsSubsumed determines whether, on attributes
+        # that match the target, the profiling data has inclusion dependencies between an attribute in one mapping and a corresponding
+        # attribute in the other mapping. If so, the subsumed mapping is
+        # discarded from the set of kept mappings (for further reference,
+        # in Section 4.3, we refer to the kept mappings as memorized subsolutions) and null is returned.
+        map1_ma = self.find_matches_attr(map1)
+        map2_ma = self.find_matches_attr(map2)
+
+        map1_subsumptions = {}
+        for att in map1_ma:
+            if att in map2:
+                # todo: replace this with call to profile data (propagation method)
+                inclusion = sum(el in map1[att] for el in map2[att])
+                if inclusion == len(map1[att]):
+                    # this att is subsumed in map2
+                    map1_subsumptions[att] = True
+                else:
+                    map1_subsumptions[att] = False
+            else:
+                map1_subsumptions[att] = False
+        # todo: all or any? text in paper sounds like "any", but then the two cases of subsumption map1 by map2 and the other way round wouldn't be symmetrical anymore
+        if all(map1_subsumptions):
+            # map1 is subsumed by map2
+            self.remove_mapping(map1_name)
             return None
-        for attr, values in map1.items():
-            if attr not in map2:
-                return None
-            if values != map2[attr]:
-                return None
-        return map1 if len(map1) < len(map2) else map2
+
+        map2_subsumptions = {}
+        for att in map2_ma:
+            if att in map1:
+                inclusion = sum(el in map2[att] for el in map1[att])
+                if inclusion == len(map2[att]):
+                    # this att is subsumed in map2
+                    map2_subsumptions[att] = True
+                else:
+                    map2_subsumptions[att] = False
+            else:
+                map2_subsumptions[att] = False
+        if all(map2_subsumptions):
+            # map2 is subsumed by map1
+            self.remove_mapping(map2_name)
+            return None
+
+    def remove_mapping(self, map_name):
+        for solution in self.sub_solution:
+            if map_name in solution:
+                del self.sub_solution[map_name]
 
     def find_keys(self, map):
+        # todo: replace with call to profiling function
+        # we want candidate keys here, i.e. attributes that are unique
         keys = set()
         for attr, values in map.items():
-            if attr in self.pd and 'candidate_keys' in self.pd[attr]:
-                keys.update(self.pd[attr]['candidate_keys'])
+            if len(values) == len(set(values)):
+                keys.add(attr)
         return keys
 
-    def max_ind(self, map1_keys, map2_keys):
-        max_ind = None
-        max_overlap = 0
-        for key1 in map1_keys:
-            if key1 in self.pd:
-                for ind in self.pd[key1]['inds']:
-                    if ind['attributes'].issubset(map2_keys):
-                        overlap = ind['overlap']
-                        if overlap > max_overlap:
-                            max_ind = ind
-                            max_overlap = overlap
-        return max_ind
+    def max_ind(self, map1, map2, map1_keys, map2_keys):
+        # todo: replace this with call to profiling function
+        # todo: in this function and "find_keys", we could replace these functions with pk/fk inferrence from paper fernandez2018
+        map1_map2_inclusions = {}
+        for key in map1_keys:
+            if key in map2_keys:
+                inclusion = sum(el in map1[key] for el in map2[key])
+                inclusion_ratio = inclusion/len(map1[key])
+                map1_map2_inclusions[key] = inclusion_ratio
+        map2_map1_inclusions = {}
+        for key in map2_keys:
+            if key in map1_keys:
+                inclusion = sum(el in map2[key] for el in map1[key])
+                inclusion_ratio = inclusion / len(map2[key])
+                map2_map1_inclusions[key] = inclusion_ratio
+
+        if max(map1_map2_inclusions.values()) > max(map2_map1_inclusions.values()):
+            max_inclusion = [(key, inclusion) for key, inclusion in map1_map2_inclusions.items() if
+                             inclusion == max(map1_map2_inclusions.values())]
+        else:
+            max_inclusion = [(key, inclusion) for key, inclusion in map2_map1_inclusions.items() if
+                             inclusion == max(map2_map1_inclusions.values())]
+
+        if max(max_inclusion.values()) == 1:
+            # if θ = 1.0, then the inclusion dependency is total and the
+            # chosen operator is join because a foreign key relationship
+            # is inferred between two mappings on their candidate key
+            # attributes (lines 12–13);
+            # if inclusion_ratio == 1 --> all elements from map1[key] are in map2[key], so we assume key is a pk for map1 and a fk for map2 (? foreign key relationship)
+            op = ("join", map1, map2, list(max_inclusion.keys()))
+            return {"op": op, "inclusion_ratio": 1}
+        elif 0 <= max(max_inclusion.values()) < 1:
+            # if θ ∈ (0, 1.0), then the inclusion dependency is partial
+            # and the operator is a full outer join because a foreign key
+            # relationship cannot be inferred so the algorithm joins the
+            # tuples that can be joined and keeps the remaining data (lines
+            # 14–15).
+            op = ("outer join", map1, map2, list(max_inclusion.keys()))
+            return {"op": op, "inclusion_ratio": max(max_inclusion.values())}
+        else:
+            return None
 
     def find_matched_keys(self, map):
         matched_keys = set()
-        for attr in mapping['attributes']:
-            if attr in self.pd and 'matched_targets' in self.pd[attr]:
-                matched_keys.update(self.pd[attr]['matched_targets'])
+        for att in list(map.keys()):
+            if att in self.t_rel:
+                matched_keys.add(att)
         return matched_keys
 
     def same_matches(self, map1_mk, map2_mk):

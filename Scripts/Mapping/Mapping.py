@@ -1,14 +1,12 @@
 from Helper.FieldRelationship import FieldRelationship
+#from Mapping.pyDynaMap.pyDynaMap import pyDynaMap
 
 class Mapping:
-    def __init__(self, involved_tables):
-        print(involved_tables)
+    def __init__(self, source_relations):
+        # print(source_relations)
         # A list of involved tables and at least their column names
-        # todo: perspectively, these invovled tables should be table objects
-        if len(involved_tables) > 2:
-            raise NotImplementedError("currently only implemented for two tables!")
         # assuming form {tableX: [col1, col2, col3], tableY: [col1, col2]}
-        self.involved_tables = involved_tables
+        self.source_relations = source_relations
 
     @staticmethod
     def naiveMapping(matches, threshold):
@@ -18,7 +16,6 @@ class Mapping:
     @staticmethod
     def naiveMappingDecider(involved_tables, matches):
         # given matches (above threshold) and involved_tables (class variable), naively decide the mapping
-        # todo: think about case with > 2 involved tables!
         # put matches into mappings, with no relationship type yet
         mappings = []
         map_cols = {}
@@ -94,3 +91,11 @@ class Mapping:
                             if m.relationship_type == (None,) or m.relationship_type is None:
                                 m.relationship_type = "view union"
         return mappings
+
+    def pyDynaMapMapping(self, matches):
+        for rel in source_relations:
+            col_names = source_relations[rel].keys()
+            if len(col_names) > len(set(col_names)):
+                raise RuntimeError("pyDynaMap doesn't accept duplicate column names. "
+                                   "Duplicate column names found in source_relations: ", source_relations)
+        pass

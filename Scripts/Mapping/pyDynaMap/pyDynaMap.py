@@ -375,6 +375,11 @@ class pyDynaMap():
             if map_name in self.sub_solution[solution]:
                 del self.sub_solution[solution][map_name]
 
+    def get_mapping_rows(self, map_name):
+        for solution in self.sub_solution:
+            if map_name in self.sub_solution[solution]:
+                return self.sub_solution[solution][map_name]
+
     def find_keys(self, map):
         # todo: replace with call to profiling function
         # we want candidate keys here, i.e. attributes that are unique
@@ -512,7 +517,7 @@ class pyDynaMap():
             raise RuntimeError("wrong mapping path format", mapping_path)
         if not (isinstance(from_table, list) or isinstance(to_table, list)):
             for col in cols:
-                rel_strength = self.get_match_strength(from_table, to_table, from_column, to_column)
+                rel_strength = self.get_match_strength(from_table, to_table, col, col)
                 field_relationships.append(FieldRelationship(from_table, to_table,
                                                              col, col,
                                                              relationship_type=rel,
@@ -543,6 +548,8 @@ class pyDynaMap():
             print("mapping path", mapping_path)
             field_relationships = self.mapping_name_to_field_relationships(mapping_path)
             print("Field relationships", field_relationships)
+            mapping_rows = self.get_mapping_rows(mapping_name)
+            print("Mapping rows", mapping_rows)
         return k_highest_fitness_values
 
 if __name__ == "__main__":

@@ -2,6 +2,7 @@
 import pandas as pd
 import math
 import copy
+import collections
 import statistics
 
 class pyDynaMap():
@@ -17,6 +18,7 @@ class pyDynaMap():
         self.sub_solution = {}
         # todo: profile data
         self.pd = {}
+        self.fitness_value_by_source = {}
         self.highest_fitness_value = {}
         self.mapping_sources = {}
 
@@ -92,9 +94,11 @@ class pyDynaMap():
     def merge_mappings(self, batch1, batch2):
         # Algorithm 2: Merge pairwise the mappings from 2 sets of mappings.
         new_maps = {}
+        batch1 = copy.deepcopy(batch1)
+        batch2 = copy.deepcopy(batch2)
         for map_i_name in batch1:
             for map_j_name in batch2:
-                # If map_i == map_j, do not return union with itself (probably not intended)
+                # If map_i == map_j, do not return union with itself (endless recursion, unintended endless self-unions)
                 if map_i_name == map_j_name:
                     continue
                 # If a relation is already part of a mapping, don't combine it in again
@@ -102,6 +106,12 @@ class pyDynaMap():
                     continue
                 map_i = copy.deepcopy(batch1[map_i_name])
                 map_j = copy.deepcopy(batch2[map_j_name])
+                # put initial sources in highest fitness records as well, so we can return if not merging them at all is the best solution
+                if map_i_name not in self.highest_fitness_value:
+                    self.highest_fitness_value[map_i_name] = self.fitness(map_i)
+                if map_j_name not in self.highest_fitness_value:
+                    self.highest_fitness_value[map_j_name] = self.fitness(map_j)
+                # continue merging of mappings
                 operator = self.choose_operator(map_i, map_j, map_i_name, map_j_name)
                 if operator is not None:
                     new_map = self.new_mapping(*operator)
@@ -112,6 +122,7 @@ class pyDynaMap():
                         map_name = map_i_name + "_" + map_j_name
                         new_maps[map_name] = new_map
                         self.mapping_sources[map_name] = [map_i_name, map_j_name]
+                        self.highest_fitness_value[map_name] = self.fitness(new_map)
         return new_maps
 
     def mapping_subsumed(self, map1_name, map2_name):
@@ -154,7 +165,7 @@ class pyDynaMap():
         map2_ma = self.find_matches_attr(map2)
         operator = None
         attributes = None
-        if self.diff_matches(map1_ma, map2_ma):
+        if not self.diff_matches(map1_ma, map2_ma):
             operator = self.choose_operator_diff(map1, map2, map1_name, map2_name)
         else:
             operator = ("union", map1, map2, None)
@@ -202,8 +213,9 @@ class pyDynaMap():
                 # aligns the key attributes that match the same target attributes
                 map1_mk = self.find_matched_keys(map1)
                 map2_mk = self.find_matched_keys(map2)
-                if self.same_matches(map1_mk, map2_mk):
-                    op = ("outer join", map1, map2, [map1_mk, map2_mk])
+                same_matches = self.same_matches(map1_mk, map2_mk)
+                if same_matches:
+                    op = ("outer join", map1, map2, list(same_matches))
         return op
 
     def new_mapping(self, operator, map1, map2, attributes):
@@ -239,7 +251,7 @@ class pyDynaMap():
         df1 = pd.DataFrame.from_dict(map1)
         df2 = pd.DataFrame.from_dict(map2)
         # using pandas merge to join on non-index columns
-        outer_joined_dfs =pd.merge(left=df2, right=df1, on=attributes, how='outer')
+        outer_joined_dfs = pd.merge(left=df2, right=df1, on=attributes, how='outer')
         # getting unioned dfs back to dict format we use here
         outer_join_map = outer_joined_dfs.to_dict(orient='list')
         return outer_join_map
@@ -254,18 +266,17 @@ class pyDynaMap():
         # Check if the mapping has the highest fitness of any mapping involving the same initial sources
         # If yes, update highest known fitness value
         if fitness > self.get_max_fitness(source_names):
-            #for s in source_names:
-            #    self.highest_fitness_value[s] = fitness
+            # Update highest fitness value by source, so we can see which source combinations have the highest fitness value
             source_1_name = source_names[0]
             source_2_name = source_names[1]
-            if source_1_name in self.highest_fitness_value:
-                self.highest_fitness_value[source_1_name][source_2_name] = fitness
+            if source_1_name in self.fitness_value_by_source:
+                self.fitness_value_by_source[source_1_name][source_2_name] = fitness
             else:
-                self.highest_fitness_value[source_1_name] = {source_2_name: fitness}
-            if source_2_name in self.highest_fitness_value:
-                self.highest_fitness_value[source_2_name][source_1_name] = fitness
+                self.fitness_value_by_source[source_1_name] = {source_2_name: fitness}
+            if source_2_name in self.fitness_value_by_source:
+                self.fitness_value_by_source[source_2_name][source_1_name] = fitness
             else:
-                self.highest_fitness_value[source_2_name] = {source_1_name: fitness}
+                self.fitness_value_by_source[source_2_name] = {source_1_name: fitness}
             return True
         return False
 
@@ -274,13 +285,10 @@ class pyDynaMap():
         max_fitness = 0
         source_1_name = source_names[0]
         source_2_name = source_names[1]
-        if source_1_name in self.highest_fitness_value and source_2_name in self.highest_fitness_value[source_1_name]:
-            max_fitness = max(max_fitness, self.highest_fitness_value[source_1_name][source_2_name])
-        if source_2_name in self.highest_fitness_value and source_1_name in self.highest_fitness_value[source_2_name]:
-            max_fitness = max(max_fitness, self.highest_fitness_value[source_2_name][source_1_name])
-        #for s in source_names:
-        #    if s in self.highest_fitness_value:
-        #        max_fitness = max(max_fitness, self.highest_fitness_value[s])
+        if source_1_name in self.fitness_value_by_source and source_2_name in self.fitness_value_by_source[source_1_name]:
+            max_fitness = max(max_fitness, self.fitness_value_by_source[source_1_name][source_2_name])
+        if source_2_name in self.fitness_value_by_source and source_1_name in self.fitness_value_by_source[source_2_name]:
+            max_fitness = max(max_fitness, self.fitness_value_by_source[source_2_name][source_1_name])
         return max_fitness
 
     def find_matches_attr(self, map):
@@ -320,10 +328,10 @@ class pyDynaMap():
             else:
                 map1_subsumptions[att] = False
         # todo: all or any? text in paper sounds like "any", but then the two cases of subsumption map1 by map2 and the other way round wouldn't be symmetrical anymore
-        if all(map1_subsumptions):
+        if all(map1_subsumptions.values()):
             # map1 is subsumed by map2
             self.remove_mapping(map1_name)
-            return None
+            return True
 
         map2_subsumptions = {}
         for att in map2_ma:
@@ -336,15 +344,16 @@ class pyDynaMap():
                     map2_subsumptions[att] = False
             else:
                 map2_subsumptions[att] = False
-        if all(map2_subsumptions):
+        if all(map2_subsumptions.values()):
             # map2 is subsumed by map1
             self.remove_mapping(map2_name)
-            return None
+            return True
+        return False
 
     def remove_mapping(self, map_name):
         for solution in self.sub_solution:
-            if map_name in solution:
-                del self.sub_solution[map_name]
+            if map_name in self.sub_solution[solution]:
+                del self.sub_solution[solution][map_name]
 
     def find_keys(self, map):
         # todo: replace with call to profiling function
@@ -372,11 +381,11 @@ class pyDynaMap():
                 map2_map1_inclusions[key] = inclusion_ratio
 
         if max(map1_map2_inclusions.values()) > max(map2_map1_inclusions.values()):
-            max_inclusion = [(key, inclusion) for key, inclusion in map1_map2_inclusions.items() if
-                             inclusion == max(map1_map2_inclusions.values())]
+            max_inclusion = {key: inclusion for key, inclusion in map1_map2_inclusions.items() if
+                             inclusion == max(map1_map2_inclusions.values())}
         else:
-            max_inclusion = [(key, inclusion) for key, inclusion in map2_map1_inclusions.items() if
-                             inclusion == max(map2_map1_inclusions.values())]
+            max_inclusion = {key: inclusion for key, inclusion in map2_map1_inclusions.items() if
+                             inclusion == max(map2_map1_inclusions.values())}
 
         if max(max_inclusion.values()) == 1:
             # if θ = 1.0, then the inclusion dependency is total and the
@@ -386,7 +395,7 @@ class pyDynaMap():
             # if inclusion_ratio == 1 --> all elements from map1[key] are in map2[key], so we assume key is a pk for map1 and a fk for map2 (? foreign key relationship)
             op = ("join", map1, map2, list(max_inclusion.keys()))
             return {"op": op, "inclusion_ratio": 1}
-        elif 0 <= max(max_inclusion.values()) < 1:
+        elif 0 < max(max_inclusion.values()) < 1:
             # if θ ∈ (0, 1.0), then the inclusion dependency is partial
             # and the operator is a full outer join because a foreign key
             # relationship cannot be inferred so the algorithm joins the
@@ -405,7 +414,7 @@ class pyDynaMap():
         return matched_keys
 
     def same_matches(self, map1_mk, map2_mk):
-        return map1_mk == map2_mk
+        return map1_mk.intersection(map2_mk)
 
     def fitness(self, map):
         # Algorithm 5: Fitness function
@@ -450,14 +459,6 @@ class pyDynaMap():
         else:
             return [a for a in att_null_counts]
 
-        #null_counts = [count(a.values) for a in attributes]
-        #median = statistics.median(null_counts)
-        #iqr = statistics.quantiles(null_counts, n=4)[2] - statistics.quantiles(null_counts, n=4)[1]
-        #lower_bound = median - 1.5 * iqr
-        #upper_bound = median + 1.5 * iqr
-        #return [a for a in attributes if lower_bound <= count(a.values) <= upper_bound]
-        #return [a for a, null_count in zip(attributes, null_counts) if lower_bound <= null_count <= upper_bound]
-
     def attr_nulls(self, atts):
         # For atts, count nulls (? alg 5 line 3)
         null_count = 0
@@ -466,16 +467,15 @@ class pyDynaMap():
                 null_count += 0
         return null_count
 
-    def best_mappings(self):
+    def k_best_mappings(self, k):
         # In the current approach, Dynamap outputs the best k mappings where
         # k is an integer. The output mappings merge subsets of i source
         # relations, 1 ≤ i ≤ n, where n is the total number of input source
         # relations, which were obtained during the dynamic programming
         # search, and that are ranked according to their fitness.
-        pass
-
-    def main(self):
-        self.generate_mappings(len(self.source_relations))
+        # todo: for thesis writing, what are the tie breaks here?
+        k_highest_fitness_values = dict(collections.Counter(self.highest_fitness_value).most_common(5))
+        return k_highest_fitness_values
 
 if __name__ == "__main__":
     # Create a dataframe with three columns: 'A', 'B', and 'C'
@@ -496,5 +496,6 @@ if __name__ == "__main__":
 
     dynamap = pyDynaMap(dfs, matches)
     dynamap.generate_mappings(len(dfs))
-    for solution in dynamap.sub_solution:
-        print(dynamap.sub_solution[solution])
+    print(dynamap.k_best_mappings(3))
+    #for solution in dynamap.sub_solution:
+    #    print(dynamap.sub_solution[solution])

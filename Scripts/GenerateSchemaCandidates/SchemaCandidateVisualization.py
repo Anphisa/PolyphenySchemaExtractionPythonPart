@@ -1,6 +1,6 @@
 import graphviz
 from graphviz import Digraph
-from FieldRelationship import FieldRelationship
+from Helper.FieldRelationship import FieldRelationship
 
 class SchemaCandidateVisualization():
     def __init__(self,
@@ -8,11 +8,13 @@ class SchemaCandidateVisualization():
                  mapping_name: str,
                  mapping_path: list,
                  mapping_result: dict,
+                 sample_length: int,
                  field_loss: list, instance_loss: list, structure_loss: list):
         self.n_schema_candidate = str(n_schema_candidate)
         self.mapping_name = mapping_name
         self.mapping_path = mapping_path
         self.mapping_result = mapping_result
+        self.sample_length = sample_length
         self.field_loss = field_loss
         self.instance_loss = instance_loss
         self.structure_loss = structure_loss
@@ -65,6 +67,7 @@ class SchemaCandidateVisualization():
             draw_mapping_path(self.mapping_path, t)
 
         # Draw sample from proposed schema, so we can see some content that rows would have
+        # todo: this should also display multiple tables if mapping returns multiple tables (this could happen with dynamap, although currently it doesn't)
         with self.g.subgraph(name='cluster_proposed_schema') as t:
             t.attr(label='Proposed schema sample data')
             table_name = self.mapping_name
@@ -73,7 +76,7 @@ class SchemaCandidateVisualization():
                 tt.attr(style='filled', color='lightgrey')
                 tt.attr(label=table_name)
                 table_content = """<<table border="0" cellborder="1" cellspacing="0"> <tr>  <td>""" + "</td><td>".join(col_names) + " </td>  </tr>"
-                for i in range(0, 5):
+                for i in range(0, self.sample_length):
                     tables_at_i = []
                     for table in self.mapping_result:
                         tables_at_i.append(str(self.mapping_result[table][i]))
@@ -96,8 +99,11 @@ if __name__ == "__main__":
                                      {'B': [10.0, 11.0, 12.0, 4.0, 5.0, 6.0, None, None, None],
                                       'C': [13, 14, 15, 7, 8, 9, 19, 20, 21],
                                       'A': [None, None, None, 1.0, 2.0, 3.0, 16.0, 17.0, 18.0]},
-                                     "Field loss: depts: loss of fields [1, 2, 3]",
-                                     "Instance loss: 95% of bla",
-                                     "Structure loss: None.")
+                                      "Field loss: None.",
+                                      "Instance loss: None.",
+                                      "Structure loss: None.")
+                                     #"Field loss: depts: loss of fields [1, 2, 3]",
+                                     #"Instance loss: 95% of bla",
+                                     #"Structure loss: None.")
     g = s.draw()
     g.view()

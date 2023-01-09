@@ -4,7 +4,7 @@ import math
 import copy
 import collections
 import statistics
-from FieldRelationship import FieldRelationship
+from Helper.FieldRelationship import FieldRelationship
 
 class pyDynaMap():
     def __init__(self, source_relations: dict, matches: dict):
@@ -63,7 +63,7 @@ class pyDynaMap():
     #                (('df1', 'A'), ('df3', 'A')): 1,
     #                (('df1', 'A'), ('df3', 'C')): 1,
     #                (('df2', 'C'), ('df3', 'C')): 1}
-        for m in matches:
+        for m in self.matches:
             m_from_table = m[0][0]
             m_to_table = m[1][0]
             m_from_column = m[0][1]
@@ -72,7 +72,7 @@ class pyDynaMap():
                 to_table == m_to_table and \
                 from_column == m_to_column and \
                 to_column == m_to_column:
-                return matches[m]
+                return self.matches[m]
 
     def compute_profile_data(self, map):
         # todo: get this from polypheny statistics and/or metanome library
@@ -188,7 +188,7 @@ class pyDynaMap():
         if not self.diff_matches(map1_ma, map2_ma):
             operator = self.choose_operator_diff(map1, map2, map1_name, map2_name)
         else:
-            operator = ("union", map1, map2, None)
+            operator = ("union", map1, map2, list(map1_ma.intersection(map2_ma)))
         return operator
 
     def choose_operator_diff(self, map1, map2, map1_name, map2_name):
@@ -405,6 +405,9 @@ class pyDynaMap():
                 inclusion_ratio = inclusion / len(map2[key])
                 map2_map1_inclusions[key] = inclusion_ratio
 
+        if not map1_map2_inclusions or not map2_map1_inclusions:
+            return None
+
         if max(map1_map2_inclusions.values()) > max(map2_map1_inclusions.values()):
             max_inclusion = {key: inclusion for key, inclusion in map1_map2_inclusions.items() if
                              inclusion == max(map1_map2_inclusions.values())}
@@ -516,6 +519,17 @@ class pyDynaMap():
         else:
             raise RuntimeError("wrong mapping path format", mapping_path)
         if not (isinstance(from_table, list) or isinstance(to_table, list)):
+            if cols is None:
+                # TODO: Replace None in case of union with list of column names!
+                from_cols = list(self.get_mapping_rows(from_table).keys())
+                to_cols = list(self.get_mapping_rows(to_table).keys())
+                for fc in from_cols:
+                    for tc in to_cols:
+                        rel_strength = self.get_match_strength(from_table, to_table, fc, tc)
+                        field_relationships.append(FieldRelationship(from_table, to_table,
+                                                                     fc, tc,
+                                                                     relationship_type=rel,
+                                                                     relationship_strength=rel_strength))
             for col in cols:
                 rel_strength = self.get_match_strength(from_table, to_table, col, col)
                 field_relationships.append(FieldRelationship(from_table, to_table,
@@ -537,20 +551,33 @@ class pyDynaMap():
         # relations, which were obtained during the dynamic programming
         # search, and that are ranked according to their fitness.
         # todo: for thesis writing, what are the tie breaks here?
-        k_highest_fitness_values = dict(collections.Counter(self.highest_fitness_value).most_common(5))
+        k_highest_fitness_values = dict(collections.Counter(self.highest_fitness_value).most_common(k))
+        # tie break 1: prefer mappings to source relations
+        not_source_mappings = [m for m in k_highest_fitness_values.keys() if "_" in m]
+        if not_source_mappings:
+            k_highest_fitness_values = {k: v for k, v in k_highest_fitness_values.items() if k in not_source_mappings}
         print("k highest fitness values", k_highest_fitness_values)
         # example: {'df1_df2_df3': 6, 'df2_df1_df3': 6, 'df3_df1_df2': 6, 'df1': 3, 'df2': 3}
         # format that we want for graphviz visualization:
         # [{'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': 'view union', 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'deptno', 'field_name2': 'deptno', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'depts', 'table2': 'emps', 'field_name1': 'name', 'field_name2': 'name', 'relationship_type': ('join',), 'relationship_strength': 1}, {'object': 'FieldRelationship', 'table1': 'emp', 'table2': 'work', 'field_name1': 'employeeno', 'field_name2': 'employeeno', 'relationship_type': ('join',), 'relationship_strength': 1}]
+        viz_info = {}
         for mapping_name in k_highest_fitness_values:
             # ['join', 'df1', ['union', 'df2', 'df3', None], 'A']
             mapping_path = self.reconstruct_mapping_path(mapping_name)
-            print("mapping path", mapping_path)
             field_relationships = self.mapping_name_to_field_relationships(mapping_path)
-            print("Field relationships", field_relationships)
             mapping_rows = self.get_mapping_rows(mapping_name)
-            print("Mapping rows", mapping_rows)
-        return k_highest_fitness_values
+            max_map_length = 0
+            for col in mapping_rows:
+                if max_map_length < len(mapping_rows[col]):
+                    max_map_length = len(mapping_rows[col])
+            viz_info[mapping_name] = {
+                "mapping_path": mapping_path,
+                "field_relationships": field_relationships,
+                "mapping_rows": mapping_rows,
+                "max_mapping_rows_length": max_map_length
+            }
+            print(viz_info)
+        return viz_info
 
 if __name__ == "__main__":
     dfs = {"df1": {'A': [1, 2, 3], 'B': [4, 5, 6], 'C': [7, 8, 9]},

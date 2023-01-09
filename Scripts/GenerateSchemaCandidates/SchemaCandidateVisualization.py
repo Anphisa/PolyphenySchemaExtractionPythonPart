@@ -20,6 +20,10 @@ class SchemaCandidateVisualization():
         self.structure_loss = structure_loss
         self.g = graphviz.Digraph('G', filename="output/schemacandidatetest.svg")
 
+    def escape_special_characters(self, string):
+        escaped = string.replace("&", "&amp;")
+        return escaped
+
     def draw(self):
         self.g.attr(labelloc="t")
         self.g.attr(label="Schema candidate " + self.n_schema_candidate)
@@ -71,7 +75,7 @@ class SchemaCandidateVisualization():
         with self.g.subgraph(name='cluster_proposed_schema') as t:
             t.attr(label='Proposed schema sample data')
             table_name = self.mapping_name
-            col_names = list(self.mapping_result.keys())
+            col_names = [self.escape_special_characters(c) for c in list(self.mapping_result.keys())]
             with t.subgraph(name='cluster_' + table_name) as tt:
                 tt.attr(style='filled', color='lightgrey')
                 tt.attr(label=table_name)
@@ -79,7 +83,7 @@ class SchemaCandidateVisualization():
                 for i in range(0, self.sample_length):
                     tables_at_i = []
                     for table in self.mapping_result:
-                        tables_at_i.append(str(self.mapping_result[table][i]))
+                        tables_at_i.append(self.escape_special_characters(str(self.mapping_result[table][i])))
                     table_content += "<tr> <td>" + "</td><td>".join(tables_at_i) + "</td></tr>"
                 print(table_content + "</table>>")
                 tt.node("blub", label=table_content + "</table>>", shape="box")

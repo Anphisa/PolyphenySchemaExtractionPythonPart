@@ -1,19 +1,19 @@
 #!/usr/bin/env python
-import sys
-import json
 import logging
+import time
+
 import requests
 import asyncio
 import websockets
 import datetime
 import ast
 import collections
-import time
 import pandas as pd
-from valentine.algorithms import Coma, JaccardLevenMatcherColNamesOnly
+from valentine.algorithms import JaccardLevenMatcherColNamesOnly, Coma
 from valentine import valentine_match
 from Mapping.Mapping import Mapping
 from GenerateSchemaCandidates.SchemaCandidateVisualization import SchemaCandidateVisualization
+from Scripts.Sampling.Sample import Sample
 
 from PkFkFinder import PkFkFinder
 
@@ -64,6 +64,24 @@ def dataframe_valentine_compare(dataframes, valentine_method):
                 checked_combinations.append((df1, df2))
     return all_matches
 
+async def show_mapping(num, result, mapping_result):
+    schema_candidate_graph = SchemaCandidateVisualization(num,
+                                                          result,
+                                                          mapping_result[result]["mapping_path"],
+                                                          mapping_result[result]["mapping_rows"],
+                                                          mapping_result[result]["max_mapping_rows_length"],
+                                                          "Field loss: None.",
+                                                          "Instance loss: None.",
+                                                          "Structure loss: None.")
+    g = schema_candidate_graph.draw()
+    # TODO: Why do I need these long delays??
+    time.sleep(1)
+    print("graphviz dot code:", g.source)
+    g.graph_attr.update(size="20,100")
+    time.sleep(1)
+    g.view()
+    print("mapping result", result)
+
 async def consumer(message):
     print("consumer: ", message)
     d_message = ast.literal_eval(message)
@@ -76,6 +94,15 @@ async def consumer(message):
         # Index: [], 'pk': ['deptno'], 'fk': [], 'datamodel': 'RELATIONAL'}, 'emp': {'columns': Empty DataFrame
         # Columns: [(employeeno,), (age,), (gender,), (maritalstatus,), (worklifebalance,), (education,), (monthlyincome,), (relationshipjoy,), (workingyears,), (yearsatcompany,)]
         # Index: [], 'pk': ['employeeno'], 'fk': [], 'datamodel': 'RELATIONAL'}}
+        # sampling
+        # Take samples from all columns
+        for df in dfs:
+            cols = dfs[df]["columns"]
+            for col in cols:
+                sample = Sample("http://127.0.0.1", "20598", col, df, 5)
+                sample.take_sample()
+                sample.extract_sample()
+                dfs[df]["columns"][col] = sample.sample
         # matching
         # todo: set threshold for jl colnames only
         matches = await loop.run_in_executor(None, dataframe_valentine_compare, dfs, JaccardLevenMatcherColNamesOnly())
@@ -90,18 +117,7 @@ async def consumer(message):
         mapping_result = mapper.pyDynaMapMapping(matches_above_thresh)
         schema_candidate_num = 0
         for result in mapping_result:
-            schema_candidate_graph = SchemaCandidateVisualization(schema_candidate_num,
-                                                                 result,
-                                                                 mapping_result[result]["mapping_path"],
-                                                                 mapping_result[result]["mapping_rows"],
-                                                                 mapping_result[result]["max_mapping_rows_length"],
-                                                                  "Field loss: None.",
-                                                                  "Instance loss: None.",
-                                                                  "Structure loss: None.")
-            g = schema_candidate_graph.draw()
-            print("graphviz dot code:", g.source)
-            g.view()
-            print("mapping result", result)
+            await show_mapping(schema_candidate_num, result, mapping_result)
             schema_candidate_num += 1
         URL = "http://127.0.0.1:20598/result"
         PARAMS = {'results': str(mapping_result)}

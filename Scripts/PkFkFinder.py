@@ -3,7 +3,7 @@
 import logging
 import requests
 import ast
-import Sample
+from Scripts.Sampling import Sample
 from itertools import chain
 from Scripts.probably_to_delete.StringSimilarity import StringSimilarity
 

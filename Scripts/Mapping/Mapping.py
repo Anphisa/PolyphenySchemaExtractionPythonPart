@@ -102,10 +102,10 @@ class Mapping:
         for rel in self.source_relations:
             dyna_source_relations[rel] = self.source_relations[rel]["columns"].to_dict(orient="list")
         # TODO: Take out, this is static fake data!
-        dyna_source_relations = {'depts': {'deptno': [10, 20, 30], 'name': ['Sales', 'Marketing', 'HR']},
-                                 'emp': {'employeeno': [1, 2, 4], 'age': [41, 49, 37], 'gender': ['Female', 'Male', 'Male'], 'maritalstatus': ['Single', 'Married', 'Single'], 'worklifebalance': ['Bad', 'Better', 'Better'], 'education': ['College', 'Below College', 'College'], 'monthlyincome': [5933, 5130, 2090], 'relationshipjoy': ['Low', 'Very High', 'Medium'], 'workingyears': [8, 10, 7], 'yearsatcompany': [6, 10, 0]},
-                                 'emps': {'empid': [100, 110, 150], 'deptno': [10, 10, 20], 'name': ['Bill', 'Theodore', 'Sebastian'], 'salary': [10000, 11500, 7000], 'commission': [1000, 250, 400]},
-                                 'work': {'employeeno': [1, 2, 4], 'educationfield': ['Life Sciences', 'Life Sciences', 'Other'], 'jobinvolvement': ['High', 'Medium', 'Medium'], 'joblevel': [2, 2, 1], 'jobrole': ['Sales Executive', 'Research Scientist', 'Laboratory Technician'], 'businesstravel': ['Travel_Rarely', 'Travel_Frequently', 'Travel_Rarely'], 'department': ['Sales', 'R&D', 'R&D'], 'attrition': ['Yes', 'No', 'Yes'], 'dailyrate': [1102, 279, 1373]}}
+        # dyna_source_relations = {'depts': {'deptno': [10, 20, 30], 'name': ['Sales', 'Marketing', 'HR']},
+        #                          'emp': {'employeeno': [1, 2, 4], 'age': [41, 49, 37], 'gender': ['Female', 'Male', 'Male'], 'maritalstatus': ['Single', 'Married', 'Single'], 'worklifebalance': ['Bad', 'Better', 'Better'], 'education': ['College', 'Below College', 'College'], 'monthlyincome': [5933, 5130, 2090], 'relationshipjoy': ['Low', 'Very High', 'Medium'], 'workingyears': [8, 10, 7], 'yearsatcompany': [6, 10, 0]},
+        #                          'emps': {'empid': [100, 110, 150], 'deptno': [10, 10, 20], 'name': ['Bill', 'Theodore', 'Sebastian'], 'salary': [10000, 11500, 7000], 'commission': [1000, 250, 400]},
+        #                          'work': {'employeeno': [1, 2, 4], 'educationfield': ['Life Sciences', 'Life Sciences', 'Other'], 'jobinvolvement': ['High', 'Medium', 'Medium'], 'joblevel': [2, 2, 1], 'jobrole': ['Sales Executive', 'Research Scientist', 'Laboratory Technician'], 'businesstravel': ['Travel_Rarely', 'Travel_Frequently', 'Travel_Rarely'], 'department': ['Sales', 'R&D', 'R&D'], 'attrition': ['Yes', 'No', 'Yes'], 'dailyrate': [1102, 279, 1373]}}
         dynamap = pyDynaMap(dyna_source_relations, matches)
         dynamap.generate_mappings(len(dyna_source_relations))
         k_best_mappings = dynamap.k_best_mappings(5)

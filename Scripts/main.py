@@ -65,7 +65,8 @@ def dataframe_valentine_compare(dataframes, valentine_method):
     return all_matches
 
 async def show_mapping(num, result, mapping_result):
-    schema_candidate_graph = SchemaCandidateVisualization(num,
+    schema_candidate_graph = SchemaCandidateVisualization(result + ".svg",
+                                                          num,
                                                           result,
                                                           mapping_result[result]["mapping_path"],
                                                           mapping_result[result]["mapping_rows"],

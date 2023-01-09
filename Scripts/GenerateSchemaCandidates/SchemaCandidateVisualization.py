@@ -4,6 +4,7 @@ from Helper.FieldRelationship import FieldRelationship
 
 class SchemaCandidateVisualization():
     def __init__(self,
+                 out_file_name: str,
                  n_schema_candidate: int,
                  mapping_name: str,
                  mapping_path: list,
@@ -18,7 +19,7 @@ class SchemaCandidateVisualization():
         self.field_loss = field_loss
         self.instance_loss = instance_loss
         self.structure_loss = structure_loss
-        self.g = graphviz.Digraph('G', filename="output/schemacandidatetest.svg")
+        self.g = graphviz.Digraph('G', filename="output/" + out_file_name)
 
     def escape_special_characters(self, string):
         escaped = string.replace("&", "&amp;")

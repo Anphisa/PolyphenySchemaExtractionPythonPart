@@ -94,10 +94,11 @@ class Mapping:
 
     def pyDynaMapMapping(self, matches):
         for rel in self.source_relations:
-            col_names = self.source_relations[rel].keys()
-            if len(col_names) > len(set(col_names)):
-                raise RuntimeError("pyDynaMap doesn't accept duplicate column names. "
-                                   "Duplicate column names found in source_relations: ", self.source_relations)
+            # todo: test this with duplicate table names
+            df_names = self.source_relations[rel].keys()
+            if len(df_names) > len(set(df_names)):
+                raise RuntimeError("pyDynaMap doesn't accept duplicate table names. "
+                                   "Duplicate table names found in source_relations: ", self.source_relations)
         dyna_source_relations = {}
         for rel in self.source_relations:
             dyna_source_relations[rel] = self.source_relations[rel]["columns"].to_dict(orient="list")

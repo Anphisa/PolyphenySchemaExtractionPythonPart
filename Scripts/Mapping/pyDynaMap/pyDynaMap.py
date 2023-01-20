@@ -228,7 +228,7 @@ class pyDynaMap():
         map2_ma = self.find_matches_attr(map2, map2_name)
         operator = None
         attributes = None
-        if not self.diff_matches(map1, map1_name, map1_ma, map2, map2_name, map2_ma):
+        if not self.diff_matches(map1_ma, map2_ma):
             # todo: check what happens here if we have different col names from a match
             operator = self.choose_operator_diff(map1, map2, map1_name, map2_name)
         else:
@@ -275,10 +275,12 @@ class pyDynaMap():
                 # it could be that there is instance complementarity between the
                 # two mappings, in which case performing a full outer join vertically
                 # aligns the key attributes that match the same target attributes
-                map1_mk = self.find_matched_keys(map1)
-                map2_mk = self.find_matched_keys(map2)
-                same_matches = self.same_matches(map1_mk, map2_mk)
-                if same_matches:
+                # todo: replaced here with other function names. does this still work?
+                # todo: if not, fix original function calls for unequal column names
+                map1_mk = self.find_matches_attr(map1, map1_name)
+                map2_mk = self.find_matched_attr(map2, map2_name)
+                diff_matches = self.diff_matches(map1_mk, map2_mk)
+                if not diff_matches:
                     op = ("outer join", map1, map2, list(same_matches))
         return op
 
@@ -492,18 +494,16 @@ class pyDynaMap():
             return {"op": op, "inclusion_ratio": max(max_inclusion.values())}
         else:
             return None
-
-    def find_matched_keys(self, map):
-        matched_keys = set()
-        # todo: fix for unequal col names!
-        for att in list(map.keys()):
-            if att in self.t_rel.keys():
-                matched_keys.add(att)
-        return matched_keys
-
-    def same_matches(self, map1_mk, map2_mk):
-        # todo: this may work for unequal col names if we use col_name key in self.find_matched_keys
-        return map1_mk.intersection(map2_mk)
+    #
+    # def find_matched_keys(self, map):
+    #     matched_keys = set()
+    #     for att in list(map.keys()):
+    #         if att in self.t_rel.keys():
+    #             matched_keys.add(att)
+    #     return matched_keys
+    #
+    # def same_matches(self, map1_mk, map2_mk):
+    #     return map1_mk.intersection(map2_mk)
 
     def fitness(self, map):
         # Algorithm 5: Fitness function
@@ -647,7 +647,6 @@ if __name__ == "__main__":
     dfs = {"df1": {'A': [1, 2, 3], 'B': [4, 5, 6], 'C': [7, 8, 9]},
            "df2": {'B': [10, 11, 12], 'C': [13, 14, 15]},
            "df3": {'A': [16, 17, 18], 'C': [19, 20, 21]}}
-    # todo: check earlier that dfs source relations doesn't have duplicate keys (names of tables)
     matches = {(('df1', 'B'), ('df2', 'B')): 1,
                (('df1', 'C'), ('df2', 'C')): 1,
                (('df1', 'A'), ('df3', 'A')): 1,

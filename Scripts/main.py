@@ -36,19 +36,49 @@ def build_dataframes(message):
     message = ast.literal_eval(message["message"])
     tables_list = message["tables"]
     tables_df = {}
-    for table in tables_list:
-        table_name = table["tableName"]
-        column_names = table["columnNames"]
-        primary_key = table["primaryKey"]
-        foreign_keys = table["foreignKeys"]
-        data_model = message["datamodel"]
-        df = pd.DataFrame(columns=column_names)
-        if table_name not in tables_df:
-            tables_df[table_name] = {}
-        tables_df[table_name]["columns"] = df
-        tables_df[table_name]["pk"] = primary_key
-        tables_df[table_name]["fk"] = foreign_keys
-        tables_df[table_name]["datamodel"] = data_model
+    data_model = message["datamodel"]
+    if data_model == 'RELATIONAL':
+        for table in tables_list:
+            table_name = table["tableName"]
+            column_names = table["columnNames"]
+            primary_key = table["primaryKey"]
+            foreign_keys = table["foreignKeys"]
+            namespace_name = table["namespaceName"]
+            data_model = message["datamodel"]
+            df = pd.DataFrame(columns=column_names)
+            if table_name not in tables_df:
+                tables_df[table_name] = {}
+            tables_df[table_name]["columns"] = df
+            tables_df[table_name]["pk"] = primary_key
+            tables_df[table_name]["fk"] = foreign_keys
+            tables_df[table_name]["datamodel"] = data_model
+            tables_df[table_name]["namespacename"] = namespace_name
+    elif data_model == 'GRAPH':
+        for table in tables_list:
+            table_name = table["graphLabel"]
+            column_names = table["propertyNames"]
+            namespace_name = table["namespaceName"]
+            data_model = message["datamodel"]
+            df = pd.DataFrame(columns=column_names)
+            if table_name not in tables_df:
+                tables_df[table_name] = {}
+            tables_df[table_name]["columns"] = df
+            tables_df[table_name]["datamodel"] = data_model
+            tables_df[table_name]["namespacename"] = namespace_name
+    elif data_model == 'DOCUMENT':
+        for table in tables_list:
+            table_name = table["collectionName"]
+            column_names = table["firstLevelTags"]
+            namespace_name = table["namespaceName"]
+            data_model = message["datamodel"]
+            df = pd.DataFrame(columns=column_names)
+            if table_name not in tables_df:
+                tables_df[table_name] = {}
+            tables_df[table_name]["columns"] = df
+            tables_df[table_name]["datamodel"] = data_model
+            tables_df[table_name]["namespacename"] = namespace_name
+    else:
+        raise RuntimeWarning("Unknown data model: ", data_model)
     return tables_df
 
 def dataframe_valentine_compare(dataframes, valentine_method):
@@ -75,13 +105,10 @@ async def show_mapping(num, result, mapping_result):
                                                           "Instance loss: None.",
                                                           "Structure loss: None.")
     g = schema_candidate_graph.draw()
-    # TODO: Why do I need these long delays??
-    time.sleep(1)
-    print("graphviz dot code:", g.source)
+    #print("graphviz dot code:", g.source)
     g.graph_attr.update(size="20,100")
-    time.sleep(1)
     g.view()
-    print("mapping result", result)
+    #print("mapping result", result)
 
 async def consumer(message):
     print("consumer: ", message)
@@ -90,6 +117,11 @@ async def consumer(message):
         loop = asyncio.get_event_loop()
         dfs = await loop.run_in_executor(None, build_dataframes, d_message)
         #print(dfs)
+        #datamodels = [value["datamodel"] for value in dfs.values()]
+        #print(datamodels)
+        #if not all('RELATIONAL' == model for model in datamodels):
+        #    logging.error("Schema integration only works on relational data!")
+        #    return
         # {'depts': {'columns': Empty DataFrame
         # Columns: [(deptno,), (name,)]
         # Index: [], 'pk': ['deptno'], 'fk': [], 'datamodel': 'RELATIONAL'}, 'emp': {'columns': Empty DataFrame
@@ -99,8 +131,10 @@ async def consumer(message):
         # Take samples from all columns
         for df in dfs:
             cols = dfs[df]["columns"]
+            namespace = dfs[df]["namespacename"]
             for col in cols:
-                sample = Sample("http://127.0.0.1", "20598", col, df, 5)
+                # todo: get from pp and fallback 127.0.0.1
+                sample = Sample("http://127.0.0.1", "20598", col, namespace, df, 5)
                 sample.take_sample()
                 sample.extract_sample()
                 dfs[df]["columns"][col] = sample.sample

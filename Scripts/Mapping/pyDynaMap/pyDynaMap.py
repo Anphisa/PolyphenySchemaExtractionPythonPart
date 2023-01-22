@@ -67,7 +67,6 @@ class pyDynaMap():
         # example: [{'depts_deptno', 'emps_deptno'}, {'depts_name', 'emps_name'}, {'emp_employeeno', 'work_employeeno'}]
         G = nx.Graph()
         G.add_edges_from(tuplist)
-        print(list(nx.connected_components(G)))
 
         target_columns = {}
         for connected_fields in list(nx.connected_components(G)):
@@ -77,8 +76,8 @@ class pyDynaMap():
 
             # save col_name aliases from source tables
             for table_field in connected_fields:
-                table = table_field[0]
-                field = table_field[1]
+                table = table_field.split("_")[0]
+                field = table_field.split("_")[1]
                 if col_name in target_columns:
                     target_columns[col_name][table] = field
                 else:
@@ -227,6 +226,15 @@ class pyDynaMap():
     def compute_metadata_lossy(self, map1, map2):
         pass
 
+    def aliases_for_t_rel_columns(self, map_name, t_rel_column_names: list):
+        # Given a map and column names as they are in t_rel, find local aliases in map
+        map_col_names = []
+        for column_name in t_rel_column_names:
+            for t_col in self.t_rel.keys():
+                if map_name in self.t_rel[t_col] and self.t_rel[t_col][map_name] == column_name:
+                    map_col_names.append(column_name)
+        return map_col_names
+
     def t_rel_column_names(self, map, map_name, map_column_names):
         # Given a map and its column names, return column names (field names) as they are represented in t_rel
         target_col_names = []
@@ -334,25 +342,40 @@ class pyDynaMap():
         union_map = unioned_dfs.to_dict(orient='list')
         return union_map
 
-    def op_join(self, map1, map2, attributes):
+    def op_join(self, map1, map2, attributes: list):
         df1 = pd.DataFrame.from_dict(map1)
         df2 = pd.DataFrame.from_dict(map2)
+        # attributes gives us column names as they are in t_rel, so we have to find out what their aliases are in df1 and df2
+        df1_aliases = self.aliases_for_t_rel_columns(map1_name, attributes)
+        df2_aliases = self.aliases_for_t_rel_columns(map2_name, attributes)
         # using pandas merge to join on non-index columns
-        joined_dfs = df1.merge(df2, on=attributes, suffixes=('', '_y'))
+        joined_dfs = df1.merge(df2, left_on=df1_aliases, right_on=df2_aliases, suffixes=('', '_y'))
         if 'index_y' in joined_dfs:
             joined_dfs.drop('index_y', axis=1, inplace=True)
         # getting unioned dfs back to dict format we use here
         join_map = joined_dfs.to_dict(orient='list')
         return join_map
 
-    def op_outer_join(self, map1, map2, attributes):
+    def op_outer_join(self, map1, map2, map1_name, map2_name, attributes):
         df1 = pd.DataFrame.from_dict(map1)
         df2 = pd.DataFrame.from_dict(map2)
+        # attributes gives us column names as they are in t_rel, so we have to find out what their aliases are in df1 and df2
+        df1_aliases = self.aliases_for_t_rel_columns(map1_name, attributes)
+        df2_aliases = self.aliases_for_t_rel_columns(map2_name, attributes)
         # using pandas merge to join on non-index columns
-        outer_joined_dfs = pd.merge(left=df2, right=df1, on=attributes, how='outer')
+        joined_dfs = df1.merge(df2, left_on=df1_aliases, right_on=df2_aliases, suffixes=('', '_y'), how="outer")
+        if 'index_y' in joined_dfs:
+            joined_dfs.drop('index_y', axis=1, inplace=True)
         # getting unioned dfs back to dict format we use here
-        outer_join_map = outer_joined_dfs.to_dict(orient='list')
-        return outer_join_map
+        join_map = joined_dfs.to_dict(orient='list')
+        return join_map
+        # df1 = pd.DataFrame.from_dict(map1)
+        # df2 = pd.DataFrame.from_dict(map2)
+        # # using pandas merge to join on non-index columns
+        # outer_joined_dfs = pd.merge(left=df2, right=df1, on=attributes, how='outer')
+        # # getting unioned dfs back to dict format we use here
+        # outer_join_map = outer_joined_dfs.to_dict(orient='list')
+        # return outer_join_map
 
     def is_fittest(self, map, source_names):
         # return fittest map from self.metadata (? algorithm 2)

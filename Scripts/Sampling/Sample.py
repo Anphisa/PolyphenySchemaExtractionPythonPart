@@ -26,7 +26,7 @@ class Sample():
         self.flat_sample = None
 
     def take_sample_relational(self):
-        query = "SELECT " + self.column_name + " FROM " + self.namespace + "." + self.table_name
+        query = "SELECT " + self.column_name + " FROM " + self.namespace + ".\"" + self.table_name + "\""
         if self.sample_size != 0:
             query += " LIMIT " + str(self.sample_size)
         DATA = {'querylanguage': 'SQL',
@@ -59,19 +59,20 @@ class Sample():
         result = requests.post(url=self.URL, data=DATA)
         self.http_sample_result = result
 
-    def take_sample(self):
-        if self.namespace_type == 'RELATIONAL':
+    def take_sample(self, namespace_type):
+        if namespace_type == 'RELATIONAL':
             return self.take_sample_relational()
-        elif self.namespace_type == 'GRAPH':
+        elif namespace_type == 'GRAPH':
             return self.take_sample_graph()
-        elif self.namespace_type == 'DOCUMENT':
+        elif namespace_type == 'DOCUMENT':
             return self.take_sample_document()
 
     def extract_sample(self):
         if self.http_sample_result:
             sample_string = self.http_sample_result.content.decode('utf-8')
             # TODO: Results in all string values. Is that a problem? Perhaps
-            sample_list = [s.replace('[','').replace(']', '').strip() for s in sample_string.split(",")]
+            #sample_list = [s.replace('[','').replace(']', '').strip() for s in sample_string.split(",")]
+            sample_list = [string.strip()[1:] for string in sample_string.strip()[1:-1].split("],")]
             self.sample = sample_list
         else:
             try:

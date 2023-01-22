@@ -132,12 +132,17 @@ async def consumer(message):
         for df in dfs:
             cols = dfs[df]["columns"]
             namespace = dfs[df]["namespacename"]
+            namespace_type = dfs[df]["datamodel"]
             for col in cols:
-                # todo: get from pp and fallback 127.0.0.1
-                sample = Sample("http://127.0.0.1", "20598", col, namespace, df, 5)
-                sample.take_sample()
-                sample.extract_sample()
-                dfs[df]["columns"][col] = sample.sample
+                try:
+                    # todo: get from polypheny and fallback 127.0.0.1
+                    # todo: get sample size from global config file
+                    sample = Sample("http://127.0.0.1", "20598", col, namespace, df, 5)
+                    sample.take_sample(namespace_type)
+                    sample.extract_sample()
+                    dfs[df]["columns"][col] = sample.sample
+                except Exception as e:
+                    raise RuntimeWarning("Sampling failed for col ", col, "in df ", df, "in namespace, ", namespace)
         # matching
         # todo: set threshold for jl colnames only
         matches = await loop.run_in_executor(None, dataframe_valentine_compare, dfs, JaccardLevenMatcherColNamesOnly())

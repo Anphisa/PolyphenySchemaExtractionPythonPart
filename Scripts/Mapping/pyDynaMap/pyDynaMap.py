@@ -631,24 +631,12 @@ class pyDynaMap():
     def reconstruct_mapping_path(self, mapping_name, mapping_path=[]):
         if mapping_name in self.source_relations:
             return [mapping_name]
-        if mapping_name in ['20220930_1_xlsdata_depts_emps']:
-            print("KAPUTT??")
-        mapping_path = self.mapping_path.get(mapping_name)
+        mapping_path = copy.deepcopy(self.mapping_path.get(mapping_name))
         # ['join', 'df1', 'df2_df3', ['A']]
-        print("0", mapping_name, mapping_path, mapping_name in self.mapping_path)
-        if type(mapping_name) == list:
-            print("type of mapping name is list")
         for index, j_mapping_name in enumerate(mapping_path[1:-1]):
-            print("2", j_mapping_name)
             if j_mapping_name not in self.source_relations:
                 # recursively replace mappings with their mapping paths
-                print("before replacement", mapping_path)
                 mapping_path[index + 1] = self.reconstruct_mapping_path(j_mapping_name)
-                print("after replacement", mapping_path)
-                print("index", index)
-                if index == 1:
-                    # Failsafe: Otherwise we replace second df name with mapping and then try to replace it again
-                    break
         # ['join', 'df1', ['union', 'df2', 'df3', None], 'A']
         return mapping_path
 

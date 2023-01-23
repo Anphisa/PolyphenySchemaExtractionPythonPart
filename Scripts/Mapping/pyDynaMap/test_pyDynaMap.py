@@ -24,6 +24,52 @@ class onecol_samename_overlappingcontent_1(unittest.TestCase):
         self.assertIn("df2_df1", self.dynamap.k_best_mappings(3))
         self.assertEqual(self.dynamap.k_best_mappings(3)["df2_df1"]["mapping_path"][0], "left join")
 
+class onecol_samename_overlappingcontent_2(unittest.TestCase):
+    def setUp(self) -> None:
+        dfs = {"df1": {'id': [1, 2]},
+               "df2": {'id': [1, 2, 3]}}
+        matches = {(('df1', 'id'), ('df2', 'id')): 1}
+        self.dynamap = pyDynaMap(dfs, matches)
+        self.dynamap.generate_mappings(len(dfs))
+    def test_onecol_samename_overlappingcontent_2(self):
+        self.assertIn("df1_df2", self.dynamap.k_best_mappings(3))
+        self.assertEqual(self.dynamap.k_best_mappings(3)["df1_df2"]["mapping_path"][0], "left join")
+
+class onecol_samename_differentcontent(unittest.TestCase):
+    def setUp(self) -> None:
+        dfs = {"df1": {'id': [1, 2, 3]},
+               "df2": {'id': [4, 5, 6]}}
+        matches = {(('df1', 'id'), ('df2', 'id')): 1}
+        self.dynamap = pyDynaMap(dfs, matches)
+        self.dynamap.generate_mappings(len(dfs))
+    def test_onecol_samename_differentcontent(self):
+        self.assertIn("df1_df2", self.dynamap.k_best_mappings(3))
+        self.assertEqual(self.dynamap.k_best_mappings(3)["df1_df2"]["mapping_path"][0], "union")
+
+class onecol_differentname_samecontent(unittest.TestCase):
+    def setUp(self) -> None:
+        dfs = {"df1": {'id': [1, 2, 3]},
+               "df2": {'id2': [1, 2, 3]}}
+        matches = {(('df1', 'id'), ('df2', 'id2')): 1}
+        self.dynamap = pyDynaMap(dfs, matches)
+        self.dynamap.generate_mappings(len(dfs))
+    def test_onecol_differentname_samecontent(self):
+        self.assertIn("df1_df2", self.dynamap.k_best_mappings(3))
+        self.assertEqual(self.dynamap.k_best_mappings(3)["df1_df2"]["mapping_path"][0], "left join")
+
+class onecol_differentname_overlappingcontent_1(unittest.TestCase):
+    def setUp(self) -> None:
+        dfs = {"df1": {'id': [1, 2]},
+               "df2": {'id2': [1, 2, 3]}}
+        matches = {(('df1', 'id'), ('df2', 'id2')): 1}
+        self.dynamap = pyDynaMap(dfs, matches)
+        self.dynamap.generate_mappings(len(dfs))
+    def test_onecol_samename_overlappingcontent_1(self):
+        self.assertIn("df1_df2", self.dynamap.k_best_mappings(3))
+        self.assertEqual(self.dynamap.k_best_mappings(3)["df1_df2"]["mapping_path"][0], "left join")
+
+
+
 
 
 class TestUnequalColumnNamesInMatches(unittest.TestCase):

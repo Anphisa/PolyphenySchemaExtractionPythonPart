@@ -174,7 +174,6 @@ class pyDynaMap():
         batch2 = copy.deepcopy(batch2)
         for map_i_name in batch1:
             for map_j_name in batch2:
-                # todo : emp and work should be a join on employeeno, not a union (check)
                 # todo: I STOPPED HERE check for frosttage_19161990 and niederschlag_19611990 hier: something's wrong with their union
                 # If map_i == map_j, do not return union with itself (endless recursion, unintended endless self-unions)
                 if map_i_name == map_j_name:
@@ -313,8 +312,8 @@ class pyDynaMap():
                     att1_in_target = att1_in_target[0]
                     if map2_name in self.t_rel[att1_in_target]:
                         att1_in_map2 = self.t_rel[att1_in_target][map2_name]
-                        included[att1_in_target] = self.is_attribute_subsumed(map1, map2, map1_name, map2_name, att1,
-                                                                              att1_in_map2)
+                        included[att1_in_target] = self.is_attribute_subsumed(map1, map2, map1_name, map2_name, att1_in_target,
+                                                                              att1_in_target)
                 else:
                     # attribute is not in target. We may still want to join mappings
                     # todo: think if it makes sense. intuitively yes, as it reduces size, but maybe it's not leading to our goal (t_rel cols)
@@ -335,12 +334,12 @@ class pyDynaMap():
                             if map1_name in self.t_rel[t_col]:
                                 # this is a col that is in target, but not in inclusion
                                 dont_left_join = True
-                for col2 in map2:
-                    if col2 not in included_cols:
-                        for t_col in self.t_rel:
-                            if map2_name in self.t_rel[t_col]:
-                                # this is a col that is in target, but not in inclusion
-                                dont_left_join = True
+                # for col2 in map2:
+                #     if col2 not in included_cols:
+                #         for t_col in self.t_rel:
+                #             if map2_name in self.t_rel[t_col]:
+                #                 # this is a col that is in target, but not in inclusion
+                #                 dont_left_join = True
                 if not dont_left_join:
                     operator = ("left join", map1, map2, map1_name, map2_name, included_cols)
                 else:
@@ -565,8 +564,6 @@ class pyDynaMap():
         else:
             att1 = map1_attribute
             att2 = map2_attribute
-        #if att1 not in map1 or att2 not in map2:
-        #    print("whaat")
         att1_in_map1 = set(map1[att1])
         att2_in_map2 = set(map2[att2])
         if att1_in_map1.intersection(att2_in_map2) == att1_in_map1:
@@ -865,9 +862,9 @@ if __name__ == "__main__":
     #        "df3": {"name": ["A", "B", "C"]}}
     # matches = {(('df1', 'id'), ('df2', 'id2')): 1,
     #            (('df1', 'name'), ('df3', 'name')): 1}
-    dfs = {"df1": {'id': [1, 2, 3]},
-           "df2": {'id': [1, 2]}}
-    matches = {(('df1', 'id'), ('df2', 'id')): 1}
+    dfs = {"df1": {'id': [1, 2]},
+           "df2": {'id2': [1, 2, 3]}}
+    matches = {(('df1', 'id'), ('df2', 'id2')): 1}
 
     dynamap = pyDynaMap(dfs, matches)
     dynamap.generate_mappings(len(dfs))

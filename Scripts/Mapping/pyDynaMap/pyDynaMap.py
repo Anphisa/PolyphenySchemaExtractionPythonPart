@@ -5,7 +5,7 @@ import math
 import copy
 import collections
 import statistics
-from Helper.FieldRelationship import FieldRelationship
+from FieldRelationship import FieldRelationship
 
 class pyDynaMap():
     def __init__(self, source_relations: dict, matches: dict):
@@ -186,9 +186,9 @@ class pyDynaMap():
                 map_j = copy.deepcopy(batch2[map_j_name])
                 # put initial sources in highest fitness records as well, so we can return if not merging them at all is the best solution
                 if map_i_name not in self.highest_fitness_value:
-                    self.highest_fitness_value[map_i_name] = self.fitness(map_i)
+                    self.highest_fitness_value[map_i_name] = self.fitness(map_i, map_i_name)
                 if map_j_name not in self.highest_fitness_value:
-                    self.highest_fitness_value[map_j_name] = self.fitness(map_j)
+                    self.highest_fitness_value[map_j_name] = self.fitness(map_j, map_j_name)
                 # continue merging of mappings
                 operator = self.choose_operator(map_i, map_j, map_i_name, map_j_name)
                 if operator is not None:
@@ -200,12 +200,15 @@ class pyDynaMap():
                     #md = self.compute_metadata(new_map)
                     # mapping was accepted
                     # metadata needs to be recorded given initial sources (we need to find mapping with highest fitness given same initial sources)
-                    if self.is_fittest(new_map, [map_i_name, map_j_name]):
-                        map_name = map_i_name + "_" + map_j_name
-                        new_maps[map_name] = new_map
-                        self.mapping_sources[map_name] = [map_i_name, map_j_name]
-                        self.mapping_path[map_name] = [operator[0], map_i_name, map_j_name, operator[-1]]
-                        self.highest_fitness_value[map_name] = self.fitness(new_map)
+                    max_fitness_for_sources = self.get_max_fitness([map_i_name, map_j_name])
+                    map_name = map_i_name + "_" + map_j_name
+                    new_maps[map_name] = new_map
+                    self.mapping_sources[map_name] = [map_i_name, map_j_name]
+                    self.mapping_path[map_name] = [operator[0], map_i_name, map_j_name, operator[-1]]
+                    new_map_fitness = self.fitness(new_map, map_name)
+                    if new_map_fitness > max_fitness_for_sources:
+                        # mapping was accepted
+                        self.highest_fitness_value[map_name] = new_map_fitness
                         for t_col in self.t_rel.keys():
                             if map_i_name in self.t_rel[t_col] and map_j_name in self.t_rel[t_col]:
                                 self.t_rel[t_col][map_name] = self.choose_column_name([self.t_rel[t_col][map_i_name],
@@ -214,8 +217,27 @@ class pyDynaMap():
                                 self.t_rel[t_col][map_name] = self.t_rel[t_col][map_i_name]
                             elif map_j_name in self.t_rel[t_col]:
                                 self.t_rel[t_col][map_name] = self.t_rel[t_col][map_j_name]
-                            # else:
-                            #     raise RuntimeError("Both parents of map ", map_name, " are not present in t_rel: ", self.t_rel)
+                    else:
+                        # mapping was not accepted
+                        del new_maps[map_name]
+                        del self.mapping_sources[map_name]
+                        del self.mapping_path[map_name]
+                    # if self.is_fittest(new_map, [map_i_name, map_j_name]):
+                    #     map_name = map_i_name + "_" + map_j_name
+                    #     new_maps[map_name] = new_map
+                    #     self.mapping_sources[map_name] = [map_i_name, map_j_name]
+                    #     self.mapping_path[map_name] = [operator[0], map_i_name, map_j_name, operator[-1]]
+                    #     self.highest_fitness_value[map_name] = self.fitness(new_map, map_name)
+                    #     for t_col in self.t_rel.keys():
+                    #         if map_i_name in self.t_rel[t_col] and map_j_name in self.t_rel[t_col]:
+                    #             self.t_rel[t_col][map_name] = self.choose_column_name([self.t_rel[t_col][map_i_name],
+                    #                                                                    self.t_rel[t_col][map_j_name]])
+                    #         elif map_i_name in self.t_rel[t_col]:
+                    #             self.t_rel[t_col][map_name] = self.t_rel[t_col][map_i_name]
+                    #         elif map_j_name in self.t_rel[t_col]:
+                    #             self.t_rel[t_col][map_name] = self.t_rel[t_col][map_j_name]
+                    #         # else:
+                    #         #     raise RuntimeError("Both parents of map ", map_name, " are not present in t_rel: ", self.t_rel)
         return new_maps
 
     def mapping_subsumed(self, map1_name, map2_name):
@@ -223,22 +245,22 @@ class pyDynaMap():
             (map2_name in self.mapping_sources and map1_name in self.mapping_sources[map2_name]):
             return True
         return False
-
-    def compute_metadata(self, new_map):
-        # compute fitness data for new mapping
-        fitness = self.fitness(new_map)
-        # compute profile data for new mapping
-        profile_data = self.compute_profile_data(new_map)
-        # if operator == 'join':
-        #     if self.lossy_merge_conditions_satisfied(map1, map2):
-        #         metadata = self.compute_metadata_lossy(map1, map2)
-        #     else:
-        #         metadata = self.compute_metadata_lossless(map1, map2)
-        # elif operator == 'full outer join':
-        #     metadata = self.compute_metadata_lossless(map1, map2)
-        # elif operator == 'union':
-        #     metadata = self.compute_metadata_lossless(map1, map2)
-        # return metadata
+    #
+    # def compute_metadata(self, new_map):
+    #     # compute fitness data for new mapping
+    #     fitness = self.fitness(new_map)
+    #     # compute profile data for new mapping
+    #     profile_data = self.compute_profile_data(new_map)
+    #     # if operator == 'join':
+    #     #     if self.lossy_merge_conditions_satisfied(map1, map2):
+    #     #         metadata = self.compute_metadata_lossy(map1, map2)
+    #     #     else:
+    #     #         metadata = self.compute_metadata_lossless(map1, map2)
+    #     # elif operator == 'full outer join':
+    #     #     metadata = self.compute_metadata_lossless(map1, map2)
+    #     # elif operator == 'union':
+    #     #     metadata = self.compute_metadata_lossless(map1, map2)
+    #     # return metadata
 
     def lossy_merge_conditions_satisfied(self, map1, map2):
         # When one of the relations may lose attribute values.
@@ -280,31 +302,53 @@ class pyDynaMap():
         if not self.diff_matches(set(map1_ma.keys()), set(map2_ma.keys())):
             operator = self.choose_operator_diff(map1, map2, map1_name, map2_name)
         else:
-            # # todo: this is an extension of original dynamap (-> thesis)
-            # # they share the same attributes with target relation. should those be joined or unioned?
-            # # naive idea: if there's occlusion, make it a join. Otherwise make it a join.
-            # included = {}
-            # for att1 in map1.keys():
-            #     # We first check if the attribute is in target and we can go along that route
-            #     att1_in_target = self.t_rel_column_names(map1, map1_name, [att1])
-            #     if len(att1_in_target) == 1:
-            #         att1_in_target = att1_in_target[0]
-            #         if map2_name in self.t_rel[att1_in_target]:
-            #             att1_in_map2 = self.t_rel[att1_in_target][map2_name]
-            #             included[att1_in_target] = self.is_attribute_subsumed(map1, map2, map1_name, map2_name, att1,
-            #                                                                   att1_in_map2)
-            #     else:
-            #         # attribute is not in target. We may still want to join mappings
-            #         # todo: think if it makes sense. intuitively yes, as it reduces size, but maybe it's not leading to our goal (t_rel cols)
-            #         # we now go naively via column name
-            #         if att1 in map2:
-            #             included[att1] = self.is_attribute_subsumed(map1, map2, map1_name, map2_name, att1, att1, False)
-            # if any(included.values()):
-            #     included_cols = [c for c in included.keys() if included[c]]
-            #     operator = ("left join", map1, map2, map1_name, map2_name, included_cols)
-            # else:
-            #     operator = ("union", map1, map2, map1_name, map2_name, list(set(map1_ma.keys()).intersection(set(map2_ma.keys()))))
-            operator = ("union", map1, map2, map1_name, map2_name, list(set(map1_ma.keys()).intersection(set(map2_ma.keys()))))
+            # todo: this is an extension of original dynamap (-> thesis)
+            # they share the same attributes with target relation. should those be joined or unioned?
+            # naive idea: if there's occlusion, make it a join. Otherwise make it a union.
+            included = {}
+            for att1 in map1.keys():
+                # We first check if the attribute is in target and we can go along that route
+                att1_in_target = self.t_rel_column_names(map1, map1_name, [att1])
+                if len(att1_in_target) == 1:
+                    att1_in_target = att1_in_target[0]
+                    if map2_name in self.t_rel[att1_in_target]:
+                        att1_in_map2 = self.t_rel[att1_in_target][map2_name]
+                        included[att1_in_target] = self.is_attribute_subsumed(map1, map2, map1_name, map2_name, att1,
+                                                                              att1_in_map2)
+                else:
+                    # attribute is not in target. We may still want to join mappings
+                    # todo: think if it makes sense. intuitively yes, as it reduces size, but maybe it's not leading to our goal (t_rel cols)
+                    # we go naively via column name
+                    if att1 in map2:
+                        included[att1] = self.is_attribute_subsumed(map1, map2, map1_name, map2_name, att1, att1, False)
+            if any(included.values()):
+                # There are inclusions!
+                # We still have to be careful: If both maps include columns that are in target, but *not* in inclusions, they will be renamed in the join
+                # and we can no longer provide a unique alias. E.g: join emps & depts on employeeno, what happens to name? It may be in target, but
+                # we now have to name it name_depts and name_emps or so and can't put a unique alias in self.t_rel.
+                # So we check for that. Once that's clear, we can proceed with a clean left join.
+                included_cols = [c for c in included.keys() if included[c]]
+                dont_left_join = False
+                for col1 in map1:
+                    if col1 not in included_cols:
+                        for t_col in self.t_rel:
+                            if map1_name in self.t_rel[t_col]:
+                                # this is a col that is in target, but not in inclusion
+                                dont_left_join = True
+                for col2 in map2:
+                    if col2 not in included_cols:
+                        for t_col in self.t_rel:
+                            if map2_name in self.t_rel[t_col]:
+                                # this is a col that is in target, but not in inclusion
+                                dont_left_join = True
+                if not dont_left_join:
+                    operator = ("left join", map1, map2, map1_name, map2_name, included_cols)
+                else:
+                    operator = ("union", map1, map2, map1_name, map2_name,
+                                list(set(map1_ma.keys()).intersection(set(map2_ma.keys()))))
+            else:
+                operator = ("union", map1, map2, map1_name, map2_name, list(set(map1_ma.keys()).intersection(set(map2_ma.keys()))))
+            #operator = ("union", map1, map2, map1_name, map2_name, list(set(map1_ma.keys()).intersection(set(map2_ma.keys()))))
         return operator
 
     def choose_operator_diff(self, map1, map2, map1_name, map2_name):
@@ -459,7 +503,9 @@ class pyDynaMap():
         # highest fitness of any mapping involving the same initial sources,
         # if so, it is retained (alg 2 lines 9–10).
         # Compute the fitness of the mapping
-        fitness = self.fitness(map)
+        fitness_0 = self.fitness(map, source_names[0])
+        fitness_1 = self.fitness(map, source_names[1])
+        fitness = max(fitness_0, fitness_1)
         # Check if the mapping has the highest fitness of any mapping involving the same initial sources
         # If yes, update highest known fitness value
         if fitness > self.get_max_fitness(source_names):
@@ -519,8 +565,8 @@ class pyDynaMap():
         else:
             att1 = map1_attribute
             att2 = map2_attribute
-        if att1 not in map1 or att2 not in map2:
-            print("whaat")
+        #if att1 not in map1 or att2 not in map2:
+        #    print("whaat")
         att1_in_map1 = set(map1[att1])
         att2_in_map2 = set(map2[att2])
         if att1_in_map1.intersection(att2_in_map2) == att1_in_map1:
@@ -643,19 +689,48 @@ class pyDynaMap():
     def same_matches(self, map1_mk, map2_mk):
         return map1_mk.intersection(map2_mk)
 
-    def fitness(self, map):
+    def fitness(self, map, map_name):
         # Algorithm 5: Fitness function
         # todo: get cardinalities and null counts from polypheny statistics module
-        atts = self.remove_outliers(map)
+        # atts = self.remove_outliers(map)
         null_counts = []
+        attr_counts = []
+        target_counts = 0
         for att in map:
+            # null counts
             values = map[att]
             null_count = len([v for v in values if pd.isna(v)])
             null_counts.append(null_count)
+            # attr counts
+            attr_count = len(values)
+            attr_counts.append(attr_count)
+            # target counts
+            att_in_trel = self.t_rel_column_names(map, map_name, [att])
+            if len(att_in_trel) == 1:
+                target_counts += 1
         max_attr_nulls = max(null_counts)
+        target_percentage = target_counts/len(self.t_rel)
+        attr_null_percentages = result = [n/a for n, a in zip(null_counts, attr_counts)]
+        attr_avg_null_percentage = sum(attr_null_percentages)/len(attr_null_percentages)
+        mapping_path = self.mapping_path.get(map_name)
+        if type(mapping_path) != list:
+            operator_bonus = 0
+        elif mapping_path[0] == "union":
+            # todo: make the bonus variable, but not sure what to tie it to. ideally: amount of unions in the whole chain, but I'm lazy
+            operator_bonus = -3
+        elif "join" in mapping_path[0]:
+            operator_bonus = 1
+        else:
+            operator_bonus = 0
         # The number of largely complete tuples in the mapping is estimated to be
         # the cardinality of the mapping minus the number of nulls in the attribute with the most nulls.
-        return self.map_cardinality(map) - max_attr_nulls
+        # Original fitness logic as I understood it from the dynaMap paper:
+        # reward many rows with few null values
+        return self.map_cardinality(map) - max_attr_nulls + operator_bonus
+        # todo: also extension of original dynamap
+        # New idea for fitness logic:
+        # Reward having many cols from target + few NULLs in rows
+        # return target_percentage - attr_avg_null_percentage
 
     def map_cardinality(self, map):
         # cardinality of a map = number of tuples = number of rows
@@ -784,14 +859,18 @@ if __name__ == "__main__":
     # matches = {(('df1', 'name'), ('df2', 'firstname')): 1,
     #            (('df1', 'name'), ('df3', 'name2')): 1,
     #            (('df2', 'firstname'), ('df3', 'name2')): 1}
-    dfs = {"df1": {'id': [1, 2, 3],
-                   "name": [None, None, "B"]},
-           "df2": {'id2': [1, 2, 3]},
-           "df3": {"name": ["A", "B", "C"]}}
-    matches = {(('df1', 'id'), ('df2', 'id2')): 1,
-               (('df1', 'name'), ('df3', 'name')): 1}
+    # dfs = {"df1": {'id': [1, 2, 3],
+    #                "name": [None, None, "B"]},
+    #        "df2": {'id2': [1, 2, 3]},
+    #        "df3": {"name": ["A", "B", "C"]}}
+    # matches = {(('df1', 'id'), ('df2', 'id2')): 1,
+    #            (('df1', 'name'), ('df3', 'name')): 1}
+    dfs = {"df1": {'id': [1, 2, 3]},
+           "df2": {'id': [1, 2]}}
+    matches = {(('df1', 'id'), ('df2', 'id')): 1}
 
     dynamap = pyDynaMap(dfs, matches)
     dynamap.generate_mappings(len(dfs))
     print(dynamap.k_best_mappings(3))
+    print(dynamap.highest_fitness_value)
     print(dynamap.sub_solution)

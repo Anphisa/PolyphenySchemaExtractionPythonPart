@@ -168,7 +168,7 @@ async def consumer(message):
         # Loss information
         field_loss_main = await loop.run_in_executor(None, field_loss, datamodel)
         field_loss_mapper = mapping_result["field_loss"]
-        instance_loss = mapping_result["instance_loss"]
+        instance_loss_mapper = mapping_result["instance_loss"]
         structure_loss_main = await loop.run_in_executor(None, structure_loss, datamodel)
         # Visualization
         schema_candidate_num = 0
@@ -177,7 +177,7 @@ async def consumer(message):
                                result,
                                k_best_mappings,
                                field_loss_main + field_loss_mapper,
-                               instance_loss,
+                               instance_loss_mapper,
                                structure_loss_main)
             schema_candidate_num += 1
         URL = "http://127.0.0.1:20598/result"

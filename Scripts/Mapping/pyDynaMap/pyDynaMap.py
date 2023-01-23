@@ -29,7 +29,7 @@ class pyDynaMap():
         for source in self.source_relations:
             self.mapping_path[source] = source
         # loss information for display
-        self.instance_loss = ""
+        self.instance_loss = "No instance loss."
         self.field_loss = ""
 
     def field_loss(self):
@@ -280,6 +280,30 @@ class pyDynaMap():
         if not self.diff_matches(set(map1_ma.keys()), set(map2_ma.keys())):
             operator = self.choose_operator_diff(map1, map2, map1_name, map2_name)
         else:
+            # # todo: this is an extension of original dynamap (-> thesis)
+            # # they share the same attributes with target relation. should those be joined or unioned?
+            # # naive idea: if there's occlusion, make it a join. Otherwise make it a join.
+            # included = {}
+            # for att1 in map1.keys():
+            #     # We first check if the attribute is in target and we can go along that route
+            #     att1_in_target = self.t_rel_column_names(map1, map1_name, [att1])
+            #     if len(att1_in_target) == 1:
+            #         att1_in_target = att1_in_target[0]
+            #         if map2_name in self.t_rel[att1_in_target]:
+            #             att1_in_map2 = self.t_rel[att1_in_target][map2_name]
+            #             included[att1_in_target] = self.is_attribute_subsumed(map1, map2, map1_name, map2_name, att1,
+            #                                                                   att1_in_map2)
+            #     else:
+            #         # attribute is not in target. We may still want to join mappings
+            #         # todo: think if it makes sense. intuitively yes, as it reduces size, but maybe it's not leading to our goal (t_rel cols)
+            #         # we now go naively via column name
+            #         if att1 in map2:
+            #             included[att1] = self.is_attribute_subsumed(map1, map2, map1_name, map2_name, att1, att1, False)
+            # if any(included.values()):
+            #     included_cols = [c for c in included.keys() if included[c]]
+            #     operator = ("left join", map1, map2, map1_name, map2_name, included_cols)
+            # else:
+            #     operator = ("union", map1, map2, map1_name, map2_name, list(set(map1_ma.keys()).intersection(set(map2_ma.keys()))))
             operator = ("union", map1, map2, map1_name, map2_name, list(set(map1_ma.keys()).intersection(set(map2_ma.keys()))))
         return operator
 
@@ -335,7 +359,9 @@ class pyDynaMap():
         if operator == "union":
             return self.op_union(map1, map2, map1_name, map2_name, attributes)
         elif operator == "join":
-            return self.op_join(map1, map2, map1_name, map2_name, attributes)
+            return self.op_inner_join(map1, map2, map1_name, map2_name, attributes)
+        elif operator == "left join":
+            return self.op_left_join(map1, map2, map1_name, map2_name, attributes)
         elif operator == "outer join":
             return self.op_outer_join(map1, map2, map1_name, map2_name, attributes)
         else:
@@ -361,22 +387,44 @@ class pyDynaMap():
                         replace_df2[col] = t_col
         df2.rename(columns=replace_df2, inplace=True)
         # using pandas union
-        unioned_dfs = pd.concat([df1, df2], axis=0, ignore_index=True)
+        try:
+            unioned_dfs = pd.concat([df1, df2], axis=0, ignore_index=True)
+        except Exception as e:
+            raise RuntimeError("op_union failed on", map1_name, "and", map2_name, "with exception", e)
         # getting unioned dfs back to dict format we use here
         union_map = unioned_dfs.to_dict(orient='list')
         return union_map
 
-    def op_join(self, map1, map2, map1_name, map2_name, attributes: list):
+    def op_inner_join(self, map1, map2, map1_name, map2_name, attributes: list):
         df1 = pd.DataFrame.from_dict(map1)
         df2 = pd.DataFrame.from_dict(map2)
         # attributes gives us column names as they are in t_rel, so we have to find out what their aliases are in df1 and df2
         df1_aliases = self.aliases_for_t_rel_columns(map1_name, attributes)
         df2_aliases = self.aliases_for_t_rel_columns(map2_name, attributes)
         # using pandas merge to join on non-index columns
-        joined_dfs = df1.join(df2.set_index(df2_aliases), on=df1_aliases, how='inner')
-        # todo: columns will then have df1 aliases, do I have to translate them? perhaps? put the alias in our alias collecting thing
+        try:
+            joined_dfs = df1.join(df2.set_index(df2_aliases), on=df1_aliases, how='inner')
+        except Exception as e:
+            raise RuntimeError("op_inner_join failed on", map1_name, "and", map2_name, "with exception", e)
         if 'index_y' in joined_dfs:
             joined_dfs.drop('index_y', axis=1, inplace=True)
+        # getting unioned dfs back to dict format we use here
+        join_map = joined_dfs.to_dict(orient='list')
+        return join_map
+
+    def op_left_join(self, map1, map2, map1_name, map2_name, attributes: list):
+        df1 = pd.DataFrame.from_dict(map1)
+        df2 = pd.DataFrame.from_dict(map2)
+        # attributes gives us column names as they are in t_rel, so we have to find out what their aliases are in df1 and df2
+        df1_aliases = self.aliases_for_t_rel_columns(map1_name, attributes)
+        df2_aliases = self.aliases_for_t_rel_columns(map2_name, attributes)
+        # using pandas merge to join on non-index columns
+        try:
+            #joined_dfs = df1.join(df2.set_index(df2_aliases), on=df1_aliases, how='left')
+            joined_dfs = df1.merge(df2, left_on=df1_aliases, right_on=df2_aliases, how="left")
+            # suffixes=("_"+map1_name,"_"+map2_name),
+        except Exception as e:
+            raise RuntimeError("op_left_join failed on", map1_name, "and", map2_name, "with exception", e)
         # getting unioned dfs back to dict format we use here
         join_map = joined_dfs.to_dict(orient='list')
         return join_map
@@ -388,7 +436,10 @@ class pyDynaMap():
         df1_aliases = self.aliases_for_t_rel_columns(map1_name, attributes)
         df2_aliases = self.aliases_for_t_rel_columns(map2_name, attributes)
         # using pandas merge to join on non-index columns
-        joined_dfs = df1.merge(df2, left_on=df1_aliases, right_on=df2_aliases, suffixes=('', '_y'), how="outer")
+        try:
+            joined_dfs = df1.merge(df2, left_on=df1_aliases, right_on=df2_aliases, suffixes=('', '_y'), how="outer")
+        except Exception as e:
+            raise RuntimeError("op_outer_join failed on", map1_name, "and", map2_name, "with exception", e)
         if 'index_y' in joined_dfs:
             joined_dfs.drop('index_y', axis=1, inplace=True)
         # getting unioned dfs back to dict format we use here
@@ -454,6 +505,30 @@ class pyDynaMap():
         # This should work because we use the keys that we set in self.t_rel for populating the sets in self.find_matches_attr()
         return len(set1.symmetric_difference(set2)) == 0
 
+    def is_attribute_subsumed(self, map1, map2, map1_name, map2_name, map1_attribute, map2_attribute, look_via_t_rel=True):
+        # Helper function: Given attributes in two maps, is attribute1 from map1 subsumed in attribute2 in map2?
+        if look_via_t_rel:
+            # we give attribute names as they are in t_rel
+            for t_col in self.t_rel.keys():
+                if t_col in [map1_attribute, map2_attribute]:
+                    if map1_name in self.t_rel[t_col] and map2_name in self.t_rel[t_col]:
+                        # atts point to same target column
+                        # todo: replace this with call to profile data (propagation method)
+                            att1 = self.aliases_for_t_rel_columns(map1_name, [map1_attribute])[0]
+                            att2 = self.aliases_for_t_rel_columns(map2_name, [map2_attribute])[0]
+        else:
+            att1 = map1_attribute
+            att2 = map2_attribute
+        if att1 not in map1 or att2 not in map2:
+            print("whaat")
+        att1_in_map1 = set(map1[att1])
+        att2_in_map2 = set(map2[att2])
+        if att1_in_map1.intersection(att2_in_map2) == att1_in_map1:
+            # this att is subsumed in map2
+            return True
+        else:
+            return False
+
     def is_subsumed(self, map1, map2, map1_name, map2_name):
         # In lines 4–7, IsSubsumed determines whether, on attributes
         # that match the target, the profiling data has inclusion dependencies between an attribute in one mapping and a corresponding
@@ -466,22 +541,7 @@ class pyDynaMap():
         map1_subsumptions = {}
         for att in map1_ma:
             if att in map2_ma:
-                for t_col in self.t_rel.keys():
-                    if map1_name in self.t_rel[t_col] and map2_name in self.t_rel[t_col]:
-                        # atts point to same target column
-                        # todo: replace this with call to profile data (propagation method)
-                        att1 = self.aliases_for_t_rel_columns(map1_name, [att])[0]
-                        att2 = self.aliases_for_t_rel_columns(map2_name, [att])[0]
-                        inclusion = sum(el in map1[att1] for el in map2[att2])
-                        if inclusion == len(map1[att1]):
-                            # this att is subsumed in map2
-                            map1_subsumptions[att] = True
-                        else:
-                            map1_subsumptions[att] = False
-                    else:
-                        map1_subsumptions[att] = False
-            else:
-                map1_subsumptions[att] = False
+                map1_subsumptions[att] = self.is_attribute_subsumed(map1, map2, map1_name, map2_name, att, att)
         # todo: all or any? text in paper sounds like "any", but then the two cases of subsumption map1 by map2 and the other way round wouldn't be symmetrical anymore
         if map1_subsumptions and all(map1_subsumptions.values()):
             # map1 is subsumed by map2
@@ -491,21 +551,7 @@ class pyDynaMap():
         map2_subsumptions = {}
         for att in map2_ma:
             if att in map1_ma:
-                for t_col in self.t_rel.keys():
-                    if map2_name in self.t_rel[t_col] and map1_name in self.t_rel[t_col]:
-                        # atts point to same target column
-                        att1 = self.aliases_for_t_rel_columns(map1_name, [att])[0]
-                        att2 = self.aliases_for_t_rel_columns(map2_name, [att])[0]
-                        inclusion = sum(el in map2[att2] for el in map1[att1])
-                        if inclusion == len(map2[att2]):
-                            # this att is subsumed in map1
-                            map2_subsumptions[att] = True
-                        else:
-                            map2_subsumptions[att] = False
-                    else:
-                        map2_subsumptions[att] = False
-            else:
-                map2_subsumptions[att] = False
+                map2_subsumptions[att] = self.is_attribute_subsumed(map2, map1, map2_name, map1_name, att, att)
         if map2_subsumptions and all(map2_subsumptions.values()):
             # map2 is subsumed by map1
             self.remove_mapping(map2_name)
@@ -515,7 +561,9 @@ class pyDynaMap():
     def remove_mapping(self, map_name):
         for solution in self.sub_solution:
             if map_name in self.sub_solution[solution]:
-                del self.sub_solution[solution][map_name]
+                sub_sol = copy.deepcopy(self.sub_solution)
+                del sub_sol[solution][map_name]
+                self.sub_solution = sub_sol
 
     def get_mapping_rows(self, map_name):
         for solution in self.sub_solution:

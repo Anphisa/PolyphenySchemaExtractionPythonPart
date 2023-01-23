@@ -5,7 +5,7 @@ import math
 import copy
 import collections
 import statistics
-from FieldRelationship import FieldRelationship
+from Helper.FieldRelationship import FieldRelationship
 
 class pyDynaMap():
     def __init__(self, source_relations: dict, matches: dict):
@@ -174,6 +174,7 @@ class pyDynaMap():
         batch2 = copy.deepcopy(batch2)
         for map_i_name in batch1:
             for map_j_name in batch2:
+                # todo : emp and work should be a join on employeeno, not a union (check)
                 # todo: I STOPPED HERE check for frosttage_19161990 and niederschlag_19611990 hier: something's wrong with their union
                 # If map_i == map_j, do not return union with itself (endless recursion, unintended endless self-unions)
                 if map_i_name == map_j_name:

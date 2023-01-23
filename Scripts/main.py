@@ -10,7 +10,7 @@ import ast
 import collections
 import pandas as pd
 from valentine import valentine_match
-from Configuration.config import config
+from Configuration.Config import Config
 from Mapping.Mapping import Mapping
 from GenerateSchemaCandidates.SchemaCandidateVisualization import SchemaCandidateVisualization
 from Scripts.Sampling.Sample import Sample
@@ -81,7 +81,7 @@ def build_dataframes(message):
         raise RuntimeWarning("Unknown data model: ", data_model)
     return tables_df
 
-def datamodel(message):
+def extract_datamodel(message):
     message = ast.literal_eval(message["message"])
     data_model = message["datamodel"]
     return data_model
@@ -138,7 +138,7 @@ async def consumer(message):
     if d_message["topic"] == "namespaceInfo":
         loop = asyncio.get_event_loop()
         dfs = await loop.run_in_executor(None, build_dataframes, d_message)
-        datamodel = await loop.run_in_executor(None, datamodel, d_message)
+        datamodel = await loop.run_in_executor(None, extract_datamodel, d_message)
         # Take samples from all columns
         for df in dfs:
             cols = dfs[df]["columns"]
@@ -166,14 +166,19 @@ async def consumer(message):
         mapping_result = mapper.pyDynaMapMapping(matches_above_thresh, config.show_n_best_mappings)
         k_best_mappings = mapping_result["k_best_mappings"]
         # Loss information
-        field_loss = await loop.run_in_executor(None, field_loss, datamodel)
+        field_loss_main = await loop.run_in_executor(None, field_loss, datamodel)
         field_loss_mapper = mapping_result["field_loss"]
         instance_loss = mapping_result["instance_loss"]
-        structure_loss = await loop.run_in_executor(None, structure_loss, datamodel)
+        structure_loss_main = await loop.run_in_executor(None, structure_loss, datamodel)
         # Visualization
         schema_candidate_num = 0
         for result in k_best_mappings:
-            await show_mapping(schema_candidate_num, result, k_best_mappings, field_loss + field_loss_mapper, instance_loss, structure_loss)
+            await show_mapping(schema_candidate_num,
+                               result,
+                               k_best_mappings,
+                               field_loss_main + field_loss_mapper,
+                               instance_loss,
+                               structure_loss_main)
             schema_candidate_num += 1
         URL = "http://127.0.0.1:20598/result"
         PARAMS = {'results': str(k_best_mappings)}
@@ -236,7 +241,7 @@ async def main():
     # TODO: Define a pipeline of steps to be performed (later to be optimized/determined dynamically due to user inputs, etc.)
 
 if __name__ == "__main__":
-    config = config()
+    config = Config()
     logging.getLogger("asyncio").setLevel(logging.INFO)
     logging.Formatter('%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
     # TODO: Set logging file name (https://stackoverflow.com/questions/13839554/how-to-change-filehandle-with-python-logging-on-the-fly-with-different-classes-a)

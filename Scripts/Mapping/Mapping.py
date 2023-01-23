@@ -8,11 +8,11 @@ class Mapping:
         # assuming form {tableX: [col1, col2, col3], tableY: [col1, col2]}
         self.source_relations = source_relations
 
-    # @staticmethod
-    # def naiveMapping(matches, threshold):
-    #     # given a list of matches from schema matcher and a threshold, return all matches that are above the threshold
-    #     return {k:v for (k, v) in matches.items() if matches[k] >= threshold}
-    #
+    @staticmethod
+    def naiveMapping(matches, threshold):
+        # given a list of matches from schema matcher and a threshold, return all matches that are above the threshold
+        return {k:v for (k, v) in matches.items() if matches[k] >= threshold}
+
     # @staticmethod
     # def naiveMappingDecider(involved_tables, matches):
     #     # given matches (above threshold) and involved_tables (class variable), naively decide the mapping

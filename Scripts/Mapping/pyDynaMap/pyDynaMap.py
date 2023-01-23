@@ -5,7 +5,7 @@ import math
 import copy
 import collections
 import statistics
-from Helper.FieldRelationship import FieldRelationship
+from FieldRelationship import FieldRelationship
 
 class pyDynaMap():
     def __init__(self, source_relations: dict, matches: dict):
@@ -28,6 +28,23 @@ class pyDynaMap():
         self.mapping_path = {}
         for source in self.source_relations:
             self.mapping_path[source] = source
+        # loss information for display
+        self.instance_loss = ""
+        self.field_loss = ""
+
+    def field_loss(self):
+        # If a source relation has a field that is not represented in t_rel, it is lost
+        for source in self.source_relations:
+            source_field_repr = {}
+            for field in source:
+                field_repr = False
+                for t_col in self.t_rel:
+                    if field in self.t_rel[t_col]:
+                        field_repr = True
+                source_field_repr[field] = field_repr
+            if any(source_field_repr.values()):
+                lost_fields = [f for f in source_field_repr.keys() if source_field_repr[f]]
+                self.field_loss().append("Source: ", source, "loses fields: ", ",".join(lost_fields))
 
     def is_match_exact(self, from_table, from_column, to_table, to_column):
         # Allow non-equal column names and still achieve a mapping
@@ -142,7 +159,6 @@ class pyDynaMap():
             for j in range(1, math.ceil(i/2) + 1):
                 b1 = self.generate_mappings(j)
                 b2 = self.generate_mappings(i - j)
-                # todo: in next steps, self.source_relations gets emptied? wtf. also b1 and b2 disappear
                 new_maps = self.merge_mappings(b1, b2)
                 iteration_maps.append(new_maps)
             # flatten list of iteration_maps
@@ -238,8 +254,10 @@ class pyDynaMap():
         map_col_names = []
         for column_name in t_rel_column_names:
             for t_col in self.t_rel.keys():
-                if map_name in self.t_rel[t_col] and self.t_rel[t_col][map_name] == column_name:
-                    map_col_names.append(column_name)
+                if column_name != t_col:
+                    continue
+                if map_name in self.t_rel[t_col]:
+                    map_col_names.append(self.t_rel[t_col][map_name])
         return map_col_names
 
     def t_rel_column_names(self, map, map_name, map_column_names):
@@ -304,8 +322,6 @@ class pyDynaMap():
                 # it could be that there is instance complementarity between the
                 # two mappings, in which case performing a full outer join vertically
                 # aligns the key attributes that match the same target attributes
-                # todo: replaced here with other function names. does this still work?
-                # todo: if not, fix original function calls for unequal column names
                 map1_mk = self.find_matched_keys(map1, map1_name)
                 map2_mk = self.find_matched_keys(map2, map2_name)
                 same_matches = self.same_matches(map1_mk, map2_mk)
@@ -356,7 +372,8 @@ class pyDynaMap():
         df1_aliases = self.aliases_for_t_rel_columns(map1_name, attributes)
         df2_aliases = self.aliases_for_t_rel_columns(map2_name, attributes)
         # using pandas merge to join on non-index columns
-        joined_dfs = df1.merge(df2, left_on=df1_aliases, right_on=df2_aliases, suffixes=('', '_y'))
+        joined_dfs = df1.join(df2.set_index(df2_aliases), on=df1_aliases, how='inner')
+        # todo: columns will then have df1 aliases, do I have to translate them? perhaps? put the alias in our alias collecting thing
         if 'index_y' in joined_dfs:
             joined_dfs.drop('index_y', axis=1, inplace=True)
         # getting unioned dfs back to dict format we use here
@@ -428,18 +445,6 @@ class pyDynaMap():
             if map_name in self.t_rel[t_col]:
                 cols[t_col] = self.t_rel[t_col][map_name]
         return cols
-        # base_df_names = self.get_base_df_names_for_mapping(map_name)
-        # matches = set()
-        # for att, values in map.items():
-        #     for col_name, origin in self.t_rel.items():
-        #         if col_name == att:
-        #             matches.add(att)
-        #         else:
-        #             target_attribute_from_table = origin["from_match"]["from_table"]
-        #             target_attribute_to_table = origin["from_match"]["to_table"]
-        #             if target_attribute_from_table in base_df_names and target_attribute_to_table in base_df_names:
-        #                 matches.add(col_name)
-        # return matches
 
     def diff_matches(self, set1, set2):
         # DiffMatches checks whether the matches are for different target attributes. If they are, they become candidates for joining,
@@ -464,8 +469,10 @@ class pyDynaMap():
                     if map1_name in self.t_rel[t_col] and map2_name in self.t_rel[t_col]:
                         # atts point to same target column
                         # todo: replace this with call to profile data (propagation method)
-                        inclusion = sum(el in map1[att] for el in map2[att])
-                        if inclusion == len(map1[att]):
+                        att1 = self.aliases_for_t_rel_columns(map1_name, [att])[0]
+                        att2 = self.aliases_for_t_rel_columns(map2_name, [att])[0]
+                        inclusion = sum(el in map1[att1] for el in map2[att2])
+                        if inclusion == len(map1[att1]):
                             # this att is subsumed in map2
                             map1_subsumptions[att] = True
                         else:
@@ -481,21 +488,23 @@ class pyDynaMap():
             return True
 
         map2_subsumptions = {}
-        for att2 in map2_ma:
-            if att2 in map1_ma:
+        for att in map2_ma:
+            if att in map1_ma:
                 for t_col in self.t_rel.keys():
                     if map2_name in self.t_rel[t_col] and map1_name in self.t_rel[t_col]:
                         # atts point to same target column
-                        inclusion = sum(el in map2[att2] for el in map1[att2])
+                        att1 = self.aliases_for_t_rel_columns(map1_name, [att])[0]
+                        att2 = self.aliases_for_t_rel_columns(map2_name, [att])[0]
+                        inclusion = sum(el in map2[att2] for el in map1[att1])
                         if inclusion == len(map2[att2]):
                             # this att is subsumed in map1
-                            map2_subsumptions[att2] = True
+                            map2_subsumptions[att] = True
                         else:
-                            map2_subsumptions[att2] = False
+                            map2_subsumptions[att] = False
                     else:
-                        map2_subsumptions[att2] = False
+                        map2_subsumptions[att] = False
             else:
-                map2_subsumptions[att2] = False
+                map2_subsumptions[att] = False
         if map2_subsumptions and all(map2_subsumptions.values()):
             # map2 is subsumed by map1
             self.remove_mapping(map2_name)
@@ -720,14 +729,20 @@ if __name__ == "__main__":
     #            (('df1', 'A'), ('df3', 'A')): 1,
     #            (('df1', 'A'), ('df3', 'C')): 1,
     #            (('df2', 'C'), ('df3', 'C')): 1}
-    dfs = {"df1": {'name': ["Leon", "Albert", "Pupsbanane"]},
-           "df2": {'firstname': ["Leon", "Albert", "Pupsbanane"]},
-           "df3": {'name2': ["Batista", "Einstein", "Banane"]}}
-    matches = {(('df1', 'name'), ('df2', 'firstname')): 1,
-               (('df1', 'name'), ('df3', 'name2')): 1,
-               (('df2', 'firstname'), ('df3', 'name2')): 1}
+    # dfs = {"df1": {'name': ["Leon", "Albert", "Pupsbanane"]},
+    #        "df2": {'firstname': ["Leon", "Albert", "Pupsbanane"]},
+    #        "df3": {'name2': ["Batista", "Einstein", "Banane"]}}
+    # matches = {(('df1', 'name'), ('df2', 'firstname')): 1,
+    #            (('df1', 'name'), ('df3', 'name2')): 1,
+    #            (('df2', 'firstname'), ('df3', 'name2')): 1}
+    dfs = {"df1": {'id': [1, 2, 3],
+                   "name": [None, None, "B"]},
+           "df2": {'id2': [1, 2, 3]},
+           "df3": {"name": ["A", "B", "C"]}}
+    matches = {(('df1', 'id'), ('df2', 'id2')): 1,
+               (('df1', 'name'), ('df3', 'name')): 1}
 
     dynamap = pyDynaMap(dfs, matches)
     dynamap.generate_mappings(len(dfs))
-    print(dynamap.k_best_mappings(1))
+    print(dynamap.k_best_mappings(3))
     print(dynamap.sub_solution)

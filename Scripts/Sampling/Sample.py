@@ -72,7 +72,8 @@ class Sample():
             sample_string = self.http_sample_result.content.decode('utf-8')
             # TODO: Results in all string values. Is that a problem? Perhaps
             #sample_list = [s.replace('[','').replace(']', '').strip() for s in sample_string.split(",")]
-            sample_list = [string.strip()[1:] for string in sample_string.strip()[1:-1].split("],")]
+            print (sample_string)
+            sample_list = [string.strip()[1:] for string in sample_string.strip()[1:-2].split("],")]
             self.sample = sample_list
         else:
             try:

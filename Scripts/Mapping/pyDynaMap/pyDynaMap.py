@@ -179,6 +179,8 @@ class pyDynaMap():
                 # If map_i == map_j, do not return union with itself (endless recursion, unintended endless self-unions)
                 if map_i_name == map_j_name:
                     continue
+                if map_i_name == "emp" and map_j_name == "work":
+                    print("yooo")
                 # If a relation is already part of a mapping, don't combine it in again
                 if self.mapping_subsumed(map_i_name, map_j_name):
                     continue
@@ -362,14 +364,14 @@ class pyDynaMap():
                 for col1 in map1:
                     if col1 not in included_cols_map1:
                         for t_col in self.t_rel:
-                            if map1_name in self.t_rel[t_col]:
+                            if map1_name in self.t_rel[t_col] and self.t_rel[t_col][map1_name] == col1:
                                 # this is a col that is in target, but not in inclusion
                                 dont_left_join = True
                 included_cols_map2 = [c[1] for c in included.keys() if included[c]]
                 for col2 in map2:
                     if col2 not in included_cols_map2:
                         for t_col in self.t_rel:
-                            if map2_name in self.t_rel[t_col]:
+                            if map2_name in self.t_rel[t_col] and self.t_rel[t_col][map2_name] == col2:
                                 # this is a col that is in target, but not in inclusion
                                 dont_left_join = True
                 if not dont_left_join:

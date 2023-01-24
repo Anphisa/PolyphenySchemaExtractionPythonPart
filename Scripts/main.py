@@ -81,6 +81,21 @@ def build_dataframes(message):
         raise RuntimeWarning("Unknown data model: ", data_model)
     return tables_df
 
+def set_config(message):
+    parameter = message["topic"]
+    value = message["message"]
+    if parameter == "matchingThreshold":
+        config.matching_threshold = value
+    elif parameter == "sampleSize":
+        config.sample_size = value
+    elif parameter == "valentineAlgorithm":
+        set_valentine_algo_return = config.set_valentine_algo(value)
+        logging.info("Set Valentine algorithm response", set_valentine_algo_return)
+    elif parameter == "kBestMappings":
+        config.show_n_best_mappings = value
+    print(str(config))
+    return
+
 def extract_datamodel(message):
     message = ast.literal_eval(message["message"])
     data_model = message["datamodel"]
@@ -155,8 +170,13 @@ async def send_http_request(path, params):
 async def consumer(message):
     print("consumer: ", message)
     d_message = ast.literal_eval(message)
+    loop = asyncio.get_event_loop()
+    if d_message["topic"] in ["matchingThreshold",
+                              "sampleSize",
+                              "valentineAlgorithm",
+                              "kBestMappings"]:
+        await loop.run_in_executor(None, set_config, d_message)
     if d_message["topic"] == "namespaceInfo":
-        loop = asyncio.get_event_loop()
         dfs = await loop.run_in_executor(None, build_dataframes, d_message)
         datamodel = await loop.run_in_executor(None, extract_datamodel, d_message)
         # Take samples from all columns

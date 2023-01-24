@@ -251,12 +251,30 @@ class pyDynaMap():
                     #         #     raise RuntimeError("Both parents of map ", map_name, " are not present in t_rel: ", self.t_rel)
         return new_maps
 
+    def find_parentage(self, ancestor_names):
+        # find all ancestor map names
+        i = 0
+        while i < len(ancestor_names):
+            ancestor = ancestor_names[i]
+            if ancestor in self.mapping_sources:
+                sources = self.mapping_sources[ancestor]
+                for s in sources:
+                    ancestor_names.append(s)
+            i += 1
+        return ancestor_names
+
     def mapping_subsumed(self, map1_name, map2_name):
-        if (map1_name in self.mapping_sources and map2_name in self.mapping_sources[map1_name]) or \
-            (map2_name in self.mapping_sources and map1_name in self.mapping_sources[map2_name]):
+        map1_ancestors = self.find_parentage([map1_name])
+        map2_ancestors = self.find_parentage([map2_name])
+        if map1_name in map2_ancestors or map2_name in map1_ancestors:
             return True
-        return False
-    #
+        else:
+            return False
+        # if (map1_name in self.mapping_sources and map2_name in self.mapping_sources[map1_name]) or \
+        #     (map2_name in self.mapping_sources and map1_name in self.mapping_sources[map2_name]):
+        #     return True
+        # return False
+
     # def compute_metadata(self, new_map):
     #     # compute fitness data for new mapping
     #     fitness = self.fitness(new_map)

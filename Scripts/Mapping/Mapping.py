@@ -104,6 +104,7 @@ class Mapping:
             dyna_source_relations[rel] = self.source_relations[rel]["columns"].to_dict(orient="list")
         dynamap = pyDynaMap(dyna_source_relations, matches)
         dynamap.generate_mappings(len(dyna_source_relations))
+        target_relation = list(dynamap.t_rel.keys())
         k_best_mappings = dynamap.k_best_mappings(show_n_best_mappings)
         instance_loss_k_best_mappings = {}
         renamed_columns = {}
@@ -111,9 +112,10 @@ class Mapping:
             instance_loss_k_best_mappings[mapping] = dynamap.instance_loss_for_mapping_name(mapping)
             renamed_columns_mapping = dynamap.renamed_columns_for_mapping(mapping)
             if renamed_columns_mapping:
-                renamed_columns[mapping] = [r for r in renamed_columns_mapping]
+                renamed_columns[mapping] = renamed_columns_mapping
         field_loss = dynamap.field_loss
-        return({"k_best_mappings": k_best_mappings,
+        return({"target_relation": target_relation,
+                "k_best_mappings": k_best_mappings,
                 "instance_loss": instance_loss_k_best_mappings,
                 "field_loss": field_loss,
                 "renamed_columns": renamed_columns})

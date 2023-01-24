@@ -203,7 +203,7 @@ class pyDynaMap():
                     map_name = map_i_name + "_" + map_j_name
                     new_maps[map_name] = new_map
                     self.mapping_sources[map_name] = [map_i_name, map_j_name]
-                    self.mapping_path[map_name] = [operator[0], map_i_name, map_j_name, operator[-1]]
+                    self.mapping_path[map_name] = [operator[0], map_i_name, map_j_name, operator[-2]]
                     new_map_fitness = self.fitness(new_map, map_name)
                     if new_map_fitness > max_fitness_for_sources:
                         # mapping was accepted
@@ -312,36 +312,38 @@ class pyDynaMap():
                     att1_in_target = att1_in_target[0]
                     if map2_name in self.t_rel[att1_in_target]:
                         att1_in_map2 = self.t_rel[att1_in_target][map2_name]
-                        included[att1_in_target] = self.is_attribute_subsumed(map1, map2, map1_name, map2_name, att1_in_target,
+                        included[(att1, att1_in_map2)] = self.is_attribute_subsumed(map1, map2, map1_name, map2_name, att1_in_target,
                                                                               att1_in_target)
                 else:
                     # attribute is not in target. We may still want to join mappings
                     # todo: think if it makes sense. intuitively yes, as it reduces size, but maybe it's not leading to our goal (t_rel cols)
                     # we go naively via column name
                     if att1 in map2:
-                        included[att1] = self.is_attribute_subsumed(map1, map2, map1_name, map2_name, att1, att1, False)
+                        included[(att1, att1)] = self.is_attribute_subsumed(map1, map2, map1_name, map2_name, att1, att1, False)
             if any(included.values()):
                 # There are inclusions!
                 # We still have to be careful: If both maps include columns that are in target, but *not* in inclusions, they will be renamed in the join
                 # and we can no longer provide a unique alias. E.g: join emps & depts on employeeno, what happens to name? It may be in target, but
                 # we now have to name it name_depts and name_emps or so and can't put a unique alias in self.t_rel.
                 # So we check for that. Once that's clear, we can proceed with a clean left join.
-                included_cols = [c for c in included.keys() if included[c]]
+                included_cols_map1 = [c[0] for c in included.keys() if included[c]]
                 dont_left_join = False
                 for col1 in map1:
-                    if col1 not in included_cols:
+                    if col1 not in included_cols_map1:
                         for t_col in self.t_rel:
                             if map1_name in self.t_rel[t_col]:
                                 # this is a col that is in target, but not in inclusion
                                 dont_left_join = True
-                # for col2 in map2:
-                #     if col2 not in included_cols:
-                #         for t_col in self.t_rel:
-                #             if map2_name in self.t_rel[t_col]:
-                #                 # this is a col that is in target, but not in inclusion
-                #                 dont_left_join = True
+                included_cols_map2 = [c[1] for c in included.keys() if included[c]]
+                for col2 in map2:
+                    if col2 not in included_cols_map2:
+                        for t_col in self.t_rel:
+                            if map2_name in self.t_rel[t_col]:
+                                # this is a col that is in target, but not in inclusion
+                                dont_left_join = True
                 if not dont_left_join:
-                    operator = ("left join", map1, map2, map1_name, map2_name, included_cols)
+                    included_cols = [c for c in included.keys()]
+                    operator = ("left join", map1, map2, map1_name, map2_name, included_cols, False)
                 else:
                     operator = ("union", map1, map2, map1_name, map2_name,
                                 list(set(map1_ma.keys()).intersection(set(map2_ma.keys()))))
@@ -397,14 +399,14 @@ class pyDynaMap():
                     op = ("outer join", map1, map2, map1_name, map2_name, list(same_matches))
         return op
 
-    def new_mapping(self, operator, map1, map2, map1_name, map2_name, attributes):
+    def new_mapping(self, operator, map1, map2, map1_name, map2_name, attributes, target_col_translation=True):
         # apply operator to two mappings
         if operator == "union":
             return self.op_union(map1, map2, map1_name, map2_name, attributes)
         elif operator == "join":
             return self.op_inner_join(map1, map2, map1_name, map2_name, attributes)
         elif operator == "left join":
-            return self.op_left_join(map1, map2, map1_name, map2_name, attributes)
+            return self.op_left_join(map1, map2, map1_name, map2_name, attributes, target_col_translation)
         elif operator == "outer join":
             return self.op_outer_join(map1, map2, map1_name, map2_name, attributes)
         else:
@@ -455,17 +457,27 @@ class pyDynaMap():
         join_map = joined_dfs.to_dict(orient='list')
         return join_map
 
-    def op_left_join(self, map1, map2, map1_name, map2_name, attributes: list):
+    def op_left_join(self, map1, map2, map1_name, map2_name, attributes: list, target_col_translation=True):
         df1 = pd.DataFrame.from_dict(map1)
         df2 = pd.DataFrame.from_dict(map2)
         # attributes gives us column names as they are in t_rel, so we have to find out what their aliases are in df1 and df2
-        df1_aliases = self.aliases_for_t_rel_columns(map1_name, attributes)
-        df2_aliases = self.aliases_for_t_rel_columns(map2_name, attributes)
+        if target_col_translation:
+            df1_aliases = self.aliases_for_t_rel_columns(map1_name, attributes)
+            df2_aliases = self.aliases_for_t_rel_columns(map2_name, attributes)
+        else:
+            df1_aliases = [att[0] for att in attributes]
+            df2_aliases = [att[1] for att in attributes]
         # using pandas merge to join on non-index columns
         try:
             #joined_dfs = df1.join(df2.set_index(df2_aliases), on=df1_aliases, how='left')
-            joined_dfs = df1.merge(df2, left_on=df1_aliases, right_on=df2_aliases, how="left")
-            # suffixes=("_"+map1_name,"_"+map2_name),
+            joined_dfs = df1.join(df2.set_index(df2_aliases), on=df1_aliases, how='left')
+            #joined_dfs = df1.merge(df2, left_on=df1_aliases, right_on=df2_aliases, how="left")
+            # suffixes=("_"+map1_name,"_"+map2_name)
+            # Statistics for instance loss
+            outer_joined_dfs = df1.join(df2.set_index(df2_aliases), on=df1_aliases, how='outer')
+            lost_rows = len(outer_joined_dfs) - len(joined_dfs)
+            if lost_rows > 0:
+                self.instance_loss += "Lost " + str(lost_rows) + " on joining " + map1_name + " and " + map2_name + ".\r\n"
         except Exception as e:
             raise RuntimeError("op_left_join failed on", map1_name, "and", map2_name, "with exception", e)
         # getting unioned dfs back to dict format we use here
@@ -792,12 +804,23 @@ class pyDynaMap():
                                                                      fc, tc,
                                                                      relationship_type=rel,
                                                                      relationship_strength=rel_strength))
-            for col in cols:
-                rel_strength = self.get_match_strength(from_table, to_table, col, col)
-                field_relationships.append(FieldRelationship(from_table, to_table,
-                                                             col, col,
-                                                             relationship_type=rel,
-                                                             relationship_strength=rel_strength))
+            elif type(cols) == list:
+                from_cols = [c[0] for c in cols]
+                to_cols = [c[1] for c in cols]
+                for fc in from_cols:
+                    for tc in to_cols:
+                        rel_strength = self.get_match_strength(from_table, to_table, fc, tc)
+                        field_relationships.append(FieldRelationship(from_table, to_table,
+                                                                     fc, tc,
+                                                                     relationship_type=rel,
+                                                                     relationship_strength=rel_strength))
+            else:
+                for col in cols:
+                    rel_strength = self.get_match_strength(from_table, to_table, col, col)
+                    field_relationships.append(FieldRelationship(from_table, to_table,
+                                                                 col, col,
+                                                                 relationship_type=rel,
+                                                                 relationship_strength=rel_strength))
         else:
             # recursively get fieldrelationships from mappings, starting from the simplest ones
             if (isinstance(from_table, list)):

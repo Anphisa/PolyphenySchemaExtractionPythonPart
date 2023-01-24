@@ -507,8 +507,7 @@ class pyDynaMap():
             outer_joined_dfs = df1.join(df2.set_index(df2_aliases), on=df1_aliases, how='outer')
             lost_rows = len(outer_joined_dfs) - len(joined_dfs)
             if lost_rows > 0:
-                self.instance_loss[map1_name + "_" + map2_name] = "Lost " + str(lost_rows) + " rows on joining " + map1_name + \
-                                                                  " and " + map2_name + ".\r\n"
+                self.instance_loss[map1_name + "_" + map2_name] = lost_rows
         except Exception as e:
             raise RuntimeError("op_left_join failed on", map1_name, "and", map2_name, "with exception", e)
         # getting unioned dfs back to dict format we use here
@@ -918,6 +917,15 @@ class pyDynaMap():
             }
             #print(viz_info)
         return viz_info
+
+    def instance_loss_for_mapping_name(self, map_name):
+        # Given a mapping name, find how many rows were (potentially) lost during its creation
+        ancestors = self.find_parentage([map_name])
+        instance_loss = 0
+        for ancestor in ancestors:
+            instance_loss += self.instance_loss.get(ancestor, 0)
+        instance_loss_string = "Lost " + str(instance_loss) + " rows during mapping of " + map_name + ".\r\n"
+        return instance_loss_string
 
 if __name__ == "__main__":
     dfs = {"df1": {'A': [1, 2, 3], 'B': [4, 5, 6], 'C': [7, 8, 9]},

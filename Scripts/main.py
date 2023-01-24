@@ -138,7 +138,7 @@ async def show_mapping(num, result, mapping_result, field_loss, instance_loss, s
                                                           mapping_result[result]["mapping_rows"],
                                                           mapping_result[result]["max_mapping_rows_length"],
                                                           "Field loss: " + field_loss,
-                                                          "Instance loss: " + instance_loss.get(result, "No instance loss."),
+                                                          "Instance loss: " + instance_loss,
                                                           "Structure loss: " + structure_loss)
     g = schema_candidate_graph.draw()
     #print("graphviz dot code:", g.source)
@@ -211,7 +211,7 @@ async def consumer(message):
                                result,
                                k_best_mappings,
                                field_loss_main + field_loss_mapper,
-                               instance_loss_mapper,
+                               instance_loss_mapper[result],
                                structure_loss_main)
             schema_candidate_num += 1
 

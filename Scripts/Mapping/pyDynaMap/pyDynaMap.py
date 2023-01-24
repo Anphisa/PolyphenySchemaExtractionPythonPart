@@ -20,7 +20,6 @@ class pyDynaMap():
         # We also save the aliases that this column name has in different source tables
         self.t_rel = self.target_relation_from_matches()
         self.sub_solution = {}
-        # todo: profile data
         self.pd = {}
         self.fitness_value_by_source = {}
         self.highest_fitness_value = {}
@@ -31,6 +30,8 @@ class pyDynaMap():
         # loss information for display
         self.instance_loss = {}
         self.field_loss = ""
+        # renamed columns for re-tracing steps
+        self.renamed_columns = {}
 
     def field_loss(self):
         # If a source relation has a field that is not represented in t_rel, it is lost
@@ -446,7 +447,7 @@ class pyDynaMap():
         # attributes holds the names of columns in t_rel
         df1 = pd.DataFrame.from_dict(map1)
         df2 = pd.DataFrame.from_dict(map2)
-        # rename columns in dataframes to names in t_rel. i hope this works
+        # rename columns in dataframes to names in t_rel.
         replace_df1 = {}
         for col in df1.columns.to_list():
             if col not in self.t_rel:
@@ -461,6 +462,9 @@ class pyDynaMap():
                     if map2_name in self.t_rel[t_col] and self.t_rel[t_col][map2_name] == col:
                         replace_df2[col] = t_col
         df2.rename(columns=replace_df2, inplace=True)
+        # tracking column renaming
+        self.renamed_columns[map1_name] = replace_df1
+        self.renamed_columns[map2_name] = replace_df2
         # using pandas union
         try:
             unioned_dfs = pd.concat([df1, df2], axis=0, ignore_index=True)
@@ -481,6 +485,12 @@ class pyDynaMap():
             joined_dfs = df1.join(df2.set_index(df2_aliases), on=df1_aliases, how='inner')
         except Exception as e:
             raise RuntimeError("op_inner_join failed on", map1_name, "and", map2_name, "with exception", e)
+        # tracking column renaming
+        for i, col in enumerate(df1_aliases):
+            if map2_name in self.renamed_columns:
+                self.renamed_columns[map2_name][df2_aliases[i]] = df1_aliases[i]
+            else:
+                self.renamed_columns[map2_name] = {df2_aliases[i]: df1_aliases[i]}
         if 'index_y' in joined_dfs:
             joined_dfs.drop('index_y', axis=1, inplace=True)
         # getting unioned dfs back to dict format we use here
@@ -510,6 +520,12 @@ class pyDynaMap():
                 self.instance_loss[map1_name + "_" + map2_name] = lost_rows
         except Exception as e:
             raise RuntimeError("op_left_join failed on", map1_name, "and", map2_name, "with exception", e)
+        # tracking column renaming
+        for i, col in enumerate(df1_aliases):
+            if map2_name in self.renamed_columns:
+                self.renamed_columns[map2_name][df2_aliases[i]] = df1_aliases[i]
+            else:
+                self.renamed_columns[map2_name] = {df2_aliases[i]: df1_aliases[i]}
         # getting unioned dfs back to dict format we use here
         join_map = joined_dfs.to_dict(orient='list')
         return join_map
@@ -525,6 +541,12 @@ class pyDynaMap():
             joined_dfs = df1.merge(df2, left_on=df1_aliases, right_on=df2_aliases, suffixes=('', '_y'), how="outer")
         except Exception as e:
             raise RuntimeError("op_outer_join failed on", map1_name, "and", map2_name, "with exception", e)
+        # tracking column renaming
+        for i, col in enumerate(df1_aliases):
+            if map2_name in self.renamed_columns:
+                self.renamed_columns[map2_name][df2_aliases[i]] = df1_aliases[i]
+            else:
+                self.renamed_columns[map2_name] = {df2_aliases[i]: df1_aliases[i]}
         if 'index_y' in joined_dfs:
             joined_dfs.drop('index_y', axis=1, inplace=True)
         # getting unioned dfs back to dict format we use here
@@ -926,6 +948,21 @@ class pyDynaMap():
             instance_loss += self.instance_loss.get(ancestor, 0)
         instance_loss_string = "Lost " + str(instance_loss) + " rows during mapping of " + map_name + ".\r\n"
         return instance_loss_string
+
+    def renamed_columns_for_mapping(self, map_name):
+        # Given a mapping name, how did we rename columns in its ancestors?
+        renamed_column_string = ""
+        ancestors = self.find_parentage([map_name])
+        for ancestor in ancestors:
+            ancestor_renaming = self.renamed_columns.get(ancestor, "")
+            if ancestor_renaming:
+                for col in ancestor_renaming:
+                    if col != ancestor_renaming[col]:
+                        renamed_column_string += "Renamed column " + col + " in " + ancestor + " to " + ancestor_renaming[col] + "; "
+        if not renamed_column_string:
+            return
+        else:
+            return renamed_column_string[:-2] + "."
 
 if __name__ == "__main__":
     # dfs = {"df1": {'A': [1, 2, 3], 'B': [4, 5, 6], 'C': [7, 8, 9]},

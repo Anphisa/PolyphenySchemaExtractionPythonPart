@@ -5,7 +5,7 @@ import math
 import copy
 import collections
 import statistics
-from FieldRelationship import FieldRelationship
+from Helper.FieldRelationship import FieldRelationship
 
 class pyDynaMap():
     def __init__(self, source_relations: dict, matches: dict):
@@ -29,7 +29,7 @@ class pyDynaMap():
         for source in self.source_relations:
             self.mapping_path[source] = source
         # loss information for display
-        self.instance_loss = []
+        self.instance_loss = {}
         self.field_loss = ""
 
     def field_loss(self):
@@ -252,7 +252,8 @@ class pyDynaMap():
         return new_maps
 
     def find_parentage(self, ancestor_names):
-        # find all ancestor map names
+        # find all ancestor map names, so parents, grandparents, etc.
+        # this should help combat the issue of endlessly re-combining in the same dfs over and over again
         i = 0
         while i < len(ancestor_names):
             ancestor = ancestor_names[i]
@@ -264,16 +265,15 @@ class pyDynaMap():
         return ancestor_names
 
     def mapping_subsumed(self, map1_name, map2_name):
+        # Don't combine immediate ancestors back into a mapping.
+        # If we wanted to forbid all re-combinations, we would have to make a set operations in the if-condition to
+        # check that there are no common ancestors at all.
         map1_ancestors = self.find_parentage([map1_name])
         map2_ancestors = self.find_parentage([map2_name])
         if map1_name in map2_ancestors or map2_name in map1_ancestors:
             return True
         else:
             return False
-        # if (map1_name in self.mapping_sources and map2_name in self.mapping_sources[map1_name]) or \
-        #     (map2_name in self.mapping_sources and map1_name in self.mapping_sources[map2_name]):
-        #     return True
-        # return False
 
     # def compute_metadata(self, new_map):
     #     # compute fitness data for new mapping
@@ -507,8 +507,8 @@ class pyDynaMap():
             outer_joined_dfs = df1.join(df2.set_index(df2_aliases), on=df1_aliases, how='outer')
             lost_rows = len(outer_joined_dfs) - len(joined_dfs)
             if lost_rows > 0:
-                self.instance_loss.append("Lost " + str(lost_rows) + " rows on joining " + map1_name + \
-                                          " and " + map2_name + ".\r\n")
+                self.instance_loss[map1_name + "_" + map2_name] = "Lost " + str(lost_rows) + " rows on joining " + map1_name + \
+                                                                  " and " + map2_name + ".\r\n"
         except Exception as e:
             raise RuntimeError("op_left_join failed on", map1_name, "and", map2_name, "with exception", e)
         # getting unioned dfs back to dict format we use here
@@ -920,26 +920,19 @@ class pyDynaMap():
         return viz_info
 
 if __name__ == "__main__":
-    # dfs = {"df1": {'A': [1, 2, 3], 'B': [4, 5, 6], 'C': [7, 8, 9]},
-    #        "df2": {'B': [10, 11, 12], 'C': [13, 14, 15]},
-    #        "df3": {'A': [16, 17, 18], 'C': [19, 20, 21]}}
-    # matches = {(('df1', 'B'), ('df2', 'B')): 1,
-    #            (('df1', 'C'), ('df2', 'C')): 1,
-    #            (('df1', 'A'), ('df3', 'A')): 1,
-    #            (('df1', 'A'), ('df3', 'C')): 1,
-    #            (('df2', 'C'), ('df3', 'C')): 1}
-    dfs = {"df1": {'name': ["Leon", "Albert", "Pupsbanane"]},
-           "df2": {'firstname': ["Leon", "Albert", "Pupsbanane"]},
-           "df3": {'name2': ["Batista", "Einstein", "Banane"]}}
-    matches = {(('df1', 'name'), ('df2', 'firstname')): 1,
-               (('df1', 'name'), ('df3', 'name2')): 1,
-               (('df2', 'firstname'), ('df3', 'name2')): 1}
-    # dfs = {"df1": {'id': [1, 2, 3],
-    #                "name": [None, None, "B"]},
-    #        "df2": {'id2': [1, 2, 3]},
-    #        "df3": {"name": ["A", "B", "C"]}}
-    # matches = {(('df1', 'id'), ('df2', 'id2')): 1,
-    #            (('df1', 'name'), ('df3', 'name')): 1}
+    dfs = {"df1": {'A': [1, 2, 3], 'B': [4, 5, 6], 'C': [7, 8, 9]},
+           "df2": {'B': [10, 11, 12], 'C': [13, 14, 15]},
+           "df3": {'A': [16, 17, 18], 'C': [19, 20, 21]}}
+    matches = {(('df1', 'B'), ('df2', 'B')): 1,
+               (('df1', 'C'), ('df2', 'C')): 1,
+               (('df1', 'A'), ('df3', 'A')): 1,
+               (('df2', 'C'), ('df3', 'C')): 1}
+    # dfs = {"df1": {'name': ["Leon", "Albert", "Pupsbanane"]},
+    #        "df2": {'firstname': ["Leon", "Albert", "Pupsbanane"]},
+    #        "df3": {'name2': ["Batista", "Einstein", "Banane"]}}
+    # matches = {(('df1', 'name'), ('df2', 'firstname')): 1,
+    #            (('df1', 'name'), ('df3', 'name2')): 1,
+    #            (('df2', 'firstname'), ('df3', 'name2')): 1}
 
     dynamap = pyDynaMap(dfs, matches)
     dynamap.generate_mappings(len(dfs))

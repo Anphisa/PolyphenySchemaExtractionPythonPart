@@ -116,6 +116,20 @@ def structure_loss(datamodel):
     else:
         return "No structure loss."
 
+def format_matches(matches):
+    # {(('depts', 'deptno'), ('emps', 'deptno')): 1, (('depts', 'name'), ('emps', 'name')): 1, (('emp', 'employeeno'), ('work', 'employeeno')): 1}
+    matches_string = ""
+    for m in matches:
+        from_table = str(m[0][0])
+        from_column = str(m[0][1])
+        to_table = str(m[1][0])
+        to_column = str(m[1][1])
+        match_strength = str(matches[m])
+        matches_string += from_table + "[" + from_column + "]" + \
+                        " -> " + to_table + "[" + to_column + "]" + \
+                        " (match strength: " + match_strength + ")\r\n"
+    return matches_string
+
 async def show_mapping(num, result, mapping_result, field_loss, instance_loss, structure_loss):
     schema_candidate_graph = SchemaCandidateVisualization(result + ".svg",
                                                           num,
@@ -124,13 +138,19 @@ async def show_mapping(num, result, mapping_result, field_loss, instance_loss, s
                                                           mapping_result[result]["mapping_rows"],
                                                           mapping_result[result]["max_mapping_rows_length"],
                                                           "Field loss: " + field_loss,
-                                                          "Instance loss: " + instance_loss,
+                                                          "Instance loss: " + instance_loss.get(result, "No instance loss."),
                                                           "Structure loss: " + structure_loss)
     g = schema_candidate_graph.draw()
     #print("graphviz dot code:", g.source)
     g.graph_attr.update(size="20,100")
     g.view()
     #print("mapping result", result)
+
+async def send_http_request(path, params):
+    URL = config.polypheny_ip_address + ":" + config.polypheny_port + "/" + path
+    logging.info("sending params", params, "to", URL)
+    r = requests.post(url=URL, data=params)
+    logging.info("response", r.status_code)
 
 async def consumer(message):
     print("consumer: ", message)
@@ -142,22 +162,30 @@ async def consumer(message):
         # Take samples from all columns
         for df in dfs:
             cols = dfs[df]["columns"]
+            await send_http_request("log", {"log": "Sampling each " + str(config.sample_size) + " rows from " + df + \
+                                            " from columns: " + str(cols.columns.to_list()) + "\r\n"})
             namespace = dfs[df]["namespacename"]
-            #datamodel = dfs[df]["datamodel"]
             for col in cols:
                 try:
                     # todo: get from polypheny and fallback to 127.0.0.1
-                    sample = Sample("http://127.0.0.1", "20598", col, namespace, df, config.sample_size)
+                    sample = Sample(config.polypheny_ip_address, config.polypheny_port, col, namespace, df, config.sample_size)
                     sample.take_sample(datamodel)
                     sample.extract_sample()
                     dfs[df]["columns"][col] = sample.sample
                 except Exception as e:
                     raise RuntimeWarning("Sampling failed for col ", col, "in df ", df, "in namespace, ", namespace)
+        await send_http_request("log", {"log": "-------------------------------------------------"})
         # matching
         matches = await loop.run_in_executor(None, dataframe_valentine_compare, dfs, config.valentine_algo)
-        #print("matches:", await matches)
+        logging.info("Received matches", matches, "from matcher", config.valentine_algo)
+        await send_http_request("log", {"log": "Valentine algorithm " + str(config.valentine_algo_string()) + " calculated matches:\r\n" + \
+                                        await loop.run_in_executor(None, format_matches, matches)})
+        await send_http_request("log", {"log": "-------------------------------------------------"})
         # mapping
-        matches_above_thresh = await loop.run_in_executor(None, Mapping.naiveMapping, matches, 0.5)
+        matches_above_thresh = await loop.run_in_executor(None, Mapping.naiveMapping, matches, config.matching_threshold)
+        await send_http_request("log", {"log": "Matches above matching strength threshold of " + str(config.matching_threshold) + ":\r\n" + \
+                                        await loop.run_in_executor(None, format_matches, matches_above_thresh)})
+        await send_http_request("log", {"log": "-------------------------------------------------"})
         #print("matches above thresh:", matches_above_thresh)
         # {(('depts', 'deptno'), ('emps', 'deptno')): 1, (('depts', 'name'), ('emps', 'name')): 1, (('emp', 'employeeno'), ('work', 'employeeno')): 1}
         #mapping_result = await loop.run_in_executor(None, Mapping.naiveMappingDecider, dfs, matches_above_thresh)
@@ -165,6 +193,12 @@ async def consumer(message):
         mapper = Mapping(dfs)
         mapping_result = mapper.pyDynaMapMapping(matches_above_thresh, config.show_n_best_mappings)
         k_best_mappings = mapping_result["k_best_mappings"]
+        k_best_mappings_results = {'results': str(k_best_mappings)}
+        # send k best mapping results to result output pane in polypheny
+        await send_http_request("results", k_best_mappings_results)
+        await send_http_request("log",
+                                {"log": str(config.show_n_best_mappings) + " best mappings: " + str(k_best_mappings_results) + "\r\n"})
+        await send_http_request("log", {"log": "-------------------------------------------------"})
         # Loss information
         field_loss_main = await loop.run_in_executor(None, field_loss, datamodel)
         field_loss_mapper = mapping_result["field_loss"]
@@ -180,11 +214,7 @@ async def consumer(message):
                                instance_loss_mapper,
                                structure_loss_main)
             schema_candidate_num += 1
-        URL = "http://127.0.0.1:20598/result"
-        PARAMS = {'results': str(k_best_mappings)}
-        print("sending PARAMS", PARAMS)
-        r = requests.post(url=URL, data=PARAMS)
-        print("response", r.status_code)
+
         #ws_message_queue.appendleft(str(await matches))
         #await pk_fk_relationship_finder(ast.literal_eval(d_message["message"]))
     if d_message["topic"] == "speedThoroughness":

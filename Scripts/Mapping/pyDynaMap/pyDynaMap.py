@@ -29,7 +29,7 @@ class pyDynaMap():
         for source in self.source_relations:
             self.mapping_path[source] = source
         # loss information for display
-        self.instance_loss = "No instance loss."
+        self.instance_loss = []
         self.field_loss = ""
 
     def field_loss(self):
@@ -203,15 +203,27 @@ class pyDynaMap():
                     map_name = map_i_name + "_" + map_j_name
                     new_maps[map_name] = new_map
                     self.mapping_sources[map_name] = [map_i_name, map_j_name]
-                    self.mapping_path[map_name] = [operator[0], map_i_name, map_j_name, operator[-2]]
+                    if operator[0] == "left join":
+                        self.mapping_path[map_name] = [operator[0], map_i_name, map_j_name, operator[-2]]
+                    else:
+                        self.mapping_path[map_name] = [operator[0], map_i_name, map_j_name, operator[-1]]
                     new_map_fitness = self.fitness(new_map, map_name)
                     if new_map_fitness > max_fitness_for_sources:
                         # mapping was accepted
                         self.highest_fitness_value[map_name] = new_map_fitness
                         for t_col in self.t_rel.keys():
                             if map_i_name in self.t_rel[t_col] and map_j_name in self.t_rel[t_col]:
-                                self.t_rel[t_col][map_name] = self.choose_column_name([self.t_rel[t_col][map_i_name],
-                                                                                       self.t_rel[t_col][map_j_name]])
+                                if operator[0] == "left join":
+                                    # column name comes from map1 (we take df1_aliases in join)
+                                    # todo: put in explanation
+                                    self.t_rel[t_col][map_name] = self.t_rel[t_col][map_i_name]
+                                elif operator[0] == "union":
+                                    # We replace target names with t_col names
+                                    # todo: put in explanation
+                                    self.t_rel[t_col][map_name] = t_col
+                                else:
+                                    self.t_rel[t_col][map_name] = self.choose_column_name([self.t_rel[t_col][map_i_name],
+                                                                                           self.t_rel[t_col][map_j_name]])
                             elif map_i_name in self.t_rel[t_col]:
                                 self.t_rel[t_col][map_name] = self.t_rel[t_col][map_i_name]
                             elif map_j_name in self.t_rel[t_col]:
@@ -477,7 +489,8 @@ class pyDynaMap():
             outer_joined_dfs = df1.join(df2.set_index(df2_aliases), on=df1_aliases, how='outer')
             lost_rows = len(outer_joined_dfs) - len(joined_dfs)
             if lost_rows > 0:
-                self.instance_loss += "Lost " + str(lost_rows) + " on joining " + map1_name + " and " + map2_name + ".\r\n"
+                self.instance_loss.append("Lost " + str(lost_rows) + " rows on joining " + map1_name + \
+                                          " and " + map2_name + ".\r\n")
         except Exception as e:
             raise RuntimeError("op_left_join failed on", map1_name, "and", map2_name, "with exception", e)
         # getting unioned dfs back to dict format we use here
@@ -597,6 +610,10 @@ class pyDynaMap():
         for att in map1_ma:
             if att in map2_ma:
                 map1_subsumptions[att] = self.is_attribute_subsumed(map1, map2, map1_name, map2_name, att, att)
+            else:
+                # This is an attribute that appears in target, but it is not subsumed! I.e. mapping1 carries more value than mapping2
+                # because it knows more target attributes, even though one may be subsumed.
+                map1_subsumptions[att] = False
         # todo: all or any? text in paper sounds like "any", but then the two cases of subsumption map1 by map2 and the other way round wouldn't be symmetrical anymore
         if map1_subsumptions and all(map1_subsumptions.values()):
             # map1 is subsumed by map2
@@ -607,6 +624,8 @@ class pyDynaMap():
         for att in map2_ma:
             if att in map1_ma:
                 map2_subsumptions[att] = self.is_attribute_subsumed(map2, map1, map2_name, map1_name, att, att)
+            else:
+                map2_subsumptions[att] = False
         if map2_subsumptions and all(map2_subsumptions.values()):
             # map2 is subsumed by map1
             self.remove_mapping(map2_name)
@@ -704,7 +723,7 @@ class pyDynaMap():
         # atts = self.remove_outliers(map)
         null_counts = []
         attr_counts = []
-        target_counts = 0
+        # target_counts = 0
         for att in map:
             # null counts
             values = map[att]
@@ -713,32 +732,27 @@ class pyDynaMap():
             # attr counts
             attr_count = len(values)
             attr_counts.append(attr_count)
-            # target counts
-            att_in_trel = self.t_rel_column_names(map, map_name, [att])
-            if len(att_in_trel) == 1:
-                target_counts += 1
+            # # target counts
+            # att_in_trel = self.t_rel_column_names(map, map_name, [att])
+            # if len(att_in_trel) == 1:
+            #     target_counts += 1
         max_attr_nulls = max(null_counts)
-        target_percentage = target_counts/len(self.t_rel)
-        attr_null_percentages = result = [n/a for n, a in zip(null_counts, attr_counts)]
-        attr_avg_null_percentage = sum(attr_null_percentages)/len(attr_null_percentages)
-        mapping_path = self.mapping_path.get(map_name)
-        if type(mapping_path) != list:
-            operator_bonus = 0
-        elif mapping_path[0] == "union":
-            # todo: make the bonus variable, but not sure what to tie it to. ideally: amount of unions in the whole chain, but I'm lazy
-            operator_bonus = -3
-        elif "join" in mapping_path[0]:
-            operator_bonus = 1
-        else:
-            operator_bonus = 0
+        # target_percentage = target_counts/len(self.t_rel)
+        # attr_null_percentages = result = [n/a for n, a in zip(null_counts, attr_counts)]
+        # attr_avg_null_percentage = sum(attr_null_percentages)/len(attr_null_percentages)
+        # Reward merges, but prefer
+        merge_counts = self.count_merge_types(self.mapping_path.get(map_name), {})
+        all_merges = sum(merge_counts.values())
+        union_merges = merge_counts.get("union", 0)
         # The number of largely complete tuples in the mapping is estimated to be
         # the cardinality of the mapping minus the number of nulls in the attribute with the most nulls.
         # Original fitness logic as I understood it from the dynaMap paper:
         # reward many rows with few null values
-        return self.map_cardinality(map) - max_attr_nulls + operator_bonus
-        # todo: also extension of original dynamap
+        return self.map_cardinality(map) - max_attr_nulls + all_merges - union_merges
+        # todo: this is also an extension of original dynamap
         # New idea for fitness logic:
         # Reward having many cols from target + few NULLs in rows
+        # and many merges, but few unions
         # return target_percentage - attr_avg_null_percentage
 
     def map_cardinality(self, map):
@@ -782,6 +796,29 @@ class pyDynaMap():
         # ['join', 'df1', ['union', 'df2', 'df3', None], 'A']
         return mapping_path
 
+    def count_merge_types(self, mapping_path, merge_types={}):
+        if not type(mapping_path) == list:
+            return merge_types
+        if len(mapping_path) == 4:
+            rel = mapping_path[0]
+            from_table = mapping_path[1]
+            to_table = mapping_path[2]
+            cols = mapping_path[3]
+            if rel in merge_types:
+                merge_types[rel] += 1
+            else:
+                merge_types[rel] = 1
+        elif len(mapping_path) == 1:
+            return
+        else:
+            raise RuntimeError("wrong mapping path format", mapping_path)
+        # recursively get merge types from mappings, starting from the simplest ones
+        if (isinstance(from_table, list)):
+            self.count_merge_types(from_table, merge_types)
+        if (isinstance(to_table, list)):
+            self.count_merge_types(to_table, merge_types)
+        return merge_types
+
     def mapping_name_to_field_relationships(self, mapping_path, field_relationships=[]):
         # ['outer join', 'df3', ['outer join', 'df1', 'df2', ['B', 'C']], ['A', 'C']]
         if len(mapping_path) == 4:
@@ -804,7 +841,7 @@ class pyDynaMap():
                                                                      fc, tc,
                                                                      relationship_type=rel,
                                                                      relationship_strength=rel_strength))
-            elif type(cols) == list:
+            elif type(cols) == list and type(cols[0]) == tuple:
                 from_cols = [c[0] for c in cols]
                 to_cols = [c[1] for c in cols]
                 for fc in from_cols:
@@ -873,21 +910,18 @@ if __name__ == "__main__":
     #            (('df1', 'A'), ('df3', 'A')): 1,
     #            (('df1', 'A'), ('df3', 'C')): 1,
     #            (('df2', 'C'), ('df3', 'C')): 1}
-    # dfs = {"df1": {'name': ["Leon", "Albert", "Pupsbanane"]},
-    #        "df2": {'firstname': ["Leon", "Albert", "Pupsbanane"]},
-    #        "df3": {'name2': ["Batista", "Einstein", "Banane"]}}
-    # matches = {(('df1', 'name'), ('df2', 'firstname')): 1,
-    #            (('df1', 'name'), ('df3', 'name2')): 1,
-    #            (('df2', 'firstname'), ('df3', 'name2')): 1}
+    dfs = {"df1": {'name': ["Leon", "Albert", "Pupsbanane"]},
+           "df2": {'firstname': ["Leon", "Albert", "Pupsbanane"]},
+           "df3": {'name2': ["Batista", "Einstein", "Banane"]}}
+    matches = {(('df1', 'name'), ('df2', 'firstname')): 1,
+               (('df1', 'name'), ('df3', 'name2')): 1,
+               (('df2', 'firstname'), ('df3', 'name2')): 1}
     # dfs = {"df1": {'id': [1, 2, 3],
     #                "name": [None, None, "B"]},
     #        "df2": {'id2': [1, 2, 3]},
     #        "df3": {"name": ["A", "B", "C"]}}
     # matches = {(('df1', 'id'), ('df2', 'id2')): 1,
     #            (('df1', 'name'), ('df3', 'name')): 1}
-    dfs = {"df1": {'id': [1, 2]},
-           "df2": {'id2': [1, 2, 3]}}
-    matches = {(('df1', 'id'), ('df2', 'id2')): 1}
 
     dynamap = pyDynaMap(dfs, matches)
     dynamap.generate_mappings(len(dfs))

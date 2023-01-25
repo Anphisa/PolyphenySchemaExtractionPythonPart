@@ -228,3 +228,43 @@ class complicated_mapping_case_1(unittest.TestCase):
     def test_complicated_mapping_case_1(self):
         self.assertIn("df1_df3_df2", self.dynamap.k_best_mappings(10))
         self.assertIn("df1_df2_df3", self.dynamap.k_best_mappings(10))
+
+class public_polypheny_data(unittest.TestCase):
+    def setUp(self) -> None:
+        dfs = {"depts": {'deptno': ['10', '20', '30'], 'name': ['Sales', 'Marketing', 'HR']},
+               "emps": {'empid': ['100', '110', '150', '200'], 'deptno': ['10', '10', '20', '30'],
+                        'name': ['Bill', 'Theodore', 'Sebastian', 'Eric'], 'salary': ['10000', '11500', '7000', '8000'],
+                        'commission': ['1000', '250', '400', '500']},
+               "emp": {'employeeno': ['1', '2', '4', '5', '7'], 'age': ['41', '49', '37', '33', '27'],
+                       'gender': ['Female', 'Male', 'Male', 'Female', 'Male'],
+                       'maritalstatus': ['Single', 'Married', 'Single', 'Married', 'Married'],
+                       'worklifebalance': ['Bad', 'Better', 'Better', 'Better', 'Better'],
+                       'education': ['College', 'Below College', 'College', 'Master', 'Below College'],
+                       'monthlyincome': ['5993', '5130', '2090', '2909', '3468'],
+                       'relationshipjoy': ['Low', 'Very High', 'Medium', 'High', 'Very High'],
+                       'workingyears': ['8', '10', '7', '8', '6'], 'yearsatcompany': ['6', '10', '0', '8', '2']},
+               "work": {'employeeno': ['1', '2', '4', '5', '7'],
+                        'educationfield': ['Life Sciences', 'Life Sciences', 'Other', 'Life Sciences', 'Medical'],
+                        'jobinvolvement': ['High', 'Medium', 'Medium', 'High', 'High'],
+                        'joblevel': ['2', '2', '1', '1', '1'],
+                        'jobrole': ['Sales Executive', 'Research Scientist', 'Laboratory Technician',
+                                    'Research Scientist',
+                                    'Laboratory Technician'],
+                        'businesstravel': ['Travel_Rarely', 'Travel_Frequently', 'Travel_Rarely', 'Travel_Frequently',
+                                           'Travel_Rarely'],
+                        'department': ['Sales', 'Research & Development', 'Research & Development',
+                                       'Research & Development', 'Research & Development'],
+                        'attrition': ['Yes', 'No', 'Yes', 'No', 'No'],
+                        'dailyrate': ['1102', '279', '1373', '1392', '591']}
+               }
+        matches = {(('depts', 'deptno'), ('emps', 'deptno')): 1,
+                   (('depts', 'name'), ('emps', 'name')): 1,
+                   (('emp', 'employeeno'), ('work', 'employeeno')): 1}
+        self.dynamap = pyDynaMap(dfs, matches)
+        self.dynamap.generate_mappings(len(dfs))
+    def test_complicated_mapping_case_1(self):
+        self.assertIn("emp_work", self.dynamap.k_best_mappings(10))
+        self.assertIn("work_emp", self.dynamap.k_best_mappings(10))
+        self.assertEqual(self.dynamap.k_best_mappings(3)["emp_work"]["mapping_path"][0], "left join")
+
+

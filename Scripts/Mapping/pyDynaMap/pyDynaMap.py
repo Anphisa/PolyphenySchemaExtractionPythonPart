@@ -175,7 +175,6 @@ class pyDynaMap():
         batch2 = copy.deepcopy(batch2)
         for map_i_name in batch1:
             for map_j_name in batch2:
-                # todo: I STOPPED HERE check for frosttage_19161990 and niederschlag_19611990 hier: something's wrong with their union
                 # If map_i == map_j, do not return union with itself (endless recursion, unintended endless self-unions)
                 if map_i_name == map_j_name:
                     continue
@@ -965,42 +964,13 @@ class pyDynaMap():
             return renamed_column_string[:-2] + "."
 
 if __name__ == "__main__":
-    # dfs = {"df1": {'A': [1, 2, 3], 'B': [4, 5, 6], 'C': [7, 8, 9]},
-    #        "df2": {'B': [10, 11, 12], 'C': [13, 14, 15]},
-    #        "df3": {'A': [16, 17, 18], 'C': [19, 20, 21]}}
-    # matches = {(('df1', 'B'), ('df2', 'B')): 1,
-    #            (('df1', 'C'), ('df2', 'C')): 1,
-    #            (('df1', 'A'), ('df3', 'A')): 1,
-    #            (('df2', 'C'), ('df3', 'C')): 1}
-
-    dfs = {"depts": {'deptno': ['10', '20', '30'], 'name': ['Sales', 'Marketing', 'HR']},
-           "emps": {'empid': ['100', '110', '150', '200'], 'deptno': ['10', '10', '20', '30'],
-                    'name': ['Bill', 'Theodore', 'Sebastian', 'Eric'], 'salary': ['10000', '11500', '7000', '8000'],
-                    'commission': ['1000', '250', '400', '500']},
-           "emp": {'employeeno': ['1', '2', '4', '5', '7'], 'age': ['41', '49', '37', '33', '27'],
-                   'gender': ['Female', 'Male', 'Male', 'Female', 'Male'],
-                   'maritalstatus': ['Single', 'Married', 'Single', 'Married', 'Married'],
-                   'worklifebalance': ['Bad', 'Better', 'Better', 'Better', 'Better'],
-                   'education': ['College', 'Below College', 'College', 'Master', 'Below College'],
-                   'monthlyincome': ['5993', '5130', '2090', '2909', '3468'],
-                   'relationshipjoy': ['Low', 'Very High', 'Medium', 'High', 'Very High'],
-                   'workingyears': ['8', '10', '7', '8', '6'], 'yearsatcompany': ['6', '10', '0', '8', '2']},
-           "work": {'employeeno': ['1', '2', '4', '5', '7'],
-                    'educationfield': ['Life Sciences', 'Life Sciences', 'Other', 'Life Sciences', 'Medical'],
-                    'jobinvolvement': ['High', 'Medium', 'Medium', 'High', 'High'],
-                    'joblevel': ['2', '2', '1', '1', '1'],
-                    'jobrole': ['Sales Executive', 'Research Scientist', 'Laboratory Technician', 'Research Scientist',
-                                'Laboratory Technician'],
-                    'businesstravel': ['Travel_Rarely', 'Travel_Frequently', 'Travel_Rarely', 'Travel_Frequently',
-                                       'Travel_Rarely'],
-                    'department': ['Sales', 'Research & Development', 'Research & Development',
-                                   'Research & Development', 'Research & Development'],
-                    'attrition': ['Yes', 'No', 'Yes', 'No', 'No'], 'dailyrate': ['1102', '279', '1373', '1392', '591']}
-           }
-    matches = {(('depts', 'deptno'), ('emps', 'deptno')): 1,
-               (('depts', 'name'), ('emps', 'name')): 1,
-               (('emp', 'employeeno'), ('work', 'employeeno')): 1}
-
+    dfs = {"df1": {'A': [1, 2, 3], 'B': [4, 5, 6], 'C': [7, 8, 9]},
+           "df2": {'B': [10, 11, 12], 'C': [13, 14, 15]},
+           "df3": {'A': [16, 17, 18], 'C': [19, 20, 21]}}
+    matches = {(('df1', 'B'), ('df2', 'B')): 1,
+               (('df1', 'C'), ('df2', 'C')): 1,
+               (('df1', 'A'), ('df3', 'A')): 1,
+               (('df2', 'C'), ('df3', 'C')): 1}
     dynamap = pyDynaMap(dfs, matches)
     dynamap.generate_mappings(len(dfs))
     print(dynamap.k_best_mappings(3))

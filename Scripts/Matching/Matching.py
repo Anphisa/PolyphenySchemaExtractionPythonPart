@@ -8,4 +8,6 @@ class Matching():
         # This is derived from tests on dataframe combinations and seeing which features lead to which Valentine algorithm
         # performing best.
         # todo: put logic here ;)
-        return "JaccardLevenMatcherColNamesOnly"
+        return {"algorithm_string": "JaccardLevenMatcherColNamesOnly",
+                "algorithm_arguments" : "",
+                "explanation": "Default algorithm."}

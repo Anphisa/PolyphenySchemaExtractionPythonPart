@@ -88,9 +88,9 @@ def set_config(message):
         config.matching_threshold = value
     elif parameter == "sampleSize":
         config.sample_size = value
-    elif parameter == "randomSamples":
+    elif parameter == "randomSample":
         # we need a boolean True/False
-        config.random_samples = ast.literal_eval(value)
+        config.random_sample = ast.literal_eval(value)
     elif parameter == "valentineAlgorithm":
         set_valentine_algo_return = config.set_valentine_algo(value)
         logging.info("Set Valentine algorithm response", set_valentine_algo_return)
@@ -176,7 +176,7 @@ async def consumer(message):
     loop = asyncio.get_event_loop()
     if d_message["topic"] in ["matchingThreshold",
                               "sampleSize",
-                              "randomSamples",
+                              "randomSample",
                               "valentineAlgorithm",
                               "kBestMappings"]:
         await loop.run_in_executor(None, set_config, d_message)
@@ -186,12 +186,12 @@ async def consumer(message):
         # Take samples from all columns
         for df in dfs:
             cols = dfs[df]["columns"]
-            await send_http_request("log", {"log": "Sampling each " + str(config.sample_size) + " rows from " + df + \
+            await send_http_request("log", {"log": "Sampling " + str(config.sample_size) + " rows each from " + df + \
                                             " from columns: " + str(cols.columns.to_list()) + "\r\n"})
             namespace = dfs[df]["namespacename"]
             for col in cols:
                 try:
-                    sample = Sample(config.polypheny_ip_address, config.polypheny_port, col, namespace, df, config.sample_size, random=config.random_samples)
+                    sample = Sample(config.polypheny_ip_address, config.polypheny_port, col, namespace, df, config.sample_size, random=config.random_sample)
                     sample.set_num_rows()
                     row_sample = sample.take_sample(datamodel)
                     extracted_row_sample = sample.extract_sample(row_sample)
@@ -218,7 +218,7 @@ async def consumer(message):
         mapping_result = mapper.pyDynaMapMapping(matches_above_thresh, config.show_n_best_mappings)
         # Display target relation column names
         target_relation = mapping_result["target_relation"]
-        await send_http_request("log", {"log": "Expected fields in target relation: " + str(target_relation) + "\r\n"})
+        await send_http_request("log", {"log": "Expected field names in target relation: " + str(target_relation) + "\r\n"})
         await send_http_request("log", {"log": "-------------------------------------------------"})
         # Display renamed columns
         renamed_columns = mapping_result["renamed_columns"]

@@ -11,7 +11,7 @@ class Config():
         self.sample_size = 5
         self.valentine_algo = JaccardLevenMatcherColNamesOnly(self.jl_colnames_only_threshold)
         self.show_n_best_mappings = 3
-        self.random_samples = False
+        self.random_sample = False
 
     def valentine_algo_string(self):
         if isinstance(self.valentine_algo, JaccardLevenMatcherColNamesOnly):
@@ -33,7 +33,7 @@ class Config():
             "JL col names only threshold: " + str(self.jl_colnames_only_threshold) + "\r\n" + \
             "Matching threshold: " + str(self.matching_threshold) + "\r\n" + \
             "Sample size: " + str(self.sample_size) + "\r\n" + \
-            "Random samples: " + str(self.random_samples) + "\r\n" + \
+            "Random samples: " + str(self.random_sample) + "\r\n" + \
             "Valentine algorithm: " + self.valentine_algo_string() + "\r\n" + \
             "Show n best mappings: " + str(self.show_n_best_mappings)
         return config_string

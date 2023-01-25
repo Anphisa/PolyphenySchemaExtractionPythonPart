@@ -179,8 +179,6 @@ class pyDynaMap():
                 # If map_i == map_j, do not return union with itself (endless recursion, unintended endless self-unions)
                 if map_i_name == map_j_name:
                     continue
-                if map_i_name == "emp" and map_j_name == "work":
-                    print("yooo")
                 # If a relation is already part of a mapping, don't combine it in again
                 if self.mapping_subsumed(map_i_name, map_j_name):
                     continue

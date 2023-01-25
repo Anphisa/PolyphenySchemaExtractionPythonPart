@@ -88,6 +88,9 @@ def set_config(message):
         config.matching_threshold = value
     elif parameter == "sampleSize":
         config.sample_size = value
+    elif parameter == "randomSamples":
+        # we need a boolean True/False
+        config.random_samples = ast.literal_eval(value)
     elif parameter == "valentineAlgorithm":
         set_valentine_algo_return = config.set_valentine_algo(value)
         logging.info("Set Valentine algorithm response", set_valentine_algo_return)
@@ -173,6 +176,7 @@ async def consumer(message):
     loop = asyncio.get_event_loop()
     if d_message["topic"] in ["matchingThreshold",
                               "sampleSize",
+                              "randomSamples",
                               "valentineAlgorithm",
                               "kBestMappings"]:
         await loop.run_in_executor(None, set_config, d_message)
@@ -187,11 +191,11 @@ async def consumer(message):
             namespace = dfs[df]["namespacename"]
             for col in cols:
                 try:
-                    # todo: get from polypheny and fallback to 127.0.0.1
-                    sample = Sample(config.polypheny_ip_address, config.polypheny_port, col, namespace, df, config.sample_size)
-                    sample.take_sample(datamodel)
-                    sample.extract_sample()
-                    dfs[df]["columns"][col] = sample.sample
+                    sample = Sample(config.polypheny_ip_address, config.polypheny_port, col, namespace, df, config.sample_size, random=config.random_samples)
+                    sample.set_num_rows()
+                    row_sample = sample.take_sample(datamodel)
+                    extracted_row_sample = sample.extract_sample(row_sample)
+                    dfs[df]["columns"][col] = extracted_row_sample
                 except Exception as e:
                     raise RuntimeWarning("Sampling failed for col ", col, "in df ", df, "in namespace, ", namespace)
         await send_http_request("log", {"log": "-------------------------------------------------"})
@@ -243,13 +247,6 @@ async def consumer(message):
                                structure_loss_main)
             schema_candidate_num += 1
 
-        #ws_message_queue.appendleft(str(await matches))
-        #await pk_fk_relationship_finder(ast.literal_eval(d_message["message"]))
-    if d_message["topic"] == "speedThoroughness":
-        speedThoroughness = int(d_message["message"])
-        print("set speed/thoroughness to ", speedThoroughness)
-        # TODO: Use this parameter to set Valentine methods or sth like that. Make & use global config
-
 async def consumer_handler(websocket):
     while True:
         async for message in websocket:
@@ -289,6 +286,7 @@ async def main():
     # Connect to Polypheny: websocket connection
     # Here we get user input (i.e. call to run Python script)
     try:
+        # todo: replace with config parameters
         async with websockets.connect("ws://localhost:20598/register") as websocket:
             await handler(websocket)
             await asyncio.Future()  # run forever
@@ -296,13 +294,11 @@ async def main():
         logging.error("Polypheny websocket server not running or responding")
         print("Polypheny websocket server not running or responding", e)
 
-    # TODO: Define a pipeline of steps to be performed (later to be optimized/determined dynamically due to user inputs, etc.)
 
 if __name__ == "__main__":
     config = Config()
     logging.getLogger("asyncio").setLevel(logging.INFO)
     logging.Formatter('%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
-    # TODO: Set logging file name (https://stackoverflow.com/questions/13839554/how-to-change-filehandle-with-python-logging-on-the-fly-with-different-classes-a)
     logging.info('Started schema integration Python part (main.py)')
 
     asyncio.run(main())

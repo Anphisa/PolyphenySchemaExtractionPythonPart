@@ -201,14 +201,17 @@ async def consumer(message):
                     raise RuntimeWarning("Sampling failed for col ", col, "in df ", df, "in namespace, ", namespace)
         await send_http_request("log", {"log": "-------------------------------------------------"})
         # choosing best valentine algorithm
-        if config.valentine_algo == "automatic":
-            best_valentine_algo = await loop.run_in_executor(None, Matching.chooseValentineAlgorithm, dfs)
+        if config.str_valentine_algo == "automatic":
+            best_valentine_algo = Matching.chooseValentineAlgorithm(dfs)
             logging.info("Received best valentine algo: ", best_valentine_algo)
             await send_http_request("log", {
-                "log": "Automatic Valentine algorithm chosen: " + best_valentine_algo + "\r\n" + \
-                       "Configuration is now: " + str(config) + "\r\n"})
+                "log": "Automatic Valentine algorithm chosen: " + best_valentine_algo + "\r\n"})
             await send_http_request("log", {"log": "-------------------------------------------------"})
             config.set_valentine_algo(best_valentine_algo)
+        # configuration log
+        await send_http_request("log", {
+            "log": "Configuration is now: \r\n" + str(config) + "\r\n"})
+        await send_http_request("log", {"log": "-------------------------------------------------"})
         # matching
         matches = await loop.run_in_executor(None, dataframe_valentine_compare, dfs, config.valentine_algo)
         logging.info("Received matches", matches, "from matcher", config.valentine_algo)

@@ -10,6 +10,7 @@ class Config():
         self.matching_threshold = 0.5
         self.sample_size = 5
         #self.valentine_algo = JaccardLevenMatcherColNamesOnly(self.jl_colnames_only_threshold)
+        #self.str_valentine_algo = "JaccardLevenMatcherColNamesOnly"
         self.str_valentine_algo = "automatic"
         self.valentine_algo = None
         self.show_n_best_mappings = 3
@@ -26,10 +27,13 @@ class Config():
     def set_valentine_algo(self, algo_string):
         # Given an algorithm string, set Valentine algorithm
         if algo_string == "JaccardLevenMatcherColNamesOnly":
+            self.str_valentine_algo = "JaccardLevenMatcherColNamesOnly"
             self.valentine_algo = JaccardLevenMatcherColNamesOnly(self.jl_colnames_only_threshold)
         elif algo_string == "Coma":
+            self.str_valentine_algo = "Coma"
             self.valentine_algo = Coma()
         elif algo_string == "automatic":
+            self.str_valentine_algo = "automatic"
             self.valentine_algo = None
         return "Set valentine algorithm to " + self.valentine_algo_string()
 

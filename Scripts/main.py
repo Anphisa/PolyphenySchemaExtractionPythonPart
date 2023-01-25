@@ -82,13 +82,13 @@ def build_dataframes(message):
         raise RuntimeWarning("Unknown data model: ", data_model)
     return tables_df
 
-def set_config(message):
+async def set_config(message):
     parameter = message["topic"]
     value = message["message"]
     if parameter == "matchingThreshold":
-        config.matching_threshold = value
+        config.matching_threshold = float(value)
     elif parameter == "sampleSize":
-        config.sample_size = value
+        config.sample_size = int(value)
     elif parameter == "randomSample":
         # we need a boolean True/False
         config.random_sample = ast.literal_eval(value)
@@ -98,6 +98,7 @@ def set_config(message):
     elif parameter == "kBestMappings":
         config.show_n_best_mappings = value
     print(str(config))
+    await send_http_request("log", {"log": "Set config parameter " + parameter + " to " + value + ".\r\n"})
     return
 
 def extract_datamodel(message):
@@ -160,7 +161,9 @@ async def show_mapping(num, result, mapping_result, field_loss, instance_loss, s
                                                           "Instance loss: " + instance_loss,
                                                           "Structure loss: " + structure_loss)
     g = schema_candidate_graph.draw()
-    #print("graphviz dot code:", g.source)
+    # write graphviz dot code for visualization debugging
+    with open("output/" + result + ".dot", 'w') as f:
+        f.write(g.source)
     g.graph_attr.update(size="20,100")
     g.view()
     #print("mapping result", result)
@@ -180,25 +183,35 @@ async def consumer(message):
                               "randomSample",
                               "valentineAlgorithm",
                               "kBestMappings"]:
-        await loop.run_in_executor(None, set_config, d_message)
+        await set_config(d_message)
     if d_message["topic"] == "namespaceInfo":
         dfs = await loop.run_in_executor(None, build_dataframes, d_message)
         datamodel = await loop.run_in_executor(None, extract_datamodel, d_message)
+        # Start schema integration
+        await send_http_request("log", {"log": "-------------------------------------------------"})
+        await send_http_request("log", {"log": "--------- Starting schema integration -----------"})
+        await send_http_request("log", {"log": "-------------------------------------------------"})
         # Take samples from all columns
         for df in dfs:
             cols = dfs[df]["columns"]
             await send_http_request("log", {"log": "Sampling " + str(config.sample_size) + " rows each from " + df + \
-                                            " from columns: " + str(cols.columns.to_list()) + "\r\n"})
+                                            " columns: " + str(cols.columns.to_list()) + "\r\n"})
             namespace = dfs[df]["namespacename"]
             for col in cols:
-                try:
-                    sample = Sample(config.polypheny_ip_address, config.polypheny_port, col, namespace, df, config.sample_size, random=config.random_sample)
-                    sample.set_num_rows()
-                    row_sample = sample.take_sample(datamodel)
+                sample = Sample(config.polypheny_ip_address, config.polypheny_port, col, namespace, df, config.sample_size, random=config.random_sample)
+                sample.set_num_rows()
+                row_sample = sample.take_sample(datamodel)
+                if row_sample[0].text == "null":
+                    logging.warning("Sampling failed for col " + col + " in df " + df + "in namespace " + namespace + ". Setting values to None.")
+                    dfs[df]["columns"][col] = [None for i in range(config.sample_size)]
+                else:
                     extracted_row_sample = sample.extract_sample(row_sample)
-                    dfs[df]["columns"][col] = extracted_row_sample
-                except Exception as e:
-                    raise RuntimeWarning("Sampling failed for col ", col, "in df ", df, "in namespace, ", namespace)
+                    if len(extracted_row_sample) != config.sample_size:
+                        logging.warning("Extracting sample failed for col " + col + " in df " + df + " in namespace " + namespace +
+                                     ". This occurs due to square brackets in column. Setting values to None.")
+                        dfs[df]["columns"][col] = [None for i in range(config.sample_size)]
+                    else:
+                        dfs[df]["columns"][col] = extracted_row_sample
         await send_http_request("log", {"log": "-------------------------------------------------"})
         # choosing best valentine algorithm
         if config.str_valentine_algo == "automatic":
@@ -228,40 +241,58 @@ async def consumer(message):
         await send_http_request("log", {"log": "Matches above matching strength threshold of " + str(config.matching_threshold) + ":\r\n" + \
                                         await loop.run_in_executor(None, format_matches, matches_above_thresh)})
         await send_http_request("log", {"log": "-------------------------------------------------"})
-        # mapping
-        mapper = Mapping(dfs)
-        mapping_result = mapper.pyDynaMapMapping(matches_above_thresh, config.show_n_best_mappings)
-        # Display target relation column names
-        target_relation = mapping_result["target_relation"]
-        await send_http_request("log", {"log": "Expected field names in target relation: " + str(target_relation) + "\r\n" + \
-                                        "These were extracted from connected components in matches graph." + "\r\n"})
-        await send_http_request("log", {"log": "-------------------------------------------------"})
-        # Display renamed columns
-        renamed_columns = mapping_result["renamed_columns"]
-        await send_http_request("log", {"log": "Renamed columns: " + str(renamed_columns) + "\r\n"})
-        await send_http_request("log", {"log": "-------------------------------------------------"})
-        k_best_mappings = mapping_result["k_best_mappings"]
-        k_best_mappings_results = {'results': str(k_best_mappings)}
-        # send k best mapping results to result output pane in polypheny
-        await send_http_request("results", k_best_mappings_results)
-        await send_http_request("log",
-                                {"log": str(config.show_n_best_mappings) + " best mappings: " + str(k_best_mappings_results) + "\r\n"})
-        await send_http_request("log", {"log": "-------------------------------------------------"})
-        # Loss information
-        field_loss_main = await loop.run_in_executor(None, field_loss, datamodel)
-        field_loss_mapper = mapping_result["field_loss"]
-        instance_loss_mapper = mapping_result["instance_loss"]
-        structure_loss_main = await loop.run_in_executor(None, structure_loss, datamodel)
-        # Visualization
-        schema_candidate_num = 0
-        for result in k_best_mappings:
-            await show_mapping(schema_candidate_num,
-                               result,
-                               k_best_mappings,
-                               field_loss_main + field_loss_mapper,
-                               instance_loss_mapper[result],
-                               structure_loss_main)
-            schema_candidate_num += 1
+        if matches_above_thresh:
+            # mapping
+            mapper = Mapping(dfs)
+            mapping_result = mapper.pyDynaMapMapping(matches_above_thresh, config.show_n_best_mappings)
+            # Display target relation column names
+            target_relation = mapping_result["target_relation"]
+            await send_http_request("log", {"log": "Expected field names in target relation: " + str(target_relation) + "\r\n" + \
+                                            "These were extracted from connected components in matches graph." + "\r\n"})
+            await send_http_request("log", {"log": "-------------------------------------------------"})
+            # Display renamed columns
+            renamed_columns = mapping_result["renamed_columns"]
+            await send_http_request("log", {"log": "Renamed columns: " + str(renamed_columns) + "\r\n"})
+            await send_http_request("log", {"log": "-------------------------------------------------"})
+            k_best_mappings = mapping_result["k_best_mappings"]
+            k_best_mappings_results = {'results': str(k_best_mappings)}
+            # Explanations for mappings
+            mapping_explanations = mapping_result["explanations"]
+            await send_http_request("log", {"log": "Merge operation explanations for best mappings:"})
+            for mapping in mapping_explanations:
+                await send_http_request("log", {"log": "\r\nMapping name: " + mapping})
+                for ex in mapping_explanations[mapping]:
+                    await send_http_request("log", {"log": "Merge operations: " + ex})
+            await send_http_request("log", {"log": "\r\n-------------------------------------------------"})
+            # send k best mapping results to result output pane in polypheny
+            await send_http_request("results", {'results': str(k_best_mappings)})
+            await send_http_request("log",
+                                    {"log": str(len(k_best_mappings)) + " best mappings: "})
+            for mapping in k_best_mappings:
+                await send_http_request("log",
+                                        {"log": "Mapping: " + mapping + "(fitness score: " + str(k_best_mappings[mapping]["fitness_score"]) + ")"})
+                await send_http_request("log",
+                                        {"log": "Mapping path: " + str(k_best_mappings[mapping]["mapping_path"])})
+            await send_http_request("log", {"log": "\r\n-------------------------------------------------"})
+            # Loss information
+            field_loss_main = await loop.run_in_executor(None, field_loss, datamodel)
+            field_loss_mapper = mapping_result["field_loss"]
+            instance_loss_mapper = mapping_result["instance_loss"]
+            structure_loss_main = await loop.run_in_executor(None, structure_loss, datamodel)
+            # Visualization
+            schema_candidate_num = 0
+            for result in k_best_mappings:
+                await show_mapping(schema_candidate_num,
+                                   result,
+                                   k_best_mappings,
+                                   field_loss_main + field_loss_mapper,
+                                   instance_loss_mapper[result],
+                                   structure_loss_main)
+                schema_candidate_num += 1
+        else:
+            await send_http_request("log",
+                                    {"log": "No matches. Can't perform mapping. \r\n"})
+            await send_http_request("log", {"log": "-------------------------------------------------"})
 
 async def consumer_handler(websocket):
     while True:

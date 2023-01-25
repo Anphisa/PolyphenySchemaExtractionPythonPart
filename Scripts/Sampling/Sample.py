@@ -107,9 +107,4 @@ class Sample():
             for sample in sample_list:
                 sample_lists.append(sample)
         return sample_lists
-        # else:
-        #     try:
-        #         self.http_sample_result = self.take_set_sample()
-        #         self.extract_sample()
-        #     except:
-        #         raise RuntimeError("No sample taken before running extract_sample. Resampling failed.")
+

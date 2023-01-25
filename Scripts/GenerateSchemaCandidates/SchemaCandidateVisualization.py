@@ -22,7 +22,7 @@ class SchemaCandidateVisualization():
         self.g = graphviz.Digraph('G', filename="output/" + out_file_name)
 
     def escape_special_characters(self, string):
-        escaped = string.replace("&", "&amp;")
+        escaped = string.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
         return escaped
 
     def draw(self):
@@ -86,12 +86,12 @@ class SchemaCandidateVisualization():
                     for table in self.mapping_result:
                         tables_at_i.append(self.escape_special_characters(str(self.mapping_result[table][i])))
                     table_content += "<tr> <td>" + "</td><td>".join(tables_at_i) + "</td></tr>"
-                print(table_content + "</table>>")
+                # todo: why blub? I don't remember
                 tt.node("blub", label=table_content + "</table>>", shape="box")
 
         # field loss, instance loss, structure loss
         with self.g.subgraph(name='cluster_loss') as l:
-            l.attr(label='Loss under proposed schema')
+            l.attr(label='Estimated loss under proposed schema')
             label = "{ " + self.field_loss + " | " + self.instance_loss + " | " + self.structure_loss + " }"
             l.node("loss records", shape="record", label=label)
 

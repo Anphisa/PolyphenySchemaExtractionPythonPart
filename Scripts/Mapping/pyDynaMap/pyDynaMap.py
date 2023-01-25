@@ -32,6 +32,8 @@ class pyDynaMap():
         self.field_loss = ""
         # renamed columns for re-tracing steps
         self.renamed_columns = {}
+        # explanation tracking for explainability of results
+        self.explanations = {}
 
     def field_loss(self):
         # If a source relation has a field that is not represented in t_rel, it is lost
@@ -189,8 +191,10 @@ class pyDynaMap():
                 if map_j_name not in self.highest_fitness_value:
                     self.highest_fitness_value[map_j_name] = self.fitness(map_j, map_j_name)
                 # continue merging of mappings
-                operator = self.choose_operator(map_i, map_j, map_i_name, map_j_name)
-                if operator is not None:
+                operator_explanation = self.choose_operator(map_i, map_j, map_i_name, map_j_name)
+                operator = operator_explanation["operator"]
+                explanation = operator_explanation["explanation"]
+                if operator:
                     try:
                         new_map = self.new_mapping(*operator)
                     except Exception as e:
@@ -211,6 +215,7 @@ class pyDynaMap():
                     if new_map_fitness > max_fitness_for_sources:
                         # mapping was accepted
                         self.highest_fitness_value[map_name] = new_map_fitness
+                        self.explanations[map_name] = explanation
                         for t_col in self.t_rel.keys():
                             if map_i_name in self.t_rel[t_col] and map_j_name in self.t_rel[t_col]:
                                 if operator[0] == "left join":
@@ -327,13 +332,15 @@ class pyDynaMap():
         map1_ma = self.find_matches_attr(map1, map1_name)
         map2_ma = self.find_matches_attr(map2, map2_name)
         operator = None
+        explanation = ""
         attributes = None
         if not self.diff_matches(set(map1_ma.keys()), set(map2_ma.keys())):
-            operator = self.choose_operator_diff(map1, map2, map1_name, map2_name)
+            operator_explanation = self.choose_operator_diff(map1, map2, map1_name, map2_name)
+            return {"operator": operator_explanation["operator"], "explanation": operator_explanation["explanation"]}
         else:
             # todo: this is an extension of original dynamap (-> thesis)
             # they share the same attributes with target relation. should those be joined or unioned?
-            # naive idea: if there's occlusion, make it a join. Otherwise make it a union.
+            # naive idea: if there's inclusion, make it a join. Otherwise make it a union.
             included = {}
             for att1 in map1.keys():
                 # We first check if the attribute is in target and we can go along that route
@@ -374,27 +381,36 @@ class pyDynaMap():
                 if not dont_left_join:
                     included_cols = [c for c in included.keys()]
                     operator = ("left join", map1, map2, map1_name, map2_name, included_cols, False)
+                    explanation = map1_name + " and " + map2_name + " don't match the same target attributes. " \
+                                  "There's full inclusion in attributes: " + str(included_cols) + ". -> left join."
                 else:
                     operator = ("union", map1, map2, map1_name, map2_name,
                                 list(set(map1_ma.keys()).intersection(set(map2_ma.keys()))))
+                    explanation = map1_name + " and " + map2_name + " don't match the same target attributes. " \
+                                  "There's full inclusion between matched target attributes: " + \
+                                  str(list(set(map1_ma.keys()).intersection(set(map2_ma.keys())))) + ", but there are other target attributes" \
+                                  "represented in either. Can't safely join. -> union."
             else:
                 operator = ("union", map1, map2, map1_name, map2_name, list(set(map1_ma.keys()).intersection(set(map2_ma.keys()))))
-            #operator = ("union", map1, map2, map1_name, map2_name, list(set(map1_ma.keys()).intersection(set(map2_ma.keys()))))
-        return operator
+                explanation = map1_name + " and " + map2_name + " don't match the same target attributes. " \
+                              "There's no full inclusion between matched target attributes: " + \
+                              str(list(set(map1_ma.keys()).intersection(set(map2_ma.keys())))) + ". -> union."
+        return {"operator": operator, "explanation": explanation}
 
     def choose_operator_diff(self, map1, map2, map1_name, map2_name):
         # Algorithm 4: Generate operator when two mappings match different target attributes.
         # t_rel, pd (profile data) are class variables
         op = None
+        explanation = ""
         subsumed_map = self.is_subsumed(map1, map2, map1_name, map2_name)
         if subsumed_map:
-            return op
+            return {"operator": op, "explanation": explanation}
         map1_keys = self.find_keys(map1)
         map2_keys = self.find_keys(map2)
         ind_op = self.max_ind(map1, map2, map1_keys, map2_keys, map1_name, map2_name)
         if ind_op:
             # There is an overlap between candidate keys in map1 and map2
-            return ind_op["op"]
+            return {"operator": ind_op["op"], "explanation": ind_op["explanation"]}
         else:
             # There is no overlap between candidate keys in map1 and map2, try to find overlap between candidate keys in map1 with attributes in map2
             # and overlap between candidate keys in map2 with attributes in map1
@@ -402,13 +418,13 @@ class pyDynaMap():
             map2_ind_op = self.max_ind(map2, map1, map2_keys, list(map1.keys()), map1_name, map2_name)
             if map1_ind_op and map2_ind_op:
                 if map1_ind_op["inclusion_ratio"] >= map2_ind_op["inclusion_ratio"]:
-                    return map1_ind_op["op"]
+                    return {"operator": map1_ind_op["op"], "explanation": map1_ind_op["explanation"]}
                 else:
-                    return map2_ind_op["op"]
+                    return {"operator": map2_ind_op["op"], "explanation": map2_ind_op["explanation"]}
             elif map1_ind_op:
-                return map1_ind_op["op"]
+                return {"operator": map1_ind_op["op"], "explanation": map1_ind_op["explanation"]}
             elif map2_ind_op:
-                return map2_ind_op["op"]
+                return {"operator": map2_ind_op["op"], "explanation": map2_ind_op["explanation"]}
             else:
                 # There is no overlap between candidate keys in map1 with attributes in map2 or the other way round.
                 # Next, if a foreign key relationship cannot be inferred, then, on
@@ -427,7 +443,11 @@ class pyDynaMap():
                 same_matches = self.same_matches(map1_mk, map2_mk)
                 if same_matches:
                     op = ("outer join", map1, map2, map1_name, map2_name, list(same_matches))
-        return op
+                    explanation = map1_name + " and " + map2_name + " match the same target attributes. " \
+                                  "There's no full inclusion between matched target attributes. Align attributes " \
+                                  "that match the same target attributes: " + \
+                                  str(list(same_matches)) + ". -> outer join."
+        return {"operator": op, "explanation": explanation}
 
     def new_mapping(self, operator, map1, map2, map1_name, map2_name, attributes, target_col_translation=True):
         # apply operator to two mappings
@@ -732,7 +752,12 @@ class pyDynaMap():
             # attributes (lines 12–13);
             # if inclusion_ratio == 1 --> all elements from map1[key1] are in map2[key2], so we assume key1 is a pk for map1 and a fk for map2 (? foreign key relationship)
             op = ("join", map1, map2, map1_name, map2_name, list(max_inclusion.keys()))
-            return {"op": op, "inclusion_ratio": 1}
+            explanation = map1_name + " and " + map2_name + " match the same target attributes. " \
+                          "There's full inclusion between matched target attributes: " + \
+                          str(list(max_inclusion.keys())) + ". -> (inner) join."
+            return {"op": op,
+                    "inclusion_ratio": 1,
+                    "explanation": explanation}
         elif 0 < max(max_inclusion.values()) < 1:
             # if θ ∈ (0, 1.0), then the inclusion dependency is partial
             # and the operator is a full outer join because a foreign key
@@ -740,7 +765,12 @@ class pyDynaMap():
             # tuples that can be joined and keeps the remaining data (lines
             # 14–15).
             op = ("outer join", map1, map2, map1_name, map2_name, list(max_inclusion.keys()))
-            return {"op": op, "inclusion_ratio": max(max_inclusion.values())}
+            explanation = map1_name + " and " + map2_name + " match the same target attributes. " \
+                          "There's partial inclusion between matched target attributes: " + \
+                          str(list(max_inclusion.keys())) + ". -> outer join to keep data that could not be joined."
+            return {"op": op,
+                    "inclusion_ratio": max(max_inclusion.values()),
+                    "explanation": explanation}
         else:
             return None
 
@@ -823,6 +853,7 @@ class pyDynaMap():
             return [a for a in att_null_counts]
 
     def reconstruct_mapping_path(self, mapping_name, mapping_path=[]):
+        # Reconstruct the expanded mapping path for a mapping name, i.e. down to base source relations
         if mapping_name in self.source_relations:
             return [mapping_name]
         mapping_path = copy.deepcopy(self.mapping_path.get(mapping_name))
@@ -833,6 +864,38 @@ class pyDynaMap():
                 mapping_path[index + 1] = self.reconstruct_mapping_path(j_mapping_name)
         # ['join', 'df1', ['union', 'df2', 'df3', None], 'A']
         return mapping_path
+
+    # def explain_mapping_path(self, mapping_path):
+    #     # Given a 4-set of a mapping path, return an explanation of the chosen merge operation
+    #     if len(mapping_path) == 4:
+    #         rel = mapping_path[0]
+    #         from_table = mapping_path[1]
+    #         to_table = mapping_path[2]
+    #         cols = mapping_path[3]
+    #         explanation = from_table + " and " + to_table + ": " + rel + " on " + str(cols)
+    #         if rel == "union":
+    #             explanation += "()"
+    #         elif rel == "left join":
+    #             pass
+    #         elif rel == "join":
+    #             pass
+    #         elif rel == "outer join":
+    #             pass
+    #         return explanation
+    #     elif len(mapping_path) == 1:
+    #         return
+    #     else:
+    #         raise RuntimeError("wrong mapping path format", mapping_path)
+
+    def explain_mapping_operations_for_mapping_name(self, mapping_name):
+        # Explain a mapping name, i.e. why were the mapping operations leading here chosen?
+        explanations = []
+        ancestors = self.find_parentage([mapping_name])
+        for ancestor in ancestors:
+            explanation = self.explanations.get(ancestor, None)
+            if explanation:
+                explanations.append(explanation)
+        return explanations
 
     def count_merge_types(self, mapping_path, merge_types={}):
         if not type(mapping_path) == list:
@@ -931,6 +994,7 @@ class pyDynaMap():
                 if max_map_length < len(mapping_rows[col]):
                     max_map_length = len(mapping_rows[col])
             viz_info[mapping_name] = {
+                "fitness_score": k_highest_fitness_values[mapping_name],
                 "mapping_path": mapping_path,
                 "field_relationships": field_relationships,
                 "mapping_rows": mapping_rows,

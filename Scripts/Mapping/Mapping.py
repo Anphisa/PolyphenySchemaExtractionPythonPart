@@ -9,7 +9,7 @@ class Mapping:
         self.source_relations = source_relations
 
     @staticmethod
-    def naiveMapping(matches, threshold):
+    def matchesAboveThreshold(matches, threshold):
         # given a list of matches from schema matcher and a threshold, return all matches that are above the threshold
         return {k:v for (k, v) in matches.items() if matches[k] >= threshold}
 

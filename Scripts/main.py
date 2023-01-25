@@ -12,6 +12,7 @@ import pandas as pd
 from valentine import valentine_match
 from Configuration.Config import Config
 from Mapping.Mapping import Mapping
+from Matching.Matching import Matching
 from GenerateSchemaCandidates.SchemaCandidateVisualization import SchemaCandidateVisualization
 from Scripts.Sampling.Sample import Sample
 
@@ -199,6 +200,15 @@ async def consumer(message):
                 except Exception as e:
                     raise RuntimeWarning("Sampling failed for col ", col, "in df ", df, "in namespace, ", namespace)
         await send_http_request("log", {"log": "-------------------------------------------------"})
+        # choosing best valentine algorithm
+        if config.valentine_algo == "automatic":
+            best_valentine_algo = await loop.run_in_executor(None, Matching.chooseValentineAlgorithm, dfs)
+            logging.info("Received best valentine algo: ", best_valentine_algo)
+            await send_http_request("log", {
+                "log": "Automatic Valentine algorithm chosen: " + best_valentine_algo + "\r\n" + \
+                       "Configuration is now: " + str(config) + "\r\n"})
+            await send_http_request("log", {"log": "-------------------------------------------------"})
+            config.set_valentine_algo(best_valentine_algo)
         # matching
         matches = await loop.run_in_executor(None, dataframe_valentine_compare, dfs, config.valentine_algo)
         logging.info("Received matches", matches, "from matcher", config.valentine_algo)
@@ -206,7 +216,7 @@ async def consumer(message):
                                         await loop.run_in_executor(None, format_matches, matches)})
         await send_http_request("log", {"log": "-------------------------------------------------"})
         # mapping
-        matches_above_thresh = await loop.run_in_executor(None, Mapping.naiveMapping, matches, config.matching_threshold)
+        matches_above_thresh = await loop.run_in_executor(None, Mapping.matchesAboveThreshold, matches, config.matching_threshold)
         await send_http_request("log", {"log": "Matches above matching strength threshold of " + str(config.matching_threshold) + ":\r\n" + \
                                         await loop.run_in_executor(None, format_matches, matches_above_thresh)})
         await send_http_request("log", {"log": "-------------------------------------------------"})

@@ -9,11 +9,15 @@ class Config():
         self.jl_colnames_only_threshold = 0.8
         self.matching_threshold = 0.5
         self.sample_size = 5
-        self.valentine_algo = JaccardLevenMatcherColNamesOnly(self.jl_colnames_only_threshold)
+        #self.valentine_algo = JaccardLevenMatcherColNamesOnly(self.jl_colnames_only_threshold)
+        self.str_valentine_algo = "automatic"
+        self.valentine_algo = None
         self.show_n_best_mappings = 3
         self.random_sample = False
 
     def valentine_algo_string(self):
+        if not self.valentine_algo:
+            return "automatic"
         if isinstance(self.valentine_algo, JaccardLevenMatcherColNamesOnly):
             return "Jaccard-Levenshtein (column names only, threshold: " + str(self.jl_colnames_only_threshold) + ")"
         elif isinstance(self.valentine_algo, Coma):
@@ -25,6 +29,8 @@ class Config():
             self.valentine_algo = JaccardLevenMatcherColNamesOnly(self.jl_colnames_only_threshold)
         elif algo_string == "Coma":
             self.valentine_algo = Coma()
+        elif algo_string == "automatic":
+            self.valentine_algo = None
         return "Set valentine algorithm to " + self.valentine_algo_string()
 
     def __str__(self):

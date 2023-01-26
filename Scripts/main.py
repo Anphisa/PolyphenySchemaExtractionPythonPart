@@ -206,9 +206,9 @@ async def consumer(message):
                     dfs[df]["columns"][col] = [None for i in range(config.sample_size)]
                 else:
                     extracted_row_sample = sample.extract_sample(row_sample)
-                    if len(extracted_row_sample) != config.sample_size:
+                    if len(extracted_row_sample) > config.sample_size:
                         logging.warning("Extracting sample failed for col " + col + " in df " + df + " in namespace " + namespace +
-                                     ". This occurs due to square brackets in column. Setting values to None.")
+                                     ". This likely occurred due to square brackets in column. Setting values to None.")
                         dfs[df]["columns"][col] = [None for i in range(config.sample_size)]
                     else:
                         dfs[df]["columns"][col] = extracted_row_sample

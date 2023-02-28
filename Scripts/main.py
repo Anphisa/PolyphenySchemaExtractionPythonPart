@@ -34,53 +34,53 @@ async def pk_fk_relationship_finder(data):
         print("Validated pk_fk relationships", validated_pk_fk_relationships)
 
 def build_dataframes(message):
+    # message has format {namespace_name: {datamodel: '', tables: [{tableName: '', columnNames: [], primaryKey: [], foreignKeys: []}] }}
     message = ast.literal_eval(message["message"])
-    tables_list = message["tables"]
-    tables_df = {}
-    data_model = message["datamodel"]
-    if data_model == 'RELATIONAL':
-        for table in tables_list:
-            table_name = table["tableName"]
-            column_names = table["columnNames"]
-            primary_key = table["primaryKey"]
-            foreign_keys = table["foreignKeys"]
-            namespace_name = table["namespaceName"]
-            data_model = message["datamodel"]
-            df = pd.DataFrame(columns=column_names)
-            if table_name not in tables_df:
-                tables_df[table_name] = {}
-            tables_df[table_name]["columns"] = df
-            tables_df[table_name]["pk"] = primary_key
-            tables_df[table_name]["fk"] = foreign_keys
-            tables_df[table_name]["datamodel"] = data_model
-            tables_df[table_name]["namespacename"] = namespace_name
-    elif data_model == 'GRAPH':
-        for table in tables_list:
-            table_name = table["graphLabel"]
-            column_names = table["propertyNames"]
-            namespace_name = table["namespaceName"]
-            data_model = message["datamodel"]
-            df = pd.DataFrame(columns=column_names)
-            if table_name not in tables_df:
-                tables_df[table_name] = {}
-            tables_df[table_name]["columns"] = df
-            tables_df[table_name]["datamodel"] = data_model
-            tables_df[table_name]["namespacename"] = namespace_name
-    elif data_model == 'DOCUMENT':
-        for table in tables_list:
-            table_name = table["collectionName"]
-            column_names = table["firstLevelTags"]
-            namespace_name = table["namespaceName"]
-            data_model = message["datamodel"]
-            df = pd.DataFrame(columns=column_names)
-            if table_name not in tables_df:
-                tables_df[table_name] = {}
-            tables_df[table_name]["columns"] = df
-            tables_df[table_name]["datamodel"] = data_model
-            tables_df[table_name]["namespacename"] = namespace_name
-    else:
-        raise RuntimeWarning("Unknown data model: ", data_model)
-    return tables_df
+    for namespace_name in message:
+        namespace_info = message[namespace_name]
+        tables_list = namespace_info["tables"]
+        tables_df = {}
+        data_model = namespace_info["datamodel"]
+        if data_model == 'RELATIONAL':
+            for table in tables_list:
+                table_name = table["tableName"]
+                column_names = table["columnNames"]
+                primary_key = table["primaryKey"]
+                foreign_keys = table["foreignKeys"]
+                namespace_name = table["namespaceName"]
+                df = pd.DataFrame(columns=column_names)
+                if table_name not in tables_df:
+                    tables_df[table_name] = {}
+                tables_df[table_name]["columns"] = df
+                tables_df[table_name]["pk"] = primary_key
+                tables_df[table_name]["fk"] = foreign_keys
+                tables_df[table_name]["datamodel"] = data_model
+                tables_df[table_name]["namespacename"] = namespace_name
+        elif data_model == 'GRAPH':
+            for table in tables_list:
+                table_name = table["graphLabel"]
+                column_names = table["propertyNames"]
+                namespace_name = table["namespaceName"]
+                df = pd.DataFrame(columns=column_names)
+                if table_name not in tables_df:
+                    tables_df[table_name] = {}
+                tables_df[table_name]["columns"] = df
+                tables_df[table_name]["datamodel"] = data_model
+                tables_df[table_name]["namespacename"] = namespace_name
+        elif data_model == 'DOCUMENT':
+            for table in tables_list:
+                table_name = table["collectionName"]
+                column_names = table["firstLevelTags"]
+                namespace_name = table["namespaceName"]
+                df = pd.DataFrame(columns=column_names)
+                if table_name not in tables_df:
+                    tables_df[table_name] = {}
+                tables_df[table_name]["columns"] = df
+                tables_df[table_name]["datamodel"] = data_model
+                tables_df[table_name]["namespacename"] = namespace_name
+        else:
+            raise RuntimeWarning("Unknown data model: ", data_model)
+        return tables_df
 
 async def set_config(message):
     parameter = message["topic"]
@@ -186,7 +186,7 @@ async def consumer(message):
         await set_config(d_message)
     if d_message["topic"] == "namespaceInfo":
         dfs = await loop.run_in_executor(None, build_dataframes, d_message)
-        datamodel = await loop.run_in_executor(None, extract_datamodel, d_message)
+        #datamodel = await loop.run_in_executor(None, extract_datamodel, d_message)
         # Start schema integration
         await send_http_request("log", {"log": "-------------------------------------------------"})
         await send_http_request("log", {"log": "--------- Starting schema integration -----------"})
@@ -194,6 +194,7 @@ async def consumer(message):
         # Take samples from all columns
         for df in dfs:
             cols = dfs[df]["columns"]
+            datamodel = dfs[df]["datamodel"]
             await send_http_request("log", {"log": "Sampling " + str(config.sample_size) + " rows each from " + df + \
                                             " columns: " + str(cols.columns.to_list()) + "\r\n"})
             namespace = dfs[df]["namespacename"]
@@ -265,7 +266,7 @@ async def consumer(message):
                     await send_http_request("log", {"log": "Merge operations: " + ex})
             await send_http_request("log", {"log": "\r\n-------------------------------------------------"})
             # send k best mapping results to result output pane in polypheny
-            await send_http_request("results", {'results': str(k_best_mappings)})
+            await send_http_request("result", {'results': str(k_best_mappings)})
             await send_http_request("log",
                                     {"log": str(len(k_best_mappings)) + " best mappings: "})
             for mapping in k_best_mappings:

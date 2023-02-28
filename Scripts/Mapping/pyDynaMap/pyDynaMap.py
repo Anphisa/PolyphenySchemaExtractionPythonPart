@@ -974,6 +974,9 @@ class pyDynaMap():
         # relations, which were obtained during the dynamic programming
         # search, and that are ranked according to their fitness.
         # todo: for thesis writing, what are the tie breaks here?
+        num = len(self.highest_fitness_value)
+        k = int(k)
+        k = k if k <= num else num
         k_highest_fitness_values = dict(collections.Counter(self.highest_fitness_value).most_common(k))
         # tie break 1: prefer mappings to source relations
         not_source_mappings = [m for m in k_highest_fitness_values.keys() if m not in self.source_relations]

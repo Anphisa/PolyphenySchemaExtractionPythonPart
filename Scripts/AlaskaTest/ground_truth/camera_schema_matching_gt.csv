@@ -1,0 +1,844 @@
+source_attribute_id,target_attribute_name
+www.alibaba.com//auto focus,auto_focus_automatic
+www.eglobalcentral.co.uk//focus,auto_focus_automatic
+www.flipkart.com//focus,auto_focus_automatic
+buy.net//depth,camera_depth
+www.alibaba.com//focus control,auto_focus_automatic
+buy.net//focal length,focal_length_max
+buy.net//focal length,focal_length_min
+cammarkt.com//focus type,auto_focus_automatic
+www.eglobalcentral.co.uk//focus type,auto_focus_automatic
+www.alibaba.com//focusing system,auto_focus_automatic
+www.cambuy.com.au//af assist beam,auto_focus_beam
+www.camerafarm.com.au//af assist beam,auto_focus_beam
+www.canon-europe.com//af assist beam,auto_focus_beam
+www.cambuy.com.au//af assist lamp,auto_focus_beam
+www.ebay.com//af assist lamp,auto_focus_beam
+www.shopmania.in//af illuminator,auto_focus_beam
+www.camerafarm.com.au//afassist lamp,auto_focus_beam
+www.ilgs.net//auto focus af assist beam,auto_focus_beam
+www.ebay.com//auto focus assist light,auto_focus_beam
+www.ebay.com//autofocus assist lamp,auto_focus_beam
+www.cambuy.com.au//af modes,auto_focus_mode
+www.canon-europe.com//af modes,auto_focus_mode
+www.ilgs.net//auto focusing af modes,auto_focus_mode
+buy.net//focal length 35mm equivalent,focal_length_max
+www.cambuy.com.au//focus,auto_focus_mode
+www.flipkart.com//focus mode,auto_focus_mode
+www.camerafarm.com.au//focus modes,auto_focus_mode
+buy.net//focal length 35mm equivalent,focal_length_min
+buy.net//iso sensitivity,iso_sensitivity_max
+buy.net//longest shutter speed,shutter_speed_min
+www.cambuy.com.au//af point selection,auto_focus_points
+www.cambuy.com.au//af points,auto_focus_points
+www.canon-europe.com//af system  points,auto_focus_points
+www.cambuy.com.au//af system points,auto_focus_points
+www.camerafarm.com.au//af system points,auto_focus_points
+www.canon-europe.com//af system points,auto_focus_points
+www.cambuy.com.au//afarea mode,auto_focus_points
+www.ebay.com//afarea mode,auto_focus_points
+www.ebay.com//afarea modes,auto_focus_points
+www.ilgs.net//auto focus af points,auto_focus_points
+buy.net//shortest shutter speed,shutter_speed_max
+www.camerafarm.com.au//dynamic af mode,auto_focus_points
+www.ebay.com//dynamic af mode,auto_focus_points
+buy.net//width,camera_width
+www.alibaba.com//focus point,auto_focus_points
+www.cambuy.com.au//focus point,auto_focus_points
+www.camerafarm.com.au//focus point,auto_focus_points
+www.ebay.com//focus point,auto_focus_points
+cammarkt.com//battery type,battery_chemistry
+www.flipkart.com//focusing sysetm,auto_focus_points
+www.shopmania.in//number of focus points,auto_focus_points
+www.mypriceindia.com//other focus features,auto_focus_points
+www.canon-europe.com//af point selection,auto_focus_points_selection
+www.ilgs.net//auto focus af points selection,auto_focus_points_selection
+cammarkt.com//battery type,battery_type
+cammarkt.com//camera resolution,image_resolution
+cammarkt.com//camera resolution,image_resolution_lw
+cammarkt.com//focal length,focal_length_max
+cammarkt.com//focal length,focal_length_min
+cammarkt.com//iso speeds,iso_sensitivity_min
+www.cambuy.com.au//autofocus af,auto_focus_type
+www.camerafarm.com.au//autofocus system,auto_focus_type
+cammarkt.com//light sensitivity max,iso_sensitivity_max
+cammarkt.com//screen size,screen_size
+cammarkt.com//screen size,screen_type
+cammarkt.com//shutter speed,shutter_speed_max
+cammarkt.com//shutter speed,shutter_speed_min
+cammarkt.com//width,camera_width
+www.alibaba.com//dimensions,camera_depth
+www.alibaba.com//dimensions,camera_height
+www.alibaba.com//dimensions,camera_width
+www.ebay.com//battery chemistry,battery_chemistry
+www.alibaba.com//effective pixels,image_resolution
+www.ilgs.net//battery technology,battery_chemistry
+www.pcconnection.com//battery technology,battery_chemistry
+www.alibaba.com//effective pixels,image_resolution_lw
+www.buzzillions.com//battery type,battery_chemistry
+www.alibaba.com//image sensor,image_resolution
+www.alibaba.com//image sensor,sensor_size
+www.walmart.com//battery type,battery_chemistry
+www.alibaba.com//image sensor,sensor_type
+www.alibaba.com//resolution,image_resolution
+www.ilgs.net//battery life max,battery_duration_hours
+cammarkt.com//battery life,battery_duration_shots
+www.cambuy.com.au//battery life,battery_duration_shots
+www.cambuy.com.au//battery life cipa standard,battery_duration_shots
+www.ilgs.net//battery life cipa standard,battery_duration_shots
+www.alibaba.com//resolution,video_resolution
+www.alibaba.com//shutter time,shutter_speed_max
+www.alibaba.com//shutter time,shutter_speed_min
+www.alibaba.com//total pixel no,image_resolution_lw
+www.alibaba.com//total pixel no,video_resolution
+www.buzzillions.com//compatible battery,battery_chemistry
+www.buzzillions.com//compatible battery,battery_type
+buy.net//battery model supported,battery_type
+www.buzzillions.com//depth inches,camera_depth
+www.buzzillions.com//focus modes,auto_focus_automatic
+www.buzzillions.com//focus modes,auto_focus_points
+www.buzzillions.com//focus modes,auto_focus_type
+www.buzzillions.com//height inches,camera_height
+cammarkt.com//brand,brand
+www.camerafarm.com.au//brand,brand
+www.ebay.com//brand,brand
+www.flipkart.com//brand,brand
+www.price-hunt.com//brand,brand
+www.buzzillions.com//movie mode,video_format
+www.buzzillions.com//movie mode,video_resolution
+www.buzzillions.com//shutter speed,shutter_speed_max
+www.shopmania.in//brand,brand
+www.buzzillions.com//shutter speed,shutter_speed_min
+www.buzzillions.com//width inches,camera_width
+buy.net//brand name,brand
+cammarkt.com//manufacturer,brand
+www.gosale.com//manufacturer,brand
+www.ilgs.net//manufacturer,brand
+www.cambuy.com.au//autofocus,auto_focus_points
+www.cambuy.com.au//autofocus,auto_focus_type
+www.cambuy.com.au//batteries,battery_chemistry
+www.cambuy.com.au//batteries,battery_type
+www.cambuy.com.au//battery,battery_chemistry
+www.cambuy.com.au//battery,battery_type
+www.cambuy.com.au//colour filter size,color_filter
+www.cambuy.com.au//colour filter size,sensor_size_class
+www.cambuy.com.au//dimensions w x h x d,camera_depth
+www.cambuy.com.au//dimensions w x h x d,camera_height
+www.cambuy.com.au//dimensions w x h x d,camera_width
+www.cambuy.com.au//dimensions wxhxd,camera_depth
+www.cambuy.com.au//dimensions wxhxd,camera_height
+www.cambuy.com.au//dimensions wxhxd,camera_width
+www.cambuy.com.au//exposure control,exposure_compensation
+www.cambuy.com.au//exposure control,exposure_mode
+www.cambuy.com.au//file format,image_format
+www.cambuy.com.au//file format,video_format
+www.cambuy.com.au//file formats,image_format
+www.cambuy.com.au//file formats,video_format
+www.cambuy.com.au//focal length,focal_length_max
+www.cambuy.com.au//focal length,focal_length_min
+www.cambuy.com.au//focusarea selection,auto_focus_mode
+www.cambuy.com.au//focusarea selection,auto_focus_points
+www.cambuy.com.au//image sensor,sensor_size
+www.cambuy.com.au//image sensor,sensor_type
+www.cambuy.com.au//image size pixels,image_resolution
+www.cambuy.com.au//image size pixels,image_resolution_lw
+www.cambuy.com.au//imaging sensor  effective pixels,image_resolution
+www.cambuy.com.au//imaging sensor  effective pixels,sensor_type
+www.cambuy.com.au//iso sensitivity,iso_sensitivity_max
+www.cambuy.com.au//iso sensitivity,iso_sensitivity_min
+www.cambuy.com.au//iso sensitivity recommended exposure index,iso_sensitivity_max
+www.cambuy.com.au//iso sensitivity recommended exposure index,iso_sensitivity_min
+www.cambuy.com.au//iso sensitivity standard output sensitivity,iso_sensitivity_max
+www.cambuy.com.au//iso sensitivity standard output sensitivity,iso_sensitivity_min
+www.cambuy.com.au//iso speed range,iso_sensitivity_max
+www.cambuy.com.au//iso speed range,iso_sensitivity_min
+www.cambuy.com.au//lcd monitor,screen_size
+www.cambuy.com.au//lcd monitor,screen_type
+www.cambuy.com.au//lens,lens_mount_type
+www.ebay.com//body type,camera_type
+www.buzzillions.com//camera style,camera_type
+buy.net//camera type,camera_type
+cammarkt.com//camera type,camera_type
+www.buzzillions.com//camera type,camera_type
+www.cambuy.com.au//camera type,camera_type
+www.gosale.com//camera type,camera_type
+www.henrys.com//camera type,camera_type
+www.ilgs.net//camera type,camera_type
+www.pcconnection.com//camera type,camera_type
+www.shopbot.com.au//camera type,camera_type
+www.cambuy.com.au//lens,zoom_optical
+www.cambuy.com.au//menu languages,supported_languages
+www.cambuy.com.au//menu languages,supported_languages_number
+www.cambuy.com.au//monitor,screen_size
+www.cambuy.com.au//monitor,screen_type
+www.cambuy.com.au//movies,video_format
+www.cambuy.com.au//movies,video_resolution
+www.cambuy.com.au//shutter speed,shutter_speed_max
+www.cambuy.com.au//shutter speed,shutter_speed_min
+www.cambuy.com.au//zoom,zoom_combined
+www.cambuy.com.au//zoom,zoom_digital
+www.cambuy.com.au//zoom,zoom_optical
+www.camerafarm.com.au//fastest shutter speed,shutter_speed_max
+www.camerafarm.com.au//file format,image_format
+www.camerafarm.com.au//file format,video_format
+www.camerafarm.com.au//iso sensitivity,iso_sensitivity_max
+www.camerafarm.com.au//iso sensitivity,iso_sensitivity_min
+www.camerafarm.com.au//menu languages,supported_languages
+www.camerafarm.com.au//menu languages,supported_languages_number
+www.camerafarm.com.au//shutter,shutter_speed_min
+www.camerafarm.com.au//shutter,shutter_type
+www.camerafarm.com.au//shutter speed,shutter_speed_max
+www.camerafarm.com.au//shutter speed,shutter_speed_min
+www.buzzillions.com//camera color,color
+www.ebay.com//camera colour,color
+cammarkt.com//color,color
+www.buzzillions.com//color,color
+www.flipkart.com//color,color
+www.pcconnection.com//color,color
+www.price-hunt.com//color,color
+www.pricedekho.com//color,color
+www.henrys.com//colour,color
+www.priceme.co.nz//colour,color
+www.ukdigitalcameras.co.uk//colour,color
+www.wexphotographic.com//colour,color
+www.ilgs.net//colour of product,color
+www.walmart.com//primary color,color
+www.camerafarm.com.au//color filter,color_filter
+www.flipkart.com//color filter,color_filter
+www.mypriceindia.com//color filter,color_filter
+www.price-hunt.com//color filter,color_filter
+www.pricedekho.com//color filter,color_filter
+www.ebay.com//color filter system,color_filter
+www.cambuy.com.au//colour filter,color_filter
+www.camerafarm.com.au//slowest shutter speed,shutter_speed_min
+www.cambuy.com.au//colour filter type,color_filter
+www.camerafarm.com.au//colour filter type,color_filter
+www.ebay.com//compensation,exposure_compensation
+www.cambuy.com.au//exposure compansation,exposure_compensation
+www.cambuy.com.au//exposure compensation,exposure_compensation
+www.camerafarm.com.au//exposure compensation,exposure_compensation
+www.canon-europe.com//exposure compensation,exposure_compensation
+www.flipkart.com//exposure compensation,exposure_compensation
+www.price-hunt.com//exposure compensation,exposure_compensation
+www.pricedekho.com//exposure compensation,exposure_compensation
+www.shopmania.in//exposure compensation,exposure_compensation
+www.canon-europe.com//batteries,battery_chemistry
+www.camerafarm.com.au//exposure control,exposure_compensation
+www.wexphotographic.com//exposure control,exposure_compensation
+www.ilgs.net//flash exposure correction,exposure_compensation
+www.canon-europe.com//batteries,battery_type
+www.ilgs.net//light exposure correction,exposure_compensation
+buy.net//exposure control,exposure_mode
+www.canon-europe.com//dimensions,camera_depth
+www.cambuy.com.au//exposure mode,exposure_mode
+www.buzzillions.com//exposure modes,exposure_mode
+www.camerafarm.com.au//exposure modes,exposure_mode
+www.flipkart.com//exposure modes,exposure_mode
+www.henrys.com//exposure modes,exposure_mode
+www.price-hunt.com//exposure modes,exposure_mode
+www.shopmania.in//exposure modes,exposure_mode
+www.wexphotographic.com//exposure modes,exposure_mode
+www.cambuy.com.au//exposure parameters,exposure_mode
+www.canon-europe.com//dimensions,camera_height
+www.ilgs.net//light exposure modes,exposure_mode
+www.wexphotographic.com//card format,external_memory_type
+www.buzzillions.com//card slot,external_memory_type
+www.camerafarm.com.au//card slot,external_memory_type
+www.ilgs.net//compatible memory cards,external_memory_type
+www.pcconnection.com//flash memory form factor,external_memory_type
+buy.net//memory card support,external_memory_type
+www.flipkart.com//memory card type,external_memory_type
+www.mypriceindia.com//memory card type,external_memory_type
+www.price-hunt.com//memory card type,external_memory_type
+cammarkt.com//memory type,external_memory_type
+www.buzzillions.com//memory type,external_memory_type
+www.garricks.com.au//memory type,external_memory_type
+www.shopmania.in//memory type,external_memory_type
+www.buzzillions.com//removable memory type,external_memory_type
+www.buzzillions.com//storage media type,external_memory_type
+www.ebay.com//storage memory,external_memory_type
+www.eglobalcentral.co.uk//storage type,external_memory_type
+www.cambuy.com.au//file system,file_system
+www.camerafarm.com.au//file system,file_system
+www.ebay.com//file system,file_system
+www.ebay.com//storage file system,file_system
+www.canon-europe.com//dimensions,camera_width
+www.canon-europe.com//dimensions wxhxd,camera_depth
+www.canon-europe.com//dimensions wxhxd,camera_height
+www.canon-europe.com//dimensions wxhxd,camera_width
+www.canon-europe.com//focal length,focal_length_max
+www.canon-europe.com//focal length,focal_length_min
+www.canon-europe.com//iso sensitivity,iso_sensitivity_max
+www.canon-europe.com//iso sensitivity,iso_sensitivity_min
+www.canon-europe.com//zoom,zoom_combined
+www.canon-europe.com//zoom,zoom_digital
+www.canon-europe.com//zoom,zoom_optical
+www.ebay.com//highest standard iso sensitivity,iso_sensitivity_max
+www.ebay.com//interface languages,supported_languages
+www.ebay.com//interface languages,supported_languages_number
+www.ebay.com//iso range,iso_sensitivity_max
+www.ebay.com//iso range,iso_sensitivity_min
+www.ebay.com//iso speed,iso_sensitivity_max
+www.ebay.com//iso speed,iso_sensitivity_min
+www.ebay.com//lowest standard iso sensitivity,iso_sensitivity_min
+www.ebay.com//minimum shutter speed,shutter_speed_min
+www.ebay.com//pixel resolution,image_resolution_lw
+www.ebay.com//pixel resolution,video_resolution
+www.ebay.com//sensor type  size,sensor_size
+www.ebay.com//sensor type  size,sensor_type
+www.ebay.com//shutter speed (maximum),shutter_speed_max
+www.ebay.com//slowest shutter speed,shutter_speed_min
+www.eglobalcentral.co.uk//battery,battery_chemistry
+www.eglobalcentral.co.uk//battery,battery_type
+www.eglobalcentral.co.uk//dimensions approx,camera_height
+www.eglobalcentral.co.uk//dimensions approx,camera_width
+www.eglobalcentral.co.uk//dimensions w x h x d,camera_depth
+www.eglobalcentral.co.uk//dimensions w x h x d,camera_height
+www.eglobalcentral.co.uk//dimensions w x h x d,camera_width
+www.eglobalcentral.co.uk//focal length,focal_length_min
+www.eglobalcentral.co.uk//iso sensitivity,iso_sensitivity_max
+www.eglobalcentral.co.uk//iso sensitivity,iso_sensitivity_min
+www.eglobalcentral.co.uk//sensor size,sensor_size
+www.eglobalcentral.co.uk//sensor size,sensor_size_class
+www.eglobalcentral.co.uk//sensor type,sensor_size_class
+www.eglobalcentral.co.uk//sensor type,sensor_type
+www.eglobalcentral.co.uk//sensor type  size,sensor_size
+www.eglobalcentral.co.uk//sensor type  size,sensor_type
+www.eglobalcentral.co.uk//shutter speed,shutter_speed_max
+www.eglobalcentral.co.uk//shutter speed,shutter_speed_min
+www.flipkart.com//auto focus,auto_focus_type
+www.flipkart.com//auto focus,has_auto_focus
+www.flipkart.com//focal length,focal_length_max
+www.buzzillions.com//image format,image_format
+www.flipkart.com//image format,image_format
+www.mypriceindia.com//image format,image_format
+www.price-hunt.com//image format,image_format
+www.pricedekho.com//image format,image_format
+www.shopmania.in//image format,image_format
+www.buzzillions.com//image formats,image_format
+www.ilgs.net//image formats supported,image_format
+www.ilgs.net//recording format,image_format
+www.buzzillions.com//still image file formats,image_format
+www.ebay.com//still image format,image_format
+www.pcconnection.com//still image format,image_format
+www.priceme.co.nz//still image format,image_format
+www.cambuy.com.au//still image type,image_format
+www.camerafarm.com.au//still image type,image_format
+www.canon-europe.com//still image type,image_format
+www.buzzillions.com//camera pixel count,image_resolution
+www.flipkart.com//focal length,focal_length_min
+www.mypriceindia.com//camera resolution,image_resolution
+www.ukdigitalcameras.co.uk//camera resolution,image_resolution
+www.buzzillions.com//effective megapixel count,image_resolution
+buy.net//effective megapixels,image_resolution
+www.flipkart.com//iso rating,iso_sensitivity_max
+www.cambuy.com.au//effective pixels,image_resolution
+www.camerafarm.com.au//effective pixels,image_resolution
+www.eglobalcentral.co.uk//effective pixels,image_resolution
+www.henrys.com//effective pixels,image_resolution
+www.flipkart.com//iso rating,iso_sensitivity_min
+www.flipkart.com//maximum focal length,focal_length_max
+www.flipkart.com//supported languages,supported_languages
+www.ebay.com//mã©gapixels,image_resolution
+www.ilgs.net//megapixel,image_resolution
+www.gosale.com//megapixel range,image_resolution
+cammarkt.com//megapixels,image_resolution
+www.buzzillions.com//megapixels,image_resolution
+www.ebay.com//megapixels,image_resolution
+www.gosale.com//megapixels,image_resolution
+www.pcconnection.com//megapixels,image_resolution
+www.wexphotographic.com//megapixels,image_resolution
+www.cambuy.com.au//number of effective pixels,image_resolution
+www.flipkart.com//optical sensor resolution in megapixel,image_resolution
+www.price-hunt.com//optical sensor resolution in megapixel,image_resolution
+www.flipkart.com//supported languages,supported_languages_number
+www.flipkart.com//zoom,zoom_digital
+www.flipkart.com//zoom,zoom_optical
+www.garricks.com.au//sensor details,image_resolution
+www.pricedekho.com//other resolution,image_resolution
+www.ebay.com//photo resolution,image_resolution
+www.ebay.com//pixel,image_resolution
+www.buzzillions.com//pixel count,image_resolution
+www.pricedekho.com//pixels,image_resolution
+www.cambuy.com.au//raw,image_resolution
+cammarkt.com//resolution,image_resolution
+www.garricks.com.au//sensor details,sensor_type
+www.buzzillions.com//resolution,image_resolution
+www.garricks.com.au//resolution,image_resolution
+www.shopmania.in//resolution,image_resolution
+www.ebay.com//resolution (megapixels),image_resolution
+www.walmart.com//resolution megapixels,image_resolution
+www.gosale.com//dimensions,camera_depth
+www.shopbot.com.au//sensor resolution,image_resolution
+www.ilgs.net//total megapixels,image_resolution
+www.price-hunt.com//total pixelgross pixel,image_resolution
+buy.net//total pixels,image_resolution
+www.cambuy.com.au//total pixels,image_resolution
+www.camerafarm.com.au//total pixels,image_resolution
+www.eglobalcentral.co.uk//total pixels,image_resolution
+www.gosale.com//dimensions,camera_height
+www.gosale.com//dimensions,camera_width
+cammarkt.com//image resolutions,image_resolution_lw
+www.shopmania.in//image resolutions,image_resolution_lw
+www.henrys.com//battery,battery_chemistry
+www.alibaba.com//max image resolution,image_resolution_lw
+www.priceme.co.nz//max image resolution,image_resolution_lw
+www.eglobalcentral.co.uk//max resolution,image_resolution_lw
+www.mypriceindia.com//max resolution,image_resolution_lw
+www.ilgs.net//maximum image resolution,image_resolution_lw
+www.henrys.com//battery,battery_type
+www.henrys.com//dimensions wxhxd,camera_depth
+www.henrys.com//dimensions wxhxd,camera_height
+www.buzzillions.com//still image resolution max,image_resolution_lw
+www.ilgs.net//still image resolutions,image_resolution_lw
+www.henrys.com//dimensions wxhxd,camera_width
+www.buzzillions.com//builtin memory,internal_memory_capacity
+www.henrys.com//builtin memory,internal_memory_capacity
+www.price-hunt.com//inbuilt memory,internal_memory_capacity
+www.pricedekho.com//inbuilt memory,internal_memory_capacity
+buy.net//installed memory,internal_memory_capacity
+www.shopmania.in//installed memory,internal_memory_capacity
+www.buzzillions.com//internal memory,internal_memory_capacity
+www.ilgs.net//internal memory,internal_memory_capacity
+www.henrys.com//file formats,image_format
+www.henrys.com//file formats,video_format
+www.henrys.com//iso sensitivity,iso_sensitivity_max
+www.henrys.com//iso sensitivity,iso_sensitivity_min
+www.henrys.com//sensor typesize,sensor_size
+www.henrys.com//sensor typesize,sensor_type
+www.henrys.com//shutter,shutter_speed_max
+www.henrys.com//shutter,shutter_speed_min
+www.ilgs.net//battery type,battery_chemistry
+www.ilgs.net//battery type,battery_type
+www.ilgs.net//camera shutter speed,shutter_speed_max
+www.ilgs.net//camera shutter speed,shutter_speed_min
+www.ilgs.net//camera shutter speed max,shutter_speed_max
+www.ilgs.net//camera shutter speed max,shutter_speed_min
+www.ilgs.net//camera shutter speed min,shutter_speed_max
+www.ilgs.net//camera shutter speed min,shutter_speed_min
+www.ilgs.net//depth,camera_depth
+www.ilgs.net//dimensions w x d x h,camera_depth
+www.ilgs.net//dimensions w x d x h,camera_height
+www.ilgs.net//dimensions w x d x h,camera_width
+www.ilgs.net//focal length range ff,focal_length_max
+www.ilgs.net//focal length range ff,focal_length_min
+www.ilgs.net//height,camera_height
+www.ilgs.net//iso sensitivity,iso_sensitivity_max
+www.ilgs.net//iso sensitivity,iso_sensitivity_min
+www.ilgs.net//iso sensitivity max,iso_sensitivity_max
+www.ilgs.net//iso sensitivity min,iso_sensitivity_min
+www.ilgs.net//light exposure control,exposure_compensation
+www.ilgs.net//light exposure control,exposure_mode
+www.ilgs.net//maximum focal length 35mm film equiv,focal_length_max
+www.ilgs.net//minimum focal length 35mm film equiv,focal_length_min
+www.ilgs.net//width,camera_width
+www.mypriceindia.com//auto focus,auto_focus_type
+www.mypriceindia.com//auto focus,has_auto_focus
+www.mypriceindia.com//dimensions,camera_depth
+www.mypriceindia.com//dimensions,camera_height
+www.mypriceindia.com//dimensions,camera_width
+www.mypriceindia.com//focal length,focal_length_max
+www.mypriceindia.com//focal length,focal_length_min
+www.mypriceindia.com//iso rating,iso_sensitivity_max
+www.mypriceindia.com//iso rating,iso_sensitivity_min
+www.mypriceindia.com//maximum shutter speed,shutter_speed_max
+www.mypriceindia.com//minimum shutter speed,shutter_speed_min
+www.mypriceindia.com//supported languages,supported_languages
+www.cambuy.com.au//compatible lenses,lens_mount_type
+www.mypriceindia.com//supported languages,supported_languages_number
+www.henrys.com//lens,lens_mount_type
+buy.net//lens mount,lens_mount_type
+www.alibaba.com//lens mount,lens_mount_type
+www.buzzillions.com//lens mount,lens_mount_type
+www.cambuy.com.au//lens mount,lens_mount_type
+www.camerafarm.com.au//lens mount,lens_mount_type
+www.eglobalcentral.co.uk//lens mount,lens_mount_type
+www.garricks.com.au//lens mount,lens_mount_type
+www.shopmania.in//lens mount,lens_mount_type
+www.ilgs.net//lens mount interface,lens_mount_type
+www.walmart.com//lens system mounting,lens_mount_type
+www.flipkart.com//lens type,lens_mount_type
+www.mypriceindia.com//lens type,lens_mount_type
+www.price-hunt.com//lens type,lens_mount_type
+www.pricedekho.com//lens type,lens_mount_type
+www.cambuy.com.au//audio,microphone_type
+www.cambuy.com.au//audio recording device,microphone_type
+www.ebay.com//audio recording device,microphone_type
+cammarkt.com//builtin microphone,microphone_type
+www.ilgs.net//builtin microphone,microphone_type
+www.buzzillions.com//microphone,microphone_type
+www.eglobalcentral.co.uk//microphone,microphone_type
+www.flipkart.com//microphone,microphone_type
+www.mypriceindia.com//microphone,microphone_type
+www.price-hunt.com//microphone,microphone_type
+www.pricedekho.com//microphone,microphone_type
+www.shopmania.in//microphone,microphone_type
+www.ebay.com//microphone  speaker,microphone_type
+www.ebay.com//microphonespeaker,microphone_type
+www.camerafarm.com.au//movie audio recording device,microphone_type
+www.mypriceindia.com//picture angle,picture_angle
+www.price-hunt.com//picture angle,picture_angle
+www.pricedekho.com//picture angle,picture_angle
+www.cambuy.com.au//photo effects,picture_styles
+www.canon-europe.com//photo effects,picture_styles
+www.ebay.com//photo effects,picture_styles
+www.ilgs.net//photo effects,picture_styles
+www.camerafarm.com.au//picture control,picture_styles
+www.ebay.com//picture control,picture_styles
+www.alibaba.com//picture control system,picture_styles
+www.cambuy.com.au//picture control system,picture_styles
+www.ebay.com//picture control system,picture_styles
+www.buzzillions.com//scene modes,picture_styles
+www.pcconnection.com//special effects,picture_styles
+www.shopmania.in//special effects,picture_styles
+www.buzzillions.com//red eye reduction,red_eye_reduction
+www.ebay.com//red eye reduction,red_eye_reduction
+www.flipkart.com//red eye reduction,red_eye_reduction
+www.mypriceindia.com//red eye reduction,red_eye_reduction
+www.pcconnection.com//red eye reduction,red_eye_reduction
+www.price-hunt.com//red eye reduction,red_eye_reduction
+www.pricedekho.com//red eye reduction,red_eye_reduction
+www.shopmania.in//red eye reduction,red_eye_reduction
+www.cambuy.com.au//redeye correction,red_eye_reduction
+www.canon-europe.com//redeye correction,red_eye_reduction
+www.cambuy.com.au//redeye reduction,red_eye_reduction
+www.canon-europe.com//redeye reduction,red_eye_reduction
+www.ebay.com//redeye reduction,red_eye_reduction
+www.gosale.com//redeye reduction,red_eye_reduction
+www.pricedekho.com//display,screen_size
+www.buzzillions.com//display screen,screen_size
+www.pcconnection.com//display size,screen_size
+www.ebay.com//lcd display size (inches),screen_size
+www.buzzillions.com//lcd display size inches,screen_size
+www.pcconnection.com//35mm equivalent focal length max,focal_length_max
+buy.net//lcd screen size,screen_size
+cammarkt.com//lcd screen size,screen_size
+www.flipkart.com//lcd screen size,screen_size
+www.gosale.com//lcd screen size,screen_size
+www.ilgs.net//lcd screen size,screen_size
+www.price-hunt.com//lcd screen size,screen_size
+www.walmart.com//lcd screen size,screen_size
+www.eglobalcentral.co.uk//lcd screen size inch,screen_size
+www.shopbot.com.au//lcd size,screen_size
+www.ukdigitalcameras.co.uk//lcd size,screen_size
+www.ebay.com//lcd size inches,screen_size
+www.buzzillions.com//lcd viewer,screen_size
+www.pcconnection.com//35mm equivalent focal length min,focal_length_min
+www.cambuy.com.au//monitor size,screen_size
+www.pcconnection.com//focal length max,focal_length_max
+www.buzzillions.com//screen size,screen_size
+www.ebay.com//screen size,screen_size
+www.henrys.com//screen size,screen_size
+www.pricedekho.com//screen size,screen_size
+www.shopmania.in//screen size,screen_size
+www.ebay.com//screen size (in.),screen_size
+www.wexphotographic.com//screen size inches,screen_size
+www.ebay.com//screensize,screen_size
+www.ilgs.net//display,screen_type
+www.ebay.com//display screen type,screen_type
+www.henrys.com//display screen type,screen_type
+www.pcconnection.com//display technology,screen_type
+cammarkt.com//display type,screen_type
+www.pricedekho.com//display type,screen_type
+www.flipkart.com//lcd display,screen_type
+www.price-hunt.com//lcd display,screen_type
+www.pcconnection.com//focal length min,focal_length_min
+www.pcconnection.com//physical dimensions,camera_depth
+www.pcconnection.com//physical dimensions,camera_height
+www.shopmania.in//screen type,screen_type
+cammarkt.com//self timer,self_timer
+www.buzzillions.com//self timer,self_timer
+www.cambuy.com.au//self timer,self_timer
+www.canon-europe.com//self timer,self_timer
+www.flipkart.com//self timer,self_timer
+www.henrys.com//self timer,self_timer
+www.mypriceindia.com//self timer,self_timer
+www.price-hunt.com//self timer,self_timer
+www.pricedekho.com//self timer,self_timer
+www.ebay.com//self timer delay,self_timer
+www.shopmania.in//self timer delay,self_timer
+www.walmart.com//self timer delay,self_timer
+www.cambuy.com.au//selftimer,self_timer
+www.camerafarm.com.au//selftimer,self_timer
+www.ilgs.net//selftimer,self_timer
+www.cambuy.com.au//effective sensor size,sensor_size
+www.pcconnection.com//physical dimensions,camera_width
+www.pcconnection.com//shutter speed,shutter_speed_max
+www.cambuy.com.au//image sensor size,sensor_size
+www.ilgs.net//image sensor size,sensor_size
+www.ilgs.net//image sensor size w x h,sensor_size
+www.pcconnection.com//optical sensor size,sensor_size
+www.pcconnection.com//shutter speed,shutter_speed_min
+www.price-hunt.com//sensor format,sensor_size
+www.camerafarm.com.au//sensor size,sensor_size
+www.price-hunt.com//all,zoom_optical
+www.mypriceindia.com//sensor size,sensor_size
+www.price-hunt.com//sensor size,sensor_size
+www.pricedekho.com//sensor size,sensor_size
+www.shopmania.in//sensor size,sensor_size
+www.wexphotographic.com//sensor size,sensor_size
+www.price-hunt.com//auto focus,auto_focus_type
+www.price-hunt.com//auto focus,has_auto_focus
+www.price-hunt.com//battery type,battery_chemistry
+www.price-hunt.com//battery type,battery_type
+www.garricks.com.au//image format,sensor_size_class
+www.camerafarm.com.au//image sensor format,sensor_size_class
+www.buzzillions.com//interchangeable lens camera format,sensor_size_class
+www.shopmania.in//sensor format,sensor_size_class
+www.price-hunt.com//dimensions,camera_depth
+www.price-hunt.com//dimensions,camera_height
+buy.net//image sensor,sensor_type
+www.price-hunt.com//dimensions,camera_width
+www.price-hunt.com//focal length,focal_length_max
+cammarkt.com//image sensor type,sensor_type
+www.camerafarm.com.au//image sensor type,sensor_type
+www.price-hunt.com//focal length,focal_length_min
+www.priceme.co.nz//optical sensor,sensor_type
+www.pcconnection.com//optical sensor type,sensor_type
+www.buzzillions.com//sensor,sensor_type
+www.price-hunt.com//focus,auto_focus_automatic
+www.price-hunt.com//focus,auto_focus_type
+www.price-hunt.com//focus mode,auto_focus_automatic
+www.ilgs.net//sensor type,sensor_type
+www.mypriceindia.com//sensor type,sensor_type
+www.price-hunt.com//sensor type,sensor_type
+www.price-hunt.com//focus mode,auto_focus_type
+www.price-hunt.com//focusing sysetm,auto_focus_mode
+www.price-hunt.com//focusing sysetm,auto_focus_mode
+www.shopmania.in//sensor type,sensor_type
+www.wexphotographic.com//sensor type,sensor_type
+www.price-hunt.com//iso rating,iso_sensitivity_max
+www.price-hunt.com//iso rating,iso_sensitivity_min
+www.price-hunt.com//maximum expandable iso sensitivity,iso_sensitivity_max
+www.price-hunt.com//maximum shutter speed,shutter_speed_max
+www.price-hunt.com//minimum shutter speed,shutter_speed_min
+www.price-hunt.com//other resolution,image_resolution
+www.price-hunt.com//other resolution,image_resolution_lw
+www.price-hunt.com//other resolution,video_resolution
+www.price-hunt.com//supported languages,supported_languages
+www.price-hunt.com//supported languages,supported_languages_number
+www.pricedekho.com//auto focus,auto_focus_type
+www.pricedekho.com//auto focus,has_auto_focus
+www.pricedekho.com//brand,brand
+www.pricedekho.com//brand,brand
+www.pricedekho.com//brand,brand
+www.pricedekho.com//dimension,camera_width
+www.pricedekho.com//dimensions,camera_depth
+www.pricedekho.com//dimensions,camera_height
+www.pricedekho.com//dimensions,camera_width
+www.pricedekho.com//focal length,focal_length_max
+www.pricedekho.com//focal length,focal_length_min
+www.pricedekho.com//iso rating,iso_sensitivity_max
+www.pricedekho.com//iso rating,iso_sensitivity_min
+www.pricedekho.com//maximum shutter speed,shutter_speed_max
+www.pricedekho.com//minimum shutter speed,shutter_speed_min
+www.pricedekho.com//optical sensor resolution in megapixel,image_resolution
+www.pricedekho.com//optical sensor resolution in megapixel,image_resolution
+www.pricedekho.com//optical sensor resolution in megapixel,image_resolution
+www.pricedekho.com//sensor,sensor_size
+www.pricedekho.com//sensor,sensor_type
+www.pricedekho.com//sensor type,sensor_type
+www.pricedekho.com//sensor type,sensor_type
+www.pricedekho.com//sensor type,sensor_type
+www.pricedekho.com//shutter speed,shutter_speed_max
+www.pricedekho.com//shutter speed,shutter_speed_min
+www.pricedekho.com//supplied battery,battery_chemistry
+www.pricedekho.com//supplied battery,battery_type
+www.pricedekho.com//supported languages,supported_languages
+www.pricedekho.com//supported languages,supported_languages_number
+www.pricedekho.com//zoom,zoom_digital
+www.pricedekho.com//zoom,zoom_optical
+www.priceme.co.nz//light sensitivity,iso_sensitivity_max
+www.priceme.co.nz//light sensitivity,iso_sensitivity_min
+www.priceme.co.nz//max focal length,focal_length_max
+www.priceme.co.nz//min focal length,focal_length_min
+www.priceme.co.nz//shutter speed,shutter_speed_max
+www.priceme.co.nz//shutter speed,shutter_speed_min
+www.ilgs.net//camera shutter type,shutter_type
+www.cambuy.com.au//shutter,shutter_type
+www.shopbot.com.au//dimensions,camera_depth
+www.camerafarm.com.au//shutter type,shutter_type
+www.price-hunt.com//shutter type,shutter_type
+www.cambuy.com.au//aspect ratio,supported_aspect_ratio
+www.eglobalcentral.co.uk//aspect ratio,supported_aspect_ratio
+www.henrys.com//aspect ratio,supported_aspect_ratio
+www.shopmania.in//image ratio,supported_aspect_ratio
+www.ebay.com//image ratio wh,supported_aspect_ratio
+www.mypriceindia.com//image ratio wh,supported_aspect_ratio
+www.flipkart.com//image size at aspect ratio,supported_aspect_ratio
+www.price-hunt.com//image size at aspect ratio,supported_aspect_ratio
+www.cambuy.com.au//still picture aspect ratios,supported_aspect_ratio
+www.flipkart.com//supported aspect ratio,supported_aspect_ratio
+www.price-hunt.com//supported aspect ratio,supported_aspect_ratio
+www.pricedekho.com//supported aspect ratio,supported_aspect_ratio
+www.ilgs.net//supported aspect ratios,supported_aspect_ratio
+www.ebay.com//audio formats,supported_audio_formats
+www.flipkart.com//audio formats,supported_audio_formats
+www.mypriceindia.com//audio formats,supported_audio_formats
+www.price-hunt.com//audio formats,supported_audio_formats
+www.pricedekho.com//audio formats,supported_audio_formats
+www.ilgs.net//audio formats supported,supported_audio_formats
+www.henrys.com//audio recording,supported_audio_formats
+www.cambuy.com.au//audio recording format,supported_audio_formats
+www.camerafarm.com.au//movie audio recording format,supported_audio_formats
+www.ebay.com//movie audio recording format,supported_audio_formats
+www.shopbot.com.au//dimensions,camera_height
+www.ebay.com//language support,supported_languages
+www.ebay.com//language supported,supported_languages
+www.ebay.com//languages,supported_languages
+www.ilgs.net//languages support,supported_languages
+www.ebay.com//languages supported,supported_languages
+www.shopbot.com.au//dimensions,camera_width
+www.shopbot.com.au//zoom,zoom_digital
+www.canon-europe.com//menu languages,supported_languages
+www.cambuy.com.au//supported languages,supported_languages
+www.camerafarm.com.au//supported languages,supported_languages
+www.ebay.com//supported languages,supported_languages
+www.shopbot.com.au//zoom,zoom_optical
+www.shopmania.in//autofocus,auto_focus_mode
+www.shopmania.in//autofocus,auto_focus_type
+www.shopmania.in//battery,battery_chemistry
+www.shopmania.in//battery,battery_type
+www.shopmania.in//depth,camera_depth
+www.shopmania.in//focal length,focal_length_max
+www.shopmania.in//focal length,focal_length_min
+www.shopmania.in//focal length equivalent to 35mm,focal_length_max
+www.shopmania.in//focal length equivalent to 35mm,focal_length_min
+www.shopmania.in//height,camera_height
+www.shopmania.in//digital video format,video_format
+www.shopmania.in//light sensitivity iso,iso_sensitivity_max
+www.shopmania.in//light sensitivity iso,iso_sensitivity_min
+www.shopmania.in//max shutter speed,shutter_speed_max
+www.shopmania.in//min shutter speed,shutter_speed_min
+www.shopmania.in//product name,brand
+www.camerafarm.com.au//movie file format,video_format
+www.shopmania.in//width,camera_width
+www.ukdigitalcameras.co.uk//brand,brand
+www.mypriceindia.com//video format,video_format
+www.price-hunt.com//video format,video_format
+www.pricedekho.com//video format,video_format
+www.ilgs.net//video formats supported,video_format
+www.garricks.com.au//video recording format,video_format
+www.cambuy.com.au//1280 x 720 hd,video_resolution
+www.cambuy.com.au//1920 x 1080 full hd,video_resolution
+www.cambuy.com.au//640 x 480 hd,video_resolution
+www.alibaba.com//frame rate,video_resolution
+www.ebay.com//frame rate,video_resolution
+www.eglobalcentral.co.uk//frame rate,video_resolution
+www.ilgs.net//frame rate,video_resolution
+www.price-hunt.com//frame ratevideo modes,video_resolution
+www.flipkart.com//full hd,video_resolution
+www.wexphotographic.com//hd movie mode,video_resolution
+cammarkt.com//hd recording format,video_resolution
+www.ebay.com//max video resolution24 fps minimum,video_resolution
+www.ebay.com//max. resolution,video_resolution
+buy.net//maximum video capture resolution,video_resolution
+www.ebay.com//maximum video resolution,video_resolution
+www.ilgs.net//maximum video resolution,video_resolution
+www.ilgs.net//motion jpeg frame rate,video_resolution
+www.ukdigitalcameras.co.uk//brand,brand
+www.wexphotographic.com//movie mode,video_resolution
+www.walmart.com//focal length equivalent to 35mm camera,focal_length_max
+www.walmart.com//focal length equivalent to 35mm camera,focal_length_min
+www.walmart.com//product in inches l x w x h,camera_depth
+www.walmart.com//product in inches l x w x h,camera_height
+www.eglobalcentral.co.uk//resolution,video_resolution
+www.walmart.com//product in inches l x w x h,camera_width
+www.ilgs.net//resolution at capture speed,video_resolution
+www.ebay.com//resolutions,video_resolution
+www.wexphotographic.com//battery model,battery_chemistry
+www.flipkart.com//video display resolution,video_resolution
+www.price-hunt.com//video display resolution,video_resolution
+www.pricedekho.com//video display resolution,video_resolution
+cammarkt.com//video format,video_resolution
+www.mypriceindia.com//video resolution,video_resolution
+www.shopbot.com.au//video resolution,video_resolution
+www.shopmania.in//video resolution,video_resolution
+cammarkt.com//video resolutions,video_resolution
+www.ilgs.net//video resolutions,video_resolution
+www.ebay.com//video size,video_resolution
+www.buzzillions.com//manufacturers warranty  hardware,warranty_duration
+www.buzzillions.com//standard warranty,warranty_duration
+cammarkt.com//warranty,warranty_duration
+www.henrys.com//warranty,warranty_duration
+www.ilgs.net//warranty,warranty_duration
+www.pcconnection.com//warranty  labor,warranty_duration
+www.pcconnection.com//warranty  parts,warranty_duration
+www.ebay.com//warranty - labor,warranty_duration
+www.ebay.com//warranty - parts,warranty_duration
+buy.net//warranty information,warranty_duration
+www.flipkart.com//warranty summary,warranty_duration
+www.price-hunt.com//warranty summary,warranty_duration
+www.alibaba.com//warranty time,warranty_duration
+www.ebay.com//warranty:,warranty_duration
+cammarkt.com//white balance,white_balance
+www.alibaba.com//white balance,white_balance
+www.buzzillions.com//white balance,white_balance
+www.cambuy.com.au//white balance,white_balance
+www.ilgs.net//white balance,white_balance
+www.shopmania.in//white balance,white_balance
+www.ebay.com//white balance control,white_balance
+buy.net//white balance modes,white_balance
+www.henrys.com//white balance modes,white_balance
+www.shopmania.in//white balance presets,white_balance
+www.flipkart.com//white balancing,white_balance
+www.mypriceindia.com//white balancing,white_balance
+www.price-hunt.com//white balancing,white_balance
+www.pricedekho.com//white balancing,white_balance
+www.cambuy.com.au//humidity,working_humidity
+www.ebay.com//humidity,working_humidity
+www.flipkart.com//humidity,working_humidity
+www.price-hunt.com//humidity,working_humidity
+www.cambuy.com.au//operating environment  humidity,working_humidity
+www.cambuy.com.au//operating humidity,working_humidity
+www.cambuy.com.au//operating humidity range,working_humidity
+www.ilgs.net//operating relative humidity hh,working_humidity
+www.ebay.com//working humidity,working_humidity
+www.wexphotographic.com//battery model,battery_type
+www.wexphotographic.com//file formats,image_format
+buy.net//digital zoom,zoom_digital
+cammarkt.com//digital zoom,zoom_digital
+www.buzzillions.com//digital zoom,zoom_digital
+www.cambuy.com.au//digital zoom,zoom_digital
+www.henrys.com//digital zoom,zoom_digital
+www.ilgs.net//digital zoom,zoom_digital
+www.mypriceindia.com//digital zoom,zoom_digital
+www.price-hunt.com//digital zoom,zoom_digital
+www.pricedekho.com//digital zoom,zoom_digital
+www.shopmania.in//digital zoom,zoom_digital
+www.walmart.com//digital zoom,zoom_digital
+buy.net//normalizeddigital zoom,zoom_digital
+www.wexphotographic.com//file formats,video_format
+www.wexphotographic.com//focal length tele,focal_length_max
+www.wexphotographic.com//focal length wide,focal_length_min
+www.wexphotographic.com//iso max,iso_sensitivity_max
+www.wexphotographic.com//iso min,iso_sensitivity_min
+www.ebay.com//zoom:,zoom_digital
+www.wexphotographic.com//resolution,image_resolution_lw
+www.wexphotographic.com//resolution,video_resolution
+buy.net//normalizedoptical zoom,zoom_optical
+buy.net//optical zoom,zoom_optical
+cammarkt.com//optical zoom,zoom_optical
+www.buzzillions.com//optical zoom,zoom_optical
+www.cambuy.com.au//optical zoom,zoom_optical
+www.ebay.com//optical zoom,zoom_optical
+www.eglobalcentral.co.uk//optical zoom,zoom_optical
+www.gosale.com//optical zoom,zoom_optical
+www.henrys.com//optical zoom,zoom_optical
+www.ilgs.net//optical zoom,zoom_optical
+www.mypriceindia.com//optical zoom,zoom_optical
+www.pcconnection.com//optical zoom,zoom_optical
+www.price-hunt.com//optical zoom,zoom_optical
+www.pricedekho.com//optical zoom,zoom_optical
+www.shopmania.in//optical zoom,zoom_optical
+www.ukdigitalcameras.co.uk//optical zoom,zoom_optical
+www.walmart.com//optical zoom,zoom_optical
+www.ukdigitalcameras.co.uk//optical zoom range,zoom_optical
+www.wexphotographic.com//optical zoom x,zoom_optical
+www.wexphotographic.com//shutter speed max,shutter_speed_max
+www.wexphotographic.com//shutter speed min,shutter_speed_min
+www.wexphotographic.com//size,camera_depth
+www.wexphotographic.com//size,camera_height
+www.wexphotographic.com//size,camera_width
+www.ebay.com//zoom optique,zoom_optical
+www.garricks.com.au//zoom range,zoom_optical

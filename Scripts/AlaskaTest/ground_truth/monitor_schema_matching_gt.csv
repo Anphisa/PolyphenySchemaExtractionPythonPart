@@ -1,0 +1,1346 @@
+source_attribute_id,target_attribute_name
+ca.pcpartpicker.com//builtin speakers,has_speakers
+www.best-deal-items.com//builtin speakers,has_speakers
+www.best-deal-items.com//dvi,has_dvi_port
+www.best-deal-items.com//network rj45,has_ethernet_port
+www.best-deal-items.com//vga,has_vga_port
+www.cleverboxes.com//dvi,has_dvi_port
+www.cleverboxes.com//hdmi,has_hdmi_port
+www.cleverboxes.com//speakers,has_speakers
+www.cleverboxes.com//vga,has_vga_port
+www.ebay.com//bluetooth,bluetooth
+www.ebay.com//built in speakers,has_speakers
+www.ebay.com//dvi,has_dvi_port
+www.ebay.com//dvid,has_dvid_port
+www.ebay.com//dvid input,has_dvid_port
+www.ebay.com//dvid with hdcp input,has_dvid_port
+www.ebay.com//hdmi input,has_hdmi_port
+www.ebay.com//headphone,has_headphone_port
+www.ebay.com//microphone,has_microphone
+www.ebay.com//usb hub,has_usb_port
+www.ebay.com//vga input,has_vga_port
+www.getprice.com.au//speakers,has_speakers
+www.hardware-planet.it//altoparlante  cuffia  spinotto di uscita,has_speakers_output
+www.hardware-planet.it//altoparlanti incorporati,has_speakers
+www.hardware-planet.it//bluetooth,bluetooth
+www.hardware-planet.it//collegamento ethernet lan,has_ethernet_port
+www.hardware-planet.it//full hd,has_full_hd
+www.hardware-planet.it//hdmi,has_hdmi_port
+www.hardware-planet.it//microfono incorporato,has_microphone
+www.hardware-planet.it//microfono spinotto dingresso,has_microphone_input
+www.hardware-planet.it//porta dvi,has_dvi_port
+www.hardware-planet.it//subwoofer incorporato,has_subwoofer
+www.imldirect.it//displayport,has_displayport
+www.imldirect.it//dvi,has_dvi_port
+www.imldirect.it//hdmi,has_hdmi_port
+www.imldirect.it//headphone,has_headphone_port
+www.imldirect.it//network rj45,has_ethernet_port
+www.imldirect.it//speakers,has_speakers
+www.imldirect.it//usb,has_usb_port
+www.imldirect.it//vga,has_vga_port
+www.itenergy.co.uk//displayport,has_displayport
+www.itenergy.co.uk//dvi,has_dvi_port
+www.itenergy.co.uk//hdmi,has_hdmi_port
+www.itenergy.co.uk//headphone,has_headphone_port
+www.itenergy.co.uk//network rj45,has_ethernet_port
+www.itenergy.co.uk//speakers,has_speakers
+www.itenergy.co.uk//usb,has_usb_port
+www.itenergy.co.uk//vga,has_vga_port
+www.jrlinton.co.uk//displayport,has_displayport
+www.jrlinton.co.uk//dvi,has_dvi_port
+www.jrlinton.co.uk//hdmi,has_hdmi_port
+www.jrlinton.co.uk//headphone,has_headphone_port
+www.jrlinton.co.uk//network rj45,has_ethernet_port
+www.jrlinton.co.uk//speakers,has_speakers
+www.jrlinton.co.uk//usb,has_usb_port
+www.jrlinton.co.uk//vga,has_vga_port
+www.kingsfieldcomputers.co.uk//displayport,has_displayport
+www.kingsfieldcomputers.co.uk//dvi,has_dvi_port
+www.kingsfieldcomputers.co.uk//hdmi,has_hdmi_port
+www.kingsfieldcomputers.co.uk//headphone,has_headphone_port
+www.kingsfieldcomputers.co.uk//network rj45,has_ethernet_port
+www.kingsfieldcomputers.co.uk//speakers,has_speakers
+www.kingsfieldcomputers.co.uk//usb,has_usb_port
+www.kingsfieldcomputers.co.uk//vga,has_vga_port
+www.makingbuyingeasy.co.uk//bluetooth,bluetooth
+www.makingbuyingeasy.co.uk//builtin speakers,has_speakers
+www.makingbuyingeasy.co.uk//dvi port,has_dvi_port
+www.makingbuyingeasy.co.uk//ethernet lan,has_ethernet_port
+www.makingbuyingeasy.co.uk//full hd,has_full_hd
+www.makingbuyingeasy.co.uk//headphone out,has_headphone_port
+www.makingbuyingeasy.co.uk//microphone in,has_microphone_input
+www.makingbuyingeasy.co.uk//usb required,has_usb_port
+www.makingbuyingeasy.co.uk//wifi,wifi
+www.mediashopuk.com//bluetooth,bluetooth
+www.mediashopuk.com//dvi port,has_dvi_port
+www.mediashopuk.com//ethernet lan,has_ethernet_port
+www.mediashopuk.com//microphone in,has_microphone_input
+www.mediashopuk.com//wifi,wifi
+www.mrhightech.com//bluetooth,bluetooth
+www.mrhightech.com//dvi port,has_dvi_port
+www.mrhightech.com//ethernet lan,has_ethernet_port
+www.mrhightech.com//microphone in,has_microphone_input
+www.mrhightech.com//wifi,wifi
+www.nexus-t.co.uk//speakers,has_speakers
+www.officedepot.com//displayport,has_displayport
+www.officedepot.com//dvi,has_dvi_port
+www.officedepot.com//hdmi,has_hdmi_port
+www.officedepot.com//headphone jack,has_headphone_port
+www.officedepot.com//integrated speakers,has_speakers
+www.officedepot.com//network rj45,has_ethernet_port
+www.officedepot.com//speakers,has_speakers
+www.officedepot.com//usb,has_usb_port
+www.officedepot.com//vga,has_vga_port
+www.ohc24.ch//usb port,has_usb_port
+www.pc-canada.com//displayport,has_displayport
+www.pc-canada.com//dvi,has_dvi_port
+www.pc-canada.com//hdmi,has_hdmi_port
+www.pc-canada.com//headphone,has_headphone_port
+www.pc-canada.com//speakers,has_speakers
+www.pc-canada.com//usb,has_usb_port
+www.pc-canada.com//vga,has_vga_port
+www.pcconnection.com//attributes,has_speakers
+www.planet-computer.it//altoparlante  cuffia  spinotto di uscita,has_speakers_output
+www.planet-computer.it//altoparlanti incorporati,has_speakers
+www.planet-computer.it//bluetooth,bluetooth
+www.planet-computer.it//collegamento ethernet lan,has_ethernet_port
+www.planet-computer.it//full hd,has_full_hd
+www.planet-computer.it//hdmi,has_hdmi_port
+www.planet-computer.it//microfono incorporato,has_microphone
+www.planet-computer.it//microfono spinotto dingresso,has_microphone_input
+www.planet-computer.it//porta dvi,has_dvi_port
+www.planet-computer.it//subwoofer incorporato,has_subwoofer
+www.planet-computer.it//wifi,wifi
+www.softwarecity.ca//displayport,has_displayport
+www.softwarecity.ca//dvi,has_dvi_port
+www.softwarecity.ca//hdmi,has_hdmi_port
+www.softwarecity.ca//headphone,has_headphone_port
+www.softwarecity.ca//network rj45,has_ethernet_port
+www.softwarecity.ca//speakers,has_speakers
+www.softwarecity.ca//usb,has_usb_port
+www.softwarecity.ca//vga,has_vga_port
+www.xpcpro.com//bluetooth,bluetooth
+www.xpcpro.com//builtin speakers,has_speakers
+www.xpcpro.com//builtin subwoofer,has_speakers
+www.xpcpro.com//dvi port,has_dvi_port
+www.xpcpro.com//ethernet lan,has_ethernet_port
+www.xpcpro.com//ethernet lan connection,has_ethernet_port
+www.xpcpro.com//full hd,has_full_hd
+www.xpcpro.com//hdmi,has_hdmi_port
+www.xpcpro.com//headphone out,has_headphone_port
+www.xpcpro.com//microphone in,has_microphone_input
+www.xpcpro.com//usb powered,has_usb_port
+www.xpcpro.com//wifi,wifi
+ca.pcpartpicker.com//manufacturer,brand
+ce.yikus.com//brand,brand
+ce.yikus.com//label,brand
+ce.yikus.com//manufacturer,brand
+ce.yikus.com//publisher,brand
+ce.yikus.com//studio,brand
+www.ebay.com//brand,brand
+www.ebay.com//manufacturer,brand
+www.ebay.com//manufacturersupplier,brand
+www.imldirect.it//brand name,brand
+www.imldirect.it//manufacturer,brand
+www.itenergy.co.uk//brand name,brand
+www.itenergy.co.uk//manufacturer,brand
+www.jrlinton.co.uk//brand name,brand
+www.jrlinton.co.uk//manufacturer,brand
+www.kingsfieldcomputers.co.uk//brand name,brand
+www.kingsfieldcomputers.co.uk//manufacturer,brand
+www.nexus-t.co.uk//manufacturer,brand
+www.nexus-t.co.uk//product name,brand
+www.odsi.co.uk//manufacturer,brand
+www.odsi.co.uk//product description,brand
+www.officedepot.com//brand name,brand
+www.pc-canada.com//brand name,brand
+www.pc-canada.com//manufacturer,brand
+www.shopmania.com//brand,brand
+www.shopmania.com//product name,brand
+www.softwarecity.ca//brand name,brand
+www.softwarecity.ca//manufacturer,brand
+www.vology.com//product description,brand
+ce.yikus.com//color,color
+www.best-deal-items.com//case colour,color
+www.best-deal-items.com//colour,color
+www.best-deal-items.com//product color,color
+www.cleverboxes.com//case colour,color
+www.cleverboxes.com//colour,color
+www.ebay.com//exterior color,color
+www.ebay.com//product color,color
+www.hardware-planet.it//colore del prodotto,color
+www.imldirect.it//colour,color
+www.itenergy.co.uk//colour,color
+www.jrlinton.co.uk//colour,color
+www.kingsfieldcomputers.co.uk//colour,color
+www.makingbuyingeasy.co.uk//colour of product,color
+www.mediashopuk.com//colour of product,color
+www.mrhightech.com//colour of product,color
+www.nexus-t.co.uk//product name,color
+www.odsi.co.uk//colour,color
+www.odsi.co.uk//enclosure colour,color
+www.officedepot.com//color,color
+www.ohc24.ch//colour,color
+www.pc-canada.com//color,color
+www.pcconnection.com//color,color
+www.planet-computer.it//colore del prodotto,color
+www.softwarecity.ca//color,color
+www.vology.com//color,color
+www.xpcpro.com//colour of product,color
+www.hardware-planet.it//colore piedi,color_feet
+www.planet-computer.it//colore del piede,color_feet
+www.xpcpro.com//feet colour,color_feet
+www.best-deal-items.com//hd type,hd_type
+www.cleverboxes.com//resolution native,hd_type
+www.hardware-planet.it//tipologia hd,hd_type
+www.imldirect.it//screen mode,hd_type
+www.itenergy.co.uk//screen mode,hd_type
+www.jrlinton.co.uk//screen mode,hd_type
+www.kingsfieldcomputers.co.uk//screen mode,hd_type
+www.makingbuyingeasy.co.uk//hd type,hd_type
+www.mediashopuk.com//hd type,hd_type
+www.mrhightech.com//hd type,hd_type
+www.nexus-t.co.uk//screen features,hd_type
+www.officedepot.com//screen mode,hd_type
+www.pc-canada.com//screen mode,hd_type
+www.planet-computer.it//tipologia hd,hd_type
+www.softwarecity.ca//screen mode,hd_type
+www.xpcpro.com//hd type,hd_type
+www.cleverboxes.com//headphone ports,headphone_port_type
+www.hardware-planet.it//connessione cuffia,headphone_port_type
+www.makingbuyingeasy.co.uk//headphone connectivity,headphone_port_type
+www.mediashopuk.com//headphone connectivity,headphone_port_type
+www.mrhightech.com//headphone connectivity,headphone_port_type
+www.planet-computer.it//connessione cuffia,headphone_port_type
+www.xpcpro.com//headphone connectivity,headphone_port_type
+www.imldirect.it//mount type,mount_type
+www.itenergy.co.uk//mount type,mount_type
+www.jrlinton.co.uk//mount type,mount_type
+www.kingsfieldcomputers.co.uk//mount type,mount_type
+www.officedepot.com//mount type,mount_type
+www.pc-canada.com//mount type,mount_type
+www.pcconnection.com//product type,mount_type
+www.softwarecity.ca//mount type,mount_type
+www.hardware-planet.it//classe efficienza energetica,power_consumption_class
+www.imldirect.it//energy efficiency class,power_consumption_class
+www.itenergy.co.uk//energy efficiency class,power_consumption_class
+www.jrlinton.co.uk//energy efficiency class,power_consumption_class
+www.kingsfieldcomputers.co.uk//energy efficiency class,power_consumption_class
+www.makingbuyingeasy.co.uk//energy efficiency class,power_consumption_class
+www.mediashopuk.com//energy efficiency class,power_consumption_class
+www.mrhightech.com//energy efficiency class,power_consumption_class
+www.odsi.co.uk//energy class,power_consumption_class
+www.ohc24.ch//energy class,power_consumption_class
+www.planet-computer.it//classe efficienza energetica,power_consumption_class
+www.xpcpro.com//energy efficiency class,power_consumption_class
+catalog.com//display technology,screen_type
+www.cleverboxes.com//display type,screen_type
+www.cleverboxes.com//product type,screen_type
+www.cleverboxes.com//screen type,screen_type
+www.ebay.com//display technology,screen_type
+www.getprice.com.au//monitor type,screen_type
+www.hardware-planet.it//tecnologia display,screen_type
+www.hardware-planet.it//tipo di display,screen_type
+www.hardware-planet.it//tipologia display,screen_type
+www.imldirect.it//product name,screen_type
+www.imldirect.it//product type,screen_type
+www.itenergy.co.uk//product name,screen_type
+www.itenergy.co.uk//product type,screen_type
+www.jrlinton.co.uk//product name,screen_type
+www.kingsfieldcomputers.co.uk//product name,screen_type
+www.kingsfieldcomputers.co.uk//product type,screen_type
+www.makingbuyingeasy.co.uk//display,screen_type
+www.makingbuyingeasy.co.uk//display technology,screen_type
+www.makingbuyingeasy.co.uk//display type,screen_type
+www.mediashopuk.com//display,screen_type
+www.mediashopuk.com//display technology,screen_type
+www.mrhightech.com//display,screen_type
+www.mrhightech.com//display technology,screen_type
+www.nexus-t.co.uk//product name,screen_type
+www.nexus-t.co.uk//screen type,screen_type
+www.odsi.co.uk//device type,screen_type
+www.odsi.co.uk//display type,screen_type
+www.odsi.co.uk//product description,screen_type
+www.odsi.co.uk//product type,screen_type
+www.officedepot.com//product name,screen_type
+www.officedepot.com//product type,screen_type
+www.ohc24.ch//device type,screen_type
+www.ohc24.ch//product description,screen_type
+www.pc-canada.com//product name,screen_type
+www.pc-canada.com//product type,screen_type
+www.pcconnection.com//display technology,screen_type
+www.planet-computer.it//tecnologia display,screen_type
+www.planet-computer.it//tipologia display,screen_type
+www.shopmania.com//display type,screen_type
+www.softwarecity.ca//product type,screen_type
+www.vology.com//device type,screen_type
+www.vology.com//display type,screen_type
+www.vology.com//product description,screen_type
+www.xpcpro.com//display,screen_type
+www.xpcpro.com//display technology,screen_type
+www.cleverboxes.com//usb ports,usb_port_version
+www.ebay.com//usb hub,usb_port_version
+www.ebay.com//usb standard,usb_port_version
+www.imldirect.it//usb standard,usb_port_version
+www.itenergy.co.uk//usb standard,usb_port_version
+www.jrlinton.co.uk//usb standard,usb_port_version
+www.kingsfieldcomputers.co.uk//usb standard,usb_port_version
+www.makingbuyingeasy.co.uk//usb version,usb_port_version
+www.officedepot.com//usb standard,usb_port_version
+www.pc-canada.com//usb standard,usb_port_version
+www.softwarecity.ca//usb standard,usb_port_version
+ca.pcpartpicker.com//displayport,displayport_quantity
+ca.pcpartpicker.com//dvi,dvi_port_quantity
+ca.pcpartpicker.com//dvid duallink,dvid_port_quantity
+ca.pcpartpicker.com//hdmi,hdmi_port_quantity
+ca.pcpartpicker.com//minidisplay port,minidisplayport_quantity
+ca.pcpartpicker.com//vga,vga_port_quantity
+www.best-deal-items.com//dvid ports,dvid_port_quantity
+www.best-deal-items.com//dvid ports quantity,dvid_port_quantity
+www.best-deal-items.com//number of loudspeakers,speakers_quantity
+www.best-deal-items.com//number of usb ports,usb_port_quantity
+www.best-deal-items.com//usb 20 ports,usb_port2_quantity
+www.best-deal-items.com//usb 20 ports quantity,usb_port2_quantity
+www.best-deal-items.com//vga dsub ports,vga_port_quantity
+www.cleverboxes.com//audio capabilities,speakers_quantity
+www.cleverboxes.com//displayport in,displayport_quantity
+www.cleverboxes.com//hdmi ports,hdmi_port_quantity
+www.cleverboxes.com//headphone ports,headphone_port_quantity
+www.cleverboxes.com//language selection,supported_languages_number
+www.cleverboxes.com//language selection,supported_languages_number
+www.cleverboxes.com//speakers,speakers_quantity
+www.cleverboxes.com//usb ports,usb_port_quantity
+www.cleverboxes.com//usb ports,usb_port2_upstream_quantity
+www.cleverboxes.com//vga in,vga_port_quantity
+www.ebay.com//dvi,dvi_port_quantity
+www.ebay.com//dvid,dvid_port_quantity
+www.ebay.com//hdmi ports qty,hdmi_port_quantity
+www.ebay.com//number of dvi,dvi_port_quantity
+www.ebay.com//number of hdmi inputs,hdmi_port_quantity
+www.ebay.com//number of hdmi ports,hdmi_port_quantity
+www.ebay.com//number of speakers,speakers_quantity
+www.ebay.com//number of usb 30 ports,usb_port3_quantity
+www.ebay.com//number of usb ports,usb_port_quantity
+www.ebay.com//speaker qty,speakers_quantity
+www.ebay.com//speaker system,speakers_quantity
+www.ebay.com//usb hub,usb_port2_upstream_quantity
+www.ebay.com//usb ports qty,usb_port_quantity
+www.hardware-planet.it//numero di altoparlanti,speakers_quantity
+www.hardware-planet.it//numero di lingue osd,supported_languages_number
+www.hardware-planet.it//quantità displayports,displayport_quantity
+www.hardware-planet.it//quantità porte dvid,dvid_port_quantity
+www.hardware-planet.it//quantità porte hdmi,hdmi_port_quantity
+www.hardware-planet.it//quantità porte usb 20,usb_port2_quantity
+www.hardware-planet.it//quantità porte usb 30,usb_port3_quantity
+www.hardware-planet.it//quantità porte vga dsub,vga_port_quantity
+www.imldirect.it//number of speakers,speakers_quantity
+www.itenergy.co.uk//number of speakers,speakers_quantity
+www.jrlinton.co.uk//number of speakers,speakers_quantity
+www.kingsfieldcomputers.co.uk//number of speakers,speakers_quantity
+www.makingbuyingeasy.co.uk//displayports quantity,displayport_quantity
+www.makingbuyingeasy.co.uk//dvid ports quantity,dvid_port_quantity
+www.makingbuyingeasy.co.uk//ethernet lan rj45 ports,ethernet_port_quantity
+www.makingbuyingeasy.co.uk//hdmi ports quantity,hdmi_port_quantity
+www.makingbuyingeasy.co.uk//headphone outputs,headphone_port_quantity
+www.makingbuyingeasy.co.uk//mini displayport quantity,minidisplayport_quantity
+www.makingbuyingeasy.co.uk//number of loudspeakers,speakers_quantity
+www.makingbuyingeasy.co.uk//number of osd languages,supported_languages_number
+www.makingbuyingeasy.co.uk//usb 20 ports quantity,usb_port2_quantity
+www.makingbuyingeasy.co.uk//usb 30 ports quantity,usb_port3_quantity
+www.makingbuyingeasy.co.uk//vga dsub input ports,vga_port_quantity
+www.makingbuyingeasy.co.uk//vga dsub ports quantity,vga_port_quantity
+www.mediashopuk.com//displayports quantity,displayport_quantity
+www.mediashopuk.com//dvid ports quantity,dvid_port_quantity
+www.mediashopuk.com//dvii ports quantity,dvii_port_quantity
+www.mediashopuk.com//hdmi ports quantity,hdmi_port_quantity
+www.mediashopuk.com//headphone out,headphone_port_quantity
+www.mediashopuk.com//usb 20 ports quantity,usb_port2_quantity
+www.mediashopuk.com//usb 30 ports quantity,usb_port3_quantity
+www.mediashopuk.com//vga dsub ports quantity,vga_port_quantity
+www.mrhightech.com//displayports quantity,displayport_quantity
+www.mrhightech.com//dvid ports quantity,dvid_port_quantity
+www.mrhightech.com//dvii ports quantity,dvii_port_quantity
+www.mrhightech.com//hdmi ports quantity,hdmi_port_quantity
+www.mrhightech.com//headphone out,headphone_port_quantity
+www.mrhightech.com//usb 20 ports quantity,usb_port2_quantity
+www.mrhightech.com//usb 30 ports quantity,usb_port3_quantity
+www.mrhightech.com//vga dsub ports quantity,vga_port_quantity
+www.nexus-t.co.uk//displayports,displayport_quantity
+www.nexus-t.co.uk//displayports out,displayport_quantity
+www.nexus-t.co.uk//dvid ports,dvid_port_quantity
+www.nexus-t.co.uk//hdmi ports,hdmi_port_quantity
+www.nexus-t.co.uk//headphone jacks,headphone_port_quantity
+www.nexus-t.co.uk//usb 20 downstream ports,usb_port2_quantity
+www.nexus-t.co.uk//usb 20 upstream ports,usb_port2_upstream_quantity
+www.nexus-t.co.uk//usb 30 downstream ports,usb_port3_quantity
+www.nexus-t.co.uk//usb 30 upstream ports,usb_port3_upstream_quantity
+www.nexus-t.co.uk//vga ports,vga_port_quantity
+www.odsi.co.uk//hdmi ports qty,hdmi_port_quantity
+www.odsi.co.uk//speaker system,speakers_quantity
+www.odsi.co.uk//speakers,speakers_quantity
+www.officedepot.com//number of speakers,speakers_quantity
+www.ohc24.ch//hdmi ports qty,hdmi_port_quantity
+www.ohc24.ch//speaker system,speakers_quantity
+www.ohc24.ch//usb port,usb_port_quantity
+www.pc-canada.com//number of speakers,speakers_quantity
+www.pcconnection.com//attributes,speakers_quantity
+www.pcconnection.com//speakers included,speakers_quantity
+www.planet-computer.it//numero di altoparlanti,speakers_quantity
+www.planet-computer.it//numero di lingue osd,supported_languages_number
+www.planet-computer.it//quantità displayports,displayport_quantity
+www.planet-computer.it//quantità porte dvid,dvid_port_quantity
+www.planet-computer.it//quantità porte ethernet lan rj45,ethernet_port_quantity
+www.planet-computer.it//quantità porte hdmi,hdmi_port_quantity
+www.planet-computer.it//quantità porte usb 20,usb_port2_quantity
+www.planet-computer.it//quantità porte usb 30,usb_port3_quantity
+www.planet-computer.it//quantità porte vga dsub,vga_port_quantity
+www.shopmania.com//hdmi ports,hdmi_port_quantity
+www.shopmania.com//number of speakers,speakers_quantity
+www.shopmania.com//usb ports,usb_port_quantity
+www.softwarecity.ca//number of speakers,speakers_quantity
+www.xpcpro.com//displayports quantity,displayport_quantity
+www.xpcpro.com//dvid ports quantity,dvid_port_quantity
+www.xpcpro.com//dvii ports quantity,dvii_port_quantity
+www.xpcpro.com//hdmi ports quantity,hdmi_port_quantity
+www.xpcpro.com//headphone out,headphone_port_quantity
+www.xpcpro.com//headphone outputs,headphone_port_quantity
+www.xpcpro.com//number of loudspeakers,speakers_quantity
+www.xpcpro.com//number of osd languages,supported_languages_number
+www.xpcpro.com//usb 20 ports quantity,usb_port2_quantity
+www.xpcpro.com//usb 30 ports quantity,usb_port3_quantity
+www.xpcpro.com//vga dsub ports quantity,vga_port_quantity
+ca.pcpartpicker.com//aspect ratio,supported_aspect_ratio
+ca.pcpartpicker.com//brightness,screen_brightness
+ca.pcpartpicker.com//contrast ratio,contrast_ratio_static
+ca.pcpartpicker.com//display colors,number_of_colors
+ca.pcpartpicker.com//recommended resolution,supported_resolution
+ca.pcpartpicker.com//refresh rate,vertical_refresh_rate_max
+ca.pcpartpicker.com//refresh rate,vertical_refresh_rate_range
+ca.pcpartpicker.com//response time,response_time
+ca.pcpartpicker.com//screen size,screen_size_diagonal
+catalog.com//aspect ratio,supported_aspect_ratio
+catalog.com//contrast ratio,contrast_ratio_static
+catalog.com//max resolution,supported_resolution
+catalog.com//refresh rate,vertical_refresh_rate_max
+catalog.com//refresh rate,vertical_refresh_rate_range
+ce.yikus.com//aspectratio,supported_aspect_ratio
+ce.yikus.com//size,screen_size_diagonal
+ce.yikus.com//warranty,warranty_duration
+www.best-deal-items.com//aspect ratio,supported_aspect_ratio
+www.best-deal-items.com//brightness typical,screen_brightness
+www.best-deal-items.com//color support,number_of_colors
+www.best-deal-items.com//color supported,number_of_colors
+www.best-deal-items.com//colour support,number_of_colors
+www.best-deal-items.com//digital horizontal frequency,digital_horizontal_refresh_rate_max
+www.best-deal-items.com//digital horizontal frequency,digital_horizontal_refresh_rate_range
+www.best-deal-items.com//digital vertical frequency,digital_vertical_refresh_rate_max
+www.best-deal-items.com//digital vertical frequency,digital_vertical_refresh_rate_range
+www.best-deal-items.com//display ratio,supported_aspect_ratio
+www.best-deal-items.com//display resolution,supported_resolution
+www.best-deal-items.com//horizontal refresh rate,horizontal_refresh_rate_max
+www.best-deal-items.com//horizontal refresh rate,horizontal_refresh_rate_range
+www.best-deal-items.com//horizontal scan range,horizontal_refresh_rate_max
+www.best-deal-items.com//horizontal scan range,horizontal_refresh_rate_range
+www.best-deal-items.com//humidity range operating,working_humidity
+www.best-deal-items.com//image aspect ratio,supported_aspect_ratio
+www.best-deal-items.com//limited warranty,warranty_duration
+www.best-deal-items.com//native resolution,supported_resolution
+www.best-deal-items.com//operating relative humidity hh,working_humidity
+www.best-deal-items.com//operating relative humidity range,working_humidity
+www.best-deal-items.com//power consumption stand by  sleep,power_consumption_standy
+www.best-deal-items.com//service  support,warranty_duration
+www.best-deal-items.com//standard refresh rate,vertical_refresh_rate_max
+www.best-deal-items.com//standard refresh rate,vertical_refresh_rate_range
+www.best-deal-items.com//storage relative humidity hh,working_humidity
+www.best-deal-items.com//storage relative humidity range,working_humidity
+www.best-deal-items.com//supported graphics resolutions,supported_resolution
+www.best-deal-items.com//vertical refresh rate,vertical_refresh_rate_max
+www.best-deal-items.com//vertical refresh rate,vertical_refresh_rate_range
+www.best-deal-items.com//vertical scan range,vertical_refresh_rate_max
+www.best-deal-items.com//vertical scan range,vertical_refresh_rate_range
+www.cleverboxes.com//aspect ratio,supported_aspect_ratio
+www.cleverboxes.com//brightness,screen_brightness
+www.cleverboxes.com//colour support,number_of_colors
+www.cleverboxes.com//contrast ratio,contrast_ratio_dynamic
+www.cleverboxes.com//contrast ratio,contrast_ratio_static
+www.cleverboxes.com//dimensions,monitor_depth_with_stand
+www.cleverboxes.com//dimensions,monitor_dimension_with_stand
+www.cleverboxes.com//dimensions,monitor_height_with_stand
+www.cleverboxes.com//dimensions,monitor_weight_with_stand
+www.cleverboxes.com//dimensions,monitor_width_with_stand
+www.cleverboxes.com//environmental,working_humidity
+www.cleverboxes.com//environmental,working_temperature_max
+www.cleverboxes.com//environmental,working_temperature_min
+www.cleverboxes.com//environmental,working_temperature_range
+www.cleverboxes.com//maximum resolution,supported_resolution
+www.cleverboxes.com//maximum response time,response_time
+www.cleverboxes.com//pixel pitch,pixel_pitch
+www.cleverboxes.com//power consumption,power_consumption_max
+www.cleverboxes.com//power consumption,power_consumption_standy
+www.cleverboxes.com//resolution maximum,supported_resolution
+www.cleverboxes.com//resolution native,supported_resolution
+www.cleverboxes.com//response time,response_time
+www.cleverboxes.com//scan frequency horizontal,horizontal_refresh_rate_max
+www.cleverboxes.com//scan frequency horizontal,horizontal_refresh_rate_range
+www.cleverboxes.com//scan frequency vertical,vertical_refresh_rate_max
+www.cleverboxes.com//scan frequency vertical,vertical_refresh_rate_range
+www.cleverboxes.com//screen dimensions,screen_size_diagonal
+www.cleverboxes.com//screen type,number_of_colors
+www.cleverboxes.com//wall mount,mount_model
+www.cleverboxes.com//warranty,warranty_duration
+www.ebay.com//aspect ratio,supported_aspect_ratio
+www.ebay.com//brightness,screen_brightness
+www.ebay.com//color depth,number_of_colors
+www.ebay.com//color depth ja,number_of_colors
+www.ebay.com//colour support,number_of_colors
+www.ebay.com//contrast ratio,contrast_ratio_static
+www.ebay.com//display  color support,number_of_colors
+www.ebay.com//display format,supported_resolution
+www.ebay.com//display response time,response_time
+www.ebay.com//environmental parameters,working_humidity
+www.ebay.com//environmental parameters,working_temperature_max
+www.ebay.com//environmental parameters,working_temperature_min
+www.ebay.com//environmental parameters,working_temperature_range
+www.ebay.com//horizontal refresh rate,horizontal_refresh_rate_max
+www.ebay.com//horizontal refresh rate,horizontal_refresh_rate_range
+www.ebay.com//humidity range operating,working_humidity
+www.ebay.com//humidity rh non condensing,working_humidity
+www.ebay.com//image aspect ratio,supported_aspect_ratio
+www.ebay.com//image brightness,screen_brightness
+www.ebay.com//max operating temperature,working_temperature_max
+www.ebay.com//max operating temperature,working_temperature_range
+www.ebay.com//max resolution,supported_resolution
+www.ebay.com//maximum colors,number_of_colors
+www.ebay.com//maximum resolution,supported_resolution
+www.ebay.com//min operating temperature,working_temperature_min
+www.ebay.com//min operating temperature,working_temperature_range
+www.ebay.com//offmode power consumption,power_consumption_standy
+www.ebay.com//operating humidity rh non condensing,working_humidity
+www.ebay.com//projector image brightness,screen_brightness
+www.ebay.com//recommended resolution,supported_resolution
+www.ebay.com//refresh rate,vertical_refresh_rate_max
+www.ebay.com//refresh rate,vertical_refresh_rate_range
+www.ebay.com//response time,response_time
+www.ebay.com//scan format,supported_resolution
+www.ebay.com//screen brightness,screen_brightness
+www.ebay.com//screen refresh rate,vertical_refresh_rate_max
+www.ebay.com//screen refresh rate,vertical_refresh_rate_range
+www.ebay.com//screen size,screen_size_diagonal
+www.ebay.com//service  support,warranty_duration
+www.ebay.com//standard refresh rate,vertical_refresh_rate_max
+www.ebay.com//standard refresh rate,vertical_refresh_rate_range
+www.ebay.com//standby power consumption,power_consumption_standy
+www.ebay.com//support details full contract period,warranty_duration
+www.ebay.com//supported resolutions,supported_resolution
+www.ebay.com//vertical refresh rate,vertical_refresh_rate_max
+www.ebay.com//vertical refresh rate,vertical_refresh_rate_range
+www.getprice.com.au//display resolution,supported_resolution
+www.getprice.com.au//response time,response_time
+www.hardware-planet.it//altezza,monitor_dimension
+www.hardware-planet.it//altezza,monitor_height
+www.hardware-planet.it//altezza con supporto,monitor_dimension_with_stand
+www.hardware-planet.it//altezza con supporto,monitor_height_with_stand
+www.hardware-planet.it//altezza imballo,packaging_dimension
+www.hardware-planet.it//altezza imballo,packaging_height
+www.hardware-planet.it//colori del display,number_of_colors
+www.hardware-planet.it//consumi,power_consumption_max
+www.hardware-planet.it//consumi modalità risparmio energetico,power_consumption_standy
+www.hardware-planet.it//consumi modalità spento,power_consumption_standy
+www.hardware-planet.it//consumi modalità standby,power_consumption_standy
+www.hardware-planet.it//dimensioni schermo,screen_size_diagonal
+www.hardware-planet.it//dot pitch,pixel_pitch
+www.hardware-planet.it//formato,supported_aspect_ratio
+www.hardware-planet.it//frequenza di ingresso,input_frequency
+www.hardware-planet.it//frequenza scansione orizzontale,digital_horizontal_refresh_rate_max
+www.hardware-planet.it//frequenza scansione orizzontale,digital_horizontal_refresh_rate_range
+www.hardware-planet.it//frequenza scansione verticale,digital_vertical_refresh_rate_max
+www.hardware-planet.it//frequenza scansione verticale,digital_vertical_refresh_rate_range
+www.hardware-planet.it//intervallo di scansione verticale,vertical_refresh_rate_max
+www.hardware-planet.it//intervallo di scansione verticale,vertical_refresh_rate_range
+www.hardware-planet.it//intervallo di temperatura,working_temperature_max
+www.hardware-planet.it//intervallo di temperatura,working_temperature_min
+www.hardware-planet.it//intervallo di temperatura,working_temperature_range
+www.hardware-planet.it//intervallo temperatura di funzionamento,working_temperature_max
+www.hardware-planet.it//intervallo temperatura di funzionamento,working_temperature_min
+www.hardware-planet.it//intervallo temperatura di funzionamento,working_temperature_range
+www.hardware-planet.it//larghezza,monitor_dimension
+www.hardware-planet.it//larghezza,monitor_width
+www.hardware-planet.it//larghezza con supporto,monitor_dimension_with_stand
+www.hardware-planet.it//larghezza con supporto,monitor_width_with_stand
+www.hardware-planet.it//larghezza imballo,packaging_dimension
+www.hardware-planet.it//larghezza imballo,packaging_width
+www.hardware-planet.it//luminosità,screen_brightness
+www.hardware-planet.it//luminosità schermo,screen_brightness
+www.hardware-planet.it//modalità video supportate,supported_resolution
+www.hardware-planet.it//peso,monitor_weight
+www.hardware-planet.it//peso incluso imballo,packaging_weight
+www.hardware-planet.it//peso prodotto con supporto,monitor_weight_with_stand
+www.hardware-planet.it//profondità,monitor_depth
+www.hardware-planet.it//profondità,monitor_dimension
+www.hardware-planet.it//profondità con supporto,monitor_depth_with_stand
+www.hardware-planet.it//profondità con supporto,monitor_dimension_with_stand
+www.hardware-planet.it//profondità imballo,packaging_depth
+www.hardware-planet.it//profondità imballo,packaging_dimension
+www.hardware-planet.it//range di scansione orizzontale,horizontal_refresh_rate_max
+www.hardware-planet.it//range di scansione orizzontale,horizontal_refresh_rate_range
+www.hardware-planet.it//range di umidità di funzionamento,working_humidity
+www.hardware-planet.it//rapporto daspetto,supported_aspect_ratio
+www.hardware-planet.it//rapporto di contrasto,contrast_ratio_static
+www.hardware-planet.it//rapporto di contrasto dinamico,contrast_ratio_dynamic
+www.hardware-planet.it//regolazioni formato schermo,supported_aspect_ratio
+www.hardware-planet.it//risoluzione,supported_resolution
+www.hardware-planet.it//risoluzione massima,supported_resolution
+www.hardware-planet.it//risoluzioni grafiche supportate,supported_resolution
+www.hardware-planet.it//tempo di risposta,response_time
+www.hardware-planet.it//umidità,working_humidity
+www.hardware-planet.it//velocità refresh orizzontale,horizontal_refresh_rate_max
+www.hardware-planet.it//velocità refresh orizzontale,horizontal_refresh_rate_range
+www.hardware-planet.it//velocità refresh verticale,vertical_refresh_rate_max
+www.hardware-planet.it//velocità refresh verticale,vertical_refresh_rate_range
+www.imldirect.it//aspect ratio,supported_aspect_ratio
+www.imldirect.it//brightness,screen_brightness
+www.imldirect.it//colour support,number_of_colors
+www.imldirect.it//contrast ratio,contrast_ratio_static
+www.imldirect.it//depth,monitor_depth
+www.imldirect.it//depth,monitor_dimension
+www.imldirect.it//depth with stand,monitor_depth_with_stand
+www.imldirect.it//depth with stand,monitor_dimension_with_stand
+www.imldirect.it//height,monitor_dimension
+www.imldirect.it//height,monitor_height
+www.imldirect.it//height with stand,monitor_dimension_with_stand
+www.imldirect.it//height with stand,monitor_height_with_stand
+www.imldirect.it//limited warranty,warranty_duration
+www.imldirect.it//maximum resolution,supported_resolution
+www.imldirect.it//offmode power consumption,power_consumption_standy
+www.imldirect.it//operating power consumption,power_consumption_max
+www.imldirect.it//product name,screen_size_diagonal
+www.imldirect.it//response time,response_time
+www.imldirect.it//screen size,screen_size_diagonal
+www.imldirect.it//standard refresh rate,vertical_refresh_rate_max
+www.imldirect.it//standard refresh rate,vertical_refresh_rate_range
+www.imldirect.it//standby power consumption,power_consumption_standy
+www.imldirect.it//weight approximate,monitor_weight
+www.imldirect.it//weight with stand approximate,monitor_weight_with_stand
+www.imldirect.it//width,monitor_dimension
+www.imldirect.it//width,monitor_width
+www.imldirect.it//width with stand,monitor_dimension_with_stand
+www.imldirect.it//width with stand,monitor_width_with_stand
+www.itenergy.co.uk//aspect ratio,supported_aspect_ratio
+www.itenergy.co.uk//brightness,screen_brightness
+www.itenergy.co.uk//colour support,number_of_colors
+www.itenergy.co.uk//contrast ratio,contrast_ratio_static
+www.itenergy.co.uk//depth,monitor_depth
+www.itenergy.co.uk//depth,monitor_dimension
+www.itenergy.co.uk//depth with stand,monitor_depth_with_stand
+www.itenergy.co.uk//depth with stand,monitor_dimension_with_stand
+www.itenergy.co.uk//height,monitor_dimension
+www.itenergy.co.uk//height,monitor_height
+www.itenergy.co.uk//height with stand,monitor_dimension_with_stand
+www.itenergy.co.uk//height with stand,monitor_height_with_stand
+www.itenergy.co.uk//limited warranty,warranty_duration
+www.itenergy.co.uk//maximum resolution,supported_resolution
+www.itenergy.co.uk//offmode power consumption,power_consumption_standy
+www.itenergy.co.uk//operating power consumption,power_consumption_max
+www.itenergy.co.uk//product name,screen_size_diagonal
+www.itenergy.co.uk//response time,response_time
+www.itenergy.co.uk//screen size,screen_size_diagonal
+www.itenergy.co.uk//standard refresh rate,vertical_refresh_rate_max
+www.itenergy.co.uk//standard refresh rate,vertical_refresh_rate_range
+www.itenergy.co.uk//standby power consumption,power_consumption_standy
+www.itenergy.co.uk//weight approximate,monitor_weight
+www.itenergy.co.uk//weight with stand approximate,monitor_weight_with_stand
+www.itenergy.co.uk//width,monitor_dimension
+www.itenergy.co.uk//width,monitor_width
+www.itenergy.co.uk//width with stand,monitor_dimension_with_stand
+www.itenergy.co.uk//width with stand,monitor_width_with_stand
+www.jrlinton.co.uk//aspect ratio,supported_aspect_ratio
+www.jrlinton.co.uk//brightness,screen_brightness
+www.jrlinton.co.uk//colour support,number_of_colors
+www.jrlinton.co.uk//contrast ratio,contrast_ratio_static
+www.jrlinton.co.uk//depth,monitor_depth
+www.jrlinton.co.uk//depth,monitor_dimension
+www.jrlinton.co.uk//depth with stand,monitor_depth_with_stand
+www.jrlinton.co.uk//depth with stand,monitor_dimension_with_stand
+www.jrlinton.co.uk//height,monitor_dimension
+www.jrlinton.co.uk//height,monitor_height
+www.jrlinton.co.uk//height with stand,monitor_dimension_with_stand
+www.jrlinton.co.uk//height with stand,monitor_height_with_stand
+www.jrlinton.co.uk//limited warranty,warranty_duration
+www.jrlinton.co.uk//maximum resolution,supported_resolution
+www.jrlinton.co.uk//offmode power consumption,power_consumption_standy
+www.jrlinton.co.uk//operating power consumption,power_consumption_max
+www.jrlinton.co.uk//product name,screen_size_diagonal
+www.jrlinton.co.uk//response time,response_time
+www.jrlinton.co.uk//screen size,screen_size_diagonal
+www.jrlinton.co.uk//standard refresh rate,vertical_refresh_rate_max
+www.jrlinton.co.uk//standard refresh rate,vertical_refresh_rate_range
+www.jrlinton.co.uk//standby power consumption,power_consumption_standy
+www.jrlinton.co.uk//weight approximate,monitor_weight
+www.jrlinton.co.uk//weight with stand approximate,monitor_weight_with_stand
+www.jrlinton.co.uk//width,monitor_dimension
+www.jrlinton.co.uk//width,monitor_width
+www.jrlinton.co.uk//width with stand,monitor_dimension_with_stand
+www.jrlinton.co.uk//width with stand,monitor_width_with_stand
+www.kingsfieldcomputers.co.uk//aspect ratio,supported_aspect_ratio
+www.kingsfieldcomputers.co.uk//brightness,screen_brightness
+www.kingsfieldcomputers.co.uk//colour support,number_of_colors
+www.kingsfieldcomputers.co.uk//contrast ratio,contrast_ratio_static
+www.kingsfieldcomputers.co.uk//depth,monitor_depth
+www.kingsfieldcomputers.co.uk//depth,monitor_dimension
+www.kingsfieldcomputers.co.uk//depth with stand,monitor_depth_with_stand
+www.kingsfieldcomputers.co.uk//depth with stand,monitor_dimension_with_stand
+www.kingsfieldcomputers.co.uk//height,monitor_dimension
+www.kingsfieldcomputers.co.uk//height,monitor_height
+www.kingsfieldcomputers.co.uk//height with stand,monitor_dimension_with_stand
+www.kingsfieldcomputers.co.uk//height with stand,monitor_height_with_stand
+www.kingsfieldcomputers.co.uk//limited warranty,warranty_duration
+www.kingsfieldcomputers.co.uk//maximum resolution,supported_resolution
+www.kingsfieldcomputers.co.uk//offmode power consumption,power_consumption_standy
+www.kingsfieldcomputers.co.uk//operating power consumption,power_consumption_max
+www.kingsfieldcomputers.co.uk//product name,screen_size_diagonal
+www.kingsfieldcomputers.co.uk//response time,response_time
+www.kingsfieldcomputers.co.uk//screen size,screen_size_diagonal
+www.kingsfieldcomputers.co.uk//standard refresh rate,vertical_refresh_rate_max
+www.kingsfieldcomputers.co.uk//standard refresh rate,vertical_refresh_rate_range
+www.kingsfieldcomputers.co.uk//standby power consumption,power_consumption_standy
+www.kingsfieldcomputers.co.uk//weight approximate,monitor_weight
+www.kingsfieldcomputers.co.uk//weight with stand approximate,monitor_weight_with_stand
+www.kingsfieldcomputers.co.uk//width,monitor_dimension
+www.kingsfieldcomputers.co.uk//width,monitor_width
+www.kingsfieldcomputers.co.uk//width with stand,monitor_dimension_with_stand
+www.kingsfieldcomputers.co.uk//width with stand,monitor_width_with_stand
+www.makingbuyingeasy.co.uk//aspect ratio,supported_aspect_ratio
+www.makingbuyingeasy.co.uk//contrast ratio dynamic,contrast_ratio_dynamic
+www.makingbuyingeasy.co.uk//contrast ratio typical,contrast_ratio_static
+www.makingbuyingeasy.co.uk//depth,monitor_depth
+www.makingbuyingeasy.co.uk//depth,monitor_dimension
+www.makingbuyingeasy.co.uk//depth with stand,monitor_depth_with_stand
+www.makingbuyingeasy.co.uk//depth with stand,monitor_dimension_with_stand
+www.makingbuyingeasy.co.uk//digital horizontal frequency,digital_horizontal_refresh_rate_max
+www.makingbuyingeasy.co.uk//digital horizontal frequency,digital_horizontal_refresh_rate_range
+www.makingbuyingeasy.co.uk//digital vertical frequency,digital_vertical_refresh_rate_max
+www.makingbuyingeasy.co.uk//digital vertical frequency,digital_vertical_refresh_rate_range
+www.makingbuyingeasy.co.uk//dimensions w x d x h with stand,monitor_depth_with_stand
+www.makingbuyingeasy.co.uk//dimensions w x d x h with stand,monitor_dimension_with_stand
+www.makingbuyingeasy.co.uk//dimensions w x d x h with stand,monitor_height_with_stand
+www.makingbuyingeasy.co.uk//dimensions w x d x h with stand,monitor_width_with_stand
+www.makingbuyingeasy.co.uk//display brightness,screen_brightness
+www.makingbuyingeasy.co.uk//display diagonal,screen_size_diagonal
+www.makingbuyingeasy.co.uk//display diagonal metric,screen_size_diagonal
+www.makingbuyingeasy.co.uk//display number of colours,number_of_colors
+www.makingbuyingeasy.co.uk//display resolution,supported_resolution
+www.makingbuyingeasy.co.uk//height,monitor_dimension
+www.makingbuyingeasy.co.uk//height,monitor_height
+www.makingbuyingeasy.co.uk//height with stand,monitor_dimension_with_stand
+www.makingbuyingeasy.co.uk//height with stand,monitor_height_with_stand
+www.makingbuyingeasy.co.uk//horizontal scan range,horizontal_refresh_rate_max
+www.makingbuyingeasy.co.uk//horizontal scan range,horizontal_refresh_rate_range
+www.makingbuyingeasy.co.uk//input frequency,input_frequency
+www.makingbuyingeasy.co.uk//number of colours,number_of_colors
+www.makingbuyingeasy.co.uk//operating altitude,operating_working_altitude
+www.makingbuyingeasy.co.uk//operating relative humidity hh,working_humidity
+www.makingbuyingeasy.co.uk//operating temperature tt,working_temperature_max
+www.makingbuyingeasy.co.uk//operating temperature tt,working_temperature_min
+www.makingbuyingeasy.co.uk//operating temperature tt,working_temperature_range
+www.makingbuyingeasy.co.uk//package dimensions wxdxh,packaging_depth
+www.makingbuyingeasy.co.uk//package dimensions wxdxh,packaging_dimension
+www.makingbuyingeasy.co.uk//package dimensions wxdxh,packaging_height
+www.makingbuyingeasy.co.uk//package dimensions wxdxh,packaging_width
+www.makingbuyingeasy.co.uk//packaging depth,packaging_depth
+www.makingbuyingeasy.co.uk//packaging depth,packaging_dimension
+www.makingbuyingeasy.co.uk//packaging height,packaging_dimension
+www.makingbuyingeasy.co.uk//packaging height,packaging_height
+www.makingbuyingeasy.co.uk//packaging width,packaging_dimension
+www.makingbuyingeasy.co.uk//packaging width,packaging_width
+www.makingbuyingeasy.co.uk//pixel pitch,pixel_pitch
+www.makingbuyingeasy.co.uk//power consumption max,power_consumption_max
+www.makingbuyingeasy.co.uk//power consumption off,power_consumption_standy
+www.makingbuyingeasy.co.uk//power consumption powersave,power_consumption_standy
+www.makingbuyingeasy.co.uk//power consumption standby,power_consumption_standy
+www.makingbuyingeasy.co.uk//power consumption typical,power_consumption_max
+www.makingbuyingeasy.co.uk//relative humidity,working_humidity
+www.makingbuyingeasy.co.uk//response time,response_time
+www.makingbuyingeasy.co.uk//storage relative humidity hh,working_humidity
+www.makingbuyingeasy.co.uk//storage temperature tt,working_temperature_max
+www.makingbuyingeasy.co.uk//storage temperature tt,working_temperature_min
+www.makingbuyingeasy.co.uk//storage temperature tt,working_temperature_range
+www.makingbuyingeasy.co.uk//supported graphics resolutions,supported_resolution
+www.makingbuyingeasy.co.uk//supported video modes,supported_resolution
+www.makingbuyingeasy.co.uk//vertical scan range,vertical_refresh_rate_max
+www.makingbuyingeasy.co.uk//vertical scan range,vertical_refresh_rate_range
+www.makingbuyingeasy.co.uk//weight,monitor_weight
+www.makingbuyingeasy.co.uk//weight with stand,monitor_weight_with_stand
+www.makingbuyingeasy.co.uk//width,monitor_dimension
+www.makingbuyingeasy.co.uk//width,monitor_width
+www.makingbuyingeasy.co.uk//width with stand,monitor_dimension_with_stand
+www.makingbuyingeasy.co.uk//width with stand,monitor_width_with_stand
+www.mediashopuk.com//aspect ratio,supported_aspect_ratio
+www.mediashopuk.com//contrast ratio dynamic,contrast_ratio_dynamic
+www.mediashopuk.com//contrast ratio typical,contrast_ratio_static
+www.mediashopuk.com//depth,monitor_depth
+www.mediashopuk.com//depth,monitor_dimension
+www.mediashopuk.com//depth with stand,monitor_depth_with_stand
+www.mediashopuk.com//depth with stand,monitor_dimension_with_stand
+www.mediashopuk.com//digital horizontal frequency,digital_horizontal_refresh_rate_max
+www.mediashopuk.com//digital horizontal frequency,digital_horizontal_refresh_rate_range
+www.mediashopuk.com//digital vertical frequency,digital_vertical_refresh_rate_max
+www.mediashopuk.com//digital vertical frequency,digital_vertical_refresh_rate_range
+www.mediashopuk.com//display brightness,screen_brightness
+www.mediashopuk.com//display diagonal,screen_size_diagonal
+www.mediashopuk.com//display diagonal metric,screen_size_diagonal
+www.mediashopuk.com//display number of colours,number_of_colors
+www.mediashopuk.com//display resolution,supported_resolution
+www.mediashopuk.com//height,monitor_dimension
+www.mediashopuk.com//height,monitor_height
+www.mediashopuk.com//height with stand,monitor_dimension_with_stand
+www.mediashopuk.com//height with stand,monitor_height_with_stand
+www.mediashopuk.com//horizontal scan range,horizontal_refresh_rate_max
+www.mediashopuk.com//horizontal scan range,horizontal_refresh_rate_range
+www.mediashopuk.com//input frequency,input_frequency
+www.mediashopuk.com//nonoperating altitude,non_operating_working_altitude
+www.mediashopuk.com//operating altitude,operating_working_altitude
+www.mediashopuk.com//operating relative humidity hh,working_humidity
+www.mediashopuk.com//operating temperature tt,working_temperature_max
+www.mediashopuk.com//operating temperature tt,working_temperature_min
+www.mediashopuk.com//operating temperature tt,working_temperature_range
+www.mediashopuk.com//package weight,packaging_weight
+www.mediashopuk.com//packaging depth,packaging_depth
+www.mediashopuk.com//packaging depth,packaging_dimension
+www.mediashopuk.com//packaging height,packaging_dimension
+www.mediashopuk.com//packaging height,packaging_height
+www.mediashopuk.com//packaging width,packaging_dimension
+www.mediashopuk.com//packaging width,packaging_width
+www.mediashopuk.com//pixel pitch,pixel_pitch
+www.mediashopuk.com//power consumption max,power_consumption_max
+www.mediashopuk.com//power consumption off,power_consumption_standy
+www.mediashopuk.com//power consumption powersave,power_consumption_standy
+www.mediashopuk.com//power consumption standby,power_consumption_standy
+www.mediashopuk.com//power consumption typical,power_consumption_max
+www.mediashopuk.com//relative humidity,working_humidity
+www.mediashopuk.com//response time,response_time
+www.mediashopuk.com//storage relative humidity hh,working_humidity
+www.mediashopuk.com//storage temperature tt,working_temperature_max
+www.mediashopuk.com//storage temperature tt,working_temperature_min
+www.mediashopuk.com//storage temperature tt,working_temperature_range
+www.mediashopuk.com//supported graphics resolutions,supported_resolution
+www.mediashopuk.com//supported video modes,supported_resolution
+www.mediashopuk.com//vertical scan range,vertical_refresh_rate_max
+www.mediashopuk.com//vertical scan range,vertical_refresh_rate_range
+www.mediashopuk.com//weight,monitor_weight
+www.mediashopuk.com//weight with stand,monitor_weight_with_stand
+www.mediashopuk.com//width,monitor_dimension
+www.mediashopuk.com//width,monitor_width
+www.mediashopuk.com//width with stand,monitor_dimension_with_stand
+www.mediashopuk.com//width with stand,monitor_width_with_stand
+www.mrhightech.com//aspect ratio,supported_aspect_ratio
+www.mrhightech.com//contrast ratio dynamic,contrast_ratio_dynamic
+www.mrhightech.com//contrast ratio typical,contrast_ratio_static
+www.mrhightech.com//depth,monitor_depth
+www.mrhightech.com//depth,monitor_dimension
+www.mrhightech.com//depth with stand,monitor_depth_with_stand
+www.mrhightech.com//depth with stand,monitor_dimension_with_stand
+www.mrhightech.com//digital horizontal frequency,digital_horizontal_refresh_rate_max
+www.mrhightech.com//digital horizontal frequency,digital_horizontal_refresh_rate_range
+www.mrhightech.com//digital vertical frequency,digital_vertical_refresh_rate_max
+www.mrhightech.com//digital vertical frequency,digital_vertical_refresh_rate_range
+www.mrhightech.com//display brightness,screen_brightness
+www.mrhightech.com//display diagonal,screen_size_diagonal
+www.mrhightech.com//display diagonal metric,screen_size_diagonal
+www.mrhightech.com//display number of colours,number_of_colors
+www.mrhightech.com//display resolution,supported_resolution
+www.mrhightech.com//height,monitor_dimension
+www.mrhightech.com//height,monitor_height
+www.mrhightech.com//height with stand,monitor_dimension_with_stand
+www.mrhightech.com//height with stand,monitor_height_with_stand
+www.mrhightech.com//horizontal scan range,horizontal_refresh_rate_max
+www.mrhightech.com//horizontal scan range,horizontal_refresh_rate_range
+www.mrhightech.com//input frequency,input_frequency
+www.mrhightech.com//nonoperating altitude,non_operating_working_altitude
+www.mrhightech.com//operating altitude,operating_working_altitude
+www.mrhightech.com//operating relative humidity hh,working_humidity
+www.mrhightech.com//operating temperature tt,working_temperature_max
+www.mrhightech.com//operating temperature tt,working_temperature_min
+www.mrhightech.com//operating temperature tt,working_temperature_range
+www.mrhightech.com//package weight,packaging_weight
+www.mrhightech.com//packaging depth,packaging_depth
+www.mrhightech.com//packaging depth,packaging_dimension
+www.mrhightech.com//packaging height,packaging_dimension
+www.mrhightech.com//packaging height,packaging_height
+www.mrhightech.com//packaging width,packaging_dimension
+www.mrhightech.com//packaging width,packaging_width
+www.mrhightech.com//pixel pitch,pixel_pitch
+www.mrhightech.com//power consumption max,power_consumption_max
+www.mrhightech.com//power consumption off,power_consumption_standy
+www.mrhightech.com//power consumption powersave,power_consumption_standy
+www.mrhightech.com//power consumption standby,power_consumption_standy
+www.mrhightech.com//power consumption typical,power_consumption_max
+www.mrhightech.com//relative humidity,working_humidity
+www.mrhightech.com//response time,response_time
+www.mrhightech.com//storage relative humidity hh,working_humidity
+www.mrhightech.com//storage temperature tt,working_temperature_max
+www.mrhightech.com//storage temperature tt,working_temperature_min
+www.mrhightech.com//storage temperature tt,working_temperature_range
+www.mrhightech.com//supported graphics resolutions,supported_resolution
+www.mrhightech.com//supported video modes,supported_resolution
+www.mrhightech.com//vertical scan range,vertical_refresh_rate_max
+www.mrhightech.com//vertical scan range,vertical_refresh_rate_range
+www.mrhightech.com//weight,monitor_weight
+www.mrhightech.com//weight with stand,monitor_weight_with_stand
+www.mrhightech.com//width,monitor_dimension
+www.mrhightech.com//width,monitor_width
+www.mrhightech.com//width with stand,monitor_dimension_with_stand
+www.mrhightech.com//width with stand,monitor_width_with_stand
+www.nexus-t.co.uk//aspect ratio,supported_aspect_ratio
+www.nexus-t.co.uk//brightness,screen_brightness
+www.nexus-t.co.uk//colours,number_of_colors
+www.nexus-t.co.uk//contrast ratio,contrast_ratio_static
+www.nexus-t.co.uk//dynamic contrast ratio,contrast_ratio_dynamic
+www.nexus-t.co.uk//gross weight,packaging_weight
+www.nexus-t.co.uk//horizontal frequency range,horizontal_refresh_rate_max
+www.nexus-t.co.uk//horizontal frequency range,horizontal_refresh_rate_range
+www.nexus-t.co.uk//max resolution,supported_resolution
+www.nexus-t.co.uk//net weight,monitor_weight
+www.nexus-t.co.uk//normal power consumption,power_consumption_max
+www.nexus-t.co.uk//package height,packaging_dimension
+www.nexus-t.co.uk//package height,packaging_height
+www.nexus-t.co.uk//package length,packaging_dimension
+www.nexus-t.co.uk//package length,packaging_width
+www.nexus-t.co.uk//package width,packaging_dimension
+www.nexus-t.co.uk//package width,packaging_width
+www.nexus-t.co.uk//pixel pitch,pixel_pitch
+www.nexus-t.co.uk//product height,monitor_dimension_with_stand
+www.nexus-t.co.uk//product height,monitor_height_with_stand
+www.nexus-t.co.uk//product height without stand,monitor_dimension
+www.nexus-t.co.uk//product height without stand,monitor_height
+www.nexus-t.co.uk//product length,monitor_depth_with_stand
+www.nexus-t.co.uk//product length,monitor_dimension_with_stand
+www.nexus-t.co.uk//product length without stand,monitor_depth
+www.nexus-t.co.uk//product length without stand,monitor_dimension
+www.nexus-t.co.uk//product name,response_time
+www.nexus-t.co.uk//product name,screen_size_diagonal
+www.nexus-t.co.uk//product name,supported_resolution
+www.nexus-t.co.uk//product width,monitor_dimension_with_stand
+www.nexus-t.co.uk//product width,monitor_width_with_stand
+www.nexus-t.co.uk//product width without stand,monitor_dimension
+www.nexus-t.co.uk//product width without stand,monitor_width
+www.nexus-t.co.uk//recommend resolution,supported_resolution
+www.nexus-t.co.uk//response time,response_time
+www.nexus-t.co.uk//screen size,screen_size_diagonal
+www.nexus-t.co.uk//standby power consumption,power_consumption_standy
+www.nexus-t.co.uk//vertical frequency range,vertical_refresh_rate_max
+www.nexus-t.co.uk//vertical frequency range,vertical_refresh_rate_range
+www.nexus-t.co.uk//wall mount,mount_model
+www.nexus-t.co.uk//warranty direct with manufacturer,warranty_duration
+www.odsi.co.uk//aspect ratio,supported_aspect_ratio
+www.odsi.co.uk//brightness,screen_brightness
+www.odsi.co.uk//colour depth,number_of_colors
+www.odsi.co.uk//colour support,number_of_colors
+www.odsi.co.uk//contrast ratio,contrast_ratio_dynamic
+www.odsi.co.uk//contrast ratio,contrast_ratio_static
+www.odsi.co.uk//depth,monitor_depth
+www.odsi.co.uk//depth,monitor_dimension
+www.odsi.co.uk//device type,screen_size_diagonal
+www.odsi.co.uk//diagonal size,screen_size_diagonal
+www.odsi.co.uk//diagonal size cm,screen_size_diagonal
+www.odsi.co.uk//dimensions  weight details,monitor_depth
+www.odsi.co.uk//dimensions  weight details,monitor_depth_with_stand
+www.odsi.co.uk//dimensions  weight details,monitor_dimension
+www.odsi.co.uk//dimensions  weight details,monitor_dimension_with_stand
+www.odsi.co.uk//dimensions  weight details,monitor_height
+www.odsi.co.uk//dimensions  weight details,monitor_height_with_stand
+www.odsi.co.uk//dimensions  weight details,monitor_weight
+www.odsi.co.uk//dimensions  weight details,monitor_weight_with_stand
+www.odsi.co.uk//dimensions  weight details,monitor_width
+www.odsi.co.uk//dimensions  weight details,monitor_width_with_stand
+www.odsi.co.uk//dimensions wxdxh,monitor_depth
+www.odsi.co.uk//dimensions wxdxh,monitor_depth_with_stand
+www.odsi.co.uk//dimensions wxdxh,monitor_dimension
+www.odsi.co.uk//dimensions wxdxh,monitor_dimension_with_stand
+www.odsi.co.uk//dimensions wxdxh,monitor_height
+www.odsi.co.uk//dimensions wxdxh,monitor_height_with_stand
+www.odsi.co.uk//dimensions wxdxh,monitor_width
+www.odsi.co.uk//dimensions wxdxh,monitor_width_with_stand
+www.odsi.co.uk//display format,supported_resolution
+www.odsi.co.uk//height,monitor_dimension
+www.odsi.co.uk//height,monitor_height
+www.odsi.co.uk//horizontal refresh rate,horizontal_refresh_rate_max
+www.odsi.co.uk//horizontal refresh rate,horizontal_refresh_rate_range
+www.odsi.co.uk//humidity range operating,working_humidity
+www.odsi.co.uk//image aspect ratio,supported_aspect_ratio
+www.odsi.co.uk//image brightness,screen_brightness
+www.odsi.co.uk//image contrast ratio,contrast_ratio_static
+www.odsi.co.uk//manufacturer warranty,warranty_duration
+www.odsi.co.uk//max operating temperature,working_temperature_max
+www.odsi.co.uk//max operating temperature,working_temperature_range
+www.odsi.co.uk//max resolution,supported_resolution
+www.odsi.co.uk//min operating temperature,working_temperature_min
+www.odsi.co.uk//min operating temperature,working_temperature_range
+www.odsi.co.uk//native maximum resolution,supported_resolution
+www.odsi.co.uk//native resolution,supported_resolution
+www.odsi.co.uk//pixel pitch,pixel_pitch
+www.odsi.co.uk//power consumption operational,power_consumption_max
+www.odsi.co.uk//power consumption stand by,power_consumption_standy
+www.odsi.co.uk//power consumption stand by  sleep,power_consumption_standy
+www.odsi.co.uk//product description,screen_size_diagonal
+www.odsi.co.uk//refresh rate,vertical_refresh_rate_max
+www.odsi.co.uk//refresh rate,vertical_refresh_rate_range
+www.odsi.co.uk//resolution,supported_resolution
+www.odsi.co.uk//response time,response_time
+www.odsi.co.uk//service  support,warranty_duration
+www.odsi.co.uk//service  support details,warranty_duration
+www.odsi.co.uk//supported computer resolutions,supported_resolution
+www.odsi.co.uk//vertical refresh rate,vertical_refresh_rate_max
+www.odsi.co.uk//vertical refresh rate,vertical_refresh_rate_range
+www.odsi.co.uk//viewable size,screen_size_diagonal
+www.odsi.co.uk//weight,monitor_weight
+www.odsi.co.uk//width,monitor_dimension
+www.odsi.co.uk//width,monitor_width
+www.officedepot.com//aspect ratio,supported_aspect_ratio
+www.officedepot.com//brightness,screen_brightness
+www.officedepot.com//color supported,number_of_colors
+www.officedepot.com//contrast ratio,contrast_ratio_static
+www.officedepot.com//depth,monitor_depth
+www.officedepot.com//depth,monitor_dimension
+www.officedepot.com//depth with stand,monitor_depth_with_stand
+www.officedepot.com//depth with stand,monitor_dimension_with_stand
+www.officedepot.com//diagonal screen size,screen_size_diagonal
+www.officedepot.com//dimensions,monitor_depth_with_stand
+www.officedepot.com//dimensions,monitor_dimension_with_stand
+www.officedepot.com//dimensions,monitor_height_with_stand
+www.officedepot.com//dimensions,monitor_width_with_stand
+www.officedepot.com//height,monitor_dimension
+www.officedepot.com//height,monitor_height
+www.officedepot.com//height with stand,monitor_dimension_with_stand
+www.officedepot.com//height with stand,monitor_height_with_stand
+www.officedepot.com//maximum resolution,supported_resolution
+www.officedepot.com//monitor brightness,screen_brightness
+www.officedepot.com//offmode power consumption,power_consumption_standy
+www.officedepot.com//operating power consumption,power_consumption_max
+www.officedepot.com//product name,screen_size_diagonal
+www.officedepot.com//response time,response_time
+www.officedepot.com//screen size,screen_size_diagonal
+www.officedepot.com//standard refresh rate,vertical_refresh_rate_max
+www.officedepot.com//standard refresh rate,vertical_refresh_rate_range
+www.officedepot.com//standby power consumption,power_consumption_standy
+www.officedepot.com//typical response time,response_time
+www.officedepot.com//viewable image size,screen_size_diagonal
+www.officedepot.com//warranty length,warranty_duration
+www.officedepot.com//weight,monitor_weight
+www.officedepot.com//weight with stand approximate,monitor_weight_with_stand
+www.officedepot.com//width,monitor_dimension
+www.officedepot.com//width,monitor_width
+www.officedepot.com//width with stand,monitor_dimension_with_stand
+www.officedepot.com//width with stand,monitor_width_with_stand
+www.ohc24.ch//aspect ratio,supported_aspect_ratio
+www.ohc24.ch//brightness,screen_brightness
+www.ohc24.ch//colour support,number_of_colors
+www.ohc24.ch//contrast ratio,contrast_ratio_dynamic
+www.ohc24.ch//contrast ratio,contrast_ratio_static
+www.ohc24.ch//device type,screen_size_diagonal
+www.ohc24.ch//dimensions wxdxh,monitor_depth
+www.ohc24.ch//dimensions wxdxh,monitor_depth_with_stand
+www.ohc24.ch//dimensions wxdxh,monitor_dimension
+www.ohc24.ch//dimensions wxdxh,monitor_dimension_with_stand
+www.ohc24.ch//dimensions wxdxh,monitor_height
+www.ohc24.ch//dimensions wxdxh,monitor_height_with_stand
+www.ohc24.ch//dimensions wxdxh,monitor_width
+www.ohc24.ch//dimensions wxdxh,monitor_width_with_stand
+www.ohc24.ch//image aspect ratio,supported_aspect_ratio
+www.ohc24.ch//manufacturer warranty,warranty_duration
+www.ohc24.ch//native resolution,supported_resolution
+www.ohc24.ch//pixel pitch,pixel_pitch
+www.ohc24.ch//product description,screen_size_diagonal
+www.ohc24.ch//resolution,supported_resolution
+www.ohc24.ch//response time,response_time
+www.ohc24.ch//weight,monitor_weight_with_stand
+www.pc-canada.com//aspect ratio,supported_aspect_ratio
+www.pc-canada.com//brightness,screen_brightness
+www.pc-canada.com//color supported,number_of_colors
+www.pc-canada.com//contrast ratio,contrast_ratio_static
+www.pc-canada.com//depth,monitor_depth
+www.pc-canada.com//depth,monitor_dimension
+www.pc-canada.com//depth with stand,monitor_depth_with_stand
+www.pc-canada.com//depth with stand,monitor_dimension_with_stand
+www.pc-canada.com//height,monitor_dimension
+www.pc-canada.com//height,monitor_height
+www.pc-canada.com//height with stand,monitor_dimension_with_stand
+www.pc-canada.com//height with stand,monitor_height_with_stand
+www.pc-canada.com//limited warranty,warranty_duration
+www.pc-canada.com//maximum resolution,supported_resolution
+www.pc-canada.com//offmode power consumption,power_consumption_standy
+www.pc-canada.com//operating power consumption,power_consumption_max
+www.pc-canada.com//product name,screen_size_diagonal
+www.pc-canada.com//response time,response_time
+www.pc-canada.com//screen size,screen_size_diagonal
+www.pc-canada.com//standard refresh rate,vertical_refresh_rate_max
+www.pc-canada.com//standard refresh rate,vertical_refresh_rate_range
+www.pc-canada.com//standby power consumption,power_consumption_standy
+www.pc-canada.com//weight approximate,monitor_weight
+www.pc-canada.com//weight with stand approximate,monitor_weight_with_stand
+www.pc-canada.com//width,monitor_dimension
+www.pc-canada.com//width,monitor_width
+www.pc-canada.com//width with stand,monitor_dimension_with_stand
+www.pc-canada.com//width with stand,monitor_width_with_stand
+www.pcconnection.com//actual weight,monitor_weight
+www.pcconnection.com//brightness nitscdm2,screen_brightness
+www.pcconnection.com//color support,number_of_colors
+www.pcconnection.com//contrast ratio,contrast_ratio_static
+www.pcconnection.com//display size,screen_size_diagonal
+www.pcconnection.com//dot pitch,pixel_pitch
+www.pcconnection.com//image aspect ratio,supported_aspect_ratio
+www.pcconnection.com//image brightness,screen_brightness
+www.pcconnection.com//internal resolution max,supported_resolution
+www.pcconnection.com//physical dimensions,monitor_depth
+www.pcconnection.com//physical dimensions,monitor_dimension
+www.pcconnection.com//physical dimensions,monitor_height
+www.pcconnection.com//physical dimensions,monitor_width
+www.pcconnection.com//response timerate,response_time
+www.pcconnection.com//warranty  labor,warranty_duration
+www.planet-computer.it//altezza,monitor_dimension
+www.planet-computer.it//altezza,monitor_height
+www.planet-computer.it//altezza con supporto,monitor_dimension_with_stand
+www.planet-computer.it//altezza con supporto,monitor_height_with_stand
+www.planet-computer.it//altezza imballo,packaging_dimension
+www.planet-computer.it//altezza imballo,packaging_height
+www.planet-computer.it//altitudine di funzionamento,operating_working_altitude
+www.planet-computer.it//altitudine di nonfunzionamento,non_operating_working_altitude
+www.planet-computer.it//colori del display,number_of_colors
+www.planet-computer.it//condizioni ambientali,non_operating_working_altitude
+www.planet-computer.it//condizioni ambientali,operating_working_altitude
+www.planet-computer.it//condizioni ambientali,working_humidity
+www.planet-computer.it//condizioni ambientali,working_temperature_max
+www.planet-computer.it//condizioni ambientali,working_temperature_min
+www.planet-computer.it//consumi,power_consumption_max
+www.planet-computer.it//consumi modalità risparmio energetico,power_consumption_standy
+www.planet-computer.it//consumi modalità spento,power_consumption_standy
+www.planet-computer.it//consumi modalità standby,power_consumption_standy
+www.planet-computer.it//dimensione visibile orizzontale,screen_size_horizontal
+www.planet-computer.it//dimensione visibile verticale,screen_size_vertical
+www.planet-computer.it//dimensioni imballo lxpxa,packaging_depth
+www.planet-computer.it//dimensioni imballo lxpxa,packaging_dimension
+www.planet-computer.it//dimensioni imballo lxpxa,packaging_height
+www.planet-computer.it//dimensioni imballo lxpxa,packaging_width
+www.planet-computer.it//dimensioni schermo,screen_size_diagonal
+www.planet-computer.it//dot pitch,pixel_pitch
+www.planet-computer.it//formato,supported_aspect_ratio
+www.planet-computer.it//frequenza di ingresso,input_frequency
+www.planet-computer.it//frequenza scansione orizzontale,digital_horizontal_refresh_rate_max
+www.planet-computer.it//frequenza scansione orizzontale,digital_horizontal_refresh_rate_range
+www.planet-computer.it//frequenza scansione verticale,digital_vertical_refresh_rate_max
+www.planet-computer.it//frequenza scansione verticale,digital_vertical_refresh_rate_range
+www.planet-computer.it//intervallo di scansione verticale,vertical_refresh_rate_max
+www.planet-computer.it//intervallo di scansione verticale,vertical_refresh_rate_range
+www.planet-computer.it//intervallo di temperatura,working_temperature_max
+www.planet-computer.it//intervallo di temperatura,working_temperature_min
+www.planet-computer.it//intervallo di temperatura,working_temperature_range
+www.planet-computer.it//intervallo temperatura di funzionamento,working_temperature_max
+www.planet-computer.it//intervallo temperatura di funzionamento,working_temperature_min
+www.planet-computer.it//intervallo temperatura di funzionamento,working_temperature_range
+www.planet-computer.it//larghezza,monitor_dimension
+www.planet-computer.it//larghezza,monitor_width
+www.planet-computer.it//larghezza con supporto,monitor_dimension_with_stand
+www.planet-computer.it//larghezza con supporto,monitor_width_with_stand
+www.planet-computer.it//larghezza imballo,packaging_dimension
+www.planet-computer.it//larghezza imballo,packaging_width
+www.planet-computer.it//luminosità schermo,screen_brightness
+www.planet-computer.it//modalità video supportate,supported_resolution
+www.planet-computer.it//peso,monitor_weight
+www.planet-computer.it//peso incluso imballo,packaging_weight
+www.planet-computer.it//peso prodotto con supporto,monitor_weight_with_stand
+www.planet-computer.it//profondità,monitor_depth
+www.planet-computer.it//profondità,monitor_dimension
+www.planet-computer.it//profondità con supporto,monitor_depth_with_stand
+www.planet-computer.it//profondità con supporto,monitor_dimension_with_stand
+www.planet-computer.it//profondità imballo,packaging_depth
+www.planet-computer.it//profondità imballo,packaging_dimension
+www.planet-computer.it//range di scansione orizzontale,horizontal_refresh_rate_max
+www.planet-computer.it//range di scansione orizzontale,horizontal_refresh_rate_range
+www.planet-computer.it//range di umidità di funzionamento,working_humidity
+www.planet-computer.it//rapporto di contrasto,contrast_ratio_static
+www.planet-computer.it//rapporto di contrasto dinamico,contrast_ratio_dynamic
+www.planet-computer.it//risoluzione,supported_resolution
+www.planet-computer.it//risoluzione consigliata,supported_resolution
+www.planet-computer.it//risoluzione massima,supported_resolution
+www.planet-computer.it//risoluzioni grafiche supportate,supported_resolution
+www.planet-computer.it//tempo di risposta,response_time
+www.planet-computer.it//umidità,working_humidity
+www.planet-computer.it//umidità relativa,working_humidity
+www.shopmania.com//aspect ratio,supported_aspect_ratio
+www.shopmania.com//brightness,screen_brightness
+www.shopmania.com//color depth,number_of_colors
+www.shopmania.com//contrast ratio,contrast_ratio_static
+www.shopmania.com//depth,monitor_depth
+www.shopmania.com//depth,monitor_dimension
+www.shopmania.com//diagonal size,screen_size_diagonal
+www.shopmania.com//dot pitch,pixel_pitch
+www.shopmania.com//dynamic contrast ratio,contrast_ratio_dynamic
+www.shopmania.com//height,monitor_dimension
+www.shopmania.com//height,monitor_height
+www.shopmania.com//power consumption operational,power_consumption_max
+www.shopmania.com//power consumption stand by,power_consumption_standy
+www.shopmania.com//resolution,supported_resolution
+www.shopmania.com//response time,response_time
+www.shopmania.com//weight,monitor_weight
+www.shopmania.com//width,monitor_dimension
+www.shopmania.com//width,monitor_width
+www.softwarecity.ca//aspect ratio,supported_aspect_ratio
+www.softwarecity.ca//brightness,screen_brightness
+www.softwarecity.ca//color supported,number_of_colors
+www.softwarecity.ca//contrast ratio,contrast_ratio_static
+www.softwarecity.ca//depth,monitor_depth
+www.softwarecity.ca//depth,monitor_dimension
+www.softwarecity.ca//depth with stand,monitor_depth_with_stand
+www.softwarecity.ca//depth with stand,monitor_dimension_with_stand
+www.softwarecity.ca//height,monitor_dimension
+www.softwarecity.ca//height,monitor_height
+www.softwarecity.ca//height with stand,monitor_dimension_with_stand
+www.softwarecity.ca//height with stand,monitor_height_with_stand
+www.softwarecity.ca//horizontal frequency,horizontal_refresh_rate_max
+www.softwarecity.ca//horizontal frequency,horizontal_refresh_rate_range
+www.softwarecity.ca//limited warranty,warranty_duration
+www.softwarecity.ca//maximum resolution,supported_resolution
+www.softwarecity.ca//offmode power consumption,power_consumption_standy
+www.softwarecity.ca//operating power consumption,power_consumption_max
+www.softwarecity.ca//response time,response_time
+www.softwarecity.ca//screen size,screen_size_diagonal
+www.softwarecity.ca//standard refresh rate,vertical_refresh_rate_max
+www.softwarecity.ca//standard refresh rate,vertical_refresh_rate_range
+www.softwarecity.ca//standby power consumption,power_consumption_standy
+www.softwarecity.ca//weight approximate,monitor_weight
+www.softwarecity.ca//weight with stand approximate,monitor_weight_with_stand
+www.softwarecity.ca//width,monitor_dimension
+www.softwarecity.ca//width,monitor_width
+www.softwarecity.ca//width with stand,monitor_dimension_with_stand
+www.softwarecity.ca//width with stand,monitor_width_with_stand
+www.vology.com//aspect ratio,supported_aspect_ratio
+www.vology.com//brightness,screen_brightness
+www.vology.com//color support,number_of_colors
+www.vology.com//contrast ratio,contrast_ratio_dynamic
+www.vology.com//contrast ratio,contrast_ratio_static
+www.vology.com//device type,screen_size_diagonal
+www.vology.com//diagonal size,screen_size_diagonal
+www.vology.com//dimensions  weight,monitor_depth
+www.vology.com//dimensions  weight,monitor_depth_with_stand
+www.vology.com//dimensions  weight,monitor_dimension
+www.vology.com//dimensions  weight,monitor_dimension_with_stand
+www.vology.com//dimensions  weight,monitor_height
+www.vology.com//dimensions  weight,monitor_height_with_stand
+www.vology.com//dimensions  weight,monitor_weight
+www.vology.com//dimensions  weight,monitor_weight_with_stand
+www.vology.com//dimensions  weight,monitor_width
+www.vology.com//dimensions  weight,monitor_width_with_stand
+www.vology.com//dimensions  weight details,monitor_depth
+www.vology.com//dimensions  weight details,monitor_depth_with_stand
+www.vology.com//dimensions  weight details,monitor_dimension
+www.vology.com//dimensions  weight details,monitor_dimension_with_stand
+www.vology.com//dimensions  weight details,monitor_height
+www.vology.com//dimensions  weight details,monitor_height_with_stand
+www.vology.com//dimensions  weight details,monitor_weight
+www.vology.com//dimensions  weight details,monitor_weight_with_stand
+www.vology.com//dimensions  weight details,monitor_width
+www.vology.com//dimensions wxdxh,monitor_depth
+www.vology.com//dimensions wxdxh,monitor_depth_with_stand
+www.vology.com//dimensions wxdxh,monitor_dimension
+www.vology.com//dimensions wxdxh,monitor_dimension_with_stand
+www.vology.com//dimensions wxdxh,monitor_height
+www.vology.com//dimensions wxdxh,monitor_height_with_stand
+www.vology.com//dimensions wxdxh,monitor_width
+www.vology.com//dimensions wxdxh,monitor_width_with_stand
+www.vology.com//environmental parameters,working_humidity
+www.vology.com//environmental parameters,working_temperature_max
+www.vology.com//environmental parameters,working_temperature_min
+www.vology.com//environmental parameters,working_temperature_range
+www.vology.com//horizontal refresh rate,horizontal_refresh_rate_max
+www.vology.com//horizontal refresh rate,horizontal_refresh_rate_range
+www.vology.com//humidity range operating,working_humidity
+www.vology.com//manufacturer warranty,warranty_duration
+www.vology.com//max operating temperature,working_temperature_max
+www.vology.com//max operating temperature,working_temperature_range
+www.vology.com//min operating temperature,working_temperature_min
+www.vology.com//min operating temperature,working_temperature_range
+www.vology.com//native resolution,supported_resolution
+www.vology.com//pixel pitch,pixel_pitch
+www.vology.com//power consumption operational,power_consumption_max
+www.vology.com//power consumption sleep,power_consumption_standy
+www.vology.com//power consumption stand by,power_consumption_standy
+www.vology.com//power consumption stand by  sleep,power_consumption_standy
+www.vology.com//product description,screen_size_diagonal
+www.vology.com//response time,response_time
+www.vology.com//service  support,warranty_duration
+www.vology.com//vertical refresh rate,vertical_refresh_rate_max
+www.vology.com//vertical refresh rate,vertical_refresh_rate_range
+www.vology.com//viewable size,screen_size_diagonal
+www.vology.com//weight,monitor_weight
+www.xpcpro.com//aspect ratio,supported_aspect_ratio
+www.xpcpro.com//contrast ratio dynamic,contrast_ratio_dynamic
+www.xpcpro.com//contrast ratio typical,contrast_ratio_static
+www.xpcpro.com//depth,monitor_depth
+www.xpcpro.com//depth,monitor_dimension
+www.xpcpro.com//depth with stand,monitor_depth_with_stand
+www.xpcpro.com//depth with stand,monitor_dimension_with_stand
+www.xpcpro.com//digital horizontal frequency,digital_horizontal_refresh_rate_max
+www.xpcpro.com//digital horizontal frequency,digital_horizontal_refresh_rate_range
+www.xpcpro.com//digital vertical frequency,digital_vertical_refresh_rate_max
+www.xpcpro.com//digital vertical frequency,digital_vertical_refresh_rate_range
+www.xpcpro.com//display brightness,screen_brightness
+www.xpcpro.com//display diagonal,screen_size_diagonal
+www.xpcpro.com//display diagonal metric,screen_size_diagonal
+www.xpcpro.com//display number of colours,number_of_colors
+www.xpcpro.com//display resolution,supported_resolution
+www.xpcpro.com//height,monitor_dimension
+www.xpcpro.com//height,monitor_height
+www.xpcpro.com//height with stand,monitor_dimension_with_stand
+www.xpcpro.com//height with stand,monitor_height_with_stand
+www.xpcpro.com//horizontal scan range,horizontal_refresh_rate_max
+www.xpcpro.com//horizontal scan range,horizontal_refresh_rate_range
+www.xpcpro.com//input frequency,input_frequency
+www.xpcpro.com//maximum resolution,supported_resolution
+www.xpcpro.com//nonoperating altitude,non_operating_working_altitude
+www.xpcpro.com//operating relative humidity hh,working_humidity
+www.xpcpro.com//operating relative humidity range,working_humidity
+www.xpcpro.com//operating temperature range tt,working_temperature_max
+www.xpcpro.com//operating temperature range tt,working_temperature_min
+www.xpcpro.com//operating temperature range tt,working_temperature_range
+www.xpcpro.com//operating temperature tt,working_temperature_max
+www.xpcpro.com//operating temperature tt,working_temperature_min
+www.xpcpro.com//operating temperature tt,working_temperature_range
+www.xpcpro.com//package weight,packaging_weight
+www.xpcpro.com//packaging depth,packaging_depth
+www.xpcpro.com//packaging depth,packaging_dimension
+www.xpcpro.com//packaging height,packaging_dimension
+www.xpcpro.com//packaging height,packaging_height
+www.xpcpro.com//packaging width,packaging_dimension
+www.xpcpro.com//packaging width,packaging_width
+www.xpcpro.com//pixel pitch,pixel_pitch
+www.xpcpro.com//power consumption max,power_consumption_max
+www.xpcpro.com//power consumption off,power_consumption_standy
+www.xpcpro.com//power consumption powersave,power_consumption_standy
+www.xpcpro.com//power consumption standby,power_consumption_standy
+www.xpcpro.com//power consumption typical,power_consumption_max
+www.xpcpro.com//reaktionszeit,response_time
+www.xpcpro.com//relative humidity,working_humidity
+www.xpcpro.com//response time,response_time
+www.xpcpro.com//storage relative humidity hh,working_humidity
+www.xpcpro.com//storage relative humidity range,working_humidity
+www.xpcpro.com//storage temperature range tt,working_temperature_max
+www.xpcpro.com//storage temperature range tt,working_temperature_min
+www.xpcpro.com//storage temperature range tt,working_temperature_range
+www.xpcpro.com//storage temperature tt,working_temperature_max
+www.xpcpro.com//storage temperature tt,working_temperature_min
+www.xpcpro.com//storage temperature tt,working_temperature_range
+www.xpcpro.com//supported graphics resolutions,supported_resolution
+www.xpcpro.com//supported video modes,supported_resolution
+www.xpcpro.com//vertical scan range,vertical_refresh_rate_max
+www.xpcpro.com//vertical scan range,vertical_refresh_rate_range
+www.xpcpro.com//weight,monitor_weight
+www.xpcpro.com//weight with stand,monitor_weight_with_stand
+www.xpcpro.com//width,monitor_dimension
+www.xpcpro.com//width,monitor_width
+www.xpcpro.com//width with stand,monitor_dimension_with_stand
+www.xpcpro.com//width with stand,monitor_width_with_stand
+www.hardware-planet.it//lingue osd,supported_languages
+www.makingbuyingeasy.co.uk//on screen display osd languages,supported_languages
+www.odsi.co.uk//osd languages,supported_languages
+www.planet-computer.it//lingue osd,supported_languages
+www.vology.com//osd languages,supported_languages
+www.xpcpro.com//on screen display osd languages,supported_languages

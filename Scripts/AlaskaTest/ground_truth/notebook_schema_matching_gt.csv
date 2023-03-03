@@ -1,0 +1,1630 @@
+source_attribute_id,target_attribute_name
+buy.net//64bit processing,is_cpu_64bit
+buy.net//aspect ratio,aspect_ratio
+buy.net//battery life,battery_life
+buy.net//brand name,brand
+buy.net//cache size,cpu_cache
+buy.net//depth,dimensions_depth
+buy.net//depth,dimensions
+buy.net//dimensions,dimensions
+buy.net//dimensions,dimensions_depth
+buy.net//dimensions,dimensions_height
+buy.net//dimensions,dimensions_width
+buy.net//display size,display_size
+buy.net//display type,display_type
+buy.net//graphics memory technology,ram_type
+buy.net//hard drive capacity,hdd_capacity
+buy.net//hard drive rpm,hdd_speed
+buy.net//height,dimensions_height
+buy.net//installed memory,ram_capacity
+buy.net//interface connection,has_hdmi_port
+buy.net//interface connection,usb_port2_quantity
+buy.net//interface connection,usb_port3_quantity
+buy.net//max resolution,display_resolution
+buy.net//maximum memory,ram_capacity_max
+buy.net//memory card reader,has_memorycard_reader
+buy.net//memory technology,ram_type
+buy.net//normalizeddisplay size,display_size
+buy.net//normalizedhard drive capacity,hdd_capacity
+buy.net//normalizedheight,dimensions_height
+buy.net//normalizedinstalled memory,ram_capacity
+buy.net//normalizedprocessor speed,cpu_frequency
+buy.net//normalizedweight,weight
+buy.net//number of hard drives included,hdd_capacity
+buy.net//number of processor cores,cpu_type
+buy.net//number of usb 20 ports,usb_port2_quantity
+buy.net//number of usb 30 ports,usb_port3_quantity
+buy.net//processor class,cpu_brand
+buy.net//processor class,cpu_type
+buy.net//processor model,cpu_type
+buy.net//processor model,cpu_model
+buy.net//processor speed,cpu_frequency
+buy.net//solid state drive capacity,ssd_capacity
+buy.net//warranty information,warranty_duration
+buy.net//weight,weight
+buy.net//width,dimensions_width
+buy.net//width,dimensions
+catalog.com//64bit computing,is_cpu_64bit
+catalog.com//brand,brand
+catalog.com//clock speed,cpu_frequency
+livehotdeals.com//display,display_resolution
+livehotdeals.com//display,display_size
+livehotdeals.com//display,display_type
+livehotdeals.com//hard drives,hdd_capacity
+livehotdeals.com//hard drives,hdd_speed
+livehotdeals.com//memory,ram_capacity
+livehotdeals.com//memory,ram_frequency
+livehotdeals.com//memory,ram_type
+livehotdeals.com//processors,cpu_brand
+livehotdeals.com//processors,cpu_frequency
+livehotdeals.com//processors,cpu_model
+livehotdeals.com//processors,cpu_type
+livehotdeals.com//support,warranty_duration
+wallmartphoto.com//accessories included,battery_chemistry
+wallmartphoto.com//battery life,battery_life
+wallmartphoto.com//battery type,battery_chemistry
+wallmartphoto.com//hard drive size,hdd_capacity
+wallmartphoto.com//laptop screen size,display_size
+wallmartphoto.com//maximum memory expansion,ram_capacity_max
+wallmartphoto.com//monitor size,display_size
+wallmartphoto.com//processor brand,cpu_brand
+wallmartphoto.com//processor speed,cpu_frequency
+wallmartphoto.com//processor type,cpu_brand
+wallmartphoto.com//processor type,cpu_model
+wallmartphoto.com//processor type,cpu_type
+wallmartphoto.com//product in inches l x w x h,dimensions
+wallmartphoto.com//product in inches l x w x h,dimensions_height
+wallmartphoto.com//product in inches l x w x h,dimensions_depth
+wallmartphoto.com//product in inches l x w x h,dimensions_width
+wallmartphoto.com//resolution,display_resolution
+wallmartphoto.com//screen type,display_type
+wallmartphoto.com//shipping weight in pounds,packaging_weight
+wallmartphoto.com//system ram,ram_capacity
+www.alibaba.com//13battery,battery_life
+www.alibaba.com//13battery,battery_capacity
+www.alibaba.com//2 dimensions,dimensions
+www.alibaba.com//2 dimensions,dimensions_height
+www.alibaba.com//2 dimensions,dimensions_width
+www.alibaba.com//2 dimensions,dimensions_depth
+www.alibaba.com//5cpu,cpu_frequency
+www.alibaba.com//5cpu,cpu_type
+www.alibaba.com//7memory,ram_capacity
+www.alibaba.com//7memory,ram_type
+www.alibaba.com//8nand flash,flash_capacity
+www.alibaba.com//9tft monitor,aspect_ratio
+www.alibaba.com//9tft monitor,display_resolution
+www.alibaba.com//9tft monitor,display_size
+www.alibaba.com//aspect ratio,aspect_ratio
+www.alibaba.com//basic parameter,cpu_brand
+www.alibaba.com//basic parameter,cpu_type
+www.alibaba.com//basic parameter,cpu_model
+www.alibaba.com//basic parameter,cpu_frequency
+www.alibaba.com//basic specifications,cpu_brand
+www.alibaba.com//basic specifications,cpu_frequency
+www.alibaba.com//basic specifications,cpu_model
+www.alibaba.com//basic specifications,cpu_type
+www.alibaba.com//battery,battery_capacity
+www.alibaba.com//battery,battery_chemistry
+www.alibaba.com//battery capacity,battery_capacity
+www.alibaba.com//battery capacity,battery_chemistry
+www.alibaba.com//battery life,battery_life
+www.alibaba.com//battery pack,battery_capacity
+www.alibaba.com//battery pack,battery_chemistry
+www.alibaba.com//battery parameter,battery_capacity
+www.alibaba.com//battery power,battery_chemistry
+www.alibaba.com//battery  run time up to,battery_life
+www.alibaba.com//battery  run timeup to,battery_life
+www.alibaba.com//battery time,battery_life
+www.alibaba.com//battery type,battery_capacity
+www.alibaba.com//battery type,battery_chemistry
+www.alibaba.com//battery working time,battery_life
+www.alibaba.com//battery working time,battery_capacity
+www.alibaba.com//body,dimensions
+www.alibaba.com//body,dimensions_height
+www.alibaba.com//body,dimensions_width
+www.alibaba.com//body,dimensions_depth
+www.alibaba.com//body size,dimensions
+www.alibaba.com//body size,dimensions_height
+www.alibaba.com//body size,dimensions_width
+www.alibaba.com//body size,dimensions_depth
+www.alibaba.com//bodypack size,dimensions
+www.alibaba.com//bodypack size,dimensions_height
+www.alibaba.com//bodypack size,dimensions_width
+www.alibaba.com//bodypack size,dimensions_depth
+www.alibaba.com//brand,brand
+www.alibaba.com//brand name,brand
+www.alibaba.com//builtin nand flash,flash_capacity
+www.alibaba.com//capacity,battery_capacity
+www.alibaba.com//capacity of ram,ram_capacity
+www.alibaba.com//capacity of ram,ram_capacity_max
+www.alibaba.com//carton,packaging_dimensions
+www.alibaba.com//carton,packaging_dimensions_height
+www.alibaba.com//carton,packaging_dimensions_depth
+www.alibaba.com//carton,packaging_dimensions_width
+www.alibaba.com//carton dimension,packaging_dimensions
+www.alibaba.com//carton dimension,packaging_dimensions_height
+www.alibaba.com//carton dimension,packaging_dimensions_depth
+www.alibaba.com//carton dimension,packaging_dimensions_width
+www.alibaba.com//carton size,packaging_dimensions
+www.alibaba.com//caton size,packaging_dimensions_height
+www.alibaba.com//caton size,packaging_dimensions_depth
+www.alibaba.com//caton size,packaging_dimensions_width
+www.alibaba.com//configuration,ram_capacity
+www.alibaba.com//configuration,hdd_capacity
+www.alibaba.com//configuration,ram_capacity
+www.alibaba.com//core,cpu_brand
+www.alibaba.com//core,cpu_type
+www.alibaba.com//core,cpu_model
+www.alibaba.com//coretm i53317u  170ghz,cpu_type
+www.alibaba.com//coretm i53317u  170ghz,cpu_model
+www.alibaba.com//coretm i53317u  170ghz,cpu_frequency
+www.alibaba.com//coretm i53427u  180ghz,cpu_type
+www.alibaba.com//coretm i53427u  180ghz,cpu_model
+www.alibaba.com//coretm i53427u  180ghz,cpu_frequency
+www.alibaba.com//coretm i73517u  190ghz,cpu_type
+www.alibaba.com//coretm i73517u  190ghz,cpu_model
+www.alibaba.com//coretm i73517u  190ghz,cpu_frequency
+www.alibaba.com//coretm i73667u  20ghz,cpu_type
+www.alibaba.com//coretm i73667u  20ghz,cpu_model
+www.alibaba.com//coretm i73667u  20ghz,cpu_frequency
+www.alibaba.com//cpu,cpu_brand
+www.alibaba.com//cpu,cpu_frequency
+www.alibaba.com//cpu,cpu_model
+www.alibaba.com//cpu,cpu_type
+www.alibaba.com//cpu frequency,cpu_frequency
+www.alibaba.com//cpu manufacturer,cpu_brand
+www.alibaba.com//cpu speed,cpu_frequency
+www.alibaba.com//cpu speedprocessor clock speed,cpu_frequency
+www.alibaba.com//cpu support,cpu_brand
+www.alibaba.com//cpu support,cpu_type
+www.alibaba.com//cpu type,cpu_type
+www.alibaba.com//cup processor,cpu_frequency
+www.alibaba.com//ddr type,ram_type
+www.alibaba.com//ddr3,ram_type
+www.alibaba.com//ddr3,ram_frequency
+www.alibaba.com//demension,dimensions
+www.alibaba.com//demension,dimensions_height
+www.alibaba.com//demension,dimensions_width
+www.alibaba.com//demension,dimensions_depth
+www.alibaba.com//dimension,dimensions
+www.alibaba.com//dimension,dimensions_height
+www.alibaba.com//dimension,dimensions_width
+www.alibaba.com//dimension,dimensions_depth
+www.alibaba.com//dimension lwh,dimensions
+www.alibaba.com//dimension lwh,dimensions_height
+www.alibaba.com//dimension lwh,dimensions_width
+www.alibaba.com//dimension lwh,dimensions_depth
+www.alibaba.com//dimension mm,dimensions
+www.alibaba.com//dimension mm,dimensions_height
+www.alibaba.com//dimension mm,dimensions_width
+www.alibaba.com//dimension mm,dimensions_depth
+www.alibaba.com//dimension wdh,dimensions
+www.alibaba.com//dimension wdh,dimensions_height
+www.alibaba.com//dimension wdh,dimensions_width
+www.alibaba.com//dimension wdh,dimensions_depth
+www.alibaba.com//dimensions,dimensions
+www.alibaba.com//dimensions,dimensions_height
+www.alibaba.com//dimensions,dimensions_width
+www.alibaba.com//dimensions,dimensions_depth
+www.alibaba.com//dimensions w x d x h,dimensions
+www.alibaba.com//dimensions w x d x h,dimensions_depth
+www.alibaba.com//dimensions w x d x h,dimensions_height
+www.alibaba.com//dimensions w x d x h,dimensions_width
+www.alibaba.com//dimensionsmm,dimensions
+www.alibaba.com//dimensionsmm,dimensions_depth
+www.alibaba.com//dimensionsmm,dimensions_height
+www.alibaba.com//dimensionsmm,dimensions_width
+www.alibaba.com//dimensionwdh,dimensions
+www.alibaba.com//dimensionwdh,dimensions_depth
+www.alibaba.com//dimensionwdh,dimensions_width
+www.alibaba.com//dimensionwdh,dimensions_height
+www.alibaba.com//dimention,dimensions
+www.alibaba.com//dimention,dimensions_depth
+www.alibaba.com//dimention,dimensions_width
+www.alibaba.com//dimention,dimensions_height
+www.alibaba.com//display,display_size
+www.alibaba.com//display,display_resolution
+www.alibaba.com//display,display_type
+www.alibaba.com//display diagonal size,display_size
+www.alibaba.com//display resolutin,display_resolution
+www.alibaba.com//display resolution,display_resolution
+www.alibaba.com//display screen,display_resolution
+www.alibaba.com//display screen,display_type
+www.alibaba.com//display screen,display_size
+www.alibaba.com//display system,display_size
+www.alibaba.com//display system,display_type
+www.alibaba.com//display technology,display_type
+www.alibaba.com//exterior,dimensions
+www.alibaba.com//exterior,dimensions_height
+www.alibaba.com//exterior,dimensions_width
+www.alibaba.com//exterior,dimensions_depth
+www.alibaba.com//external port and slots,usb_port2_quantity
+www.alibaba.com//fixed disk,hdd_capacity
+www.alibaba.com//fixed disk,hdd_speed
+www.alibaba.com//fixed disk,hdd_speed
+www.alibaba.com//flash,flash_capacity
+www.alibaba.com//full package weight,packaging_weight
+www.alibaba.com//gift box,packaging_dimensions
+www.alibaba.com//gift box,packaging_dimensions_height
+www.alibaba.com//gift box,packaging_dimensions_width
+www.alibaba.com//gift box,packaging_dimensions_depth
+www.alibaba.com//gift box packing size,packaging_dimensions
+www.alibaba.com//gift box packing size,packaging_dimensions_height
+www.alibaba.com//gift box packing size,packaging_dimensions_width
+www.alibaba.com//gift box packing size,packaging_dimensions_depth
+www.alibaba.com//gift box packing weight,packaging_weight
+www.alibaba.com//giftbox,packaging_dimensions
+www.alibaba.com//giftbox,packaging_dimensions_height
+www.alibaba.com//giftbox,packaging_dimensions_width
+www.alibaba.com//giftbox,packaging_dimensions_depth
+www.alibaba.com//giftboxdimension,packaging_dimensions
+www.alibaba.com//giftboxdimension,packaging_dimensions_height
+www.alibaba.com//giftboxdimension,packaging_dimensions_width
+www.alibaba.com//giftboxdimension,packaging_dimensions_depth
+www.alibaba.com//giftboxwdh,packaging_dimensions
+www.alibaba.com//giftboxwdh,packaging_dimensions_width
+www.alibaba.com//giftboxwdh,packaging_dimensions_depth
+www.alibaba.com//giftboxwdh,packaging_dimensions_height
+www.alibaba.com//graphic card,ram_capacity
+www.alibaba.com//graphic card,ram_type
+www.alibaba.com//graphics memory,ram_capacity
+www.alibaba.com//gross weight,weight
+www.alibaba.com//hard disc,hdd_capacity
+www.alibaba.com//hard disk,hdd_capacity
+www.alibaba.com//hard disk capacity,hdd_capacity
+www.alibaba.com//hard drive,hdd_capacity
+www.alibaba.com//hard drive capacity,hdd_capacity
+www.alibaba.com//hard drive speed,hdd_speed
+www.alibaba.com//hard drive spindle speed,hdd_speed
+www.alibaba.com//harddisk,hdd_capacity
+www.alibaba.com//hardware,cpu_type
+www.alibaba.com//hardware,cpu_frequency
+www.alibaba.com//hd,hdd_capacity
+www.alibaba.com//hd,hdd_speed
+www.alibaba.com//hd,hdd_speed
+www.alibaba.com//hdd,hdd_capacity
+www.alibaba.com//hdd capacity,hdd_capacity
+www.alibaba.com//hdd storage,hdd_capacity
+www.alibaba.com//hddhard disk drive,hdd_capacity
+www.alibaba.com//i0,usb_port2_quantity
+www.alibaba.com//input  output port,usb_port2_quantity
+www.alibaba.com//inputoutput,usb_port2_quantity
+www.alibaba.com//interface,usb_port2_quantity
+www.alibaba.com//internal storage,ram_capacity
+www.alibaba.com//internal storage,ram_capacity_max
+www.alibaba.com//io ports,usb_port2_quantity
+www.alibaba.com//io ports,usb_port3_quantity
+www.alibaba.com//item dimensions wdh,dimensions
+www.alibaba.com//item dimensions wdh,dimensions_depth
+www.alibaba.com//item dimensions wdh,dimensions_height
+www.alibaba.com//item dimensions wdh,dimensions_width
+www.alibaba.com//laptop weight,weight
+www.alibaba.com//lasting time,battery_life
+www.alibaba.com//lcd,display_type
+www.alibaba.com//lcd,display_size
+www.alibaba.com//lcd device,display_resolution
+www.alibaba.com//lcd device,display_size
+www.alibaba.com//lcd device,aspect_ratio
+www.alibaba.com//lcd device,display_type
+www.alibaba.com//lcd display,display_size
+www.alibaba.com//lcd display,display_resolution
+www.alibaba.com//lcd display,display_type
+www.alibaba.com//lcd display screen,display_size
+www.alibaba.com//lcd display screen,display_type
+www.alibaba.com//lcd display screen,display_resolution
+www.alibaba.com//lcd resolution,display_resolution
+www.alibaba.com//lcd resolution,display_type
+www.alibaba.com//lcd screen,display_size
+www.alibaba.com//lcd screen,display_type
+www.alibaba.com//lcd screen,display_resolution
+www.alibaba.com//lcd screen size,display_size
+www.alibaba.com//lcd screen size,display_type
+www.alibaba.com//lcd size,display_size
+www.alibaba.com//lcd size,display_type
+www.alibaba.com//lcd size,aspect_ratio
+www.alibaba.com//lcdsize,display_size
+www.alibaba.com//lcdsize,display_type
+www.alibaba.com//lcdsize,display_resolution
+www.alibaba.com//lcdsize,aspect_ratio
+www.alibaba.com//liion battery,battery_capacity
+www.alibaba.com//lithium battery,battery_chemistry
+www.alibaba.com//lwh,dimensions
+www.alibaba.com//lwh,dimensions_height
+www.alibaba.com//lwh,dimensions_width
+www.alibaba.com//lwh,dimensions_depth
+www.alibaba.com//machine size,dimensions
+www.alibaba.com//machine size,dimensions_height
+www.alibaba.com//machine size,dimensions_width
+www.alibaba.com//machine size,dimensions_depth
+www.alibaba.com//master carton size,packaging_dimensions
+www.alibaba.com//master carton size,packaging_dimensions_width
+www.alibaba.com//master carton size,packaging_dimensions_height
+www.alibaba.com//master carton size,packaging_dimensions_depth
+www.alibaba.com//master carton weight,packaging_weight
+www.alibaba.com//max battery time,battery_life
+www.alibaba.com//max resolution,display_resolution
+www.alibaba.com//maximum,hdd_capacity_max
+www.alibaba.com//maximum memory capacity,ram_capacity_max
+www.alibaba.com//maximum speed,hdd_speed
+www.alibaba.com//maxmemory capacity,ram_capacity_max
+www.alibaba.com//md36atrix,display_resolution
+www.alibaba.com//md36atrix,display_size
+www.alibaba.com//md36atrix,aspect_ratio
+www.alibaba.com//mechanical size,dimensions
+www.alibaba.com//mechanical size,dimensions_height
+www.alibaba.com//mechanical size,dimensions_width
+www.alibaba.com//mechanical size,dimensions_depth
+www.alibaba.com//memory,ram_capacity
+www.alibaba.com//memory,ram_type
+www.alibaba.com//memory capacity,ram_capacity
+www.alibaba.com//memory size,ram_capacity
+www.alibaba.com//memory type,ram_type
+www.alibaba.com//name,cpu_type
+www.alibaba.com//name,cpu_frequency
+www.alibaba.com//name,display_size
+www.alibaba.com//nand flash,flash_capacity
+www.alibaba.com//nandflash,flash_capacity
+www.alibaba.com//netbook screen size,display_size
+www.alibaba.com//output hdmi,has_hdmi_port
+www.alibaba.com//pack details,packaging_weight
+www.alibaba.com//pack details,packaging_dimensions
+www.alibaba.com//pack details,packaging_dimensions_height
+www.alibaba.com//pack details,packaging_dimensions_depth
+www.alibaba.com//pack details,packaging_dimensions_width
+www.alibaba.com//pack size,packaging_dimensions
+www.alibaba.com//pack size,packaging_dimensions_height
+www.alibaba.com//pack size,packaging_dimensions_depth
+www.alibaba.com//pack size,packaging_dimensions_width
+www.alibaba.com//package,packaging_weight
+www.alibaba.com//package size,packaging_dimensions
+www.alibaba.com//package size,packaging_dimensions_height
+www.alibaba.com//package size,packaging_dimensions_width
+www.alibaba.com//package size,packaging_dimensions_depth
+www.alibaba.com//package weight,packaging_weight
+www.alibaba.com//packing,packaging_dimensions
+www.alibaba.com//packing,packaging_dimensions_height
+www.alibaba.com//packing,packaging_dimensions_width
+www.alibaba.com//packing,packaging_dimensions_depth
+www.alibaba.com//packing box,packaging_dimensions
+www.alibaba.com//packing box,packaging_dimensions_height
+www.alibaba.com//packing box,packaging_dimensions_width
+www.alibaba.com//packing box,packaging_dimensions_depth
+www.alibaba.com//panel size,display_size
+www.alibaba.com//panel type,display_type
+www.alibaba.com//pc dimensions,dimensions
+www.alibaba.com//pc dimensions,dimensions_height
+www.alibaba.com//pc dimensions,dimensions_width
+www.alibaba.com//pc dimensions,dimensions_depth
+www.alibaba.com//physical sizeweight,dimensions
+www.alibaba.com//physical sizeweight,dimensions_height
+www.alibaba.com//physical sizeweight,dimensions_width
+www.alibaba.com//physical sizeweight,dimensions_depth
+www.alibaba.com//physical sizeweight,weight
+www.alibaba.com//pixel,display_resolution
+www.alibaba.com//pixel,aspect_ratio
+www.alibaba.com//power  battery,battery_capacity
+www.alibaba.com//power  battery,battery_chemistry
+www.alibaba.com//power type,battery_capacity
+www.alibaba.com//power type,battery_chemistry
+www.alibaba.com//processor,cpu_brand
+www.alibaba.com//processor,cpu_frequency
+www.alibaba.com//processor,cpu_model
+www.alibaba.com//processor,cpu_type
+www.alibaba.com//processor brand,cpu_brand
+www.alibaba.com//processor brand,cpu_type
+www.alibaba.com//processor clock speed,cpu_frequency
+www.alibaba.com//processor core,cpu_brand
+www.alibaba.com//processor core,cpu_frequency
+www.alibaba.com//processor core,cpu_model
+www.alibaba.com//processor core,cpu_type
+www.alibaba.com//processor family,cpu_type
+www.alibaba.com//processor frequency,cpu_frequency
+www.alibaba.com//processor main frequency,cpu_frequency
+www.alibaba.com//processor manufacture,cpu_brand
+www.alibaba.com//processor manufacturer model,cpu_brand
+www.alibaba.com//processor manufacturer model,cpu_model
+www.alibaba.com//processor manufacturer model,cpu_type
+www.alibaba.com//processor model,cpu_brand
+www.alibaba.com//processor model,cpu_model
+www.alibaba.com//processor model,cpu_type
+www.alibaba.com//processor speed,cpu_frequency
+www.alibaba.com//processor type,cpu_brand
+www.alibaba.com//processor type,cpu_frequency
+www.alibaba.com//processor type,cpu_model
+www.alibaba.com//processor type,cpu_type
+www.alibaba.com//product,dimensions
+www.alibaba.com//product,dimensions_height
+www.alibaba.com//product,dimensions_width
+www.alibaba.com//product,dimensions_depth
+www.alibaba.com//product dimension,dimensions
+www.alibaba.com//product dimension,dimensions_height
+www.alibaba.com//product dimension,dimensions_width
+www.alibaba.com//product dimension,dimensions_depth
+www.alibaba.com//product dimensions,dimensions
+www.alibaba.com//product dimensions,dimensions_height
+www.alibaba.com//product dimensions,dimensions_width
+www.alibaba.com//product dimensions,dimensions_depth
+www.alibaba.com//product size,dimensions
+www.alibaba.com//product size,dimensions_height
+www.alibaba.com//product size,dimensions_width
+www.alibaba.com//product size,dimensions_depth
+www.alibaba.com//product weight,weight
+www.alibaba.com//proportion,aspect_ratio
+www.alibaba.com//ram,ram_capacity
+www.alibaba.com//ram,ram_type
+www.alibaba.com//ram installed size,ram_capacity
+www.alibaba.com//ram installed size,ram_type
+www.alibaba.com//ram max supported size,ram_capacity_max
+www.alibaba.com//ram memory,ram_capacity
+www.alibaba.com//ram technology,ram_frequency
+www.alibaba.com//ram technology,ram_type
+www.alibaba.com//ramrandom access memory,ram_capacity
+www.alibaba.com//ramrom,ram_type
+www.alibaba.com//ramtechnology,ram_type
+www.alibaba.com//resolution,display_resolution
+www.alibaba.com//resolution,display_size
+www.alibaba.com//resolution ratio,display_resolution
+www.alibaba.com//resolution ratio,aspect_ratio
+www.alibaba.com//resoultion,display_resolution
+www.alibaba.com//roll speed,hdd_speed
+www.alibaba.com//rom,flash_capacity
+www.alibaba.com//rommemory,flash_capacity
+www.alibaba.com//romstorage,flash_capacity
+www.alibaba.com//rotationl speed,hdd_speed
+www.alibaba.com//screen,display_size
+www.alibaba.com//screen,display_resolution
+www.alibaba.com//screen,aspect_ratio
+www.alibaba.com//screen,display_type
+www.alibaba.com//screen description,display_type
+www.alibaba.com//screen display,display_size
+www.alibaba.com//screen display,display_type
+www.alibaba.com//screen display,display_resolution
+www.alibaba.com//screen display,aspect_ratio
+www.alibaba.com//screen resolution,display_resolution
+www.alibaba.com//screen size,display_size
+www.alibaba.com//screen sizeresolution,display_size
+www.alibaba.com//screen sizeresolution,display_type
+www.alibaba.com//screen sizeresolution,display_resolution
+www.alibaba.com//screen type,display_type
+www.alibaba.com//sd ram,ram_capacity
+www.alibaba.com//sd ram,ram_type
+www.alibaba.com//sdram,ram_capacity
+www.alibaba.com//sdram,ram_type
+www.alibaba.com//service,warranty_duration
+www.alibaba.com//shipping dimensions wdh,packaging_dimensions
+www.alibaba.com//shipping dimensions wdh,packaging_dimensions_height
+www.alibaba.com//shipping dimensions wdh,packaging_dimensions_depth
+www.alibaba.com//shipping dimensions wdh,packaging_dimensions_width
+www.alibaba.com//size,dimensions
+www.alibaba.com//size,dimensions_height
+www.alibaba.com//size,dimensions_depth
+www.alibaba.com//size,dimensions_width
+www.alibaba.com//size type resolution,display_size
+www.alibaba.com//size type resolution,display_resolution
+www.alibaba.com//size type resolution,display_type
+www.alibaba.com//size type resolution,aspect_ratio
+www.alibaba.com//sizetyperesolution,display_size
+www.alibaba.com//sizetyperesolution,display_type
+www.alibaba.com//sizetyperesolution,display_resolution
+www.alibaba.com//sizewdh,dimensions
+www.alibaba.com//sizewdh,dimensions_height
+www.alibaba.com//sizewdh,dimensions_depth
+www.alibaba.com//sizewdh,dimensions_width
+www.alibaba.com//sizeweight,dimensions
+www.alibaba.com//sizeweight,dimensions_height
+www.alibaba.com//sizeweight,dimensions_width
+www.alibaba.com//sizeweight,dimensions_depth
+www.alibaba.com//sizeweight,weight
+www.alibaba.com//solution,cpu_type
+www.alibaba.com//solution,cpu_frequency
+www.alibaba.com//ssd,ssd_capacity
+www.alibaba.com//ssdoptional,ssd_capacity
+www.alibaba.com//standard interface,usb_port2_quantity
+www.alibaba.com//storage,hdd_capacity
+www.alibaba.com//storage,flash_capacity
+www.alibaba.com//storage,hdd_capacity_max
+www.alibaba.com//storage,flash_capacity
+www.alibaba.com//storage,hdd_speed
+www.alibaba.com//storage device,flash_capacity
+www.alibaba.com//storage device,hdd_capacity
+www.alibaba.com//storage device,hdd_speed
+www.alibaba.com//storagehdd,hdd_capacity
+www.alibaba.com//support processor,cpu_brand
+www.alibaba.com//support processor,cpu_type
+www.alibaba.com//support processor,cpu_frequency
+www.alibaba.com//support processor,cpu_model
+www.alibaba.com//surface interface,usb_port2_quantity
+www.alibaba.com//system,cpu_frequency
+www.alibaba.com//system memory,ram_capacity
+www.alibaba.com//system memory,ram_frequency
+www.alibaba.com//system memory,ram_type
+www.alibaba.com//system processor,cpu_frequency
+www.alibaba.com//system ram,ram_capacity
+www.alibaba.com//systerm memory,ram_capacity
+www.alibaba.com//systerm memory,ram_capacity_max
+www.alibaba.com//systerm memory,ram_frequency
+www.alibaba.com//systerm memory,ram_type
+www.alibaba.com//tft lcd panel,display_resolution
+www.alibaba.com//tft lcd panel,aspect_ratio
+www.alibaba.com//the battery,battery_capacity
+www.alibaba.com//unit dimension,dimensions
+www.alibaba.com//unit dimension,dimensions_height
+www.alibaba.com//unit dimension,dimensions_width
+www.alibaba.com//unit dimension,dimensions_depth
+www.alibaba.com//unit packing weight,packaging_weight
+www.alibaba.com//unit weight,weight
+www.alibaba.com//warranty,warranty_duration
+www.alibaba.com//warranty time,warranty_duration
+www.alibaba.com//warranty validity,warranty_duration
+www.alibaba.com//web vedio with the iconram,ram_capacity
+www.alibaba.com//web vedio with the iconram,ram_type
+www.alibaba.com//weight,weight
+www.alibaba.com//weight with battery,weight
+www.alibaba.com//weight with cdrom,weight
+www.alibaba.com//weightkg,weight
+www.alibaba.com//weights,weight
+www.alibaba.com//weigth,weight
+www.amazon.com//average battery life in hours,battery_life
+www.amazon.com//batteries,battery_chemistry
+www.amazon.com//battery type,battery_chemistry
+www.amazon.com//brand name,brand
+www.amazon.com//computer memory type,ram_type
+www.amazon.com//flash memory size,flash_capacity
+www.amazon.com//hard drive,hdd_capacity
+www.amazon.com//item dimensions l x w x h,dimensions
+www.amazon.com//item dimensions l x w x h,dimensions_height
+www.amazon.com//item dimensions l x w x h,dimensions_depth
+www.amazon.com//item dimensions l x w x h,dimensions_width
+www.amazon.com//item weight,weight
+www.amazon.com//number of usb 20 ports,usb_port2_quantity
+www.amazon.com//number of usb 30 ports,usb_port3_quantity
+www.amazon.com//processor,cpu_brand
+www.amazon.com//processor,cpu_frequency
+www.amazon.com//processor,cpu_type
+www.amazon.com//processor,cpu_model
+www.amazon.com//processor brand,cpu_brand
+www.amazon.com//processor brand,cpu_type
+www.amazon.com//product dimensions,dimensions
+www.amazon.com//product dimensions,dimensions_height
+www.amazon.com//product dimensions,dimensions_width
+www.amazon.com//product dimensions,dimensions_depth
+www.amazon.com//ram,ram_capacity
+www.amazon.com//ram,ram_type
+www.amazon.com//screen size,display_size
+www.amazon.com//shipping weight,packaging_weight
+www.amazon.com//size,hdd_capacity
+www.bhphotovideo.com//battery,battery_chemistry
+www.bhphotovideo.com//battery,battery_life
+www.bhphotovideo.com//dimensions wxhxd,dimensions
+www.bhphotovideo.com//dimensions wxhxd,dimensions_depth
+www.bhphotovideo.com//dimensions wxhxd,dimensions_height
+www.bhphotovideo.com//dimensions wxhxd,dimensions_width
+www.bhphotovideo.com//weight,weight
+www.bidorbuy.co.za//cpu,cpu_type
+www.bidorbuy.co.za//cpu,cpu_frequency
+www.bidorbuy.co.za//cpu,cpu_model
+www.bidorbuy.co.za//dimensions,dimensions
+www.bidorbuy.co.za//dimensions,dimensions_depth
+www.bidorbuy.co.za//dimensions,dimensions_height
+www.bidorbuy.co.za//dimensions,dimensions_width
+www.bidorbuy.co.za//dimensions wd,dimensions
+www.bidorbuy.co.za//dimensions wd,dimensions_depth
+www.bidorbuy.co.za//dimensions wd,dimensions_width
+www.bidorbuy.co.za//hard drive,hdd_capacity
+www.bidorbuy.co.za//hard drive,hdd_speed
+www.bidorbuy.co.za//hdd,ssd_capacity
+www.bidorbuy.co.za//hdd,hdd_capacity
+www.bidorbuy.co.za//height,dimensions_height
+www.bidorbuy.co.za//height,dimensions
+www.bidorbuy.co.za//manufacturer warranty,warranty_duration
+www.bidorbuy.co.za//memory,ram_capacity
+www.bidorbuy.co.za//memory,ram_type
+www.bidorbuy.co.za//processor,cpu_brand
+www.bidorbuy.co.za//processor,cpu_model
+www.bidorbuy.co.za//processor,cpu_type
+www.bidorbuy.co.za//processor,cpu_cache
+www.bidorbuy.co.za//ram memory,ram_capacity
+www.bidorbuy.co.za//ram memory,ram_frequency
+www.bidorbuy.co.za//ram memory,ram_type
+www.bidorbuy.co.za//screen size diagonal,display_size
+www.bidorbuy.co.za//storage,hdd_capacity
+www.bidorbuy.co.za//storage,hdd_speed
+www.bidorbuy.co.za//system weight  weight with ac adapter,weight
+www.bidorbuy.co.za//warranty,warranty_duration
+www.bidorbuy.co.za//weight,weight
+www.directdial.com//64bit processing,is_cpu_64bit
+www.directdial.com//brand name,brand
+www.directdial.com//cache,cpu_cache
+www.directdial.com//depth,dimensions_depth
+www.directdial.com//depth,dimensions
+www.directdial.com//flash memory,flash_capacity
+www.directdial.com//graphics controller manufacturer,gpu_brand
+www.directdial.com//graphics controller model,gpu_model
+www.directdial.com//graphics memory technology,ram_type
+www.directdial.com//hdmi,has_hdmi_port
+www.directdial.com//height,dimensions_height
+www.directdial.com//height,dimensions
+www.directdial.com//hybrid hard drive capacity,hdd_capacity
+www.directdial.com//l3 cache,cpu_cache
+www.directdial.com//limited warranty,warranty_duration
+www.directdial.com//manufacturer,brand
+www.directdial.com//maximum memory,ram_capacity_max
+www.directdial.com//memory card reader,has_memorycard_reader
+www.directdial.com//memory standard,ram_frequency
+www.directdial.com//memory standard,ram_type
+www.directdial.com//memory technology,ram_type
+www.directdial.com//number of usb 20 ports,usb_port2_quantity
+www.directdial.com//number of usb 30 ports,usb_port3_quantity
+www.directdial.com//processor model,cpu_type
+www.directdial.com//processor model,cpu_model
+www.directdial.com//processor speed,cpu_frequency
+www.directdial.com//processor type,cpu_type
+www.directdial.com//screen size,display_size
+www.directdial.com//ssd cache capacity,ssd_cache_capacity
+www.directdial.com//standby power consumption,power_consumption_standby
+www.directdial.com//total hard drive capacity,hdd_capacity
+www.directdial.com//vga,has_vga_port
+www.directdial.com//weight approximate,weight
+www.ebay.com//100 working item,warranty_duration
+www.ebay.com//128gb ssd,ssd_capacity
+www.ebay.com//16gb,ram_frequency
+www.ebay.com//16gb,ram_type
+www.ebay.com//16gb,ram_capacity
+www.ebay.com//2 superspeed usb 30,usb_port2_quantity
+www.ebay.com//256gb ssd,ssd_capacity
+www.ebay.com//4gb,ram_capacity
+www.ebay.com//4gb,ram_type
+www.ebay.com//4th generation,cpu_brand
+www.ebay.com//4th generation,cpu_cache
+www.ebay.com//4th generation,cpu_frequency
+www.ebay.com//4th generation,cpu_model
+www.ebay.com//4th generation,cpu_type
+www.ebay.com//4th generation intelr coretm i74700mq,cpu_cache
+www.ebay.com//4th generation intelr coretm i74700mq,cpu_frequency
+www.ebay.com//4th generation intelr coretm i74700mq,cpu_brand
+www.ebay.com//4th generation intelr coretm i74700mq,cpu_model
+www.ebay.com//4th generation intelr coretm i74700mq,cpu_type
+www.ebay.com//4th generation intelr coretm i74710mq,cpu_frequency
+www.ebay.com//4th generation intelr coretm i74710mq,cpu_type
+www.ebay.com//4th generation intelr coretm i74710mq,cpu_brand
+www.ebay.com//4th generation intelr coretm i74710mq,cpu_model
+www.ebay.com//4th generation intelr coretm i74710mq,cpu_cache
+www.ebay.com//4th generation intelr coretm i74800mq,cpu_cache
+www.ebay.com//4th generation intelr coretm i74800mq,cpu_frequency
+www.ebay.com//4th generation intelr coretm i74800mq,cpu_type
+www.ebay.com//4th generation intelr coretm i74800mq,cpu_model
+www.ebay.com//4th generation intelr coretm i74800mq,cpu_brand
+www.ebay.com//500gb,hdd_capacity
+www.ebay.com//500gb,hdd_speed
+www.ebay.com//64bit computing,is_cpu_64bit
+www.ebay.com//64bit processing,is_cpu_64bit
+www.ebay.com//750gb,hdd_capacity
+www.ebay.com//750gb,hdd_speed
+www.ebay.com//8gb ddr3 1600mhz,ram_capacity
+www.ebay.com//8gb ddr3 1600mhz,ram_frequency
+www.ebay.com//8gb ddr3 1600mhz,ram_type
+www.ebay.com//accessories included,battery_chemistry
+www.ebay.com//additional ports,has_hdmi_port
+www.ebay.com//additional ports,has_vga_port
+www.ebay.com//aspect ratio,aspect_ratio
+www.ebay.com//average battery life in hours,battery_life
+www.ebay.com//batteries,battery_chemistry
+www.ebay.com//batteries,battery_capacity
+www.ebay.com//battery,battery_chemistry
+www.ebay.com//battery capacity,battery_capacity
+www.ebay.com//battery chemistry,battery_chemistry
+www.ebay.com//battery information,battery_capacity
+www.ebay.com//battery life,battery_life
+www.ebay.com//battery type,battery_chemistry
+www.ebay.com//brand,brand
+www.ebay.com//brand name,brand
+www.ebay.com//cache,cpu_cache
+www.ebay.com//cache memory,cpu_cache
+www.ebay.com//capacity,hdd_capacity
+www.ebay.com//chip type,cpu_brand
+www.ebay.com//chip type,cpu_type
+www.ebay.com//computer hard drive size,hdd_capacity
+www.ebay.com//computer memory type,ram_type
+www.ebay.com//connectors,usb_port2_quantity
+www.ebay.com//connectors,usb_port3_quantity
+www.ebay.com//cpu,cpu_brand
+www.ebay.com//cpu,cpu_frequency
+www.ebay.com//cpu,cpu_model
+www.ebay.com//cpu,cpu_type
+www.ebay.com//cpu,cpu_cache
+www.ebay.com//cpu brand,ram_capacity
+www.ebay.com//cpu  processor,cpu_brand
+www.ebay.com//cpu  processor,cpu_cache
+www.ebay.com//cpu  processor,cpu_frequency
+www.ebay.com//cpu  processor,cpu_model
+www.ebay.com//cpu  processor,cpu_type
+www.ebay.com//cpu speed,cpu_model
+www.ebay.com//cpu speed,cpu_frequency
+www.ebay.com//cpu type,cpu_brand
+www.ebay.com//cpu type,cpu_type
+www.ebay.com//depth,dimensions_depth
+www.ebay.com//depth,dimensions
+www.ebay.com//diagonal screen size,display_size
+www.ebay.com//dimensions,dimensions
+www.ebay.com//dimensions,dimensions_depth
+www.ebay.com//dimensions,dimensions_height
+www.ebay.com//dimensions,dimensions_width
+www.ebay.com//dimensions  weight,weight
+www.ebay.com//dimensions  weight,dimensions_depth
+www.ebay.com//dimensions  weight,dimensions
+www.ebay.com//display aspect ratio,aspect_ratio
+www.ebay.com//display  graphics,display_size
+www.ebay.com//display  graphics,display_type
+www.ebay.com//display size,display_size
+www.ebay.com//drive capacity,hdd_capacity
+www.ebay.com//flash,flash_capacity
+www.ebay.com//flash memory size,flash_capacity
+www.ebay.com//gpu,gpu_brand
+www.ebay.com//gpu,gpu_model
+www.ebay.com//gpuvpu,gpu_brand
+www.ebay.com//gpuvpu,gpu_model
+www.ebay.com//graphic,gpu_brand
+www.ebay.com//graphic,gpu_model
+www.ebay.com//graphic card,gpu_brand
+www.ebay.com//graphic card,gpu_model
+www.ebay.com//graphics,gpu_brand
+www.ebay.com//graphics,gpu_model
+www.ebay.com//graphics card,gpu_brand
+www.ebay.com//graphics card,gpu_model
+www.ebay.com//graphics cards,gpu_brand
+www.ebay.com//graphics cards,gpu_model
+www.ebay.com//graphics chip,gpu_brand
+www.ebay.com//graphics controller,gpu_brand
+www.ebay.com//graphics controller,gpu_model
+www.ebay.com//graphics controller manufacturer,gpu_brand
+www.ebay.com//graphics controller model,gpu_model
+www.ebay.com//graphics coprocessor,gpu_brand
+www.ebay.com//graphics processor,gpu_brand
+www.ebay.com//graphics processor,gpu_model
+www.ebay.com//graphics processor  vendor,gpu_brand
+www.ebay.com//graphics processor  vendor,gpu_model
+www.ebay.com//hard disk,hdd_capacity
+www.ebay.com//hard disk,ssd_capacity
+www.ebay.com//hard disk capacity,hdd_capacity
+www.ebay.com//hard disk drive,hdd_capacity
+www.ebay.com//hard disk drive,hdd_speed
+www.ebay.com//hard drive,hdd_capacity
+www.ebay.com//hard drive capacity,hdd_capacity
+www.ebay.com//hard drive rotational speed,hdd_speed
+www.ebay.com//hard drive rpm,hdd_speed
+www.ebay.com//hard drive size,hdd_capacity
+www.ebay.com//hard drive speed,hdd_speed
+www.ebay.com//hard drivessd,ssd_capacity
+www.ebay.com//hddssd drives included,hdd_capacity
+www.ebay.com//hddssd drives included,hdd_capacity
+www.ebay.com//hdmi,has_hdmi_port
+www.ebay.com//hdmi output,has_hdmi_port
+www.ebay.com//hdmi port,has_hdmi_port
+www.ebay.com//header,brand
+www.ebay.com//height,dimensions_height
+www.ebay.com//height,dimensions
+www.ebay.com//height front,dimensions_height
+www.ebay.com//height front,dimensions
+www.ebay.com//height rear,dimensions_height
+www.ebay.com//height front,dimensions
+www.ebay.com//hybrid hard drive capacity,hdd_capacity
+www.ebay.com//image aspect ratio,aspect_ratio
+www.ebay.com//includes,warranty_duration
+www.ebay.com//interfacesports,has_hdmi_port
+www.ebay.com//interfacesports,has_vga_port
+www.ebay.com//interfacesports,has_vga_port
+www.ebay.com//io input  output ports,usb_port3_quantity
+www.ebay.com//io ports,usb_port2_quantity
+www.ebay.com//io ports,usb_port3_quantity
+www.ebay.com//item dimensions l x w x h,dimensions
+www.ebay.com//item dimensions l x w x h,dimensions_height
+www.ebay.com//item dimensions l x w x h,dimensions_depth
+www.ebay.com//item dimensions l x w x h,dimensions_width
+www.ebay.com//item weight,weight
+www.ebay.com//laptop battery life,battery_life
+www.ebay.com//laptop battery type,battery_chemistry
+www.ebay.com//laptop battery type,battery_capacity
+www.ebay.com//laptop hard drive capacity gb,hdd_capacity
+www.ebay.com//laptop hard drive capacity gb,hdd_speed
+www.ebay.com//laptop memory ram,ram_capacity
+www.ebay.com//laptop memory ram gb,ram_capacity
+www.ebay.com//laptop memory type,ram_frequency
+www.ebay.com//laptop memory type,ram_type
+www.ebay.com//laptop processor speed,cpu_frequency
+www.ebay.com//laptop processor type,cpu_brand
+www.ebay.com//laptop processor type,cpu_type
+www.ebay.com//laptop processor type details,cpu_brand
+www.ebay.com//laptop processor type details,cpu_model
+www.ebay.com//laptop processor type details,cpu_type
+www.ebay.com//laptop screen size,display_size
+www.ebay.com//laptop screen size inches,display_size
+www.ebay.com//laptop size,display_size
+www.ebay.com//laptop warranty,warranty_duration
+www.ebay.com//laptop weight,weight
+www.ebay.com//lcd screen size,display_size
+www.ebay.com//lcd screen size,display_type
+www.ebay.com//limited warranty,warranty_duration
+www.ebay.com//manufacturer warranty,warranty_duration
+www.ebay.com//max ram supported,ram_capacity_max
+www.ebay.com//maximum battery life,battery_life
+www.ebay.com//maximum battery run time,battery_life
+www.ebay.com//memory card reader,has_memorycard_reader
+www.ebay.com//memory configuration,ram_capacity
+www.ebay.com//memory ram,ram_capacity
+www.ebay.com//memory size,ram_capacity
+www.ebay.com//memory standard,ram_type
+www.ebay.com//memory standard,ram_frequency
+www.ebay.com//memory technology,ram_type
+www.ebay.com//memory type,ram_type
+www.ebay.com//mobile technology,cpu_type
+www.ebay.com//native resolution,display_resolution
+www.ebay.com//native resolution,aspect_ratio
+www.ebay.com//net weight,weight
+www.ebay.com//number of usb 20 ports,usb_port2_quantity
+www.ebay.com//number of usb 30 ports,usb_port3_quantity
+www.ebay.com//ports,usb_port3_quantity
+www.ebay.com//power consumption,power_consumption_standby
+www.ebay.com//power requirements,power_consumption
+www.ebay.com//powerful intel core i5 processor,ram_capacity
+www.ebay.com//powerful intel core i5 processor,cpu_brand
+www.ebay.com//powerful intel core i5 processor,cpu_type
+www.ebay.com//powerful intel core i5 processor,hdd_capacity
+www.ebay.com//primary battery,battery_chemistry
+www.ebay.com//processor,cpu_brand
+www.ebay.com//processor,cpu_frequency
+www.ebay.com//processor,cpu_model
+www.ebay.com//processor,cpu_type
+www.ebay.com//processor brand,cpu_brand
+www.ebay.com//processor class,cpu_type
+www.ebay.com//processor manufacturer,cpu_brand
+www.ebay.com//processor model,cpu_type
+www.ebay.com//processor model,cpu_model
+www.ebay.com//processor number,cpu_type
+www.ebay.com//processor number,cpu_model
+www.ebay.com//processor speed,cpu_frequency
+www.ebay.com//processor speed per core,cpu_frequency
+www.ebay.com//processor turbo speed,cpu_frequency
+www.ebay.com//processor type,cpu_brand
+www.ebay.com//processor type,cpu_type
+www.ebay.com//processors available,cpu_brand
+www.ebay.com//processors available,cpu_frequency
+www.ebay.com//processors available,cpu_model
+www.ebay.com//processors available,cpu_type
+www.ebay.com//product description,brand
+www.ebay.com//product description,display_size
+www.ebay.com//product description,is_cpu_64bit
+www.ebay.com//product description,ram_capacity
+www.ebay.com//product description,hdd_capacity
+www.ebay.com//product description,ssd_capacity
+www.ebay.com//product description,cpu_brand
+www.ebay.com//product description,cpu_type
+www.ebay.com//product description,cpu_model
+www.ebay.com//product details,cpu_brand
+www.ebay.com//product details,cpu_type
+www.ebay.com//product details,cpu_model
+www.ebay.com//product details,ram_capacity
+www.ebay.com//product details,ram_frequency
+www.ebay.com//product in inches l x w x h,dimensions
+www.ebay.com//product in inches l x w x h,dimensions_height
+www.ebay.com//product in inches l x w x h,dimensions_depth
+www.ebay.com//product in inches l x w x h,dimensions_width
+www.ebay.com//product title,brand
+www.ebay.com//product title,display_size
+www.ebay.com//product title,cpu_type
+www.ebay.com//product title,cpu_brand
+www.ebay.com//product title,cpu_model
+www.ebay.com//product title,display_type
+www.ebay.com//product title,cpu_frequency
+www.ebay.com//product title,cpu_type
+www.ebay.com//product title,ram_capacity
+www.ebay.com//product title,ssd_capacity
+www.ebay.com//product title,display_resolution
+www.ebay.com//product title,gpu_brand
+www.ebay.com//product title,gpu_model
+www.ebay.com//product title,is_cpu_64bit
+www.ebay.com//quadcore,cpu_frequency
+www.ebay.com//quadcore,cpu_model
+www.ebay.com//quadcore,cpu_type
+www.ebay.com//ram,ram_capacity
+www.ebay.com//ram,ram_frequency
+www.ebay.com//ram,ram_type
+www.ebay.com//ram speed,ram_frequency
+www.ebay.com//screen,display_size
+www.ebay.com//screen,display_type
+www.ebay.com//screen size,display_size
+www.ebay.com//screen size measured diagonally,display_size
+www.ebay.com//service and warranty information,warranty_duration
+www.ebay.com//service support,warranty_duration
+www.ebay.com//service support details,warranty_duration
+www.ebay.com//shipping weight in pounds,packaging_weight
+www.ebay.com//speed,ram_frequency
+www.ebay.com//speed,cpu_frequency
+www.ebay.com//standard memory,ram_capacity
+www.ebay.com//standard memory,ram_type
+www.ebay.com//standby power consumption,power_consumption_standby
+www.ebay.com//system memory,ram_capacity
+www.ebay.com//system memory,ram_type
+www.ebay.com//system memory ram,ram_capacity
+www.ebay.com//system memory ram,ram_frequency
+www.ebay.com//system memory ram,ram_type
+www.ebay.com//system memory ram expandable to,ram_capacity_max
+www.ebay.com//system ram,ram_capacity
+www.ebay.com//technical information,display_size
+www.ebay.com//technology,ram_type
+www.ebay.com//thelife time,battery_life
+www.ebay.com//title,brand
+www.ebay.com//total memory size,ram_capacity
+www.ebay.com//type of memory ram,ram_type
+www.ebay.com//typical battery life,battery_life
+www.ebay.com//usb 20 ports,usb_port2_quantity
+www.ebay.com//usb 20 ports,usb_port3_quantity
+www.ebay.com//usb 30,usb_port2_quantity
+www.ebay.com//usb 30,usb_port2_quantity
+www.ebay.com//usb port 20,usb_port2_quantity
+www.ebay.com//usb port 30,usb_port3_quantity
+www.ebay.com//usb ports,usb_port2_quantity
+www.ebay.com//usb ports,usb_port3_quantity
+www.ebay.com//usb ports total,usb_port2_quantity
+www.ebay.com//usb ports total,usb_port3_quantity
+www.ebay.com//vga,has_vga_port
+www.ebay.com//vga port,has_vga_port
+www.ebay.com//warranty,warranty_duration
+www.ebay.com//warranty length,warranty_duration
+www.ebay.com//warranty terms labor,warranty_duration
+www.ebay.com//warranty terms parts,warranty_duration
+www.ebay.com//weight,weight
+www.ebay.com//weight approximate,weight
+www.ebay.com//weight net,weight
+www.ebay.com//weights and measurements,dimensions
+www.ebay.com//weights and measurements,dimensions_depth
+www.ebay.com//weights and measurements,dimensions_height
+www.ebay.com//weights and measurements,dimensions_width
+www.ebay.com//weights and measurements,weight
+www.flexshopper.com//aspect ratio,aspect_ratio
+www.flexshopper.com//battery capacity,battery_capacity
+www.flexshopper.com//battery chemistry,battery_chemistry
+www.flexshopper.com//battery life,battery_life
+www.flexshopper.com//battery run time,battery_life
+www.flexshopper.com//battery type,battery_chemistry
+www.flexshopper.com//cache per processor,cpu_cache
+www.flexshopper.com//capacity,hdd_capacity
+www.flexshopper.com//computer hard drive size,hdd_capacity
+www.flexshopper.com//depth,dimensions_depth
+www.flexshopper.com//depth,dimensions
+www.flexshopper.com//drive capacity,hdd_capacity
+www.flexshopper.com//flash memory,flash_capacity
+www.flexshopper.com//graphics,gpu_brand
+www.flexshopper.com//graphics,gpu_model
+www.flexshopper.com//graphics card,gpu_brand
+www.flexshopper.com//graphics card,gpu_model
+www.flexshopper.com//graphics chip,gpu_brand
+www.flexshopper.com//graphics controller,gpu_brand
+www.flexshopper.com//graphics controller,gpu_model
+www.flexshopper.com//graphics controller manufacturer,gpu_brand
+www.flexshopper.com//graphics memory technology,ram_type
+www.flexshopper.com//hard drive,hdd_capacity
+www.flexshopper.com//hard drive capacity,hdd_capacity
+www.flexshopper.com//hard drive size,hdd_capacity
+www.flexshopper.com//hdmi,has_hdmi_port
+www.flexshopper.com//hdmi input,has_hdmi_port
+www.flexshopper.com//hdmi output,has_hdmi_port
+www.flexshopper.com//height,dimensions_height
+www.flexshopper.com//height,dimensions
+www.flexshopper.com//laptop weight,weight
+www.flexshopper.com//main storage,ssd_capacity
+www.flexshopper.com//manufacturer warranty,warranty_duration
+www.flexshopper.com//maximum battery run time,battery_life
+www.flexshopper.com//memory,ram_capacity
+www.flexshopper.com//memory,ram_type
+www.flexshopper.com//memory card reader,has_memorycard_reader
+www.flexshopper.com//memory technology,ram_type
+www.flexshopper.com//monitor,display_size
+www.flexshopper.com//monitor,display_type
+www.flexshopper.com//monitor,display_resolution
+www.flexshopper.com//monitor,aspect_ratio
+www.flexshopper.com//number of usb 20 ports,usb_port2_quantity
+www.flexshopper.com//number of usb 30 ports,usb_port3_quantity
+www.flexshopper.com//power consumption,power_consumption
+www.flexshopper.com//processor,cpu_brand
+www.flexshopper.com//processor,cpu_cache
+www.flexshopper.com//processor,cpu_frequency
+www.flexshopper.com//processor,cpu_model
+www.flexshopper.com//processor,cpu_type
+www.flexshopper.com//processor brand,cpu_brand
+www.flexshopper.com//processor clock speed,cpu_frequency
+www.flexshopper.com//processor manufacturer,cpu_brand
+www.flexshopper.com//processor model,cpu_type
+www.flexshopper.com//processor model,cpu_model
+www.flexshopper.com//processor speed,cpu_frequency
+www.flexshopper.com//processor turbo speed,cpu_frequency
+www.flexshopper.com//processor type,cpu_type
+www.flexshopper.com//ram,ram_capacity
+www.flexshopper.com//ram,ram_capacity_max
+www.flexshopper.com//ram,ram_frequency
+www.flexshopper.com//ram,ram_type
+www.flexshopper.com//screen size,display_size
+www.flexshopper.com//screen size measured diagonally,display_size
+www.flexshopper.com//ssd cache,ssd_cache_capacity
+www.flexshopper.com//standard memory,ram_capacity
+www.flexshopper.com//storage,hdd_capacity
+www.flexshopper.com//storage,hdd_speed
+www.flexshopper.com//system memory ram,ram_capacity
+www.flexshopper.com//system memory ram expandable to,ram_capacity_max
+www.flexshopper.com//technology,ram_type
+www.flexshopper.com//type of memory ram,ram_type
+www.flexshopper.com//vga,has_vga_port
+www.flexshopper.com//vga input,has_vga_port
+www.flexshopper.com//weight,weight
+www.flexshopper.com//width,dimensions_width
+www.flexshopper.com//width,dimensions
+www.gosale.com//battery,battery_chemistry
+www.gosale.com//battery,battery_life
+www.gosale.com//graphics,gpu_brand
+www.gosale.com//graphics,gpu_model
+www.gosale.com//hard drive size,hdd_capacity
+www.gosale.com//manufacturer,brand
+www.gosale.com//memory,ram_capacity
+www.gosale.com//memory,ram_type
+www.gosale.com//monitor resolution,display_resolution
+www.gosale.com//processor,cpu_frequency
+www.gosale.com//processor,cpu_model
+www.gosale.com//processor,cpu_type
+www.gosale.com//processor manufacturer,cpu_brand
+www.gosale.com//processor speed,cpu_frequency
+www.gosale.com//processor type,cpu_brand
+www.gosale.com//processor type,cpu_type
+www.gosale.com//product name,cpu_brand
+www.gosale.com//product name,cpu_frequency
+www.gosale.com//product name,cpu_model
+www.gosale.com//product name,cpu_type
+www.gosale.com//product name,ram_capacity
+www.gosale.com//product name,ram_type
+www.gosale.com//product name,display_size
+www.gosale.com//ram,ram_capacity
+www.gosale.com//ram type,ram_type
+www.gosale.com//storage,hdd_capacity
+www.gosale.com//storage,hdd_speed
+www.gosale.com//weight,weight
+www.isupplyhub.com//average battery life in hours,battery_life
+www.isupplyhub.com//batteries,battery_chemistry
+www.isupplyhub.com//battery type,battery_chemistry
+www.isupplyhub.com//brand name,brand
+www.isupplyhub.com//card description,gpu_brand
+www.isupplyhub.com//card description,gpu_model
+www.isupplyhub.com//chipset brand,gpu_brand
+www.isupplyhub.com//computer memory type,ram_type
+www.isupplyhub.com//flash memory size,flash_capacity
+www.isupplyhub.com//graphics coprocessor,gpu_brand
+www.isupplyhub.com//graphics coprocessor,gpu_model
+www.isupplyhub.com//hard drive,hdd_capacity
+www.isupplyhub.com//item dimensions l x w x h,dimensions
+www.isupplyhub.com//item dimensions l x w x h,dimensions_height
+www.isupplyhub.com//item dimensions l x w x h,dimensions_depth
+www.isupplyhub.com//item dimensions l x w x h,dimensions_width
+www.isupplyhub.com//item weight,weight
+www.isupplyhub.com//number of usb 20 ports,usb_port2_quantity
+www.isupplyhub.com//number of usb 30 ports,usb_port3_quantity
+www.isupplyhub.com//processor,cpu_brand
+www.isupplyhub.com//processor,cpu_frequency
+www.isupplyhub.com//processor,cpu_type
+www.isupplyhub.com//processor brand,cpu_brand
+www.isupplyhub.com//product dimensions,dimensions
+www.isupplyhub.com//product dimensions,dimensions_height
+www.isupplyhub.com//product dimensions,dimensions_width
+www.isupplyhub.com//product dimensions,dimensions_depth
+www.isupplyhub.com//ram,ram_capacity
+www.isupplyhub.com//ram,ram_type
+www.isupplyhub.com//screen size,display_size
+www.isupplyhub.com//shipping weight,weight
+www.mygofer.com//64bit computing processor chipset,is_cpu_64bit
+www.mygofer.com//aspect ratio,aspect_ratio
+www.mygofer.com//battery life range,battery_life
+www.mygofer.com//battery type,battery_chemistry
+www.mygofer.com//chipset processor chipset,cpu_brand
+www.mygofer.com//chipset processor chipset,cpu_model
+www.mygofer.com//cpu brand,cpu_brand
+www.mygofer.com//cpu cache mb,cpu_cache
+www.mygofer.com//cpu processor chipset,cpu_brand
+www.mygofer.com//cpu processor chipset,cpu_frequency
+www.mygofer.com//cpu processor chipset,cpu_model
+www.mygofer.com//cpu processor chipset,cpu_type
+www.mygofer.com//cpu series,cpu_brand
+www.mygofer.com//cpu series,cpu_type
+www.mygofer.com//cpu speed,cpu_frequency
+www.mygofer.com//cpu speed range,cpu_frequency
+www.mygofer.com//depth dimensions weight,dimensions_depth
+www.mygofer.com//depth in,dimensions_depth
+www.mygofer.com//front side bus processor chipset,cpu_frequency
+www.mygofer.com//general warranty,warranty_duration
+www.mygofer.com//gpu chipset,gpu_brand
+www.mygofer.com//gpu video type,gpu_brand
+www.mygofer.com//graphics processor audio video,gpu_brand
+www.mygofer.com//graphics processor audio video,gpu_model
+www.mygofer.com//hard drive capacity,hdd_capacity
+www.mygofer.com//hard drive capacity range,hdd_capacity
+www.mygofer.com//hdmi outputs,has_hdmi_port
+www.mygofer.com//height in,dimensions_height
+www.mygofer.com//height in,dimensions
+www.mygofer.com//image aspect ratio display,aspect_ratio
+www.mygofer.com//interfaces connections expansion,usb_port2_quantity
+www.mygofer.com//item weight lbs,weight
+www.mygofer.com//main storage storage,hdd_capacity
+www.mygofer.com//main storage storage,hdd_speed
+www.mygofer.com//main storage storage,ssd_capacity
+www.mygofer.com//manufacturer warranty labor,warranty_duration
+www.mygofer.com//manufacturer warranty software,warranty_duration
+www.mygofer.com//max turbo speed processor chipset,cpu_frequency
+www.mygofer.com//maximum memory supported,ram_capacity_max
+www.mygofer.com//memory range,ram_capacity
+www.mygofer.com//memory type,ram_type
+www.mygofer.com//platform technology processor chipset,cpu_brand
+www.mygofer.com//platform technology processor chipset,cpu_type
+www.mygofer.com//ram memory,ram_capacity
+www.mygofer.com//run time battery,battery_life
+www.mygofer.com//screen size by diagonal measure,display_size
+www.mygofer.com//screen size range,display_size
+www.mygofer.com//service support details manufacturer warranty,warranty_duration
+www.mygofer.com//technology memory,ram_type
+www.mygofer.com//vga out,has_vga_port
+www.mygofer.com//weight dimensions weight,weight
+www.mygofer.com//width dimensions weight,dimensions_width
+www.overstock.com//cpu type,cpu_brand
+www.overstock.com//cpu type,cpu_type
+www.overstock.com//hard drive capacity,hdd_capacity
+www.overstock.com//installed ram,ram_capacity
+www.overstock.com//laptop weight,weight
+www.overstock.com//processor brand,cpu_brand
+www.overstock.com//processor brand,cpu_type
+www.overstock.com//screen size,display_size
+www.pricequebec.com//manufacturer,brand
+www.pricequebec.com//product,brand
+www.pricequebec.com//product,display_size
+www.pricequebec.com//product,cpu_type
+www.pricequebec.com//product,cpu_brand
+www.pricequebec.com//product,cpu_model
+www.pricequebec.com//product,cpu_frequency
+www.pricequebec.com//product,ram_capacity
+www.pricequebec.com//product,hdd_capacity
+www.pricequebec.com//product,ssd_capacity
+www.pricequebec.com//product,display_resolution
+www.pricequebec.com//product,is_cpu_64bit
+www.pricequebec.com//product,display_type
+www.softwarecity.ca//64bit processing,is_cpu_64bit
+www.softwarecity.ca//aspect ratio,aspect_ratio
+www.softwarecity.ca//battery capacity,battery_capacity
+www.softwarecity.ca//battery chemistry,battery_chemistry
+www.softwarecity.ca//brand name,brand
+www.softwarecity.ca//cache,cpu_cache
+www.softwarecity.ca//depth,dimensions_depth
+www.softwarecity.ca//depth,dimensions
+www.softwarecity.ca//depth with stand,dimensions_depth
+www.softwarecity.ca//depth with stand,dimensions
+www.softwarecity.ca//display size supported,display_size
+www.softwarecity.ca//flash memory,flash_capacity
+www.softwarecity.ca//flash memory capacity,flash_capacity
+www.softwarecity.ca//graphics controller manufacturer,gpu_brand
+www.softwarecity.ca//graphics controller model,gpu_model
+www.softwarecity.ca//graphics memory technology,ram_type
+www.softwarecity.ca//hard drive capacity,hdd_capacity
+www.softwarecity.ca//hard drive configuration,hdd_capacity
+www.softwarecity.ca//hdmi,has_hdmi_port
+www.softwarecity.ca//height,dimensions_height
+www.softwarecity.ca//height,dimensions
+www.softwarecity.ca//height with stand,dimensions_height
+www.softwarecity.ca//height with stand,dimensions
+www.softwarecity.ca//hybrid hard drive capacity,hdd_capacity
+www.softwarecity.ca//length,dimensions_depth
+www.softwarecity.ca//length,dimensions
+www.softwarecity.ca//limited warranty,warranty_duration
+www.softwarecity.ca//maximum battery run time,battery_life
+www.softwarecity.ca//maximum screen size supported,display_size
+www.softwarecity.ca//maximum standby battery time,battery_life
+www.softwarecity.ca//maximum video battery time,battery_life
+www.softwarecity.ca//maximum web surfing battery time,battery_life
+www.softwarecity.ca//memory card reader,has_memorycard_reader
+www.softwarecity.ca//memory standard,ram_frequency
+www.softwarecity.ca//memory standard,ram_type
+www.softwarecity.ca//memory technology,ram_type
+www.softwarecity.ca//minimum screen size supported,display_size
+www.softwarecity.ca//number of usb 20 ports,usb_port2_quantity
+www.softwarecity.ca//number of usb 30 ports,usb_port3_quantity
+www.softwarecity.ca//offmode power consumption,power_consumption_standby
+www.softwarecity.ca//operating power consumption,power_consumption
+www.softwarecity.ca//processor core,cpu_type
+www.softwarecity.ca//processor manufacturer,cpu_brand
+www.softwarecity.ca//processor model,cpu_brand
+www.softwarecity.ca//processor model,cpu_model
+www.softwarecity.ca//processor speed,cpu_frequency
+www.softwarecity.ca//processor type,cpu_type
+www.softwarecity.ca//screen size,display_size
+www.softwarecity.ca//ssd cache capacity,ssd_cache_capacity
+www.softwarecity.ca//standby power consumption,power_consumption_standby
+www.softwarecity.ca//storage capacity,hdd_capacity
+www.softwarecity.ca//total hard drive capacity,hdd_capacity
+www.softwarecity.ca//vga,has_vga_port
+www.softwarecity.ca//weight approximate,weight
+www.staples.com//cpu cache,cpu_cache
+www.staples.com//desktop cpu cache,cpu_cache
+www.staples.com//desktop processor,cpu_brand
+www.staples.com//desktop processor,cpu_type
+www.staples.com//desktop processor details,cpu_brand
+www.staples.com//desktop processor details,cpu_frequency
+www.staples.com//desktop processor details,cpu_type
+www.staples.com//desktop warranty,warranty_duration
+www.staples.com//desktop weight,weight
+www.staples.com//desktop weight details,weight
+www.staples.com//hard drive capacity,hdd_capacity
+www.staples.com//laptop battery life,battery_life
+www.staples.com//laptop battery type,battery_chemistry
+www.staples.com//laptop hard drive capacity gb,hdd_capacity
+www.staples.com//laptop memory ram gb,ram_capacity
+www.staples.com//laptop memory type,ram_frequency
+www.staples.com//laptop memory type,ram_type
+www.staples.com//laptop processor speed,cpu_frequency
+www.staples.com//laptop processor type,cpu_brand
+www.staples.com//laptop processor type,cpu_type
+www.staples.com//laptop processor type details,cpu_brand
+www.staples.com//laptop processor type details,cpu_model
+www.staples.com//laptop processor type details,cpu_type
+www.staples.com//laptop screen size inches,display_size
+www.staples.com//laptop warranty,warranty_duration
+www.staples.com//laptop weight,weight
+www.staples.com//laptop weight filter,weight
+www.staples.com//processor speed up to ghz,cpu_frequency
+www.staples.com//processor type,cpu_brand
+www.staples.com//processor type,cpu_type
+www.staples.com//ram capacity,ram_capacity
+www.staples.com//ram desktop memory gb,ram_capacity
+www.staples.com//screen size,display_size
+www.staples.com//speed desktop processor speed,cpu_frequency
+www.staples.com//t desktop memory type,ram_frequency
+www.staples.com//t desktop memory type,ram_type
+www.techbuy.com.au//battery,battery_capacity
+www.techbuy.com.au//brand name,brand
+www.techbuy.com.au//capacity native,hdd_capacity
+www.techbuy.com.au//cpu,cpu_brand
+www.techbuy.com.au//cpu,cpu_type
+www.techbuy.com.au//depth,dimensions_depth
+www.techbuy.com.au//depth,dimensions
+www.techbuy.com.au//dimensions d x w x h,dimensions
+www.techbuy.com.au//dimensions d x w x h,dimensions_depth
+www.techbuy.com.au//dimensions d x w x h,dimensions_height
+www.techbuy.com.au//dimensions d x w x h,dimensions_width
+www.techbuy.com.au//flash memory,flash_capacity
+www.techbuy.com.au//graphics engine,gpu_brand
+www.techbuy.com.au//graphics engine,gpu_model
+www.techbuy.com.au//height,dimensions_height
+www.techbuy.com.au//height,dimensions
+www.techbuy.com.au//lamp warranty,warranty_duration
+www.techbuy.com.au//memory,ram_capacity_max
+www.techbuy.com.au//memory clock,ram_frequency
+www.techbuy.com.au//memory clock,ram_type
+www.techbuy.com.au//multigpu support,gpu_brand
+www.techbuy.com.au//net weight,weight
+www.techbuy.com.au//power consumption,power_consumption
+www.techbuy.com.au//power consumption lamp on,power_consumption
+www.techbuy.com.au//power consumption standby,power_consumption_standby
+www.techbuy.com.au//processor,cpu_brand
+www.techbuy.com.au//processor,cpu_cache
+www.techbuy.com.au//processor,cpu_frequency
+www.techbuy.com.au//processor,cpu_model
+www.techbuy.com.au//processor,cpu_type
+www.techbuy.com.au//processor system bus,cpu_brand
+www.techbuy.com.au//product dimensions w x d x h 35 x 78 x 075 in,dimensions
+www.techbuy.com.au//product dimensions w x d x h 35 x 78 x 075 in,dimensions_depth
+www.techbuy.com.au//product dimensions w x d x h 35 x 78 x 075 in,dimensions_height
+www.techbuy.com.au//product dimensions w x d x h 35 x 78 x 075 in,dimensions_width
+www.techbuy.com.au//product dimensions w x d x h 35 x 78 x 075 in,weight
+www.techbuy.com.au//product dimensions w x d x h 544 x 90 x 1163 in,dimensions
+www.techbuy.com.au//product dimensions w x d x h 544 x 90 x 1163 in,dimensions_depth
+www.techbuy.com.au//product dimensions w x d x h 544 x 90 x 1163 in,dimensions_height
+www.techbuy.com.au//product dimensions w x d x h 544 x 90 x 1163 in,dimensions_width
+www.techbuy.com.au//product dimensions w x d x h 544 x 90 x 1163 in,weight
+www.techbuy.com.au//product dimensions w x d x h 6 x 675 x 613 in,dimensions
+www.techbuy.com.au//product dimensions w x d x h 6 x 675 x 613 in,dimensions_depth
+www.techbuy.com.au//product dimensions w x d x h 6 x 675 x 613 in,dimensions_height
+www.techbuy.com.au//product dimensions w x d x h 6 x 675 x 613 in,dimensions_width
+www.techbuy.com.au//product dimensions w x d x h 6 x 675 x 613 in,weight
+www.techbuy.com.au//product dimensions w x d x h 65 x 7 x 65 in,dimensions
+www.techbuy.com.au//product dimensions w x d x h 65 x 7 x 65 in,dimensions_depth
+www.techbuy.com.au//product dimensions w x d x h 65 x 7 x 65 in,dimensions_height
+www.techbuy.com.au//product dimensions w x d x h 65 x 7 x 65 in,dimensions_width
+www.techbuy.com.au//product dimensions w x d x h 65 x 7 x 65 in,weight
+www.techbuy.com.au//product dimensions w x d x h 663 x 7 x 65 in,dimensions
+www.techbuy.com.au//product dimensions w x d x h 663 x 7 x 65 in,dimensions_depth
+www.techbuy.com.au//product dimensions w x d x h 663 x 7 x 65 in,dimensions_height
+www.techbuy.com.au//product dimensions w x d x h 663 x 7 x 65 in,dimensions_width
+www.techbuy.com.au//product dimensions w x d x h 663 x 7 x 65 in,weight
+www.techbuy.com.au//product dimensions w x d x h 763 x 111 x 1125 in,dimensions
+www.techbuy.com.au//product dimensions w x d x h 763 x 111 x 1125 in,dimensions_depth
+www.techbuy.com.au//product dimensions w x d x h 763 x 111 x 1125 in,dimensions_height
+www.techbuy.com.au//product dimensions w x d x h 763 x 111 x 1125 in,dimensions_width
+www.techbuy.com.au//product dimensions w x d x h 763 x 111 x 1125 in,weight
+www.techbuy.com.au//product dimensions w x d x h 98 x 85 x 25 in,dimensions
+www.techbuy.com.au//product dimensions w x d x h 98 x 85 x 25 in,dimensions_depth
+www.techbuy.com.au//product dimensions w x d x h 98 x 85 x 25 in,dimensions_height
+www.techbuy.com.au//product dimensions w x d x h 98 x 85 x 25 in,dimensions_width
+www.techbuy.com.au//product dimensions w x d x h 98 x 85 x 25 in,weight
+www.techbuy.com.au//projector warranty,warranty_duration
+www.techbuy.com.au//screen size,display_size
+www.techbuy.com.au//standard warranty,warranty_duration
+www.techbuy.com.au//storage,hdd_capacity
+www.techbuy.com.au//storage capacity,hdd_capacity
+www.techbuy.com.au//vga,gpu_brand
+www.techbuy.com.au//vga,has_vga_port
+www.techbuy.com.au//warranty,warranty_duration
+www.techbuy.com.au//weight,weight
+www.techbuy.com.au//weight approximate,weight
+www.techbuy.com.au//weight imperial,weight
+www.techbuy.com.au//weight metric,weight
+www.techbuy.com.au//weight without hard drive,weight
+www.thenerds.net//64bit processing,is_cpu_64bit
+www.thenerds.net//aspect ratio,aspect_ratio
+www.thenerds.net//battery capacity,battery_capacity
+www.thenerds.net//battery chemistry,battery_chemistry
+www.thenerds.net//brand name,brand
+www.thenerds.net//cache,cpu_cache
+www.thenerds.net//depth,dimensions_depth
+www.thenerds.net//depth,dimensions
+www.thenerds.net//flash memory capacity,flash_capacity
+www.thenerds.net//graphics controller manufacturer,gpu_brand
+www.thenerds.net//graphics controller model,gpu_model
+www.thenerds.net//graphics memory technology,ram_type
+www.thenerds.net//hard drive capacity,hdd_capacity
+www.thenerds.net//hard drive configuration,hdd_capacity
+www.thenerds.net//hdmi,has_hdmi_port
+www.thenerds.net//height,dimensions_height
+www.thenerds.net//height,dimensions
+www.thenerds.net//height front,dimensions_height
+www.thenerds.net//height front,dimensions
+www.thenerds.net//height rear,dimensions_height
+www.thenerds.net//height rear,dimensions
+www.thenerds.net//manufacturer,brand
+www.thenerds.net//maximum battery run time,battery_life
+www.thenerds.net//maximum screen size supported,display_size
+www.thenerds.net//maximum standby battery time,battery_life
+www.thenerds.net//maximum video battery time,battery_life
+www.thenerds.net//maximum web surfing battery time,battery_life
+www.thenerds.net//memory card reader,has_memorycard_reader
+www.thenerds.net//memory standard,ram_frequency
+www.thenerds.net//memory standard,ram_type
+www.thenerds.net//memory technology,ram_type
+www.thenerds.net//minimum screen size supported,display_size
+www.thenerds.net//number of usb 20 ports,usb_port2_quantity
+www.thenerds.net//number of usb 30 ports,usb_port3_quantity
+www.thenerds.net//processor manufacturer,cpu_brand
+www.thenerds.net//processor model,cpu_model
+www.thenerds.net//processor model,cpu_type
+www.thenerds.net//processor speed,cpu_frequency
+www.thenerds.net//processor type,cpu_type
+www.thenerds.net//screen size,display_size
+www.thenerds.net//solid state drive configuration,ssd_capacity
+www.thenerds.net//total hard drive capacity,hdd_capacity
+www.thenerds.net//vga,has_vga_port
+www.thenerds.net//weight approximate,weight
+www.tigerdirect.com//aspect ratio,aspect_ratio
+www.tigerdirect.com//battery life,battery_life
+www.tigerdirect.com//battery run time,battery_life
+www.tigerdirect.com//battery type,battery_chemistry
+www.tigerdirect.com//capacity,hdd_capacity
+www.tigerdirect.com//cpu,cpu_brand
+www.tigerdirect.com//cpu,cpu_frequency
+www.tigerdirect.com//cpu,cpu_type
+www.tigerdirect.com//cpu type,cpu_brand
+www.tigerdirect.com//depth,dimensions_depth
+www.tigerdirect.com//depth,dimensions
+www.tigerdirect.com//display size,display_size
+www.tigerdirect.com//gpuvpu,gpu_brand
+www.tigerdirect.com//gpuvpu,gpu_model
+www.tigerdirect.com//hard drive speed,hdd_speed
+www.tigerdirect.com//hddssd drives included,hdd_capacity
+www.tigerdirect.com//height,dimensions_height
+www.tigerdirect.com//height,dimensions
+www.tigerdirect.com//lenovo,warranty_duration
+www.tigerdirect.com//memory capacity,ram_capacity
+www.tigerdirect.com//memory configuration,ram_capacity
+www.tigerdirect.com//memory speed,ram_frequency
+www.tigerdirect.com//memory speed,ram_type
+www.tigerdirect.com//memory type,ram_type
+www.tigerdirect.com//processor brand,cpu_brand
+www.tigerdirect.com//processor cache,cpu_cache
+www.tigerdirect.com//processor class,cpu_type
+www.tigerdirect.com//processor speed,cpu_frequency
+www.tigerdirect.com//ram speed,ram_frequency
+www.tigerdirect.com//screen size,display_size
+www.tigerdirect.com//storage capacity,hdd_capacity
+www.tigerdirect.com//total memory size,ram_capacity
+www.tigerdirect.com//total storage included,hdd_capacity
+www.tigerdirect.com//weight,weight
+www.tinydeal.com//builtin rechargeable polymer battery,battery_capacity
+www.tinydeal.com//cpu,cpu_model
+www.tinydeal.com//cpu,cpu_type
+www.tinydeal.com//weight,weight
+www.topendelectronic.co.uk//64bit processing,is_cpu_64bit
+www.topendelectronic.co.uk//aspect ratio,aspect_ratio
+www.topendelectronic.co.uk//battery,battery_chemistry
+www.topendelectronic.co.uk//battery capacity,battery_capacity
+www.topendelectronic.co.uk//battery chemistry,battery_chemistry
+www.topendelectronic.co.uk//battery life,battery_life
+www.topendelectronic.co.uk//battery type,battery_chemistry
+www.topendelectronic.co.uk//brand,brand
+www.topendelectronic.co.uk//brand name,brand
+www.topendelectronic.co.uk//cache,cpu_cache
+www.topendelectronic.co.uk//cpu speed,cpu_frequency
+www.topendelectronic.co.uk//cpu speed,cpu_model
+www.topendelectronic.co.uk//cpu support,cpu_cache
+www.topendelectronic.co.uk//cpu type,cpu_brand
+www.topendelectronic.co.uk//cpu type,cpu_type
+www.topendelectronic.co.uk//depth,dimensions_depth
+www.topendelectronic.co.uk//depth,dimensions
+www.topendelectronic.co.uk//dimensions,dimensions
+www.topendelectronic.co.uk//dimensions,dimensions_depth
+www.topendelectronic.co.uk//dimensions,dimensions_height
+www.topendelectronic.co.uk//dimensions,dimensions_width
+www.topendelectronic.co.uk//display graphics,display_size
+www.topendelectronic.co.uk//gpuvpu,gpu_brand
+www.topendelectronic.co.uk//gpuvpu,gpu_model
+www.topendelectronic.co.uk//graphics controller manufacturer,gpu_brand
+www.topendelectronic.co.uk//graphics controller model,gpu_model
+www.topendelectronic.co.uk//graphics memory technology,ram_type
+www.topendelectronic.co.uk//hard disk,hdd_capacity
+www.topendelectronic.co.uk//hard drive,hdd_capacity
+www.topendelectronic.co.uk//hard drive,hdd_speed
+www.topendelectronic.co.uk//hard drive capacity,hdd_capacity
+www.topendelectronic.co.uk//hdd,hdd_capacity
+www.topendelectronic.co.uk//hdd rpm,hdd_speed
+www.topendelectronic.co.uk//height,dimensions_height
+www.topendelectronic.co.uk//height,dimensions
+www.topendelectronic.co.uk//height front,dimensions_height
+www.topendelectronic.co.uk//height front,dimensions
+www.topendelectronic.co.uk//height rear,dimensions_height
+www.topendelectronic.co.uk//height rear,dimensions
+www.topendelectronic.co.uk//hhd,hdd_capacity
+www.topendelectronic.co.uk//interfacesports,has_hdmi_port
+www.topendelectronic.co.uk//manufacturer,brand
+www.topendelectronic.co.uk//maximum battery run time,battery_life
+www.topendelectronic.co.uk//memory,ram_capacity
+www.topendelectronic.co.uk//memory card reader,has_memorycard_reader
+www.topendelectronic.co.uk//memory size,ram_capacity
+www.topendelectronic.co.uk//memory size,ram_type
+www.topendelectronic.co.uk//memory speed,ram_frequency
+www.topendelectronic.co.uk//memory speed,ram_type
+www.topendelectronic.co.uk//memory standard,ram_frequency
+www.topendelectronic.co.uk//memory standard,ram_type
+www.topendelectronic.co.uk//memory technology,ram_type
+www.topendelectronic.co.uk//number of usb 20 ports,usb_port2_quantity
+www.topendelectronic.co.uk//number of usb 30 ports,usb_port3_quantity
+www.topendelectronic.co.uk//performance,cpu_brand
+www.topendelectronic.co.uk//performance,cpu_frequency
+www.topendelectronic.co.uk//performance,cpu_model
+www.topendelectronic.co.uk//performance,cpu_type
+www.topendelectronic.co.uk//processor,cpu_brand
+www.topendelectronic.co.uk//processor,cpu_frequency
+www.topendelectronic.co.uk//processor,cpu_model
+www.topendelectronic.co.uk//processor,cpu_type
+www.topendelectronic.co.uk//processor chipset,cpu_brand
+www.topendelectronic.co.uk//processor core,cpu_type
+www.topendelectronic.co.uk//processor manufacturer,cpu_brand
+www.topendelectronic.co.uk//processor model,cpu_type
+www.topendelectronic.co.uk//processor model,cpu_model
+www.topendelectronic.co.uk//processor speed,cpu_frequency
+www.topendelectronic.co.uk//processor type,cpu_type
+www.topendelectronic.co.uk//screen size,display_size
+www.topendelectronic.co.uk//ssd,ssd_capacity
+www.topendelectronic.co.uk//storage,hdd_capacity
+www.topendelectronic.co.uk//storage,ssd_capacity
+www.topendelectronic.co.uk//storage size,hdd_capacity
+www.topendelectronic.co.uk//tech description,battery_capacity
+www.topendelectronic.co.uk//tech description,battery_chemistry
+www.topendelectronic.co.uk//tech description,battery_life
+www.topendelectronic.co.uk//tech description,display_size
+www.topendelectronic.co.uk//tech description,display_type
+www.topendelectronic.co.uk//tech description,display_resolution
+www.topendelectronic.co.uk//tech description,hdd_capacity
+www.topendelectronic.co.uk//tech description,hdd_speed
+www.topendelectronic.co.uk//tech description,cpu_brand
+www.topendelectronic.co.uk//tech description,cpu_model
+www.topendelectronic.co.uk//tech description,cpu_type
+www.topendelectronic.co.uk//tech description,cpu_frequency
+www.topendelectronic.co.uk//tech description,cpu_cache
+www.topendelectronic.co.uk//tech description,aspect_ratio
+www.topendelectronic.co.uk//tech description,dimensions
+www.topendelectronic.co.uk//tech description,dimensions_height
+www.topendelectronic.co.uk//tech description,dimensions_width
+www.topendelectronic.co.uk//tech description,dimensions_depth
+www.topendelectronic.co.uk//vga,has_vga_port
+www.topendelectronic.co.uk//weight,weight
+www.topendelectronic.co.uk//weight approximate,weight
+www.vology.com//64bit computing,is_cpu_64bit
+www.vology.com//battery,battery_chemistry
+www.vology.com//cache,cpu_cache
+www.vology.com//cache memory,cpu_cache
+www.vology.com//cache per processor,cpu_cache
+www.vology.com//cpu,cpu_brand
+www.vology.com//cpu,cpu_type
+www.vology.com//cpu,cpu_frequency
+www.vology.com//cpu,cpu_model
+www.vology.com//depth,dimensions_depth
+www.vology.com//depth,dimensions
+www.vology.com//diagonal size,display_size
+www.vology.com//dimensions weight,dimensions_width
+www.vology.com//dimensions weight,dimensions_depth
+www.vology.com//dimensions weight,dimensions_height
+www.vology.com//dimensions weight,weight
+www.vology.com//dimensions weight details,weight
+www.vology.com//dimensions wxdxh,dimensions
+www.vology.com//dimensions wxdxh,dimensions_depth
+www.vology.com//dimensions wxdxh,dimensions_width
+www.vology.com//dimensions wxdxh,dimensions_height
+www.vology.com//display,display_resolution
+www.vology.com//display,display_size
+www.vology.com//display,display_type
+www.vology.com//display,aspect_ratio
+www.vology.com//graphics,gpu_brand
+www.vology.com//graphics,gpu_model
+www.vology.com//graphics processor,gpu_brand
+www.vology.com//graphics processor,gpu_model
+www.vology.com//hard drive,hdd_capacity
+www.vology.com//hard drive,hdd_speed
+www.vology.com//hard drive,ssd_capacity
+www.vology.com//hard drive 2nd,hdd_capacity
+www.vology.com//hard drive 2nd,hdd_speed
+www.vology.com//hard drive 2nd,ssd_capacity
+www.vology.com//height,dimensions_height
+www.vology.com//height,dimensions
+www.vology.com//image aspect ratio,aspect_ratio
+www.vology.com//included accessories,battery_chemistry
+www.vology.com//installed size,ram_capacity
+www.vology.com//installed size,ram_capacity_max
+www.vology.com//main storage,hdd_capacity
+www.vology.com//main storage,hdd_speed
+www.vology.com//main storage,ssd_capacity
+www.vology.com//manufacturer warranty,warranty_duration
+www.vology.com//max allocated ram size,ram_capacity
+www.vology.com//max ram supported,ram_capacity_max
+www.vology.com//memory,ram_capacity
+www.vology.com//memory,ram_capacity_max
+www.vology.com//memory,ram_frequency
+www.vology.com//memory,ram_type
+www.vology.com//memory speed,ram_frequency
+www.vology.com//monitor,display_size
+www.vology.com//monitor,display_type
+www.vology.com//monitor,display_resolution
+www.vology.com//monitor,aspect_ratio
+www.vology.com//monitor type,display_type
+www.vology.com//native resolution,display_resolution
+www.vology.com//processor,cpu_brand
+www.vology.com//processor,cpu_cache
+www.vology.com//processor,cpu_model
+www.vology.com//processor,cpu_type
+www.vology.com//processor,cpu_frequency
+www.vology.com//processor chipset,cpu_brand
+www.vology.com//processor chipset,cpu_cache
+www.vology.com//processor chipset,cpu_frequency
+www.vology.com//processor chipset,cpu_model
+www.vology.com//processor chipset,cpu_type
+www.vology.com//product description,ram_capacity
+www.vology.com//product description,hdd_capacity
+www.vology.com//product description,cpu_type
+www.vology.com//product description,cpu_model
+www.vology.com//product description,display_size
+www.vology.com//product description,brand
+www.vology.com//ram,ram_capacity
+www.vology.com//resolution,display_resolution
+www.vology.com//run time,battery_life
+www.vology.com//run time with included additional battery,battery_life
+www.vology.com//secondary storage,hdd_capacity
+www.vology.com//secondary storage,hdd_speed
+www.vology.com//secondary storage,ssd_capacity
+www.vology.com//service support,warranty_duration
+www.vology.com//service support details,warranty_duration
+www.vology.com//speed,ram_frequency
+www.vology.com//spindle speed,hdd_speed
+www.vology.com//ssd cache,ssd_cache_capacity
+www.vology.com//storage,hdd_capacity
+www.vology.com//storage,hdd_speed
+www.vology.com//technology,battery_chemistry
+www.vology.com//video system features,gpu_brand
+www.vology.com//weight,weight
+www.vology.com//width,dimensions_width
+www.vology.com//width,dimensions

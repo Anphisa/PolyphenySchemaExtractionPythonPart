@@ -163,7 +163,8 @@ class pyDynaMap():
                 b1 = self.generate_mappings(j)
                 b2 = self.generate_mappings(i - j)
                 new_maps = self.merge_mappings(b1, b2)
-                iteration_maps.append(new_maps)
+                if new_maps:
+                    iteration_maps.append(new_maps)
             # flatten list of iteration_maps
             flat_iteration_maps = {k: v for d in iteration_maps for k, v in d.items()}
             self.sub_solution[i] = flat_iteration_maps
@@ -472,14 +473,16 @@ class pyDynaMap():
             if col not in self.t_rel:
                 for t_col in self.t_rel:
                     if map1_name in self.t_rel[t_col] and self.t_rel[t_col][map1_name] == col:
-                        replace_df1[col] = t_col
+                        if t_col not in df1.columns.to_list():
+                            replace_df1[col] = t_col
         df1.rename(columns=replace_df1, inplace=True)
         replace_df2 = {}
         for col in df2.columns.to_list():
             if col not in self.t_rel:
                 for t_col in self.t_rel:
                     if map2_name in self.t_rel[t_col] and self.t_rel[t_col][map2_name] == col:
-                        replace_df2[col] = t_col
+                        if t_col not in df2.columns.to_list():
+                            replace_df2[col] = t_col
         df2.rename(columns=replace_df2, inplace=True)
         # tracking column renaming
         self.renamed_columns[map1_name] = replace_df1
@@ -555,6 +558,20 @@ class pyDynaMap():
         # attributes gives us column names as they are in t_rel, so we have to find out what their aliases are in df1 and df2
         df1_aliases = self.aliases_for_t_rel_columns(map1_name, attributes)
         df2_aliases = self.aliases_for_t_rel_columns(map2_name, attributes)
+        # fixing error with merging on different data types... so sad, these weakly typed languages
+        for i in range(len(df1_aliases)):
+            df1_alias = df1_aliases[i]
+            df2_alias = df2_aliases[i]
+            df1_dtype = df1[df1_alias].dtype
+            df2_dtype = df2[df2_alias].dtype
+            if df1_dtype != df2_dtype:
+                try:
+                    if df1_dtype == object:
+                        df1[df1_alias] = df1[df1_alias].astype(df2_dtype)
+                    if df2_dtype == object:
+                        df2[df2_alias] = df2[df2_alias].astype(df1_dtype)
+                except Exception as e:
+                    raise RuntimeError("Could not convert columns to be of same format: ", df1_alias, df2_alias)
         # using pandas merge to join on non-index columns
         try:
             joined_dfs = df1.merge(df2, left_on=df1_aliases, right_on=df2_aliases, suffixes=('', '_y'), how="outer")
@@ -977,11 +994,13 @@ class pyDynaMap():
         num = len(self.highest_fitness_value)
         k = int(k)
         k = k if k <= num else num
-        k_highest_fitness_values = dict(collections.Counter(self.highest_fitness_value).most_common(k))
+        k_highest_fitness_values = self.highest_fitness_value
         # tie break 1: prefer mappings to source relations
         not_source_mappings = [m for m in k_highest_fitness_values.keys() if m not in self.source_relations]
         if not_source_mappings:
             k_highest_fitness_values = {k: v for k, v in k_highest_fitness_values.items() if k in not_source_mappings}
+        # tie break n: select with collections.Counter.most_common
+        k_highest_fitness_values = dict(collections.Counter(k_highest_fitness_values).most_common(k))
         #print("k highest fitness values", k_highest_fitness_values)
         # example: {'df1_df2_df3': 6, 'df2_df1_df3': 6, 'df3_df1_df2': 6, 'df1': 3, 'df2': 3}
         # format that we want for graphviz visualization:

@@ -5,7 +5,11 @@ class Mapping:
     def __init__(self, source_relations):
         # print(source_relations)
         # A list of involved tables and at least their column names
-        # assuming form {tableX: [col1, col2, col3], tableY: [col1, col2]}
+        # example for source_relations:
+        # dfs = {"df1": {'id': [1, 2, 3],
+        #                'name': ['A', 'B', 'C']},
+        #        "df2": {'id2': [1, 2, 3],
+        #                'name': ['A', 'B', 'C']}}
         self.source_relations = source_relations
 
     @staticmethod

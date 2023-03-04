@@ -1,0 +1,1 @@
+In subfolder data/, the data from Alaska should be unzipped and brought into format with UseAlaskaForSchemaIntegrationEvaluation.ipynb script (i.e. folders: camera_combined, monitor_combined, notebook_combined)

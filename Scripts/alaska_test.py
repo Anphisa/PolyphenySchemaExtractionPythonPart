@@ -19,7 +19,7 @@ from Mapping.pyDynaMap.pyDynaMap import pyDynaMap
 import AlaskaTest.multi_metrics as mm
 
 
-def set_valentine_algo(algo_string, dfs, jl_cutoff=0.8):
+def set_valentine_algo(algo_string, dfs=None, jl_cutoff=0.8):
     # Given an algorithm string, set Valentine algorithm
     if algo_string == "JaccardLevenMatcherColNamesOnly":
         valentine_algo = JaccardLevenMatcherColNamesOnly(jl_cutoff)
@@ -63,38 +63,46 @@ def dataframe_valentine_compare(dataframes, gt, valentine_method):
 
 
 ## Begin!
-def alaska_test(alaska_dataset, combination_of_files, algorithm_name, threshold, jl_cutoff, folder, ground_truth, shared_list, shared_dict):
+def alaska_test(alaska_dataset, combination_of_files, algorithm_name, threshold, jl_cutoff, folder, ground_truth,
+                shared_dict, folder_name):
     try:
         if algorithm_name == "automatic":
             auto_algo = True
         else:
             auto_algo = False
-        experiment_string = alaska_dataset + "_" + ",".join(combination_of_files) + "_" + str(threshold) + "_" + \
-                            str(jl_cutoff) + "_" + algorithm_name + "_" + str(auto_algo)
-        if experiment_string in shared_dict and shared_dict[experiment_string]:
-            print("Experiment", experiment_string, "has already run successfully. Skipping.")
-            return
+        if auto_algo:
+            dfs = {}
+            # Read in csv files
+            for f in combination_of_files:
+                # print(folder + f + ".csv")
+                df = pd.read_csv(folder + f + ".csv", index_col=0)
+                dfs[f] = df
+            algorithm, algorithm_name = set_valentine_algo(algorithm_name, dfs, jl_cutoff)
+        else:
+            algorithm, algorithm_name = set_valentine_algo(algorithm_name, None, jl_cutoff)
         info = {"domain": alaska_dataset,
                 "all_compared_files": combination_of_files,
                 "num_compared_files": len(combination_of_files),
                 "threshold": threshold,
-                "jl_cutoff": jl_cutoff}
+                "jl_cutoff": jl_cutoff,
+                "algorithm": algorithm_name,
+                "automatically_set_algorithm": auto_algo}
+        experiment_string = alaska_dataset + "_" + ",".join(combination_of_files) + "_" + str(threshold) + "_" + \
+                            str(jl_cutoff) + "_" + algorithm_name + "_" + str(auto_algo)
+        if experiment_string in shared_dict and shared_dict[experiment_string]:
+            print("Experiment", experiment_string, "has already run successfully. Skipping.")
+            #shared_n += 1
+            return
         print(info, algorithm_name)
-        dfs = {}
-        # Read in csv files
-        for f in combination_of_files:
-            #print(folder + f + ".csv")
-            df = pd.read_csv(folder + f + ".csv", index_col=0)
-            dfs[f] = df
-        algorithm, algorithm_name = set_valentine_algo(algorithm_name, dfs, jl_cutoff)
-        info["algorithm"] = algorithm_name
-        info["automatically_set_algorithm"] = auto_algo
         #print(algorithm_name)
         if auto_algo and len(combination_of_files) != 2:
             print("Skipping automatic algorithm, because |files| != 2, it is = " + len(combination_of_files) + ".")
             info["error"] = "Skipping automatic algorithm, because |files| != 2, it is = " + len(combination_of_files) + "."
-            shared_list.append(info)
+            #shared_list.append(info)
             shared_dict[experiment_string] = True
+            #shared_n += 1
+            with open(folder_name + experiment_string + ".pkl", 'wb') as fout:
+                pickle.dump(info, fout)
             return
 
         # don't redo a combo that's already been done
@@ -109,6 +117,14 @@ def alaska_test(alaska_dataset, combination_of_files, algorithm_name, threshold,
         #     if combo_done:
         #         infos = infos_done
         #         continue
+
+        if not auto_algo:
+            dfs = {}
+            # Read in csv files
+            for f in combination_of_files:
+                # print(folder + f + ".csv")
+                df = pd.read_csv(folder + f + ".csv", index_col=0)
+                dfs[f] = df
 
         ## Matching
         # matching result
@@ -171,8 +187,11 @@ def alaska_test(alaska_dataset, combination_of_files, algorithm_name, threshold,
                      "algorithm", algorithm_name)
             print(error)
             info["error"] = error
-            shared_list.append(info)
+            #shared_list.append(info)
             shared_dict[experiment_string] = False
+            #shared_n += 1
+            with open(folder_name + experiment_string + ".pkl", 'wb') as fout:
+                pickle.dump(info, fout)
             return
         map_time_stop = perf_counter()
         #print("mapping is done")
@@ -227,27 +246,53 @@ def alaska_test(alaska_dataset, combination_of_files, algorithm_name, threshold,
             count_merges = 0
 
         # mapping precision tp / (tp + fp)
-        mapping_precision = n_intersection_mapping / (n_intersection_mapping + n_extra_columns)
-        mapping_precision_real = n_intersection_mapping_real / (n_intersection_mapping_real + n_extra_columns_real)
+        if n_intersection_mapping + n_extra_columns != 0:
+            mapping_precision = n_intersection_mapping / (n_intersection_mapping + n_extra_columns)
+        else:
+            mapping_precision = 0
+        if n_intersection_mapping_real + n_extra_columns_real != 0:
+            mapping_precision_real = n_intersection_mapping_real / (n_intersection_mapping_real + n_extra_columns_real)
+        else:
+            mapping_precision_real = 0
 
         # mapping recall tp / (tp + fn)
-        mapping_recall = n_intersection_mapping / (n_intersection_mapping + n_missing_columns)
-        mapping_recall_real = n_intersection_mapping_real / (n_intersection_mapping_real + n_missing_columns_real)
+        if n_intersection_mapping + n_missing_columns != 0:
+            mapping_recall = n_intersection_mapping / (n_intersection_mapping + n_missing_columns)
+        else:
+            mapping_recall = 0
+        if n_intersection_mapping_real + n_missing_columns_real != 0:
+            mapping_recall_real = n_intersection_mapping_real / (n_intersection_mapping_real + n_missing_columns_real)
+        else:
+            mapping_recall_real = 0
 
         # mapping f1 score 2 * ((pr * re) / (pr + re))
-        mapping_f1_score = 2 * ((mapping_precision * mapping_recall) / (mapping_precision + mapping_recall))
-        mapping_f1_score_real = 2 * ((mapping_precision_real * mapping_recall_real) / (mapping_precision_real + mapping_recall_real))
+        if mapping_precision + mapping_recall != 0:
+            mapping_f1_score = 2 * ((mapping_precision * mapping_recall) / (mapping_precision + mapping_recall))
+        else:
+            mapping_f1_score = 0
+        if mapping_precision_real + mapping_recall_real != 0:
+            mapping_f1_score_real = 2 * ((mapping_precision_real * mapping_recall_real) / (mapping_precision_real + mapping_recall_real))
+        else:
+            mapping_f1_score_real = 0
 
         # mapping completeness (bellahsene)
         stool = len(target_relation_translated)
         stool_real = len(best_mapping_columns_translated)
         sint = len(target_schema)
-        mapping_completeness = n_intersection_mapping / sint
-        mapping_completeness_real = n_intersection_mapping_real / sint
+        if sint != 0:
+            mapping_completeness = n_intersection_mapping / sint
+            mapping_completeness_real = n_intersection_mapping_real / sint
+        else:
+            mapping_completeness = 0
+            mapping_completeness_real = 0
 
         # mapping minimality (batista2007)
-        mapping_minimality = 1 - (n_extra_columns/stool)
-        mapping_minimality_real = 1 - (n_extra_columns_real/stool_real)
+        if stool != 0:
+            mapping_minimality = 1 - (n_extra_columns/stool)
+            mapping_minimality_real = 1 - (n_extra_columns_real/stool_real)
+        else:
+            mapping_minimality = 0
+            mapping_minimality_real = 0
         #print("statistics are done")
 
         # Put all collected info into a dict
@@ -283,8 +328,11 @@ def alaska_test(alaska_dataset, combination_of_files, algorithm_name, threshold,
                     "missing_columns_target_schema_alaska_target_schema_dynamap": missing_columns,
                     "missing_columns_target_schema_alaska_best_mapping_dynamap": missing_columns_real}
         info = info | map_info
-        shared_list.append(info)
+        #shared_list.append(info)
         shared_dict[experiment_string] = True
+        #shared_n += 1
+        with open(folder_name + experiment_string + ".pkl", 'wb') as fout:
+            pickle.dump(info, fout)
         return
     except Exception as e:
         print("Execution failed for experiment", alaska_dataset, combination_of_files, algorithm_name, threshold, jl_cutoff, folder, e)
@@ -292,10 +340,19 @@ def alaska_test(alaska_dataset, combination_of_files, algorithm_name, threshold,
                 "all_compared_files": combination_of_files,
                 "num_compared_files": len(combination_of_files),
                 "threshold": threshold,
-                "jl_cutoff": jl_cutoff}
-        info["error"] = "Execution failed for experiment."
-        shared_list.append(info)
+                "jl_cutoff": jl_cutoff,
+                "error": "Execution failed for experiment."}
+        if algorithm_name == "automatic":
+            auto_algo = True
+        else:
+            auto_algo = False
+        experiment_string = alaska_dataset + "_" + ",".join(combination_of_files) + "_" + str(threshold) + "_" + \
+                            str(jl_cutoff) + "_" + algorithm_name + "_" + str(auto_algo)
+        #shared_list.append(info)
         shared_dict[experiment_string] = False
+        #shared_n += 1
+        with open(folder_name + experiment_string + ".pkl", 'wb') as fout:
+            pickle.dump(info, fout)
         return
 
 if __name__ == "__main__":
@@ -304,28 +361,42 @@ if __name__ == "__main__":
     n_files_in_combo = 2
     target_file = "AlaskaTest/intermediate_{}_{}_files_output.pkl".format(alaska_dataset, n_files_in_combo)
     #algorithms_to_test = ["automatic", "JaccardLevenMatcherColNamesOnly", "COMA_OPT_INST", "COMA_OPT"]
-    algorithms_to_test = ["automatic"]
+    algorithms_to_test = ["COMA_OPT"]
     #thresholds = [0, 0.5, 0.8]
     thresholds = [0]
     jl_cutoff = 0.8
+    output_folder_name = "AlaskaTest/intermediate_results/{}_{}/".format(alaska_dataset, n_files_in_combo)
 
     with Manager() as manager:
+        # create a shared value so we know which experiment we're at
+        #shared_n = manager.Value(int, 0)
         # create a shared list to append info to
-        shared_list = manager.list()
+        #shared_list = manager.list()
         # create a dict so we don't repeat experiments
         shared_dict = manager.dict()
-        if os.path.exists(target_file):
-            with open(target_file, 'rb') as fr:
-                infos = pickle.load(fr)
-                for info in infos:
-                    # don't repeat experiments
-                    shared_list.append(info)
-                    experiment_string = info["domain"] + "_" + ",".join(info["all_compared_files"]) + "_" + str(info["threshold"]) + "_" + \
-                        str(info["jl_cutoff"]) + "_" + info["algorithm"] + "_" + str(info["automatically_set_algorithm"])
+        pkls = [f for f in os.listdir(output_folder_name) if f.endswith('.pkl')]
+        for p in pkls:
+            whole_path = output_folder_name + p
+            experiment_name = p.replace(".pkl", "")
+            if os.path.getsize(whole_path) > 0:
+                with open(whole_path, "rb") as fr:
+                    info = pickle.load(fr)
                     if "error" in info and "fail" in info["error"]:
-                        shared_dict[experiment_string] = False
+                        shared_dict[experiment_name] = False
                     else:
-                        shared_dict[experiment_string] = True
+                        shared_dict[experiment_name] = True
+        # if os.path.exists(target_file):
+        #     with open(target_file, 'rb') as fr:
+        #         infos = pickle.load(fr)
+        #         for info in infos:
+        #             # don't repeat experiments
+        #             #shared_list.append(info)
+        #             experiment_string = info["domain"] + "_" + ",".join(info["all_compared_files"]) + "_" + str(info["threshold"]) + "_" + \
+        #                 str(info["jl_cutoff"]) + "_" + info["algorithm"] + "_" + str(info["automatically_set_algorithm"])
+        #             if "error" in info and "fail" in info["error"]:
+        #                 shared_dict[experiment_string] = False
+        #             else:
+        #                 shared_dict[experiment_string] = True
         # create a process pool that uses all cpus
         with Pool() as pool:
             # Read in dataframes
@@ -350,17 +421,34 @@ if __name__ == "__main__":
             for cof in files:
                 for algorithm_name in algorithms_to_test:
                     for threshold in thresholds:
-                        combo = (alaska_dataset, list(cof), algorithm_name, threshold, jl_cutoff, folder, gt, shared_list, shared_dict)
+                        combo = (alaska_dataset, list(cof), algorithm_name, threshold, jl_cutoff, folder, gt,
+                                 shared_dict, output_folder_name)
                         combos.append(combo)
-                        #print(combo)
+
+            print(len(combos), "experiments.")
+            #with open(target_file, 'wb') as f:
+            #    for shared_list in pool.imap(alaska_test, combos):
+            #        pickle.dump(list(shared_list), f)
+            #        print("dumped")
+
             pool.starmap(alaska_test, combos)
 
         #print(shared_list)
 
-        with open(target_file, 'wb') as f:
-            pickle.dump(list(shared_list), f)
-            print("dumped")
+        print("Collating all info files into one file")
+        all_infos = []
+        pkls = [f for f in os.listdir(output_folder_name) if f.endswith('.pkl')]
+        for p in pkls:
+            with open(p, 'rb') as intermediate_pkl:
+                info = pickle.load(intermediate_pkl)
+                all_infos.append(info)
+        with open(target_file, 'wb') as fout:
+            pickle.dump(all_infos, fout)
+
+        #with open(target_file, 'wb') as f:
+        #    pickle.dump(list(shared_list), f)
+        #    print("dumped")
 
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
-        print("Current Time =", current_time)
+        print("Finished at time =", current_time)

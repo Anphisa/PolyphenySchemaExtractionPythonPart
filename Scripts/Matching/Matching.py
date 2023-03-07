@@ -33,8 +33,8 @@ class Matching():
         fuzzy_col_matches = [sum(d1_fuzzy.values()), sum(d2_fuzzy.values())]
         avg_fuzzy_col_match = sum(fuzzy_col_matches) / len(fuzzy_col_matches)
 
-        n_col_max = max(len(df1.columns), len(df2.columns))
-        n_col_diff = abs(len(df1.columns) - len(df2.columns))
+        n_col_max = max(len(df1), len(df2))
+        n_col_diff = abs(len(df1) - len(df2))
 
         matcher_type = "schema_based"
         if avg_fuzzy_col_match <= 1.75:

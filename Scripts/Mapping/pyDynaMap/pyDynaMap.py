@@ -737,7 +737,8 @@ class pyDynaMap():
             # e.g. "df3": "empno"
             for key2 in map2_keys:
                 for t_col in self.t_rel.keys():
-                    if map1_name in self.t_rel[t_col] and map2_name in self.t_rel[t_col]:
+                    if map1_name in self.t_rel[t_col] and self.t_rel[t_col][map1_name] == key1 \
+                            and map2_name in self.t_rel[t_col] and self.t_rel[t_col][map2_name] == key2:
                         # keys both point to the same target column!
                         inclusion = sum(el in map1[key1] for el in map2[key2])
                         inclusion_ratio = inclusion/len(map1[key1])
@@ -746,7 +747,8 @@ class pyDynaMap():
         for key2 in map2_keys:
             for key1 in map1_keys:
                 for t_col in self.t_rel.keys():
-                    if map1_name in self.t_rel[t_col] and map2_name in self.t_rel[t_col]:
+                    if map1_name in self.t_rel[t_col] and self.t_rel[t_col][map1_name] == key1 \
+                            and map2_name in self.t_rel[t_col] and self.t_rel[t_col][map2_name] == key2:
                         # keys both point to the same target column!
                         inclusion = sum(el in map2[key2] for el in map1[key1])
                         inclusion_ratio = inclusion / len(map2[key2])
@@ -768,6 +770,18 @@ class pyDynaMap():
             # is inferred between two mappings on their candidate key
             # attributes (lines 12–13);
             # if inclusion_ratio == 1 --> all elements from map1[key1] are in map2[key2], so we assume key1 is a pk for map1 and a fk for map2 (? foreign key relationship)
+            # check that there are no additionally overlapping column names that are not part of the join. if there are, we can't join
+            # safely -> union instead
+            for c1 in map1:
+                for c2 in map2:
+                    if c1 == c2 and c1 not in max_inclusion.keys():
+                        op = ("union", map1, map2, map1_name, map2_name, list(max_inclusion.keys()))
+                        explanation = map1_name + " and " + map2_name + " match the same target attributes. " \
+                                      "There's full inclusion between matched target attributes: " + \
+                                      str(list(max_inclusion.keys())) + ". There's additionally attribute " + c1 + \
+                        " that does not have full inclusion. -> union."
+                        return {"op": op,
+                                "explanation": explanation}
             op = ("join", map1, map2, map1_name, map2_name, list(max_inclusion.keys()))
             explanation = map1_name + " and " + map2_name + " match the same target attributes. " \
                           "There's full inclusion between matched target attributes: " + \
@@ -781,6 +795,18 @@ class pyDynaMap():
             # relationship cannot be inferred so the algorithm joins the
             # tuples that can be joined and keeps the remaining data (lines
             # 14–15).
+            # check that there are no additionally overlapping column names that are not part of the join. if there are, we can't join
+            # safely -> union instead
+            for c1 in map1:
+                for c2 in map2:
+                    if c1 == c2 and c1 not in max_inclusion.keys():
+                        op = ("union", map1, map2, map1_name, map2_name, list(max_inclusion.keys()))
+                        explanation = map1_name + " and " + map2_name + " match the same target attributes. " \
+                                                                        "There's full inclusion between matched target attributes: " + \
+                                      str(list(max_inclusion.keys())) + ". There's additionally attribute " + c1 + \
+                        " that does not have full inclusion. -> union."
+                        return {"op": op,
+                                "explanation": explanation}
             op = ("outer join", map1, map2, map1_name, map2_name, list(max_inclusion.keys()))
             explanation = map1_name + " and " + map2_name + " match the same target attributes. " \
                           "There's partial inclusion between matched target attributes: " + \
@@ -826,13 +852,19 @@ class pyDynaMap():
         # attr_null_percentages = result = [n/a for n, a in zip(null_counts, attr_counts)]
         # attr_avg_null_percentage = sum(attr_null_percentages)/len(attr_null_percentages)
         # Reward merges, but prefer
-        merge_counts = self.count_merge_types(self.mapping_path.get(map_name), {})
-        all_merges = sum(merge_counts.values())
-        union_merges = merge_counts.get("union", 0)
+        merge_counts = self.count_merge_types(self.reconstruct_mapping_path(map_name), {})
+        if merge_counts:
+            all_merges = sum(merge_counts.values())
+            union_merges = merge_counts.get("union", 0)
+        else:
+            all_merges = 0
+            union_merges = 0
         # The number of largely complete tuples in the mapping is estimated to be
         # the cardinality of the mapping minus the number of nulls in the attribute with the most nulls.
         # Original fitness logic as I understood it from the dynaMap paper:
-        # reward many rows with few null values
+        # reward many rows with few null values:
+        #return self.map_cardinality(map) - max_attr_nulls
+        # my fitness function
         return self.map_cardinality(map) - max_attr_nulls + all_merges - union_merges
         # todo: this is also an extension of original dynamap
         # New idea for fitness logic:

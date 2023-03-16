@@ -36,10 +36,10 @@ async def pk_fk_relationship_finder(data):
 def build_dataframes(message):
     # message has format {namespace_name: {datamodel: '', tables: [{tableName: '', columnNames: [], primaryKey: [], foreignKeys: []}] }}
     message = ast.literal_eval(message["message"])
+    tables_df = {}
     for namespace_name in message:
         namespace_info = message[namespace_name]
         tables_list = namespace_info["tables"]
-        tables_df = {}
         data_model = namespace_info["datamodel"]
         if data_model == 'RELATIONAL':
             for table in tables_list:
@@ -80,7 +80,7 @@ def build_dataframes(message):
                 tables_df[table_name]["namespacename"] = namespace_name
         else:
             raise RuntimeWarning("Unknown data model: ", data_model)
-        return tables_df
+    return tables_df
 
 async def set_config(message):
     parameter = message["topic"]
@@ -206,7 +206,7 @@ async def consumer(message):
                     logging.warning("Sampling failed for col " + col + " in df " + df + "in namespace " + namespace + ". Setting values to None.")
                     dfs[df]["columns"][col] = [None for i in range(config.sample_size)]
                 else:
-                    extracted_row_sample = sample.extract_sample(row_sample)
+                    extracted_row_sample = sample.extract_sample(row_sample, datamodel, dfs[df]["columns"].columns.tolist())
                     if len(extracted_row_sample) > config.sample_size:
                         logging.warning("Extracting sample failed for col " + col + " in df " + df + " in namespace " + namespace +
                                      ". This likely occurred due to square brackets in column. Setting values to None.")

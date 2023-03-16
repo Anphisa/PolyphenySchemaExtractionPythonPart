@@ -339,7 +339,15 @@ class pyDynaMap():
             operator_explanation = self.choose_operator_diff(map1, map2, map1_name, map2_name)
             return {"operator": operator_explanation["operator"], "explanation": operator_explanation["explanation"]}
         else:
-            # todo: this is an extension of original dynamap (-> thesis)
+            # Original DynaMap logic: If they match the same target attributes: Union on those!
+            # operator = ("union", map1, map2, map1_name, map2_name,
+            #             list(set(map1_ma.keys()).intersection(set(map2_ma.keys()))))
+            # explanation = map1_name + " and " + map2_name + " match the same target attributes: " + \
+            #               str(list(set(map1_ma.keys()).intersection(set(map2_ma.keys())))) + \
+            #                 " -> union."
+            # return {"operator": operator, "explanation": explanation}
+            #
+            # Extension of DynaMap logic:
             # they share the same attributes with target relation. should those be joined or unioned?
             # naive idea: if there's inclusion, make it a join. Otherwise make it a union.
             included = {}

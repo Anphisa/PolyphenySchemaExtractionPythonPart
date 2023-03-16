@@ -6,13 +6,14 @@ import os
 import json
 import pickle
 import itertools
+import random
 import pandas as pd
 from datetime import datetime
 from time import perf_counter
 from tqdm import tqdm
 from multiprocessing import Pool, Manager
 from valentine import valentine_match, valentine_metrics
-from valentine.algorithms import JaccardLevenMatcherColNamesOnly, Coma
+from valentine.algorithms import JaccardLevenMatcherColNamesOnly, Coma, DistributionBased, Cupid, SimilarityFlooding, JaccardLevenMatcher
 from Matching.Matching import Matching
 from Mapping.Mapping import Mapping
 from Mapping.pyDynaMap.pyDynaMap import pyDynaMap
@@ -23,6 +24,14 @@ def set_valentine_algo(algo_string, dfs=None, jl_cutoff=0.8):
     # Given an algorithm string, set Valentine algorithm
     if algo_string == "JaccardLevenMatcherColNamesOnly":
         valentine_algo = JaccardLevenMatcherColNamesOnly(jl_cutoff)
+    elif algo_string == "JaccardLevenMatcher":
+        valentine_algo = JaccardLevenMatcher(jl_cutoff)
+    elif algo_string == "DistributionBased":
+        valentine_algo = DistributionBased()
+    elif algo_string == "SimilarityFlooding":
+        valentine_algo = SimilarityFlooding()
+    elif algo_string == "Cupid":
+        valentine_algo = Cupid()
     elif algo_string == "COMA_OPT_INST":
         valentine_algo = Coma(strategy="COMA_OPT_INST")
     elif algo_string == "COMA_OPT":
@@ -356,16 +365,19 @@ def alaska_test(alaska_dataset, combination_of_files, algorithm_name, threshold,
         return
 
 if __name__ == "__main__":
-    alaska_dataset = "camera"
+    alaska_dataset = "monitor"
     folder = "AlaskaTest/data/{}_combined/".format(alaska_dataset)
     n_files_in_combo = 2
     target_file = "AlaskaTest/intermediate_{}_{}_files_output.pkl".format(alaska_dataset, n_files_in_combo)
-    #algorithms_to_test = ["automatic", "JaccardLevenMatcherColNamesOnly", "COMA_OPT_INST", "COMA_OPT"]
-    algorithms_to_test = ["COMA_OPT"]
-    #thresholds = [0, 0.5, 0.8]
+    algorithms_to_test = ["automatic", "JaccardLevenMatcherColNamesOnly",
+                          "COMA_OPT_INST", "COMA_OPT",
+                          "JaccardLevenMatcher", "DistributionBased", "SimilarityFlooding", "Cupid"]
+    #algorithms_to_test = ["COMA_OPT"]
+    thresholds = [0, 0.5, 0.8]
     thresholds = [0]
     jl_cutoff = 0.8
-    output_folder_name = "AlaskaTest/intermediate_results/{}_{}/".format(alaska_dataset, n_files_in_combo)
+    jl_cutoffs = [0.6, 0.7, 0.8]
+    output_folder_name = "AlaskaTest/intermediate_results/{}_{}_sampled_matching_algos/".format(alaska_dataset, n_files_in_combo)
 
     with Manager() as manager:
         # create a shared value so we know which experiment we're at
@@ -415,15 +427,23 @@ if __name__ == "__main__":
                 file_names.append(file_crop)
 
             # Combine the csv files in all possible combinations up to a number of max files
-            files = itertools.combinations(file_names, n_files_in_combo)
+            files = list(itertools.combinations(file_names, n_files_in_combo))
+            random.seed(42)
+            sampled_files = random.sample(files, int(len(files)/10))
 
             combos = []
-            for cof in files:
+            for cof in sampled_files:
                 for algorithm_name in algorithms_to_test:
-                    for threshold in thresholds:
-                        combo = (alaska_dataset, list(cof), algorithm_name, threshold, jl_cutoff, folder, gt,
-                                 shared_dict, output_folder_name)
-                        combos.append(combo)
+                    if "Jaccard" in algorithm_name:
+                        for jl_cutoff in jl_cutoffs:
+                            combo = (alaska_dataset, list(cof), algorithm_name, threshold, jl_cutoff, folder, gt,
+                                     shared_dict, output_folder_name)
+                            combos.append(combo)
+                    else:
+                        for threshold in thresholds:
+                            combo = (alaska_dataset, list(cof), algorithm_name, threshold, jl_cutoff, folder, gt,
+                                     shared_dict, output_folder_name)
+                            combos.append(combo)
 
             print(len(combos), "experiments.")
             #with open(target_file, 'wb') as f:
@@ -439,7 +459,7 @@ if __name__ == "__main__":
         all_infos = []
         pkls = [f for f in os.listdir(output_folder_name) if f.endswith('.pkl')]
         for p in pkls:
-            with open(p, 'rb') as intermediate_pkl:
+            with open(output_folder_name + p, 'rb') as intermediate_pkl:
                 info = pickle.load(intermediate_pkl)
                 all_infos.append(info)
         with open(target_file, 'wb') as fout:

@@ -64,20 +64,35 @@ class Sample():
                 results.append(result)
         else:
             result = self.take_sample_relational(self.column_name, self.namespace, self.table_name, False, self.sample_size)
-        results.append(result)
+            results.append(result)
         return results
 
-    def take_sample_graph(self):
-        #SELECT * FROM g."label"
-        logging.error("Graph sampling doesn't work yet!!")
-        query = "SELECT * FROM " + self.namespace + ".\"" + self.column_name + "\""
-        if self.sample_size != 0:
-            query += " LIMIT " + str(self.sample_size)
+    def take_sample_graph(self, property, namespace, graph_label, random_sample, sample_size):
+        # SELECT properties["userid"] FROM gavel_graph."User"
+        query = "SELECT properties[\"" + property + "\"] FROM " + namespace + ".\"" + graph_label + "\""
+        if sample_size != 0:
+            query += " LIMIT " + str(sample_size)
         DATA = {'querylanguage': 'SQL',
                 'query': query}
-        logging.info("Sampling values from column: " + query)
+        logging.info("Sampling values from graph label: " + query)
         result = requests.post(url=self.URL, data=DATA)
-        self.http_sample_result = result
+        return result
+
+    def take_samples_graph(self):
+        results = []
+        if self.random:
+            if self.sample_size != 0:
+                for n in range(self.sample_size):
+                    result = self.take_sample_graph(self.column_name, self.namespace, self.table_name, self.random, 0)
+                    results.append(result)
+            else:
+                logging.warn("Can't sample randomly if sample size is 0. Taking un-random sample.")
+                result = self.take_sample_graph(self.column_name, self.namespace, self.table_name, False, self.sample_size)
+                results.append(result)
+        else:
+            result = self.take_sample_graph(self.column_name, self.namespace, self.table_name, False, self.sample_size)
+            results.append(result)
+        return results
 
     def take_sample_document(self):
         # SELECT * FROM d."tag"
@@ -89,22 +104,44 @@ class Sample():
                 'query': query}
         logging.info("Sampling values from column: " + query)
         result = requests.post(url=self.URL, data=DATA)
-        self.http_sample_result = result
+        return result
+
+    def take_samples_document(self):
+        results = []
+        if self.random:
+            if self.sample_size != 0:
+                for n in range(self.sample_size):
+                    result = self.take_sample_document(self.column_name, self.namespace, self.table_name, self.random, 0)
+                    results.append(result)
+            else:
+                logging.warn("Can't sample randomly if sample size is 0. Taking un-random sample.")
+                result = self.take_sample_document(self.column_name, self.namespace, self.table_name, False, self.sample_size)
+                results.append(result)
+        else:
+            result = self.take_sample_document(self.column_name, self.namespace, self.table_name, False, self.sample_size)
+        results.append(result)
+        return results
 
     def take_sample(self, namespace_type):
         if namespace_type == 'RELATIONAL':
             return self.take_samples_relational()
         elif namespace_type == 'GRAPH':
-            return self.take_sample_graph()
+            return self.take_samples_graph()
         elif namespace_type == 'DOCUMENT':
-            return self.take_sample_document()
+            return self.take_samples_document()
 
-    def extract_sample(self, results: list):
+    def extract_sample(self, row_sample: list, datamodel: str, column_names: list[str]):
         sample_lists = []
-        for result in results:
-            sample_string = result.content.decode('utf-8')
+        for sample in row_sample:
+            sample_string = sample.content.decode('utf-8')
             sample_list = [string.strip()[1:] for string in sample_string.strip()[1:-2].split("],")]
-            for sample in sample_list:
-                sample_lists.append(sample)
+            for sample_split in sample_list:
+                sample_lists.append(sample_split)
+            # elif datamodel == "GRAPH":
+            #     for sample_split in sample_list:
+            #         for col_name in column_names:
+            #             # in 0 is the index, 2 is the graph label. 1 has the properties of each node
+            #             property_value = ast.literal_eval(sample_split.split(", ")[1]).get(col_name, "")
+            #             sample_lists.append(property_value)
         return sample_lists
 

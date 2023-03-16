@@ -11,6 +11,11 @@ class Matching():
 
         # Collect statistics from dfs. We assume that there are two, because this is the dataset that I trained the tree on.
         df_names = list(dfs.keys())
+        if len(df_names) != 2:
+            return {"algorithm_string": "JaccardLevenMatcherColNamesOnly",
+                    "algorithm_arguments": "",
+                    "explanation": "Schema-based algorithm selected (default: JaccardLevenMatcherColNamesOnly). "
+                                   "Reason: Not comparing exactly two dataframes."}
         df1 = dfs[df_names[0]]
         df2 = dfs[df_names[1]]
 

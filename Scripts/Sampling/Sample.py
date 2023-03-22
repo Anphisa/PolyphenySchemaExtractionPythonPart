@@ -94,12 +94,11 @@ class Sample():
             results.append(result)
         return results
 
-    def take_sample_document(self):
-        # SELECT * FROM d."tag"
-        logging.error("Document sampling doesn't work yet!!")
-        query = "SELECT * FROM " + self.namespace + ".\"" + self.column_name + "\""
-        if self.sample_size != 0:
-            query += " LIMIT " + str(self.sample_size)
+    def take_sample_document(self, column_name, namespace, table_name, random_sample, sample_size):
+        # SELECT JSON_VALUE(CAST (d As VARCHAR(2050)), 'lax $.userid') FROM gavel_doc.UserProperties
+        query = "SELECT JSON_VALUE(CAST (d AS VARCHAR(2050)), 'lax $." + column_name + "') FROM " + namespace + "." + table_name
+        if sample_size != 0:
+            query += " LIMIT " + str(sample_size)
         DATA = {'querylanguage': 'SQL',
                 'query': query}
         logging.info("Sampling values from column: " + query)

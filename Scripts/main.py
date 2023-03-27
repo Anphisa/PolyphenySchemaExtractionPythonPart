@@ -97,6 +97,8 @@ async def set_config(message):
         logging.info("Set Valentine algorithm response", set_valentine_algo_return)
     elif parameter == "kBestMappings":
         config.show_n_best_mappings = value
+    elif parameter == "valentineParameters":
+        config.set_valentine_algo_parameters(value)
     print(str(config))
     await send_http_request("log", {"log": "Set config parameter " + parameter + " to " + value + ".\r\n"})
     return
@@ -182,7 +184,8 @@ async def consumer(message):
                               "sampleSize",
                               "randomSample",
                               "valentineAlgorithm",
-                              "kBestMappings"]:
+                              "kBestMappings",
+                              "valentineParameters"]:
         await set_config(d_message)
     if d_message["topic"] == "namespaceInfo":
         dfs = await loop.run_in_executor(None, build_dataframes, d_message)

@@ -427,13 +427,13 @@ class pyDynaMap():
             map2_ind_op = self.max_ind(map2, map1, map2_keys, list(map1.keys()), map1_name, map2_name)
             if map1_ind_op and map2_ind_op:
                 if map1_ind_op["inclusion_ratio"] >= map2_ind_op["inclusion_ratio"]:
-                    return {"operator": map1_ind_op["op"], "explanation": map1_ind_op["explanation"]}
+                    return {"operator": map1_ind_op["op"], "explanation": map1_ind_op["explanation"] + " Mapped by comparing {}'s candidate keys with all of {}'s attributes.".format(map1_name, map2_name)}
                 else:
-                    return {"operator": map2_ind_op["op"], "explanation": map2_ind_op["explanation"]}
+                    return {"operator": map2_ind_op["op"], "explanation": map2_ind_op["explanation"] + " Mapped by comparing {}'s candidate keys with all of {}'s attributes.".format(map2_name, map1_name)}
             elif map1_ind_op:
-                return {"operator": map1_ind_op["op"], "explanation": map1_ind_op["explanation"]}
+                return {"operator": map1_ind_op["op"], "explanation": map1_ind_op["explanation"] + " Mapped by comparing {}'s candidate keys with all of {}'s attributes.".format(map1_name, map2_name)}
             elif map2_ind_op:
-                return {"operator": map2_ind_op["op"], "explanation": map2_ind_op["explanation"]}
+                return {"operator": map2_ind_op["op"], "explanation": map2_ind_op["explanation"] + " Mapped by comparing {}'s candidate keys with all of {}'s attributes.".format(map2_name, map1_name)}
             else:
                 # There is no overlap between candidate keys in map1 with attributes in map2 or the other way round.
                 # Next, if a foreign key relationship cannot be inferred, then, on
@@ -513,6 +513,10 @@ class pyDynaMap():
         # using pandas merge to join on non-index columns
         try:
             joined_dfs = df1.join(df2.set_index(df2_aliases), on=df1_aliases, how='inner')
+            outer_joined_dfs = df1.join(df2.set_index(df2_aliases), on=df1_aliases, how='outer')
+            lost_rows = len(outer_joined_dfs) - len(joined_dfs)
+            if lost_rows > 0:
+                self.instance_loss[map1_name + "_" + map2_name] = lost_rows
         except Exception as e:
             raise RuntimeError("op_inner_join failed on", map1_name, "and", map2_name, "with exception", e)
         # tracking column renaming
@@ -784,14 +788,14 @@ class pyDynaMap():
                 for c2 in map2:
                     if c1 == c2 and c1 not in max_inclusion.keys():
                         op = ("union", map1, map2, map1_name, map2_name, list(max_inclusion.keys()))
-                        explanation = map1_name + " and " + map2_name + " match the same target attributes. " \
+                        explanation = map1_name + " and " + map2_name + " match different target attributes. " \
                                       "There's full inclusion between matched target attributes: " + \
                                       str(list(max_inclusion.keys())) + ". There's additionally attribute " + c1 + \
                         " that does not have full inclusion. -> union."
                         return {"op": op,
                                 "explanation": explanation}
             op = ("join", map1, map2, map1_name, map2_name, list(max_inclusion.keys()))
-            explanation = map1_name + " and " + map2_name + " match the same target attributes. " \
+            explanation = map1_name + " and " + map2_name + " match different target attributes. " \
                           "There's full inclusion between matched target attributes: " + \
                           str(list(max_inclusion.keys())) + ". -> (inner) join."
             return {"op": op,
@@ -809,14 +813,14 @@ class pyDynaMap():
                 for c2 in map2:
                     if c1 == c2 and c1 not in max_inclusion.keys():
                         op = ("union", map1, map2, map1_name, map2_name, list(max_inclusion.keys()))
-                        explanation = map1_name + " and " + map2_name + " match the same target attributes. " \
+                        explanation = map1_name + " and " + map2_name + " match different target attributes. " \
                                                                         "There's full inclusion between matched target attributes: " + \
                                       str(list(max_inclusion.keys())) + ". There's additionally attribute " + c1 + \
                         " that does not have full inclusion. -> union."
                         return {"op": op,
                                 "explanation": explanation}
             op = ("outer join", map1, map2, map1_name, map2_name, list(max_inclusion.keys()))
-            explanation = map1_name + " and " + map2_name + " match the same target attributes. " \
+            explanation = map1_name + " and " + map2_name + " match different target attributes. " \
                           "There's partial inclusion between matched target attributes: " + \
                           str(list(max_inclusion.keys())) + ". -> outer join to keep data that could not be joined."
             return {"op": op,
@@ -1052,9 +1056,10 @@ class pyDynaMap():
             field_relationships = self.mapping_name_to_field_relationships(mapping_path)
             mapping_rows = self.get_mapping_rows(mapping_name)
             max_map_length = 0
-            for col in mapping_rows:
-                if max_map_length < len(mapping_rows[col]):
-                    max_map_length = len(mapping_rows[col])
+            if mapping_rows:
+                for col in mapping_rows:
+                    if max_map_length < len(mapping_rows[col]):
+                        max_map_length = len(mapping_rows[col])
             viz_info[mapping_name] = {
                 "fitness_score": k_highest_fitness_values[mapping_name],
                 "mapping_path": mapping_path,

@@ -15,7 +15,7 @@ class Matching():
             return {"algorithm_string": "JaccardLevenMatcherColNamesOnly",
                     "algorithm_arguments": "",
                     "explanation": "Schema-based algorithm selected (default: JaccardLevenMatcherColNamesOnly). "
-                                   "Reason: Not comparing exactly two dataframes."}
+                                   "Reason: Not comparing two dataframes, {} dataframes compared.".format(len(df_names))}
         df1 = dfs[df_names[0]]
         df2 = dfs[df_names[1]]
 

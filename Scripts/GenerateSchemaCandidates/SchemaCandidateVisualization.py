@@ -22,7 +22,7 @@ class SchemaCandidateVisualization():
         self.g = graphviz.Digraph('G', filename="output/" + out_file_name)
 
     def escape_special_characters(self, string):
-        escaped = string.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        escaped = string.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("ō", "o")
         return escaped
 
     def draw(self):
@@ -76,7 +76,10 @@ class SchemaCandidateVisualization():
         with self.g.subgraph(name='cluster_proposed_schema') as t:
             t.attr(label='Proposed schema sample data')
             table_name = self.mapping_name
-            col_names = [self.escape_special_characters(c) for c in list(self.mapping_result.keys())]
+            if self.mapping_result:
+                col_names = [self.escape_special_characters(c) for c in list(self.mapping_result.keys())]
+            else:
+                col_names = []
             with t.subgraph(name='cluster_' + table_name) as tt:
                 tt.attr(style='filled', color='lightgrey')
                 tt.attr(label=table_name)

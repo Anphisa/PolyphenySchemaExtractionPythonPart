@@ -16,8 +16,6 @@ from Matching.Matching import Matching
 from GenerateSchemaCandidates.SchemaCandidateVisualization import SchemaCandidateVisualization
 from Scripts.Sampling.Sample import Sample
 
-from PkFkFinder import PkFkFinder
-
 # message queue
 ws_message_queue = collections.deque(maxlen=100)
 

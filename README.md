@@ -12,3 +12,5 @@ Setup:
 - Start Python server
 - Load schema data into Polypheny
 - Navigate to "schema integration" pane in Polypheny, enter namespace(s), hit "Run"
+
+Apache 2 license
